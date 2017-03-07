@@ -1,14 +1,13 @@
-#' Função tjsg_meta
+#' Função processo
 #'
 #' Esta função ajuda a baixar os arquivos
 #' @param url
 #' @keywords baixar acordao
-#' @import tuneR
 #' @import httr
 #' @import stringr
 #' @export
 #' @examples
-#' tjsg_meta(livre='\"lei maria da penha\"',classes="",inicio="20/06/2012", fim="01/08/2012")
+#' processo(url)
 
 
 processo<-function(url) {
