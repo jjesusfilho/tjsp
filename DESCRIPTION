@@ -17,4 +17,5 @@ Depends:
 Imports: 
     XML,
     httr,
-    stringr
+    stringr,
+    tuneR
