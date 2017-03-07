@@ -6,12 +6,15 @@
 #' @param inicio
 #' @param fim
 #' @keywords tjsp
+#' @import XML
+#' @import httr
+#' @import stringr
 #' @export
 #' @examples
 #' tjsg_meta(livre='\"lei maria da penha\"',classes="",inicio="20/06/2012", fim="01/08/2012")
 
 tjsg_meta<-function(livre,classes="",inicio="",fim=""){
-set_config( config( ssl_verifypeer = FALSE ))
+set_config(config(ssl_verifypeer = FALSE ))
 body <- list(dados.buscaInteiroTeor ="", dados.pesquisarComSinonimos = "S",
 dados.pesquisarComSinonimos = "S", dados.buscaEmenta = "",
 dados.nuProcOrigem = "", dados.nuRegistro = "", agenteSelectedEntitiesList = "",
@@ -40,7 +43,6 @@ val <- xmlGetAttr(getNodeSet(b, "//*[@id='totalResultadoAba-A']")[[1]],"value")
 num<-as.numeric(val)
 max_pag <- ceiling(num/20)
 df<-data.frame()
-Sys.time()
 for (i in 1:max_pag){
 tryCatch({
 c <- GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",i), set_cookies(unlist(a$cookies)))
