@@ -14,5 +14,7 @@ Depends:
     XML,
     httr,
     stringr
-
-    
+Imports: 
+    XML,
+    httr,
+    stringr
