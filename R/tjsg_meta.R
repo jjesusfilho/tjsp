@@ -37,6 +37,7 @@ a<-POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",
 body=body)
 b<- htmlParse(content(a,as="text"), encoding = "UTF-8")
 val <- xmlGetAttr(getNodeSet(b, "//*[@id='totalResultadoAba-A']")[[1]],"value")
+num<-as.numeric(val)
 max_pag <- ceiling(num/20)
 df<-data.frame()
 Sys.time()
