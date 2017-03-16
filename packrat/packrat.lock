@@ -112,6 +112,16 @@ Version: 0.5.0
 Hash: 884482baf4ab273f2af5e641469f9ea4
 Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr, tibble
 
+Package: explainr
+Source: github
+Version: 0.1
+Hash: 59e2af4bce6616a8c3a1a03c718b7f9a
+Requires: broom, dplyr, stringr, yaml
+GithubRepo: explainr
+GithubUsername: hilaryparker
+GithubRef: master
+GithubSha1: 396257a92827d87a1f12c4805830e79feeab587c
+
 Package: forcats
 Source: CRAN
 Version: 0.2.0
@@ -355,3 +365,8 @@ Source: CRAN
 Version: 1.1.1
 Hash: b913af17a4e43c2fb83f3b60b5353a27
 Requires: BH, Rcpp
+
+Package: yaml
+Source: CRAN
+Version: 2.1.14
+Hash: c81230c3a7d9ba20607ad6b4331173d1
