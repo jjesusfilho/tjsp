@@ -17,8 +17,9 @@ Depends:
 Imports: 
     XML,
     httr,
+     stringi
     stringr,
     tuneR,
-    tm,
-    stringi
+    tm
+   
 RoxygenNote: 6.0.1
