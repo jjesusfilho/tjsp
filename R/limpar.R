@@ -19,6 +19,6 @@ limpar<-function(texto){
   text<-stringr::str_replace_all(text,"\\s+"," ")
   text<-tm::removePunctuation(text)
   text<-tm::stripWhitespace(text)
-  text<-tm:removeNumbers(text)
+  text<-tm::removeNumbers(text)
   return(text)
   }
