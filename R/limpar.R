@@ -14,10 +14,9 @@
 #' limpa(texto)
 
 limpar<-function(texto){
-  require(dplyr)
   text<-stringi::stri_trans_general(texto,"Latin-ASCII")
   text<-tolower(text)
-  text<-stringr::str_replace_all(text,"")
+  text<-stringr::str_replace_all(text,"\\s+"," ")
   text<-tm::removePunctuation(text)
   text<-tm::stripWhitespace(text)
   text<-tm:removeNumbers(text)
