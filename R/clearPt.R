@@ -19,7 +19,7 @@
 #' @examples
 #' clearPt(texto)
 
-cleaPt<-function(x,lower=T,stopwords=T,accent=T,punctuation=T,whitespace=T,numbers=T,ordinal=T){
+clearPt<-function(x,lower=T,stopwords=T,accent=T,punctuation=T,whitespace=T,numbers=T,ordinal=T){
   if (lower)
     x<-tolower(x)
   if (stopwords)
