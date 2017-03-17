@@ -1,0 +1,26 @@
+Package: tjsp
+Type: Package
+Date: 2017-03-03
+Title: Manipulação de decisões do TJSP
+Version: 0.1.0
+Author: José de Jesus Filho <jjesusfilho@gmail.com>
+Maintainer: The package maintainer <jjesusfilho@gmail.com>
+Description: Funções para baixar metadados das decisões judiciais, baixar as
+    próprias decisões de primeira e segunda instância do TJSP e manipulação desses
+    dados.
+License: License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 2.10),
+    XML,
+    httr,
+    stringr
+Imports:
+    XML,
+    httr,
+    stringi,
+    stringr,
+    tuneR,
+    tm
+RoxygenNote: 5.0.1
