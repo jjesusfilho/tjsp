@@ -1,4 +1,4 @@
-#' Função clearPT
+#' Função clearPt
 #'
 #' Esta função limpa o texto em português: retira acentos, retira pontuação, coloca em minúsculo
 #'     Remove stopwords, retira caracteres ordinais.

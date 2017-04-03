@@ -2,7 +2,7 @@
 % Please edit documentation in R/clearPt.R
 \name{clearPt}
 \alias{clearPt}
-\title{Função clearPT}
+\title{Função clearPt}
 \usage{
 clearPt(x, lower = T, stopwords = T, accent = T, punctuation = T,
   whitespace = T, numbers = T, ordinal = T)
