@@ -2,7 +2,8 @@
 #'
 #' Esta função extrai metadados das decisões de segundo grau do TJSP
 #' @param livre palavra ou texto a ser buscado nas ementas e nos acórdãos
-#' @param classes classes da caso, por exemplo, ação civil pública
+#' @param quote logical. Colocar a expressão entre aspas?
+#' @param classes.value Código
 #' @param inicio  Data inicial
 #' @param fim  Data final
 #' @keywords tjsp
@@ -11,9 +12,9 @@
 #' @import stringr
 #' @export
 #' @examples
-#' tjsg_meta(livre='\"lei maria da penha\"',classes="",inicio="20/06/2012", fim="01/08/2012")
+#' tjsg_meta(livre="Lei Maria da Penha",quote=TRUE,classes.value="",inicio="20/06/2012", fim="01/08/2012")
 
-tjsg_meta<-function(livre,classes="",inicio="",fim=""){
+tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim=""){
   set_config(config(ssl_verifypeer = FALSE ))
   body <- list(dados.buscaInteiroTeor ="", dados.pesquisarComSinonimos = "S",
                dados.pesquisarComSinonimos = "S", dados.buscaEmenta = "",
@@ -32,8 +33,9 @@ tjsg_meta<-function(livre,classes="",inicio="",fim=""){
                dados.origensSelecionadas = "T", tipoDecisaoSelecionados = "A",
                #tipoDecisaoSelecionados = "", tipoDecisaoSelecionados = "",
                dados.ordenacao = "data")
+  if(quote==TRUE) livre<-deparse(livre)
   body[[1]]<-livre
-  body[[20]]<-classes ##
+  body[[19]]<-classes.value ##
   body[[30]]<-inicio ## colocar a data no formato dd/mm/aaa
   body[[31]]<-fim # idem
   a<-POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",

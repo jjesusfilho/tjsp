@@ -4,12 +4,15 @@
 \alias{tjsg_meta}
 \title{Função tjsg_meta}
 \usage{
-tjsg_meta(livre, classes = "", inicio = "", fim = "")
+tjsg_meta(livre, quote = TRUE, classes.value = "", inicio = "",
+  fim = "")
 }
 \arguments{
 \item{livre}{palavra ou texto a ser buscado nas ementas e nos acórdãos}
 
-\item{classes}{classes da caso, por exemplo, ação civil pública}
+\item{quote}{logical. Colocar a expressão entre aspas?}
+
+\item{classes.value}{Código}
 
 \item{inicio}{Data inicial}
 
@@ -19,7 +22,7 @@ tjsg_meta(livre, classes = "", inicio = "", fim = "")
 Esta função extrai metadados das decisões de segundo grau do TJSP
 }
 \examples{
-tjsg_meta(livre='\\"lei maria da penha\\"',classes="",inicio="20/06/2012", fim="01/08/2012")
+tjsg_meta(livre="Lei Maria da Penha",quote=TRUE,classes.value="",inicio="20/06/2012", fim="01/08/2012")
 }
 \keyword{tjsp}
 
