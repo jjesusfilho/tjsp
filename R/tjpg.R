@@ -14,7 +14,7 @@ tjpg<-function (url){
   httr::set_config( httr::config( ssl_verifypeer = FALSE ))
   a<- GET(url)
   b<-htmlParse(content(a,as="text"))
-  val-xpathApply(b,"//*[@bgcolor='#EEEEEE']",xmlValue,trim=T)[[1]]
+  val<-xpathApply(b,"//*[@bgcolor='#EEEEEE']",xmlValue,trim=T)[[1]]
   val<-str_extract(val,"\\d+$")
   num<-as.numeric(val)
   max_pag<-ceiling(num/10)
