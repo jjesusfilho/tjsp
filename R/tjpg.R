@@ -3,7 +3,7 @@
 #' Esta função extraí dados de busca livre por processos de primeira instância no TJSP
 #' @param url Faça primeiramente a busca na página do TJSP, depois copie e cole a url aqui.
 #' @keywords tjsp primeira instância
-#' @import RCurl
+#' @import httr
 #' @import XML
 #' @import stringr
 #' @export
@@ -11,8 +11,9 @@
 #' tjsg(url)
 
 tjpg<-function (url){
-  a<- getURL(url,.opts = list(ssl.verifypeer = FALSE))
-  b<-htmlParse(a)
+  httr::set_config( httr::config( ssl_verifypeer = FALSE ))
+  a<- GET(url)
+  b<-htmlParse(content(a,as="text"))
   val-xpathApply(b,"//*[@bgcolor='#EEEEEE']",xmlValue,trim=T)[[1]]
   val<-str_extract(val,"\\d+$")
   num<-as.numeric(val)

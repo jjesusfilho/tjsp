@@ -15,7 +15,6 @@ Depends:
     R (>= 2.10),
     XML,
     httr,
-    RCurl,
     stringr
 Imports:
     XML,
