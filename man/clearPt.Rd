@@ -33,4 +33,3 @@ clearPt(texto)
 }
 \keyword{clean,}
 \keyword{stopwords,}
-

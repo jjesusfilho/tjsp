@@ -19,4 +19,3 @@ rm_dup(df,"docname")
 }
 \keyword{duplicated,}
 \keyword{remove}
-

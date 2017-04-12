@@ -2,7 +2,9 @@
 
 export(clearPt)
 export(rm_dup)
+export(tjpg)
 export(tjsg_meta)
+import(RCurl)
 import(XML)
 import(httr)
 import(stringi)

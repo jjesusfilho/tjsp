@@ -25,4 +25,3 @@ Esta função extrai metadados das decisões de segundo grau do TJSP
 tjsg_meta(livre="Lei Maria da Penha",quote=TRUE,classes.value="",inicio="20/06/2012", fim="01/08/2012")
 }
 \keyword{tjsp}
-

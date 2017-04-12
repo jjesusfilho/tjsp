@@ -15,6 +15,7 @@ Depends:
     R (>= 2.10),
     XML,
     httr,
+    RCurl,
     stringr
 Imports:
     XML,
@@ -23,4 +24,4 @@ Imports:
     stringr,
     tuneR,
     tm
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

@@ -29,12 +29,10 @@ clearPt<-function(x,lower=T,stopwords=T,accent=T,punctuation=T,whitespace=T,numb
   if (punctuation)
     x = str_replace_all(x,"[[:punct:]]", "")
   if (whitespace) {
-    x = str_replace_all(x,"[ \t]{2,}", " ")
-    x = str_replace_all(x,"^\\s+|\\s+$", "")
+    x = str_replace_all(x,"\\s+", " ")
   }
   if(numbers)
     x<-str_replace_all(x,"[[:digit:]]","")
-
   if (ordinal)
     x<-str_replace_all(x,"(º|ª)","")
 
