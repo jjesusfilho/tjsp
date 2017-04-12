@@ -37,7 +37,7 @@ tjpg<-function (url){
     }, finally = {
       next
     })
-    sys.sleep(2)
+    sys.sleep(1)
   }
   return(df)
 }
