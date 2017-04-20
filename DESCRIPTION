@@ -3,7 +3,7 @@ Type: Package
 Date: 2017-03-03
 Title: Manipulação de decisões do TJSP
 Version: 0.1.0
-Author: José de Jesus Filho <jjesusfilho@gmail.com>
+Author: José de Jesus Filho,Julio Trecenti
 Maintainer: The package maintainer <jjesusfilho@gmail.com>
 Description: Funções para baixar metadados das decisões judiciais, baixar as
     próprias decisões de primeira e segunda instância do TJSP e manipulação desses
@@ -15,7 +15,8 @@ Depends:
     R (>= 2.10),
     XML,
     httr,
-    stringr
+    stringr,
+    stringi
 Imports:
     XML,
     httr,
