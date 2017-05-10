@@ -20,7 +20,7 @@ Depends:
     stringi
 Imports:
     XML,
-    xml2
+    xml2,
     httr,
     stringi,
     stringr,
