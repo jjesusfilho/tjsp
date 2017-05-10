@@ -38,7 +38,7 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim=""){
   body[[19]]<-classes.value ##
   body[[30]]<-inicio ## colocar a data no formato dd/mm/aaa
   body[[31]]<-fim # idem
-  a<-POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",
+  a<-POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",encode="form",
           body=body)
   b<- htmlParse(content(a,as="text"), encoding = "UTF-8")
   val <- xmlGetAttr(getNodeSet(b, "//*[@id='totalResultadoAba-A']")[[1]],"value")

@@ -14,11 +14,13 @@ LazyData: true
 Depends:
     R (>= 2.10),
     XML,
+    xml2
     httr,
     stringr,
     stringi
 Imports:
     XML,
+    xml2
     httr,
     stringi,
     stringr,
