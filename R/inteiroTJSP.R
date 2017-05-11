@@ -8,10 +8,9 @@
 #' @import captchaSajAudio
 #' @return pdf of the decision downloaded to the working directory.
 #' @export
-
 testar_processo<-function(url) {
   arq_img<-"imagem.png"
-  arq_aud<-"audio_mpg"
+  arq_aud<-"audio.mpg"
   folder_img <- dirname(arq_img)
   folder_aud <- dirname(arq_aud)
   httr::handle_reset('https://esaj.tjsp.jus.br/cjsg')
@@ -38,8 +37,6 @@ testar_processo<-function(url) {
 #' @import captchaSajAudio
 #' @return pdf of the decision downloaded to the working directory.
 #' @export
-
-
 inteiroTJSP<-function(url=NULL,cdacordao=NULL){
 
   for(i in seq_along(url)){
@@ -48,6 +45,7 @@ inteiroTJSP<-function(url=NULL,cdacordao=NULL){
          write_disk(paste0(cdacordao[i],".pdf"),overwrite = T))
     Sys.sleep(1)
   }
+  file.remove("imagem.png","audio.mpg")
 }
 
 #' @examples
