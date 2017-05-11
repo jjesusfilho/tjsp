@@ -25,5 +25,6 @@ Imports:
     stringi,
     stringr,
     tuneR,
-    tm
+    tm,
+    captchaSajAudio
 RoxygenNote: 6.0.1

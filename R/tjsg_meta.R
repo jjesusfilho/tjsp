@@ -12,7 +12,7 @@
 #' @import stringr
 #' @export
 #' @examples
-#' tjsg_meta(livre="Lei Maria da Penha",quote=TRUE,classes.value="",inicio="20/06/2012", fim="01/08/2012")
+#' tjsg_meta(livre="Lei Maria da Penha")
 
 tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim=""){
   set_config(config(ssl_verifypeer = FALSE ))

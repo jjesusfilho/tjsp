@@ -9,8 +9,11 @@ tjpg(url)
 \arguments{
 \item{url}{Faça primeiramente a busca na página do TJSP, depois copie e cole a url aqui.}
 }
+\value{
+Um data.frame com as informações do julgado
+}
 \description{
-Esta função extraí dados de busca livre por processos de primeira instância no TJSP
+Esta função extraí dados de busca livre por julgados de primeira instância no TJSP
 }
 \examples{
 tjsg(url)
