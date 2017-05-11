@@ -22,6 +22,6 @@ tjsg_meta(livre, quote = TRUE, classes.value = "", inicio = "",
 Esta função extrai metadados das decisões de segundo grau do TJSP
 }
 \examples{
-tjsg_meta(livre="Lei Maria da Penha",quote=TRUE,classes.value="",inicio="20/06/2012", fim="01/08/2012")
+tjsg_meta(livre="Lei Maria da Penha")
 }
 \keyword{tjsp}

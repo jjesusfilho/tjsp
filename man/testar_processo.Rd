@@ -8,17 +8,12 @@ testar_processo(url)
 }
 \arguments{
 \item{url}{a vector of url strings to access the decisions.}
-
-\item{cdacordao}{a vector of decisions ids/codes to give as names to the downloading files.}
 }
 \value{
 pdf of the decision downloaded to the working directory.
 }
 \description{
-This function downloads complete decisions from São Paulo state High Court.
-}
-\examples{
-inteiroTJSP(url)
+This function predicts captcha letters
 }
 \keyword{court}
 \keyword{decisions}

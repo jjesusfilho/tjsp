@@ -1,17 +1,13 @@
 #' Função inteiroTJSP
 #'
-#' This function downloads complete decisions from São Paulo state High Court.
+#' This function predicts captcha letters
 #' @param url a vector of url strings to access the decisions.
-#' @param cdacordao a vector of decisions ids/codes to give as names to the downloading files.
 #' @keywords tjsp court decisions
 #' @import httr
 #' @import stringr
 #' @import captchaSajAudio
 #' @return pdf of the decision downloaded to the working directory.
 #' @export
-#' @examples
-#' inteiroTJSP(url)
-
 
 testar_processo<-function(url) {
   arq_img<-"imagem.png"
@@ -33,12 +29,26 @@ testar_processo<-function(url) {
 }
 
 
+#' This function downloads complete decisions from São Paulo state High Court.
+#' @param url a vector of url strings to access the decisions.
+#' @param cdacordao a vector of decisions ids/codes to give as names to the downloading files.
+#' @keywords tjsp court decisions
+#' @import httr
+#' @import stringr
+#' @import captchaSajAudio
+#' @return pdf of the decision downloaded to the working directory.
+#' @export
+
+
 inteiroTJSP<-function(url=NULL,cdacordao=NULL){
 
-for(i in seq_along(url)){
-POST(url[i],
-body<-list(testar_processo(url[i])[2]),
-write_disk(paste0(cdacordao[i],".pdf"),overwrite = T))
-Sys.sleep(1)
+  for(i in seq_along(url)){
+    POST(url[i],
+         body<-list(testar_processo(url[i])[2]),
+         write_disk(paste0(cdacordao[i],".pdf"),overwrite = T))
+    Sys.sleep(1)
+  }
 }
-}
+
+#' @examples
+#' inteiroTJSP(url)

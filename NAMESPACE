@@ -3,6 +3,7 @@
 export(clearPt)
 export(decifrar)
 export(filtra)
+export(inteiroTJSP)
 export(ler)
 export(rm_dup)
 export(testar_processo)
