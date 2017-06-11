@@ -14,7 +14,7 @@
 #' @examples
 #' tjsg_meta(livre="Lei Maria da Penha")
 
-tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim=""){
+tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=NULL){
   set_config(config(ssl_verifypeer = FALSE ))
   body <- list(dados.buscaInteiroTeor ="", dados.pesquisarComSinonimos = "S",
                dados.pesquisarComSinonimos = "S", dados.buscaEmenta = "",
@@ -40,12 +40,20 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim=""){
   body[[31]]<-fim # idem
   a<-POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",encode="form",
           body=body)
-  b<- htmlParse(content(a,as="text"), encoding = "UTF-8")
-  val <- xmlGetAttr(getNodeSet(b, "//*[@id='totalResultadoAba-A']")[[1]],"value")
-  num<-as.numeric(val)
-  max_pag <- ceiling(num/20)
+  if(length(paginas)==0){
+  max_pag<-a %>%
+      content("parsed") %>%
+      xml_find_all(xpath="//*[@id='totalResultadoAba-A']") %>%
+      xml_attrs() %>%
+    .[[1]] %>%
+    .[3] %>%
+    as.numeric() %>%
+    `/`(20) %>%
+    ceiling()
+  paginas<-1:max_pag
+  }
   df<-data.frame()
-  for (i in 1:max_pag){
+  for (i in paginas){
     tryCatch({
       c <- GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",i), set_cookies(unlist(a$cookies)))
       d <- htmlParse(content(c,as="text"), encoding = "UTF-8")
@@ -75,4 +83,4 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim=""){
   df$url<-paste0("https://esaj.tjsp.jus.br/cjsg/getArquivo.do?cdAcordao=",df$cdacordao,"&cdForo=0")
   return(df)
 }
-
+df<-tjsg_meta("desacato")
