@@ -4,10 +4,12 @@
 #' @param livre palavra ou texto a ser buscado nas ementas e nos acórdãos
 #' @param quote logical. Colocar a expressão entre aspas?
 #' @param classes.value Código
-#' @param inicio  Data inicial
+#' @param inicio  data inicial
 #' @param fim  Data final
+#' @param paginas
 #' @keywords tjsp
 #' @import XML
+#' @import xml2
 #' @import httr
 #' @import stringr
 #' @export
