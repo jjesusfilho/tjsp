@@ -6,7 +6,7 @@
 #' @param classes.value Código
 #' @param inicio  data inicial
 #' @param fim  Data final
-#' @param paginas
+#' @param paginas paginas a serem buscadas
 #' @keywords tjsp
 #' @import XML
 #' @import xml2

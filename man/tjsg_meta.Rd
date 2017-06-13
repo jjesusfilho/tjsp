@@ -5,7 +5,7 @@
 \title{Função tjsg_meta}
 \usage{
 tjsg_meta(livre, quote = TRUE, classes.value = "", inicio = "",
-  fim = "")
+  fim = "", paginas = NULL)
 }
 \arguments{
 \item{livre}{palavra ou texto a ser buscado nas ementas e nos acórdãos}
@@ -14,9 +14,11 @@ tjsg_meta(livre, quote = TRUE, classes.value = "", inicio = "",
 
 \item{classes.value}{Código}
 
-\item{inicio}{Data inicial}
+\item{inicio}{data inicial}
 
 \item{fim}{Data final}
+
+\item{paginas}{paginas a serem buscadas}
 }
 \description{
 Esta função extrai metadados das decisões de segundo grau do TJSP
