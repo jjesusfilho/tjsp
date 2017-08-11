@@ -85,4 +85,3 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
   df$url<-paste0("https://esaj.tjsp.jus.br/cjsg/getArquivo.do?cdAcordao=",df$cdacordao,"&cdForo=0")
   return(df)
 }
-df<-tjsg_meta("desacato")
