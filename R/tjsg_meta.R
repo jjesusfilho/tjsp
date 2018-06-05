@@ -8,16 +8,12 @@
 #' @param fim  Data final
 #' @param paginas paginas a serem buscadas
 #' @keywords tjsp
-#' @import XML
-#' @import xml2
-#' @import httr
-#' @import stringr
 #' @export
 #' @examples
 #' tjsg_meta(livre="Lei Maria da Penha")
 
 tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=NULL){
-  set_config(config(ssl_verifypeer = FALSE ))
+  httr::set_config(httr::config(ssl_verifypeer = FALSE ))
   body <- list(dados.buscaInteiroTeor ="", dados.pesquisarComSinonimos = "S",
                dados.pesquisarComSinonimos = "S", dados.buscaEmenta = "",
                dados.nuProcOrigem = "", dados.nuRegistro = "", agenteSelectedEntitiesList = "",
@@ -40,38 +36,48 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
   body[[19]]<-classes.value ##
   body[[30]]<-inicio ## colocar a data no formato dd/mm/aaa
   body[[31]]<-fim # idem
-  a<-POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",encode="form",
+  a<-httr::POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",encode="form",
           body=body)
   if(length(paginas)==0){
-  max_pag<-a %>%
-      content("parsed") %>%
-      xml_find_all(xpath="//*[@id='totalResultadoAba-A']") %>%
-      xml_attrs() %>%
-    .[[1]] %>%
-    .[3] %>%
-    as.numeric() %>%
-    `/`(20) %>%
-    ceiling()
-  paginas<-1:max_pag
+    max_pag<-a %>%
+      httr::content("parsed") %>%
+      xml2::xml_find_all(xpath="//*[@id='totalResultadoAba-A']") %>%
+      xml2::xml_attrs() %>%
+      .[[1]] %>%
+      .[3] %>%
+      as.numeric() %>%
+      `/`(20) %>%
+      ceiling()
+    paginas<-1:max_pag
   }
-  df<-data.frame()
-  for (i in paginas){
+  l<-vector("list",max_pag)
+  
+  for (i in seq_along(l)){
     tryCatch({
-      c <- GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",i), set_cookies(unlist(a$cookies)))
-      d <- htmlParse(content(c,as="text"), encoding = "UTF-8")
-      aC <-xpathSApply(d,'//*[@class="assuntoClasse"]',xmlValue,trim=T)
-      assunto.processo<-str_trim(str_extract(aC,".*?(?=/)"))
-      assunto.materia<-str_trim(str_extract(aC,"(?<=/\\s{0,100}).*"))
-      relator<-xpathSApply(d,'//*[@class="ementaClass2"][1]',xmlValue,trim=T)
-      comarca<-xpathSApply(d,'//*[@class="ementaClass2"][2]',xmlValue,trim=T)
-      orgao.julgador<-xpathSApply(d,'//*[@class="ementaClass2"][3]',xmlValue,trim=T)
-      data.julgamento<-xpathSApply(d,'//*[@class="ementaClass2"][4]',xmlValue,trim=T)
-      data.registro<-xpathSApply(d,'//*[@class="ementaClass2"][5]',xmlValue,trim=T)
-      ementa<-xpathSApply(d,'//textarea',xmlValue,trim=T)
-      processo<-xpathSApply(d,'//*[@class="esajLinkLogin downloadEmenta"]',xmlValue,trim=T)
-      cdacordao<-xpathSApply(d,'//*[@class="downloadEmenta"]',xmlAttrs,trim=T)[2,]
-      df1<-data.frame(pagina=i,assunto.processo,assunto.materia,relator,comarca,orgao.julgador,data.julgamento,data.registro,processo,ementa,cdacordao)
-      df<-rbind(df,df1)
+      c <- httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",i), set_cookies(unlist(a$cookies)))
+      d <- httr::content(c)
+      aC <-xml2::xml_find_all(d,'//*[@class="assuntoClasse"]') %>%
+        xml2::xml_text(trim=T) %>% 
+        stringr::str_match("(?:Classe.Assunto.\\s+)(\\w.*?)(?: / )(.*)")
+      classe<-aC[,2]
+      assunto<-aC[,3]
+      relator<-xml2::xml_find_all(d,'//tr[2][@class="ementaClass2"][1]') %>%
+      xml2::xml_text(trim=T)
+      comarca<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][2]') %>%
+      xml2::xml_text(trim=T)
+      orgao_julgador<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][3]') %>%
+      xml2::xml_text(trim=T)
+      data_julgamento<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][4]') %>%
+      xml2::xml_text(trim=T)
+      data_publicacao<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][5]') %>%
+      xml2::xml_text(trim=T)
+      ementa<-xml2::xml_find_all(d,'//*[@class="mensagemSemFormatacao"]') %>%
+      xml2::xml_text(trim=T)
+      processo<-xml2::xml_find_all(d,'//*[@class="esajLinkLogin downloadEmenta"]') %>%
+      xml2::xml_text(trim=T)
+      cdacordao<-xml2::xml_find_all(d,'//a[1]/@cdacordao') %>%
+      xml2::xml_text()
+      l[[i]]<-data.frame(pagina=i,classe,assunto,relator,comarca,orgao_julgador,data_julgamento,data_publicacao,processo,ementa,cdacordao)
     },
     error=function(m){
       m
@@ -81,7 +87,9 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
     })
     sys.sleep(2)
   }
-  df[4:8]<-lapply(df[4:8],function(x) str_replace(x,".*:\\s*",""))
+  df<-do.call(rbind,l)
+  
+  df %<>% dplyr::modify_at(vars(4:8),funs(str_replace(.,".*:\\s*","")))
   df$url<-paste0("https://esaj.tjsp.jus.br/cjsg/getArquivo.do?cdAcordao=",df$cdacordao,"&cdForo=0")
   return(df)
 }
