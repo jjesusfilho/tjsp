@@ -19,6 +19,8 @@ tjsg_meta(livre, quote = TRUE, classes.value = "", inicio = "",
 \item{fim}{Data final}
 
 \item{paginas}{paginas a serem buscadas}
+
+\item{tipo}{"A" Para acórdãos, "D" para decisões monocráticas. "A,D" para ambos.}
 }
 \description{
 Esta função extrai metadados das decisões de segundo grau do TJSP
