@@ -1,3 +1,11 @@
+#' Ler o andamento dos processos
+#'
+#' @param path Diretório onde se encontram os htmls dos processos.
+#'
+#' @return tibble com os processos e andamentos.
+#' @export
+#'
+#' @examples
 ler_movimentacao<-function(path="."){
 
   a<- list.files(path=path,pattern=".html",full.names = T)

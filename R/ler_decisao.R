@@ -1,4 +1,12 @@
-ler_decisao <- function(path = ".") {
+#' Ler decisoes
+#'
+#' @param path Diretório onde se encontram os htmls baixados
+#'
+#' @return tibble com as os numéros dos processos e respectivas decisões
+#' @export
+#'
+#' @examples
+ler_decisoes <- function(path = ".") {
 
   a <- list.files(path = path,
                   pattern = ".html",

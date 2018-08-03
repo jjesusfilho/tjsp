@@ -1,13 +1,21 @@
+#' Ler metadados das decisões
+#'
+#' @param path Diretório onde se encontram os htmls.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 ler_cjsg<-function(path="."){
- 
+
   a<- list.files(path=path,pattern=".html",full.names = T)
-  
+
  df<- purrr::map_dfr(a[1],purrr::possibly(~{
-  
+
   resposta<-xml2::read_html(.x)
-  
+
   aC <-xml2::xml_find_all(d,'//*[@class="assuntoClasse"]') %>%
-    xml2::xml_text(trim=T) %>% 
+    xml2::xml_text(trim=T) %>%
     stringr::str_match("(?:Classe.Assunto.\\s+)(\\w.*?)(?: / )(.*)")
   classe<-aC[,2]
   assunto<-aC[,3]

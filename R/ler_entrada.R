@@ -1,3 +1,11 @@
+#' Data da entrada do processo
+#'
+#' @param path Diretório onde se encontram os htmls dos processos
+#'
+#' @return tibble com o número dos processos e respectivas decisões
+#' @export
+#'
+#' @examples
 ler_entrada<- function(path="."){
 
 a<- list.files(path=path,pattern=".html",full.names = T)
