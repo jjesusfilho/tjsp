@@ -5,7 +5,7 @@
 \title{Função tjsg_meta}
 \usage{
 tjsg_meta(livre, quote = TRUE, classes.value = "", inicio = "",
-  fim = "", paginas = NULL)
+  fim = "", paginas = NULL, tipo = "A")
 }
 \arguments{
 \item{livre}{palavra ou texto a ser buscado nas ementas e nos acórdãos}

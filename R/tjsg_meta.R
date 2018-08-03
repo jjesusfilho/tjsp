@@ -12,7 +12,7 @@
 #' @examples
 #' tjsg_meta(livre="Lei Maria da Penha")
 
-tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=NULL){
+tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=NULL,tipo="A"){
   httr::set_config(httr::config(ssl_verifypeer = FALSE ))
   body <- list(dados.buscaInteiroTeor ="", dados.pesquisarComSinonimos = "S",
                dados.pesquisarComSinonimos = "S", dados.buscaEmenta = "",
@@ -36,6 +36,7 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
   body[[19]]<-classes.value ##
   body[[30]]<-inicio ## colocar a data no formato dd/mm/aaa
   body[[31]]<-fim # idem
+  body[[35]]<-tipo
   a<-httr::POST("https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",encode="form",
           body=body)
   if(length(paginas)==0){
@@ -51,13 +52,13 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
     paginas<-1:max_pag
   }
   l<-vector("list",max_pag)
-  
+
   for (i in seq_along(l)){
     tryCatch({
       c <- httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",i), set_cookies(unlist(a$cookies)))
       d <- httr::content(c)
       aC <-xml2::xml_find_all(d,'//*[@class="assuntoClasse"]') %>%
-        xml2::xml_text(trim=T) %>% 
+        xml2::xml_text(trim=T) %>%
         stringr::str_match("(?:Classe.Assunto.\\s+)(\\w.*?)(?: / )(.*)")
       classe<-aC[,2]
       assunto<-aC[,3]
@@ -88,7 +89,7 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
     sys.sleep(2)
   }
   df<-do.call(rbind,l)
-  
+
   df %<>% dplyr::modify_at(vars(4:8),funs(str_replace(.,".*:\\s*","")))
   df$url<-paste0("https://esaj.tjsp.jus.br/cjsg/getArquivo.do?cdAcordao=",df$cdacordao,"&cdForo=0")
   return(df)
