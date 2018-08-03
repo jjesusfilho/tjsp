@@ -13,7 +13,7 @@ ler_dados<-function(path="."){
 
   a<- list.files(path=path,pattern=".html",full.names = T)
 
-  processo<-stringr::str_extract(a,"\\d{14}")
+  processo<-stringr::str_extract(a,"\\d{20}")
 
   purrr::map_dfr(a,purrr::possibly(~{
 
