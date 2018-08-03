@@ -56,7 +56,12 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
 
   for (i in seq_along(l)){
     tryCatch({
-      c <- httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",i), set_cookies(unlist(a$cookies)))
+      if (tipo=="A"){
+        c<- httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",i), httr::set_cookies(unlist(a$cookies)))
+      }else{
+        c<- httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=",i), httr::set_cookies(unlist(a$cookies)))
+
+      }
       d <- httr::content(c)
       aC <-xml2::xml_find_all(d,'//*[@class="assuntoClasse"]') %>%
         xml2::xml_text(trim=T) %>%
@@ -91,7 +96,7 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
   }
   df<-do.call(rbind,l)
 
-  df %<>% dplyr::modify_at(vars(4:8),funs(str_replace(.,".*:\\s*","")))
+  df %<>% dplyr::mutate_at(dplyr::vars(4:8),dplyr::funs(stringr::str_replace(.,".*:\\s*","")))
   df$url<-paste0("https://esaj.tjsp.jus.br/cjsg/getArquivo.do?cdAcordao=",df$cdacordao,"&cdForo=0")
   return(df)
 }
