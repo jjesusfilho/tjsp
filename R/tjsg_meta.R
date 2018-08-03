@@ -7,6 +7,7 @@
 #' @param inicio  data inicial
 #' @param fim  Data final
 #' @param paginas paginas a serem buscadas
+#' @param tipo "A" Para acórdãos, "D" para decisões monocráticas. "A,D" para ambos.
 #' @keywords tjsp
 #' @export
 #' @examples
