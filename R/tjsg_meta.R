@@ -96,7 +96,7 @@ tjsg_meta<-function(livre,quote=TRUE,classes.value="",inicio="",fim="",paginas=N
   }
   df<-do.call(rbind,l)
 
-  df %<>% dplyr::mutate_at(dplyr::vars(4:8),dplyr::funs(stringr::str_replace(.,".*:\\s*","")))
+  df <- df %>% dplyr::mutate_at(dplyr::vars(4:8),dplyr::funs(stringr::str_replace(.,".*:\\s*","")))
   df$url<-paste0("https://esaj.tjsp.jus.br/cjsg/getArquivo.do?cdAcordao=",df$cdacordao,"&cdForo=0")
   return(df)
 }
