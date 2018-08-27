@@ -18,7 +18,9 @@ Imports:
     stringi,
     stringr,
     purrr,
+    dplyr,
     progress,
     magrittr,
-    rvest
+    rvest,
+    lubridate
 RoxygenNote: 6.0.1
