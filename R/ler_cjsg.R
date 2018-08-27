@@ -14,26 +14,26 @@ ler_cjsg<-function(path="."){
 
   resposta<-xml2::read_html(.x)
 
-  aC <-xml2::xml_find_all(d,'//*[@class="assuntoClasse"]') %>%
+  aC <-xml2::xml_find_all(resposta,'//*[@class="assuntoClasse"]') %>%
     xml2::xml_text(trim=T) %>%
     stringr::str_match("(?:Classe.Assunto.\\s+)(\\w.*?)(?: / )(.*)")
   classe<-aC[,2]
   assunto<-aC[,3]
-  relator<-xml2::xml_find_all(d,'//tr[2][@class="ementaClass2"][1]') %>%
+  relator<-xml2::xml_find_all(resposta,'//tr[2][@class="ementaClass2"][1]') %>%
     xml2::xml_text(trim=T)
-  comarca<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][2]') %>%
+  comarca<-xml2::xml_find_all(resposta,'//*[@class="ementaClass2"][2]') %>%
     xml2::xml_text(trim=T)
-  orgao_julgador<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][3]') %>%
+  orgao_julgador<-xml2::xml_find_all(resposta,'//*[@class="ementaClass2"][3]') %>%
     xml2::xml_text(trim=T)
-  data_julgamento<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][4]') %>%
+  data_julgamento<-xml2::xml_find_all(resposta,'//*[@class="ementaClass2"][4]') %>%
     xml2::xml_text(trim=T)
-  data_publicacao<-xml2::xml_find_all(d,'//*[@class="ementaClass2"][5]') %>%
+  data_publicacao<-xml2::xml_find_all(resposta,'//*[@class="ementaClass2"][5]') %>%
     xml2::xml_text(trim=T)
-  ementa<-xml2::xml_find_all(d,'//*[@class="mensagemSemFormatacao"]') %>%
+  ementa<-xml2::xml_find_all(resposta,'//*[@class="mensagemSemFormatacao"]') %>%
     xml2::xml_text(trim=T)
-  processo<-xml2::xml_find_all(d,'//*[@class="esajLinkLogin downloadEmenta"]') %>%
+  processo<-xml2::xml_find_all(resposta,'//*[@class="esajLinkLogin downloadEmenta"]') %>%
     xml2::xml_text(trim=T)
-  cdacordao<-xml2::xml_find_all(d,'//a[1]/@cdacordao') %>%
+  cdacordao<-xml2::xml_find_all(resposta,'//a[1]/@cdacordao') %>%
     xml2::xml_text()
   tibble::tibble(classe,assunto,relator,comarca,orgao_julgador,data_julgamento,data_publicacao,processo,ementa,cdacordao)
 },otherwise=NULL)
