@@ -10,7 +10,7 @@ ler_cjsg<-function(path="."){
 
   a<- list.files(path=path,pattern=".html",full.names = T)
 
- df<- purrr::map_dfr(a[1],purrr::possibly(~{
+ df<- purrr::map_dfr(a,purrr::possibly(~{
 
   resposta<-xml2::read_html(.x)
 
