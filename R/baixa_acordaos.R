@@ -28,14 +28,14 @@ baixar_acordao <- function(processos=NULL, diretorio = "."){
       query1 <- list(
         cbPesquisa = "NUMPROC",
         conversationId = "",
-        dePesquisat= "",
-        dePesquisaNuUnificadot= processos[i],
-        foroNumeroUnificadot= foro,
-        localPesquisa.cdLocalt= "-1",
-        numeroDigitoAnoUnificadot= unificado,
-        paginaConsultat= "1",
+        dePesquisa= "",
+        dePesquisaNuUnificado= processos[i],
+        foroNumeroUnificado= foro,
+        localPesquisa.cdLocal= "-1",
+        numeroDigitoAnoUnificado= unificado,
+        paginaConsulta= "1",
         tipoNuProcesso = "UNIFICADO",
-        uuidCaptchat= ""
+        uuidCaptcha= ""
       )
 
       resposta1 <- httr::RETRY("GET",
