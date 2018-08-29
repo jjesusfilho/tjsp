@@ -10,11 +10,14 @@ ler_dados(path = ".")
 \arguments{
 \item{path}{diret\u00f3rio onde se encontram os htmls baixados.}
 }
+\value{
+tabela com dados do processo
+}
 \description{
 Aplica parser para extrair informa\u00e7\u00f5es sobre as dados do
     processo.
 }
 \examples{
-partes<-ler_partes(path=".")
+dados<-ler_dados()
 
 }

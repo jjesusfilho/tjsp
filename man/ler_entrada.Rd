@@ -15,3 +15,7 @@ tibble com o número dos processos e respectivas decisões
 \description{
 Data da entrada do processo
 }
+\examples{
+entrada<-ler_entrada()
+
+}

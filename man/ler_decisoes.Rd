@@ -15,3 +15,8 @@ tibble com as os numéros dos processos e respectivas decisões
 \description{
 Ler decisoes
 }
+\examples{
+
+decisoes<-ler_decisoes()
+
+}

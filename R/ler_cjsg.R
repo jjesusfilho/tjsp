@@ -2,10 +2,12 @@
 #'
 #' @param path Diretório onde se encontram os htmls.
 #'
-#' @return
+#' @return tabela com metadados jurisprudenciais.
 #' @export
 #'
 #' @examples
+#' cjsg<-ler_cjsg()
+#'
 ler_cjsg<-function(path="."){
 
   a<- list.files(path=path,pattern=".html",full.names = T)

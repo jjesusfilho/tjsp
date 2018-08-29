@@ -9,6 +9,13 @@ ler_cjsg(path = ".")
 \arguments{
 \item{path}{Diretório onde se encontram os htmls.}
 }
+\value{
+tabela com metadados jurisprudenciais.
+}
 \description{
 Ler metadados das decisões
+}
+\examples{
+cjsg<-ler_cjsg()
+
 }

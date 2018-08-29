@@ -3,11 +3,11 @@
 #'
 #' @param path diret\u00f3rio onde se encontram os htmls baixados.
 #'
-#' @return
+#' @return tabela com dados do processo
 #' @export
 #'
 #' @examples
-#' partes<-ler_partes(path=".")
+#' dados<-ler_dados()
 #'
 ler_dados<-function(path="."){
 

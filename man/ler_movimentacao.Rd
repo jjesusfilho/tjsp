@@ -15,3 +15,8 @@ tibble com os processos e andamentos.
 \description{
 Ler o andamento dos processos
 }
+\examples{
+
+movimentacao<-ler_movimentacao()
+
+}

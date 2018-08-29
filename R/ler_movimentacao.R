@@ -6,6 +6,9 @@
 #' @export
 #'
 #' @examples
+#'
+#' movimentacao<-ler_movimentacao()
+#'
 ler_movimentacao<-function(path="."){
 
   a<- list.files(path=path,pattern=".html",full.names = T)

@@ -15,3 +15,8 @@ tibble com os htmls.
 \description{
 Lê conteúdo das decisões monocráticas
 }
+\examples{
+
+ler_decisoes_monocraticas()
+
+}

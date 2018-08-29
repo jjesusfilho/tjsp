@@ -6,6 +6,9 @@
 #' @export
 #'
 #' @examples
+#'
+#' decisoes<-ler_decisoes()
+#'
 ler_decisoes <- function(path = ".") {
 
   a <- list.files(path = path,

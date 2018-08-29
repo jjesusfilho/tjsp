@@ -6,6 +6,8 @@
 #' @export
 #'
 #' @examples
+#' entrada<-ler_entrada()
+#'
 ler_entrada<- function(path="."){
 
 a<- list.files(path=path,pattern=".html",full.names = T)

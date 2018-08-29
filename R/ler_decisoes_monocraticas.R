@@ -6,6 +6,9 @@
 #' @export
 #'
 #' @examples
+#'
+#' ler_decisoes_monocraticas()
+#'
 ler_decisoes_monocraticas<-function(path="."){
   a<- list.files(path=path,pattern=".html",full.names = T)
 
