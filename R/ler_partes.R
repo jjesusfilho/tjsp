@@ -1,20 +1,23 @@
-#' Aplica parser para extrair informa\u00e7\u00f5es sobre as partes do
+#' Aplica parser para extrair informações sobre as partes do
 #'     processo.
 #'
-#' @param path diret\u00f3rio onde se encontram os htmls baixados.
+#' @param diretorio Diretório onde se encontram os htmls baixados.
 #'
-#' @return tabela com informa\u00e7\u00f5es das partes.
+#' @return tabela com informações das partes
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' partes<-ler_partes(path=".")
-
-ler_partes<-function(path="."){
-  a<- list.files(path=path,pattern=".html",full.names = T)
+#' }
+ler_partes<-function(diretorio="."){
+  a<- list.files(path=diretorio,pattern=".html",full.names = T)
 
   processo<-stringr::str_extract(a,"\\d{20}")
 
-  purrr::map2_dfr(a,processo,purrr::possibly(~{
+  future::plan("multiprocess")
+
+  furrr::future_map2_dfr(a,processo,purrr::possibly(~{
 
     parte_nome<-xml2::read_html(.x) %>%
       xml2::xml_find_all('//td/*[contains(@class,"mensagemExibindo")]/../following-sibling::td') %>%

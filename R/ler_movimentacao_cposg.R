@@ -1,18 +1,15 @@
-#' Extrai a movimenta\\u00e7\\u00e3o processual de segunda inst\\u00e2ncia
+#' Extrai a movimentação processual de segunda instância
 #'
-#' @param processos n\\u00famero do processo de segunda inst\\u00e2ncia no formato NNNNNNN.DD.AAAA.J.TR.OOOO
+#' @param processos número do processo de segunda instância no formato NNNNNNN.DD.AAAA.J.TR.OOOO
 #'
-#' @return data frame com a movimenta\u00e7\u00e3o processual.
+#' @return data frame com a movimentação processual.
 #' @export
 #'
-#' @examples
-#'
-#' movimentacao<-cposg_mov("1049363-11.2015.8.26.0002")
 
-cposg_mov<-function(processos=NULL){
+ler_movimentacao_cposg<-function(processos=NULL){
 
-  unificado<-processos %>% str_extract(".{15}")
-  foro<- processos %>% str_extract("\\d{4}$")
+  unificado<-processos %>% stringr::str_extract(".{15}")
+  foro<- processos %>% stringr::str_extract("\\d{4}$")
 
   httr::set_config(httr::config(ssl_verifypeer = FALSE ))
   url<-"https://esaj.tjsp.jus.br/cposg/search.do?"

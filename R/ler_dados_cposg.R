@@ -1,21 +1,23 @@
-#' Aplica parser para extrair informa\u00e7\u00f5es sobre as dados do
-#'     processo.
+#' Lê metadados dos processos de segunda instância
 #'
-#' @param path diret\u00f3rio onde se encontram os htmls baixados.
+#' @param diretorio diretório onde se encontram os htmls baixados.
 #'
 #' @return tabela com dados do processo
 #' @export
 #'
 #' @examples
-#' dados<-ler_dados()
-#'
-ler_dados<-function(path="."){
+#' \dontrun{
+#' dados<-ler_dados_cposg()
+#' }
+ler_dados_cposg<-function(diretorio="."){
 
-  a<- list.files(path=path,pattern=".html",full.names = T)
+  a<- list.files(path=diretorio,pattern=".html",full.names = T)
 
   processo<-stringr::str_extract(a,"\\d{20}")
 
-  purrr::map_dfr(a,purrr::possibly(~{
+  future::plan("multiprocess")
+
+  furrr::future_map_dfr(a,purrr::possibly(~{
 
   resposta<-xml2::read_html(.x)
 
@@ -53,7 +55,7 @@ ler_dados<-function(path="."){
     tibble::as.tibble() %>%
    tidyr::separate(processo,c("processo","situacao"),sep="\\w+$",extra="merge")
 
-},otherwise = NULL))
+},otherwise = NULL),.progress=TRUE)
 }
 
 

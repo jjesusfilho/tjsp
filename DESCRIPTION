@@ -8,7 +8,7 @@ Maintainer: The package maintainer <jjesusfilho@gmail.com>
 Description: Funções para baixar metadados das decisões judiciais, baixar as
     próprias decisões de primeira e segunda instância do TJSP e manipulação desses
     dados.
-License: License: MIT + file LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -23,5 +23,11 @@ Imports:
     progress,
     magrittr,
     rvest,
-    lubridate
+    lubridate,
+    furrr,
+    future,
+    rlang,
+    janitor,
+    abjutils,
+    tidyr
 RoxygenNote: 6.0.1

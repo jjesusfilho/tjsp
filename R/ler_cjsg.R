@@ -1,16 +1,17 @@
-#' Ler metadados das decisões
+#' Ler metadados das decisões de segunda instância do TJSP
 #'
-#' @param path Diretório onde se encontram os htmls.
+#' @param diretorio Diretório onde se encontram os htmls.
 #'
 #' @return tabela com metadados jurisprudenciais.
 #' @export
 #'
 #' @examples
-#' cjsg<-ler_cjsg()
-#'
-ler_cjsg<-function(path="."){
+#' \dontrun{
+#' df<-ler_cjsg()
+#' }
+ler_cjsg<-function(diretorio="."){
 
-  a<- list.files(path=path,pattern=".html",full.names = T)
+  a<- list.files(path=diretorio,pattern=".html",full.names = T)
 
  df<- purrr::map_dfr(a,purrr::possibly(~{
 

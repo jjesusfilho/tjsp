@@ -1,17 +1,17 @@
-#' Ler decisoes
+#' Lê o dispositivo das decisões de segunda instância a partir dos htmls
 #'
-#' @param path Diretório onde se encontram os htmls baixados
+#' @param diretorio Diretório onde se encontram os htmls baixados
 #'
 #' @return tibble com as os numéros dos processos e respectivas decisões
 #' @export
 #'
 #' @examples
-#'
-#' decisoes<-ler_decisoes()
-#'
-ler_decisoes <- function(path = ".") {
+#' \dontrun{
+#' decisoes<-ler_decisoes_cposg().
+#' }
+ler_decisoes_cposg <- function(diretorio = ".") {
 
-  a <- list.files(path = path,
+  a <- list.files(path = diretorio,
                   pattern = ".html",
                   full.names = T)
 
@@ -29,7 +29,7 @@ ler_decisoes <- function(path = ".") {
         "//table/tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]") %>%
       rvest::html_table() %>%
       purrr::pluck(1) %>%
-      setNames(c("data_julgamento", "situacao_julgamento", "decisao")) %>%
+      stats::setNames(c("data_julgamento", "situacao_julgamento", "decisao")) %>%
       cbind(processo = y[i], .,stringsAsFactors=F)
 
   },error=function(e){
@@ -42,8 +42,13 @@ ler_decisoes <- function(path = ".") {
     })
   }
 
-  for (i in seq_along(lista)){
- lista[[i]]<- tentativa(a,processo)
+future::plan("multiprocess")
+
+for (ii in seq_along(lista)){
+
+ lista[[ii]]<- future::future({
+   tentativa(a,processo)
+ })
  }
  do.call(rbind,lista)
 }

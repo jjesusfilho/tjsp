@@ -2,21 +2,23 @@
 % Please edit documentation in R/ler_partes.R
 \name{ler_partes}
 \alias{ler_partes}
-\title{Aplica parser para extrair informa\u00e7\u00f5es sobre as partes do
+\title{Aplica parser para extrair informações sobre as partes do
     processo.}
 \usage{
-ler_partes(path = ".")
+ler_partes(diretorio = ".")
 }
 \arguments{
-\item{path}{diret\u00f3rio onde se encontram os htmls baixados.}
+\item{diretorio}{Diretório onde se encontram os htmls baixados.}
 }
 \value{
-tabela com informa\u00e7\u00f5es das partes.
+tabela com informações das partes
 }
 \description{
-Aplica parser para extrair informa\u00e7\u00f5es sobre as partes do
+Aplica parser para extrair informações sobre as partes do
     processo.
 }
 \examples{
+\dontrun{
 partes<-ler_partes(path=".")
+}
 }
