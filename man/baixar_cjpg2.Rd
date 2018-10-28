@@ -7,7 +7,7 @@
 baixar_cjpg2(url = "", diretorio = ".")
 }
 \arguments{
-\item{url}{Faça a busca no próprio site: (https://esaj.tjsp.jus.br/cjpg/)}
+\item{url}{Faça a busca no próprio site: \link{https://esaj.tjsp.jus.br/cjpg/}}
 
 \item{diretorio}{Diretório onde serão armazenados os htmls.}
 }
@@ -16,4 +16,9 @@ Baixa os htmls com metadados das decisãoes de primeiro grau.
 }
 \description{
 Baixa decisões de primeiro grau do TJSP a partir da url criada na busca no próprio site.
+}
+\examples{
+\dontrun{
+baixar_cjpg2("https://esaj.tjsp.jus.br/cjpg/pesquisar.do?conversationId=&dadosConsulta.pesquisaLivre=&tipoNumero=UNIFICADO&numeroDigitoAnoUnificado=&foroNumeroUnificado=&dadosConsulta.nuProcesso=&dadosConsulta.nuProcessoAntigo=&classeTreeSelection.values=&classeTreeSelection.text=&assuntoTreeSelection.values=5560\%2C1456\%2C1457\%2C9647\%2C1458&assuntoTreeSelection.text=5+Registros+selecionados&agenteSelectedEntitiesList=&contadoragente=0&contadorMaioragente=0&cdAgente=&nmAgente=&dadosConsulta.dtInicio=01\%2F10\%2F2018&dadosConsulta.dtFim=25\%2F10\%2F2018&varasTreeSelection.values=&varasTreeSelection.text=&dadosConsulta.ordenacao=DESC")
+}
 }
