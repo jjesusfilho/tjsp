@@ -3,6 +3,7 @@
 export("%>%")
 export(baixar_acordaos)
 export(baixar_cjpg)
+export(baixar_cjpg2)
 export(baixar_cjsg)
 export(filtrar)
 export(ler_cjpg)
