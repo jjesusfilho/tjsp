@@ -2,16 +2,22 @@
 % Please edit documentation in R/ler_movimentacao_cposg.R
 \name{ler_movimentacao_cposg}
 \alias{ler_movimentacao_cposg}
-\title{Extrai a movimentação processual de segunda instância}
+\title{Extrai a movimentação processual de primeira e de segunda instância}
 \usage{
-ler_movimentacao_cposg(processos = NULL)
+ler_movimentacao_cposg(diretorio = ".")
 }
 \arguments{
-\item{processos}{número do processo de segunda instância no formato NNNNNNN.DD.AAAA.J.TR.OOOO}
+\item{diretorio}{diretório onde se encontram os htmls}
 }
 \value{
-data frame com a movimentação processual.
+tibble com a movimentação processual.
 }
 \description{
-Extrai a movimentação processual de segunda instância
+Extrai a movimentação processual de primeira e de segunda instância
+}
+\examples{
+\dontrun{
+andamento_cposg<-ler_movimentacao_cposg()
+andamento_cpopg<-ler_movimentacao_cpopg()
+}
 }

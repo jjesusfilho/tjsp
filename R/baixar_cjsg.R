@@ -79,7 +79,6 @@ baixar_cjsg <-
         body = body
       )
 
-    if (length(paginas) == 0) {
       max_pag <- a %>%
         httr::content("parsed") %>%
         xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") %>%
@@ -90,7 +89,7 @@ baixar_cjsg <-
         `/`(20) %>%
         ceiling()
       paginas <- 1:max_pag
-    }
+
 
 
     if (tipo == "A") {

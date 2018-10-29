@@ -1,18 +1,16 @@
 Package: tjsp
-Type: Package
-Date: 2017-03-03
-Title: Manipulação de decisões do TJSP
-Version: 0.1.0
-Author: José de Jesus Filho,Julio Trecenti
-Maintainer: The package maintainer <jjesusfilho@gmail.com>
+Version: 0.0.0.9001
+Title: Extração de decisões do Tribunal de Justiça de São Paulo
 Description: Funções para baixar metadados das decisões judiciais, baixar as
     próprias decisões de primeira e segunda instância do TJSP e manipulação desses
     dados.
+Authors@R: person("José", "de Jesus Filho", email = "jjesusfilho@gmail.com", role = c("aut", "cre"))
+Maintainer: The package maintainer <jjesusfilho@gmail.com>
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+ByteCompile: true
 Imports:
-    XML,
     xml2,
     httr,
     stringi,
@@ -29,5 +27,6 @@ Imports:
     rlang,
     janitor,
     abjutils,
-    tidyr
+    tidyr,
+    listenv
 RoxygenNote: 6.0.1

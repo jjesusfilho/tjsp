@@ -1,5 +1,5 @@
 #' Aplica parser para extrair informações sobre as partes do
-#'     processo.
+#'     processo de primeira ou de segunda instância.
 #'
 #' @param diretorio Diretório onde se encontram os htmls baixados.
 #'
@@ -10,10 +10,11 @@
 #' \dontrun{
 #' partes<-ler_partes(path=".")
 #' }
-ler_partes<-function(diretorio="."){
+ler_partes<-ler_partes_cpopg<-ler_partes_cposg<-function(diretorio="."){
   a<- list.files(path=diretorio,pattern=".html",full.names = T)
 
-  processo<-stringr::str_extract(a,"\\d{20}")
+  processo<-stringr::str_extract(a,"\\d{20}") %>%
+    abjutils::build_id()
 
   future::plan("multiprocess")
 

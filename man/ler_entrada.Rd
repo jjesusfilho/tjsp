@@ -17,6 +17,7 @@ Data da entrada do processo
 }
 \examples{
 \dontrun{
-entrada<-ler_entrada()
+entrada<-ler_entrada_cposg()
+entrada<-ler_entrada_cpopg()
 }
 }

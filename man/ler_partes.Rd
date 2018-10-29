@@ -3,7 +3,7 @@
 \name{ler_partes}
 \alias{ler_partes}
 \title{Aplica parser para extrair informações sobre as partes do
-    processo.}
+    processo de primeira ou de segunda instância.}
 \usage{
 ler_partes(diretorio = ".")
 }
@@ -15,7 +15,7 @@ tabela com informações das partes
 }
 \description{
 Aplica parser para extrair informações sobre as partes do
-    processo.
+    processo de primeira ou de segunda instância.
 }
 \examples{
 \dontrun{
