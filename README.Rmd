@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   eval=FALSE
 )
 ```
-# tjsp
+# Pacote tjsp
 ## Baixando e lendo decisões de primeiro e segundo grau.
 
 O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas e organizações não governamentais para coletar e organizar decisões judiciais de primeira e segunda instância do Tribunal de Justiça de São Paulo.
@@ -29,7 +29,7 @@ Este pacote não será incluído no cran. De modo que você deverá fazer uso da
 
 Portanto, instale versão em desenvolvimento: [GitHub](https://github.com/) com:
 
-``` r
+``` {r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("jjesusfilho/tjsp")
 ```
@@ -46,7 +46,7 @@ O terceiro grupo é formado por funções auxiliares no trabalho de transformaç
 
 As decisões de segunda instância podem ser consultadas livremente por meio da [página jurisprudência do TJSP](https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do?f=1). Por exemplo, para realizar uma busca livre sobre o tema feminicídio, faça o seguinte:
 
-```{r}
+```{r, eval=FALSE}
 library(tjsp)
 baixar_cjsg(livre="feminicídio",diretorio=".")
 ```
@@ -55,7 +55,7 @@ Ela baixará no  diretório indicado ou no atual, os htmls com os metadados das 
 
 Depois disso, você pode pedir para ler tais decisões:
 
-```{r}
+```{r, eval=FALSE}
 tabela<-ler_cjsg(diretorio=".")
 ```
 
@@ -63,7 +63,7 @@ tabela<-ler_cjsg(diretorio=".")
 
 O passo seguinte é realizar a busca e baixar os htmls processos individualmente considerados. O comando a seguir irá baixar todos os processos no diretório atual, mas você pode informar o diretório.
 
-```{r}
+```{r, eval=FALSE}
 baixar_cposg(tabela$processo)
 ```
 
@@ -71,31 +71,31 @@ baixar_cposg(tabela$processo)
 
 A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:
 
-```{r}
+```{r, eval=FALSE}
 dados<-ler_dados_cposg(diretorio)
 ```
 
 Em seguida, lemos as informações acerca da partes do processo:
 
-```{r}
+```{r, eval=FALSE}
 partes<-ler_partes_cposg(diretorio)
 ```
 
 Depois passamos para a leitura do andamento do processo. 
 
-```{r}
+```{r, eval=FALSE}
 andamento<-ler_movimentacao_cposg(diretorio)
 ```
 
 Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:
 
-```{r}
+```{r, eval=FALSE}
 entrada<-ler_entrada_cposg()
 ```
 
 Por fim, você pode ler o dispositivo da decisão:
 
-```{r}
+```{r, eval=FALSE}
 decisao<-ler_decisoes_cposg(diretorio)
 ```
 
