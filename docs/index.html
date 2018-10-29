@@ -59,7 +59,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/jjesusfilho/tjsp">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -75,32 +82,72 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="tjsp" class="section level1">
+<div id="pacote-tjsp" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#tjsp" class="anchor"></a>tjsp</h1></div>
-<p>O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas e organicações não governamentais para baixar e organizar decisões judiciais de primeira e segunda instância do Tribunal de Justiça de São Paulo.</p>
+<a href="#pacote-tjsp" class="anchor"></a>Pacote tjsp</h1></div>
+<div id="baixando-e-lendo-decisoes-de-primeiro-e-segundo-grau-" class="section level2">
+<h2 class="hasAnchor">
+<a href="#baixando-e-lendo-decisoes-de-primeiro-e-segundo-grau-" class="anchor"></a>Baixando e lendo decisões de primeiro e segundo grau.</h2>
+<p>O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas e organizações não governamentais para coletar e organizar decisões judiciais de primeira e segunda instância do Tribunal de Justiça de São Paulo.</p>
+</div>
 <div id="instalacao" class="section level2">
 <h2 class="hasAnchor">
 <a href="#instalacao" class="anchor"></a>Instalação</h2>
-<p>Este pacote não será incluído no cran. De modo que você deverá fazer uso da versão em desenvolvimento. Há três razões para não incluir no cran:</p>
+<p>Este pacote não será incluído no cran. De modo que você deverá fazer uso da versão em desenvolvimento. Há pelo menos duas razões para não incluir no cran:</p>
 <p>1 - Pacotes para web scraping estão em constante desenvolvimento. Pǻginas web são alteradas ou mesmo inteiramente substituídas, o que pode obrigar o desenvolvedor a reescrever o pacote do zero;</p>
 <p>2 - Os usuários do pacote serão em sua maioria brasileiros, e mesmo que não lusófonos venham a utilizá-lo, a familiaridade com a lingua portuguesa e com o direito brasileiro é indispensável;</p>
-<p>3 -</p>
-<p>Portanto, use sempre a versão em desenvolvimento: <a href="https://github.com/">GitHub</a> with:</p>
+<p>Portanto, instale versão em desenvolvimento: <a href="https://github.com/">GitHub</a> com:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"jjesusfilho/tjsp"</span>)</code></pre></div>
 </div>
 <div id="utilizacao" class="section level2">
 <h2 class="hasAnchor">
 <a href="#utilizacao" class="anchor"></a>Utilização</h2>
+<p>As funções do pacote podem ser agrupadas em três grupos. Um grupo de funções que inicia com o verbo baixar, as quais baixam para um diretório indicado pelo usuário, as decisões de primeira e segunda instância em formato html.</p>
+<p>O segundo grupo inicia com o verbo ler, as quais leem as informações contidas nos htmls e as dispôem numa tabela. Todas as funções de leitura são paralelizadas, de modo que o tempo de leitura dependerá da configuração de sua máquina.</p>
+<p>O terceiro grupo é formado por funções auxiliares no trabalho de transformação dos dados lidos pelo grupo anterior.</p>
+<div id="baixando-jurisprudencia" class="section level3">
+<h3 class="hasAnchor">
+<a href="#baixando-jurisprudencia" class="anchor"></a>Baixando jurisprudência</h3>
+<p>As decisões de segunda instância podem ser consultadas livremente por meio da <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do?f=1">página jurisprudência do TJSP</a>. Por exemplo, para realizar uma busca livre sobre o tema feminicídio, faça o seguinte:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tjsp)
+<span class="kw"><a href="reference/baixar_cjsg.html">baixar_cjsg</a></span>(<span class="dt">livre=</span><span class="st">"feminicídio"</span>,<span class="dt">diretorio=</span><span class="st">"."</span>)</code></pre></div>
+<p>Ela baixará no diretório indicado ou no atual, os htmls com os metadados das decisões. Atenção, faça a busca no TJ antes para verificar quantas páginas serão baixadas. A depender do tema, esse processo pode tomar horas.</p>
+<p>Depois disso, você pode pedir para ler tais decisões:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tabela&lt;-<span class="kw"><a href="reference/ler_cjsg.html">ler_cjsg</a></span>(<span class="dt">diretorio=</span><span class="st">"."</span>)</code></pre></div>
 </div>
-<div id="codigo-de-conduta" class="section level2">
+<div id="baixando-informacoes-detalhadas-dos-processos" class="section level3">
+<h3 class="hasAnchor">
+<a href="#baixando-informacoes-detalhadas-dos-processos" class="anchor"></a>Baixando informações detalhadas dos processos</h3>
+<p>O passo seguinte é realizar a busca e baixar os htmls processos individualmente considerados. O comando a seguir irá baixar todos os processos no diretório atual, mas você pode informar o diretório.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/baixar_cposg.html">baixar_cposg</a></span>(tabela<span class="op">$</span>processo)</code></pre></div>
+</div>
+<div id="lendo-os-processos-de-segunda-instancia-" class="section level3">
+<h3 class="hasAnchor">
+<a href="#lendo-os-processos-de-segunda-instancia-" class="anchor"></a>Lendo os processos de segunda instância.</h3>
+<p>A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dados&lt;-<span class="kw"><a href="reference/ler_dados_cposg.html">ler_dados_cposg</a></span>(diretorio)</code></pre></div>
+<p>Em seguida, lemos as informações acerca da partes do processo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">partes&lt;-<span class="kw">ler_partes_cposg</span>(diretorio)</code></pre></div>
+<p>Depois passamos para a leitura do andamento do processo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">andamento&lt;-<span class="kw"><a href="reference/ler_movimentacao_cposg.html">ler_movimentacao_cposg</a></span>(diretorio)</code></pre></div>
+<p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">entrada&lt;-<span class="kw">ler_entrada_cposg</span>()</code></pre></div>
+<p>Por fim, você pode ler o dispositivo da decisão:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decisao&lt;-<span class="kw"><a href="reference/ler_decisoes_cposg.html">ler_decisoes_cposg</a></span>(diretorio)</code></pre></div>
+</div>
+<div id="baixando-decisoes-de-primeiro-grau" class="section level3">
+<h3 class="hasAnchor">
+<a href="#baixando-decisoes-de-primeiro-grau" class="anchor"></a>Baixando decisões de primeiro grau</h3>
+<p>As decisões de primeiro grau seguem a mesma lógica das decisões de segundo grau com algumas diferenças. Verifique a ajuda para entender como funcionam.</p>
+</div>
+</div>
+<div id="consideracoes-eticas" class="section level2">
 <h2 class="hasAnchor">
-<a href="#codigo-de-conduta" class="anchor"></a>Código de conduta</h2>
-<p>Antes de procedermos às instruções sobre como utilizar o pacote, algumas considerações que consideramos importantes:</p>
-<p>1 - Este pacote foi criado por colaboradores voluntários. Você também é convidado a colaborar. Se encontrar uma falha nele, não hesite em criar um “issue”, mas também procure fazer um esforço para corrigir você mesmo o erro e realizar um “pull request”;</p>
-<p>2 - O pacote é destinado principalmente ao público acadêmico, jornalistas e membros de organizações sem fins econômicos;</p>
-<p>3 - Use o pacote com parcimônia. Não bombardeie a página do TJSP, pois a navegação de milhares de usuários poderá ser retardada. Você realmente precisa baixar tantas decisões? Precisa ser durante o dia, não pode ser à noite?</p>
+<a href="#consideracoes-eticas" class="anchor"></a>Considerações éticas</h2>
+<p>1 - Este pacote foi criado por colaboradores voluntários. Você também é convidado a contribuir. Se encontrar uma falha nele, não hesite em criar um “issue”, mas também procure fazer um esforço para corrigir você mesma(o) o erro e dar um “pull request”;</p>
+<p>2 - O pacote é destinado principalmente ao público acadêmico, jornalistas e membros de organizações sem fins econômicos. O uso para fins comerciais não é encorajado.</p>
+<p>3 - Use o pacote com parcimônia. Não bombardeie a página do TJSP, pois a navegação de milhares de usuários poderá ser retardada. Você realmente precisa baixar tantas decisões? Precisa ser durante o dia, não pode ser à noite? Propositalmente, não incluímos opções de requisições assincrônicas ou paralelas.</p>
 <p>4 - Todas as funções de requisição possuem um argumento opcional chamado “usuario”. Ele pode ser usado para você identificar-se ao provedor do serviço, fornecendo o seu contato. Essa tem sido uma prática considerada ética por web scrapers.</p>
 <p>6 - Idealmente, o TJSP deveria disponibilizar uma Web API ou no mínimo um web service para facilitar o acesso a grandes volumes de decisões via comunicação máquina-máquina. Isso não custa tanto e não estaríamos criando esse raspador, como seguramente há muitos outros especialmente privados trabalhando nesse momento para fins comerciais. No entanto, o TJSP não proíbe expressamente o uso de raspadores, você pode conferir o que estou dizendo acessando o robots.txt do TJSP. Isso porém não quer dizer que seu IP não será bloqueado caso você decida reduzir o tempo entre requisições.</p>
 <p>7 - Use os dados baixados para adicionar valor, por exemplo, para realizar análises ou publicar papers, fazer inferências, elaborar recomendações aos poderes públicos etc. Baixar esses dados para reproduzi-los em sua página web é tirar proveito do trabalho alheio, mesmo sendo esses dados públicos.</p>
@@ -112,7 +159,9 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Report a bug at <br><a href="NA">NA</a>
+<li>Browse source code at <br><a href="https://github.com/jjesusfilho/tjsp">https://​github.com/​jjesusfilho/​tjsp</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/jjesusfilho/tjsp/issues">https://​github.com/​jjesusfilho/​tjsp/​issues</a>
 </li>
 </ul>
 </div>
