@@ -20,13 +20,12 @@ O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas
 
 ## Instalação
 
-Este pacote não será incluído no cran. De modo que você deverá fazer uso da versão em desenvolvimento. Há três razões para não incluir no cran: 
+Este pacote não será incluído no cran. De modo que você deverá fazer uso da versão em desenvolvimento. Há pelo menos duas razões para não incluir no cran: 
 
 1 - Pacotes para web scraping estão em constante desenvolvimento. Pǻginas web são alteradas ou mesmo inteiramente substituídas, o que pode obrigar o desenvolvedor a reescrever o pacote do zero;
 
 2 - Os usuários do pacote serão em sua maioria brasileiros, e mesmo que não lusófonos venham a utilizá-lo, a familiaridade com a lingua portuguesa e com o direito brasileiro é indispensável;
 
-3 - 
 
 Portanto, instale versão em desenvolvimento: [GitHub](https://github.com/) com:
 
