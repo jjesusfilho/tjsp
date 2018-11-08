@@ -28,7 +28,8 @@ baixar_cjsg <-
            tipo = "A",
            diretorio="."
            ) {
-    httr::set_config(httr::config(ssl_verifypeer = FALSE))
+    httr::set_config(httr::config(ssl_verifypeer = FALSE,
+                                  accept_encoding="latin1"))
     body <-
       list(
         dados.buscaInteiroTeor = livre,
@@ -99,9 +100,12 @@ baixar_cjsg <-
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",
             .x
           ),
-          httr::set_cookies(unlist(a$cookies)),
-          httr::write_disk(paste0(diretorio, "/pagina_", .x), overwrite = TRUE)
-        )
+          httr::set_cookies(unlist(a$cookies))
+          #httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"), overwrite = TRUE)
+        ) %>% ## Este foi o único meio que encontrei de salvar em latin1.
+          httr::content("text") %>%
+          xml2::read_html() %>%
+          xml2::write_html(paste0(diretorio, "/pagina_", .x,".html"),encoding="latin1")
 
       }, NULL))
 
@@ -112,9 +116,12 @@ baixar_cjsg <-
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=",
             .x
           ),
-          httr::set_cookies(unlist(a$cookies)),
-          httr::write_disk(paste0(diretorio, "/pagina_", .x), overwrite = TRUE)
-        )
+          httr::set_cookies(unlist(a$cookies))
+          #httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"), overwrite = TRUE)
+        ) %>% ## Este foi o único meio que encontrei de salvar em latin1.
+          httr::content("text") %>%
+          xml2::read_html() %>%
+          xml2::write_html(paste0(diretorio, "/pagina_", .x,".html"),encoding="latin1")
 
       }, NULL))
 

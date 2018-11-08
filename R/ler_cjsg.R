@@ -26,7 +26,7 @@ ler_cjsg<-function(diretorio="."){
     xml2::xml_text(trim=T)
   comarca<-xml2::xml_find_all(resposta,'//*[@class="ementaClass2"][2]') %>%
     xml2::xml_text(trim=T)
-  orgao_julgador<-xml2::xml_find_all(resposta,'//*[@class="ementaClass2"][3]') %>%
+  orgao_julgador<-xml2::xml_find_all(resposta,'//td/strong[contains(.,"Data do Julgamento:")]') %>%
     xml2::xml_text(trim=T)
   data_julgamento<-xml2::xml_find_all(resposta,'//*[@class="ementaClass2"][4]') %>%
     xml2::xml_text(trim=T)
@@ -41,4 +41,9 @@ ler_cjsg<-function(diretorio="."){
   tibble::tibble(classe,assunto,relator,comarca,orgao_julgador,data_julgamento,data_publicacao,processo,ementa,cdacordao)
 },otherwise=NULL)
 )
+ df %>%
+   dplyr::mutate_at(dplyr::vars(c("relator","comarca","orgao_julgador","data_julgamento","data_publicacao")),
+                    dplyr::funs(stringr::str_remove(.,".+\\:"))) %>%
+   dplyr::mutate_at(dplyr::vars(c("data_julgamento","data_publicacao")),
+                    dplyr::funs(lubridate::dmy(.)))
 }
