@@ -70,8 +70,7 @@ baixar_cjsg <-
         #tipoDecisaoSelecionados = "", tipoDecisaoSelecionados = "",
         dados.ordenacao = "data"
       )
-    if (aspas == TRUE)
-      livre <- deparse(livre)
+    if (aspas == TRUE) livre <- deparse(livre)
 
     a <-
       httr::POST(
