@@ -13,7 +13,9 @@ ler_cjsg<-function(diretorio="."){
 
   arquivos<- list.files(path=diretorio,pattern=".html",full.names = T)
 
- df<- purrr::map_dfr(arquivos,purrr::possibly(~{
+  future::plan("multiprocess")
+
+ df<- furrr::future_map_dfr(arquivos,purrr::possibly(~{
 
   resposta<-xml2::read_html(.x)
 
@@ -57,7 +59,7 @@ ler_cjsg<-function(diretorio="."){
     xml2::xml_text(trim=TRUE))
 
   tibble::tibble(classe,assunto,relator,comarca,orgao_julgador,data_julgamento,data_publicacao,processo,ementa,cdacordao)
-},otherwise=NULL)) %>%
+},otherwise=NULL),.progress = TRUE) %>%
    dplyr::mutate_at(dplyr::vars(c("relator","comarca","orgao_julgador","data_julgamento","data_publicacao")),
                      dplyr::funs(stringr::str_remove(.,".+\\:"))) %>%
    dplyr::mutate_at(dplyr::vars(c("data_julgamento","data_publicacao")),

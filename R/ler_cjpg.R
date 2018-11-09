@@ -14,7 +14,8 @@ ler_cjpg<-function (diretorio="."){
 
 a<-list.files(path=diretorio,pattern = ".html",full.names = TRUE)
 
-df<- purrr::map_dfr(a,purrr::possibly(~{
+future::plan("multiprocess")
+df<- furrr::future_map_dfr(a,purrr::possibly(~{
 
  resposta <- .x %>%
    xml2::read_html(encoding="UTF-8") %>%
@@ -46,7 +47,7 @@ df<- purrr::map_dfr(a,purrr::possibly(~{
                                          omit_no_match = F)
       tibble::tibble(processo, classe, assunto, magistrado,
                         comarca, foro, vara, disponibilizacao, julgado)
-      },NULL)) %>%
+      },NULL),.progress=TRUE) %>%
 
   dplyr::mutate_at(dplyr::vars(2:8),dplyr::funs(stringi::stri_replace_first_regex(.,".*:\\s?",""))) %>%
   dplyr::mutate_all(stringi::stri_trim_both) %>%

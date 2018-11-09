@@ -20,7 +20,8 @@ ler_decisoes_monocraticas<- function (diretorio = ".") {
 
   processo <- stringr::str_extract(a, "\\d{20}")
 
-  purrr::map2_dfr(a, processo, purrr::possibly(~{
+  future::plan("multiprocess")
+  furrr::future_map2_dfr(a, processo, purrr::possibly(~{
 
     decisao <- xml2::read_html(.x) %>%
       rvest::html_nodes(xpath = "//a[contains(text(),'Decisão Monocrática')]/following-sibling::span") %>%
@@ -32,5 +33,5 @@ ler_decisoes_monocraticas<- function (diretorio = ".") {
       lubridate::dmy()
 
     tibble::tibble(processo = .y, decisao = decisao,data_decisao=data_decisao)
-  }, otherwise = NULL))
+  }, otherwise = NULL),.progress=TRUE)
 }
