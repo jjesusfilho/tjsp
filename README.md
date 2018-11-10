@@ -6,12 +6,12 @@ Pacote tjsp
 Baixando e lendo decisões de primeiro e de segundo grau do Tribunal de Justiça de São Paulo.
 -----------------------------------------------------
 
-O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas e organizações não governamentais para coletar e organizar decisões judiciais de primeira e segunda instância do Tribunal de Justiça de São Paulo.
+O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas e organizações não governamentais para coletar e organizar decisões judiciais de primeira e de segunda instância do Tribunal de Justiça de São Paulo.
 
 Instalação
 ----------
 
-Este pacote não será incluído no cran. De modo que você deverá fazer uso da versão em desenvolvimento. Há pelo menos duas razões para não incluir no cran:
+Este pacote não será incluído no CRAN. De modo que você deverá fazer uso da versão em desenvolvimento. Há pelo menos duas razões para não incluir no cran:
 
 1 - Pacotes para web scraping estão em constante desenvolvimento. Pǻginas web são alteradas ou mesmo inteiramente substituídas, o que pode obrigar o desenvolvedor a reescrever o pacote do zero;
 
