@@ -3,7 +3,7 @@
 Pacote tjsp
 ===========
 
-Baixando e lendo decisões de primeiro e segundo grau.
+Baixando e lendo decisões de primeiro e de segundo grau do Tribunal de Justiça de São Paulo.
 -----------------------------------------------------
 
 O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas e organizações não governamentais para coletar e organizar decisões judiciais de primeira e segunda instância do Tribunal de Justiça de São Paulo.
