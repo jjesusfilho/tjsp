@@ -45,12 +45,12 @@ ler_decisoes_cposg <- function(diretorio = ".") {
 
 future::plan("multiprocess")
 
-for (ii in length(a)){
+for (ii in seq_along(a)){
 
  lista[[ii]]  %<-% {
    tentativa(a,processo)
  }
 }
 lista<-as.list(lista)
-do.call(rbind,lista)
+s<-do.call(rbind,lista)
 }
