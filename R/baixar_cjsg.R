@@ -29,7 +29,7 @@ baixar_cjsg <-
            diretorio="."
            ) {
     httr::set_config(httr::config(ssl_verifypeer = FALSE,
-                                  accept_encoding="latin1"))
+                                  accept_encoding = "latin1"))
     body <-
       list(
         dados.buscaInteiroTeor = livre,
@@ -76,11 +76,12 @@ baixar_cjsg <-
       httr::POST(
         "https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do",
         encode = "form",
-        body = body
+        body = body,
+        httr::accept("text/html; charset=latin1;")
       )
 
       max_pag <- a %>%
-        httr::content("parsed") %>%
+        httr::content() %>%
         xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") %>%
         xml2::xml_attrs() %>%
         .[[1]] %>%
@@ -88,6 +89,7 @@ baixar_cjsg <-
         as.numeric() %>%
         `/`(20) %>%
         ceiling()
+
       paginas <- 1:max_pag
 
 
@@ -99,13 +101,11 @@ baixar_cjsg <-
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",
             .x
           ),
-          httr::set_cookies(unlist(a$cookies))
-          #httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"), overwrite = TRUE)
-        ) %>% ## Este foi o único meio que encontrei de salvar em latin1.
-          httr::content("text") %>%
-          xml2::read_html() %>%
-          xml2::write_html(paste0(diretorio, "/pagina_", .x,".html"),encoding="latin1")
-
+          httr::set_cookies(unlist(a$cookies)),
+          httr::accept("text/html; charset=latin1;"),
+          httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"),
+                           overwrite = TRUE)
+          )
       }, NULL))
 
     } else {
@@ -115,12 +115,11 @@ baixar_cjsg <-
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=",
             .x
           ),
-          httr::set_cookies(unlist(a$cookies))
+          httr::set_cookies(unlist(a$cookies)),
+          httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"),
+                           overwrite = TRUE)
+          )
           #httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"), overwrite = TRUE)
-        ) %>% ## Este foi o único meio que encontrei de salvar em latin1.
-          httr::content("text") %>%
-          xml2::read_html() %>%
-          xml2::write_html(paste0(diretorio, "/pagina_", .x,".html"),encoding="latin1")
 
       }, NULL))
 

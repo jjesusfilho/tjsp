@@ -15,7 +15,7 @@ ler_cjsg<-function(diretorio="."){
 
   future::plan("multiprocess")
 
- df<- furrr::future_map_dfr(arquivos,purrr::possibly(~{
+furrr::future_map_dfr(arquivos,purrr::possibly(~{
 
   resposta<-xml2::read_html(.x)
 
@@ -44,7 +44,7 @@ ler_cjsg<-function(diretorio="."){
 
   data_publicacao<-tabela %>%
       purrr::map_chr(~xml2::xml_find_first(.x,'.//*[contains(.,"Data de publica")]/following-sibling::text()') %>%
-                       xml_text(trim=TRUE))
+                       xml2::xml_text(trim=TRUE))
 
   ementa<-tabela %>%
     purrr::map_chr(~xml2::xml_find_first(.x,'.//*[@class="mensagemSemFormatacao"]') %>%
@@ -58,10 +58,11 @@ ler_cjsg<-function(diretorio="."){
     purrr::map_chr(~xml2::xml_find_first(.x,'.//a[1]/@cdacordao') %>%
     xml2::xml_text(trim=TRUE))
 
-  tibble::tibble(classe,assunto,relator,comarca,orgao_julgador,data_julgamento,data_publicacao,processo,ementa,cdacordao)
+tibble::tibble(classe,assunto,relator,comarca,orgao_julgador,data_julgamento,data_publicacao,processo,ementa,cdacordao)
 },otherwise=NULL),.progress = TRUE) %>%
    dplyr::mutate_at(dplyr::vars(c("relator","comarca","orgao_julgador","data_julgamento","data_publicacao")),
                      dplyr::funs(stringr::str_remove(.,".+\\:"))) %>%
+   dplyr::mutate_at(dplyr::vars(1:5),dplyr::funs(iconv(.,"utf-8","latin1//TRANSLIT"))) %>%
    dplyr::mutate_at(dplyr::vars(c("data_julgamento","data_publicacao")),
                     dplyr::funs(lubridate::dmy(.))) %>%
    dplyr::mutate_all(dplyr::funs(stringr::str_squish(.)))
