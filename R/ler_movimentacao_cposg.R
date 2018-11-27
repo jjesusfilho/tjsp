@@ -21,13 +21,18 @@ ler_movimentacao_cposg<-ler_movimentacao_cpopg<-function(diretorio="."){
 
   future::plan("multiprocess")
   furrr::future_map2_dfr(a,processo,purrr::possibly(~{
-    texto<-   xml2::read_html(.x) %>%
-      rvest::html_node(xpath="//table/tbody[@id='tabelaTodasMovimentacoes']") %>%
-      rvest::html_text()
-    data<-stringr::str_extract_all(texto,"(?<=\t)\\d{2}/\\d{2}/\\d{4}") %>%
-          unlist()
-    mov<- stringr::str_extract_all(texto,"(?<=\t)[a-zA-Z].+") %>%
-      unlist()
+   
+   texto <- xml2::read_html(.x) %>%
+    xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
+  
+  
+   data<-xml2::xml_find_all(texto,".//td[@width='120']") %>% 
+     xml2::xml_text(trim=TRUE)
+   
+   mov<-xml2::xml_find_all(texto,".//td[@style='vertical-align: top; padding-bottom: 5px']") %>% 
+     xml2::xml_text(trim=TRUE)
+ 
+  
 
    tibble::tibble(processo=.y,data=data,movimentacao=mov)
   },otherwise=NULL))
