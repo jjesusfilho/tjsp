@@ -5,8 +5,8 @@
 \title{Baixa julgados de primeiro grau de São Paulo}
 \usage{
 baixar_cjpg(livre = "", aspas = FALSE, processo = "", foro = "",
-  vara = "", classe = "", assunto = "", magistrado = "", inicio = "",
-  fim = "", diretorio = ".")
+  vara = "", classe = "", assunto = "", magistrado = "",
+  inicio = "", fim = "", diretorio = ".")
 }
 \arguments{
 \item{livre}{Busca livre. Usar os mesmos critérios da página.}
