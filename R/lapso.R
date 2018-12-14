@@ -1,8 +1,8 @@
 #' Retorna o lapso temporal na unidade especificada entre duas datas.
 #'
-#' @param data_inicial
-#' @param data_final
-#' @param unidade
+#' @param data_inicial incluir a data no formato Date.
+#' @param data_final  incluir a data no formato Date.
+#' @param unidade  uma das opções: ano, mes, semana, dia.
 #' @details Esta função é um mero wrapper das funções interval e time_length
 #'     do pacote lubridate. Ela considera as variações de ano, meses e dias.
 #'

@@ -6,6 +6,13 @@
 \usage{
 lapso(data_inicial = NULL, data_final = NULL, unidade = "mes")
 }
+\arguments{
+\item{data_inicial}{incluir a data no formato Date.}
+
+\item{data_final}{incluir a data no formato Date.}
+
+\item{unidade}{uma das opções: ano, mes, semana, dia.}
+}
 \value{
 double com o lapso temporal
 }
