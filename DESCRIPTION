@@ -28,7 +28,8 @@ Imports:
     janitor,
     abjutils,
     tidyr,
-    listenv
+    listenv,
+    fs
 RoxygenNote: 6.1.1
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues
