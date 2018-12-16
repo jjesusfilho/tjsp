@@ -38,14 +38,14 @@ ler_dados_cpopg <-
                                       variavel <- resposta %>%
                                         xml2::xml_find_all("//table[@class='secaoFormBody']//label[@class='labelClass']") %>%
                                         xml2::xml_text() %>%
-                                        str_squish()
+                                        stringr::str_squish()
 
                                       valor <- resposta %>%
                                         xml2::xml_find_all(
                                           "//table[@class='secaoFormBody']//label[@class='labelClass']/../following-sibling::td"
                                         ) %>%
                                         xml2::xml_text() %>%
-                                        str_squish()
+                                        stringr::str_squish()
 
 
                                       tibble::tibble(processo = .y, digital, variavel, valor)
