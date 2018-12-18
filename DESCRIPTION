@@ -1,10 +1,10 @@
 Package: tjsp
-Version: 0.2.2.9001
-Title: Extração de decisões do Tribunal de Justiça de São Paulo
-Description: Funções para baixar metadados das decisões judiciais, baixar as
-    próprias decisões de primeira e segunda instância do TJSP e organizar esses
+Version: 0.2.2.9003
+Title: Extra\u00e7\u00e3o de decis\u00f5es do Tribunal de Justi\u00e7a de S\u00e3o Paulo
+Description: Fun\u00e7\u00f5es para baixar metadados das decis\u00f5es judiciais, baixar as
+    pr\u00f3prias decis\u00f5es de primeira e segunda inst\u00e2ncia do TJSP e organizar esses
     dados.
-Authors@R: person("José", "de Jesus Filho", email = "jjesusfilho@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Jos\u00e9", "de Jesus Filho", email = "jjesusfilho@gmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <jjesusfilho@gmail.com>
 License: MIT + file LICENSE
 Encoding: UTF-8
