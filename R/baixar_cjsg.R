@@ -21,13 +21,14 @@
 baixar_cjsg <-
   function(livre="",
            aspas = FALSE,
-           classe = "",
-           assunto= "",
+           classe = " ",
+           assunto= " ",
            inicio = "",
            fim = "",
            tipo = "A",
-           diretorio="."
+           diretorio=""
            ) {
+
     httr::set_config(httr::config(ssl_verifypeer = FALSE,
                                   accept_encoding = "latin1"))
     body <-

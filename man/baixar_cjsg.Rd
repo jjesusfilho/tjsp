@@ -4,8 +4,8 @@
 \alias{baixar_cjsg}
 \title{Baixa consulta jurisprudencial do TJSP}
 \usage{
-baixar_cjsg(livre = "", aspas = FALSE, classe = "", assunto = "",
-  inicio = "", fim = "", tipo = "A", diretorio = ".")
+baixar_cjsg(livre = "", aspas = FALSE, classe = " ", assunto = " ",
+  inicio = "", fim = "", tipo = "A", diretorio = "")
 }
 \arguments{
 \item{livre}{palavra ou texto a ser buscado nas ementas e nos acórdãos}

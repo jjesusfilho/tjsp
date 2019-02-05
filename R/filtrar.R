@@ -7,14 +7,14 @@
 #' @keywords regex,filter
 #' @export
 #' @examples
-#' df<-data.frame(a = c("furto", "roubo","tráfico"), b = c("roubo", "homicidio culposo","lesão corporal"), c = c("roubo", "ameaça","tráfico"))
-#' filtrar(df,c,"roubo")
+#' df<-data.frame(a = c("furto", "roubo","tráfico"),
+#'    b = c("roubo", "homicidio culposo","lesão corporal"),
+#'    c = c("roubo", "ameaça","tráfico"))
+#'    filtrar(df,c,"roubo")
 
-filtrar<-function(x,coluna,expressao){
+filtrar <- function(x, coluna, expressao) {
+  coluna <- rlang::enexpr(coluna)
 
-  coluna<-rlang::enexpr(coluna)
-
-  x[stringr::str_which(x[rlang::quo_name(coluna)],expressao),]
+  x[stringr::str_which(x[rlang::quo_name(coluna)], expressao), ]
 
 }
-

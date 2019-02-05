@@ -10,32 +10,34 @@
 #' \dontrun{
 #' partes<-ler_partes(path=".")
 #' }
-ler_partes<-ler_partes_cpopg<-ler_partes_cposg<-function(diretorio="."){
-  a<- list.files(path=diretorio,pattern=".html",full.names = T)
+ler_partes <-
+  ler_partes_cpopg <- ler_partes_cposg <- function(diretorio = ".") {
+    arquivos <-
+      list.files(path = diretorio,
+                 pattern = ".html",
+                 full.names = T)
+    processo <- stringr::str_extract(arquivos, "\\d{20}") %>%
+      abjutils::build_id()
 
-  processo<-stringr::str_extract(a,"\\d{20}") %>%
-    abjutils::build_id()
 
-  future::plan("multiprocess")
+    purrr::map2_dfr(arquivos, processo, purrr::possibly( ~ {
+      parte_nome <- xml2::read_html(.x) %>%
+        xml2::xml_find_all('//td/*[contains(@class,"mensagemExibindo")]/../following-sibling::td') %>%
+        #xml2::xml_find_all('//table[1]//td') %>%
+        xml2::xml_text() %>%
+        stringr::str_trim() %>%
+        stringr::str_squish() %>%
+        stringr::str_split("\\w+:&nbsp") %>%
+        unlist()
 
-  furrr::future_map2_dfr(a,processo,purrr::possibly(~{
+      parte <- xml2::read_html(.x) %>%
+        xml2::xml_find_all('//td/span[@class="mensagemExibindo"]') %>%
+        #xml2::xml_find_all('//table[1]//td') %>%
+        xml2::xml_text() %>%
+        stringr::str_extract("\\w+")
 
-    parte_nome<-xml2::read_html(.x) %>%
-      xml2::xml_find_all('//td/*[contains(@class,"mensagemExibindo")]/../following-sibling::td') %>%
-      #xml2::xml_find_all('//table[1]//td') %>%
-      xml2::xml_text() %>%
-      stringr::str_trim() %>%
-      stringr::str_squish() %>%
-      stringr::str_split("\\w+:&nbsp") %>%
-      unlist()
-
-    parte<- xml2::read_html(.x) %>%
-      xml2::xml_find_all('//td/span[@class="mensagemExibindo"]') %>%
-      #xml2::xml_find_all('//table[1]//td') %>%
-      xml2::xml_text() %>%
-      stringr::str_extract("\\w+")
-
-    tibble::tibble(processo=.y, parte_nome=parte_nome,parte=parte)
-  },otherwise=NULL))
-}
-
+      tibble::tibble(processo = .y,
+                     parte_nome = parte_nome,
+                     parte = parte)
+    }, otherwise = NULL))
+  }

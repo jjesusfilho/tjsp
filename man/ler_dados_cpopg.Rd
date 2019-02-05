@@ -4,7 +4,7 @@
 \alias{ler_dados_cpopg}
 \title{Lê os metadados de processos de primeira instância.}
 \usage{
-ler_dados_cpopg(diretorio = ".", plano = "sequential", wide = FALSE)
+ler_dados_cpopg(diretorio = ".", wide = FALSE)
 }
 \arguments{
 \item{diretorio}{Diretório onde se encontram os htmls.}

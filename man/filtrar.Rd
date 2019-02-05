@@ -20,7 +20,9 @@ Filtra tabela (dataframe) com base numa expressão regular.
 Esta função dispensa o uso de aspas para a coluna(NSE). Ela equivale a dplyr::filter(df,str_detect(coluna,expressao))
 }
 \examples{
-df<-data.frame(a = c("furto", "roubo","tráfico"), b = c("roubo", "homicidio culposo","lesão corporal"), c = c("roubo", "ameaça","tráfico"))
-filtrar(df,c,"roubo")
+df<-data.frame(a = c("furto", "roubo","tráfico"),
+   b = c("roubo", "homicidio culposo","lesão corporal"),
+   c = c("roubo", "ameaça","tráfico"))
+   filtrar(df,c,"roubo")
 }
 \keyword{regex,filter}

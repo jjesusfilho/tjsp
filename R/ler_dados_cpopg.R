@@ -3,7 +3,6 @@
 #' @param diretorio Diretório onde se encontram os htmls.
 #' @param wide o padrão é o formado longo, com apenas quatro colunas:
 #'      processo, digital, variavel, valor.
-#' @param plano
 #' @return tibble com os metadados
 #' @export
 #'
@@ -14,18 +13,18 @@
 #'
 ler_dados_cpopg <-
   function(diretorio = ".",
-           plano = "sequential",
            wide = FALSE) {
+
+
     arquivos <- list.files(path = diretorio,
                            pattern = ".html",
                            full.names = TRUE)
 
     processos <- stringr::str_extract(arquivos, "\\d{20}")
 
-    future::plan(plano)
 
 
-    dados <- furrr::future_map2_dfr(arquivos,
+    dados <- purrr::map2_dfr(arquivos,
                                     processos,
                                     purrr::possibly(~ {
                                       resposta <- .x %>%

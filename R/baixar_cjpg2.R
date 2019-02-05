@@ -8,33 +8,37 @@
 #'
 #' @examples
 #' \dontrun{
-#' baixar_cjpg2("https://esaj.tjsp.jus.br/cjpg/pesquisar.do?conversationId=&dadosConsulta.pesquisaLivre=&tipoNumero=UNIFICADO&numeroDigitoAnoUnificado=&foroNumeroUnificado=&dadosConsulta.nuProcesso=&dadosConsulta.nuProcessoAntigo=&classeTreeSelection.values=&classeTreeSelection.text=&assuntoTreeSelection.values=5560%2C1456%2C1457%2C9647%2C1458&assuntoTreeSelection.text=5+Registros+selecionados&agenteSelectedEntitiesList=&contadoragente=0&contadorMaioragente=0&cdAgente=&nmAgente=&dadosConsulta.dtInicio=01%2F10%2F2018&dadosConsulta.dtFim=25%2F10%2F2018&varasTreeSelection.values=&varasTreeSelection.text=&dadosConsulta.ordenacao=DESC")
+#' baixar_cjpg2(
+#' "https://esaj.tjsp.jus.br/cjpg/pesquisar.do?conversationId=&dadosConsulta.pesquisaLivre=&tipoNumero=UNIFICADO&numeroDigitoAnoUnificado=&foroNumeroUnificado=&dadosConsulta.nuProcesso=&dadosConsulta.nuProcessoAntigo=&classeTreeSelection.values=&classeTreeSelection.text=&assuntoTreeSelection.values=5560%2C1456%2C1457%2C9647%2C1458&assuntoTreeSelection.text=5+Registros+selecionados&agenteSelectedEntitiesList=&contadoragente=0&contadorMaioragente=0&cdAgente=&nmAgente=&dadosConsulta.dtInicio=01%2F10%2F2018&dadosConsulta.dtFim=25%2F10%2F2018&varasTreeSelection.values=&varasTreeSelection.text=&dadosConsulta.ordenacao=DESC"
+#' )
 #' }
-baixar_cjpg2<-function(
-  url="",
-  diretorio="."
-){
 
-  httr::set_config(httr::config(ssl_verifypeer = FALSE ))
+baixar_cjpg2 <- function(url = "",
+                         diretorio = ".") {
+  httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
 
   resposta <- httr::GET(url)
 
   paginas <- resposta  %>%
     httr::content() %>%
-    xml2::xml_find_first(xpath="//*[@bgcolor='#EEEEEE']") %>%
+    xml2::xml_find_first(xpath = "//*[@bgcolor='#EEEEEE']") %>%
     xml2::xml_text(trim = T) %>%
-    stringr::str_extract( "\\d+$") %>%
+    stringr::str_extract("\\d+$") %>%
     as.numeric()
 
-  max_pag <- ceiling(paginas/10)
+  max_pag <- ceiling(paginas / 10)
 
-  purrr::map(1:max_pag,purrr::possibly(~{
-
-    httr::GET(paste0("http://esaj.tjsp.jus.br/cjpg/trocarDePagina.do?pagina=",
-                     .x, "&conversationId="), httr::set_cookies(unlist(resposta$cookies)),
-              httr::write_disk(paste0(diretorio,"/pagina_",.x,".html"),overwrite = T))
-  }),otherwise=NULL)
+  purrr::map(1:max_pag, purrr::possibly( ~ {
+    httr::GET(
+      paste0(
+        "http://esaj.tjsp.jus.br/cjpg/trocarDePagina.do?pagina=",
+        .x,
+        "&conversationId="
+      ),
+      httr::set_cookies(unlist(resposta$cookies)),
+      httr::write_disk(paste0(diretorio, "/pagina_", .x, ".html"), overwrite = T)
+    )
+  }), otherwise = NULL)
 
 }
-

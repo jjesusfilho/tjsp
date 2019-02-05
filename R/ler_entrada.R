@@ -13,6 +13,8 @@
 
 ler_entrada <-ler_entrada_cposg <-ler_entrada_cpopg <- function(diretorio = ".") {
 
+
+
   a <- list.files(path = diretorio,
                   pattern = ".html",
                   full.names = T)
@@ -20,9 +22,8 @@ ler_entrada <-ler_entrada_cposg <-ler_entrada_cpopg <- function(diretorio = ".")
   processo<-stringr::str_extract(a,"\\d{20}") %>%
     abjutils::build_id()
 
-  future::plan("multiprocess")
 
- furrr::future_map2_dfr(a, processo, purrr::possibly( ~ {
+ purrr::map2_dfr(a, processo, purrr::possibly( ~ {
 
     data <- xml2::read_html(.x) %>%
       rvest::html_nodes(xpath = "//td[@width='120']") %>%

@@ -11,11 +11,11 @@
 #' }
 ler_cjsg<-function(diretorio="."){
 
-  arquivos<- list.files(path=diretorio,pattern=".html",full.names = T)
 
-  future::plan("multiprocess")
+  arquivos <- list.files(path=diretorio,pattern=".html",full.names = T)
 
-furrr::future_map_dfr(arquivos,purrr::possibly(~{
+
+purrr::map_dfr(arquivos,purrr::possibly(~{
 
   resposta<-xml2::read_html(.x)
 
