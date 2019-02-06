@@ -28,7 +28,7 @@ serializar <- function(origem = NULL,
 
   } else
 
-    baldes <- info
+    baldes <- list(info)
 
 
   arquivos <- paste0(destino, "/", prefix, seq_along(baldes), ".rds")
