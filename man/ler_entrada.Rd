@@ -4,10 +4,10 @@
 \alias{ler_entrada}
 \title{Data da entrada do processo}
 \usage{
-ler_entrada(path = ".")
+ler_entrada(diretorio = ".")
 }
 \arguments{
-\item{path}{Diretório onde se encontram os htmls dos processos}
+\item{diretorio}{Diretório onde se encontram os htmls dos processos}
 }
 \value{
 tibble com o número dos processos e respectivas decisões
@@ -16,6 +16,8 @@ tibble com o número dos processos e respectivas decisões
 Data da entrada do processo
 }
 \examples{
-entrada<-ler_entrada()
-
+\dontrun{
+entrada<-ler_entrada_cposg()
+entrada<-ler_entrada_cpopg()
+}
 }

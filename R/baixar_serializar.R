@@ -8,7 +8,8 @@
 #'
 #' @return Arquivo em rds baixado
 #' @export
-baixar_serializar <- function(lista, dir=".", subdir=NULL, funcao = NULL) {
+#'
+baixar_serializar <- function(lista=NULL, dir=".", subdir=NULL, funcao = NULL) {
 
   diretorios <- fs::dir_create(paste0(dir,"/",subdir))
 

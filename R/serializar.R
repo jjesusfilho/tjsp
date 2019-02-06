@@ -43,5 +43,4 @@ serializar <- function(origem = NULL,
     }) %>%
       saveRDS(.y)
   })
-
 }

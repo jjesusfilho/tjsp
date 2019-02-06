@@ -5,7 +5,8 @@
 \title{Aplica uma função para baixar htmls e serializa os htmls em grupos de
     no máximo aproximadamente 300 Mb.}
 \usage{
-baixar_serializar(lista, dir = ".", subdir = NULL, funcao = NULL)
+baixar_serializar(lista = NULL, dir = ".", subdir = NULL,
+  funcao = NULL)
 }
 \arguments{
 \item{lista}{lista de vetores de processos ou simplesmente um vetor de processos}
