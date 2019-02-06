@@ -1,30 +1,38 @@
 #' Data da entrada do processo
 #'
-#' @param path Diretório onde se encontram os htmls dos processos
+#' @param diretorio Diretório onde se encontram os htmls dos processos
 #'
 #' @return tibble com o número dos processos e respectivas decisões
 #' @export
 #'
 #' @examples
-#' entrada<-ler_entrada()
-#'
-ler_entrada<- function(path="."){
+#' \dontrun{
+#' entrada<-ler_entrada_cposg()
+#' entrada<-ler_entrada_cpopg()
+#' }
 
-a<- list.files(path=path,pattern=".html",full.names = T)
+ler_entrada <-ler_entrada_cposg <-ler_entrada_cpopg <- function(diretorio = ".") {
 
-processo<-stringr::str_extract(a,"\\d{20}")
+  a <- list.files(path = diretorio,
+                  pattern = ".html",
+                  full.names = T)
 
-purrr::map2_dfr(a,processo,purrr::possibly(~{
+  processo<-stringr::str_extract(a,"\\d{20}") %>%
+    abjutils::build_id()
 
-data<-xml2::read_html(.x) %>%
-  rvest::html_nodes(xpath="//div[@class='espacamentoLinhas']") %>%
-  rvest::html_text() %>%
-  stringr::str_extract("\\d{2}/\\d{2}/\\d{4}") %>%
-  lubridate::dmy() %>%
-  max()
+  future::plan("multiprocess")
 
-tibble::tibble(processo=.y,data=data)
+ furrr::future_map2_dfr(a, processo, purrr::possibly( ~ {
 
-},otherwise=NULL))
+    data <- xml2::read_html(.x) %>%
+      rvest::html_nodes(xpath = "//td[@width='120']") %>%
+      rvest::html_text() %>%
+      dplyr::last() %>%
+      stringr::str_extract("\\d{2}/\\d{2}/\\d{4}") %>%
+      lubridate::dmy() %>%
+      max()
 
+    tibble::tibble(processo = .y, data = data)
+
+  }, otherwise = NULL),.progress=TRUE)
 }

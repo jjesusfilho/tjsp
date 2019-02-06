@@ -2,20 +2,21 @@
 % Please edit documentation in R/ler_cjsg.R
 \name{ler_cjsg}
 \alias{ler_cjsg}
-\title{Ler metadados das decisões}
+\title{Ler metadados das decisões de segunda instância do TJSP}
 \usage{
-ler_cjsg(path = ".")
+ler_cjsg(diretorio = ".")
 }
 \arguments{
-\item{path}{Diretório onde se encontram os htmls.}
+\item{diretorio}{Diretório onde se encontram os htmls.}
 }
 \value{
 tabela com metadados jurisprudenciais.
 }
 \description{
-Ler metadados das decisões
+Ler metadados das decisões de segunda instância do TJSP
 }
 \examples{
-cjsg<-ler_cjsg()
-
+\dontrun{
+df<-ler_cjsg()
+}
 }

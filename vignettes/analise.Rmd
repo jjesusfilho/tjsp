@@ -1,0 +1,25 @@
+---
+title: "Análise quantitativa das decisões judiciais do TJSP"
+author: "José de Jesus Filho"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: biblio.bib
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+No passado, era praticamente impensável realizar análises quantitativas de decisões judiciais. Isso porque as decisões se encontravam impressas em papel e coletar uma amostra dessas decisões era custoso e impraticável.
+
+Nos últimos anos, esse cenário foi significativamente alterado. Não só as decisões, como também os próprios processos passaram a ganhar versão eletrônica. As técnicas de manuseio de textos se proliferaram e a capacidade computacional para processar grandes quantidades de informações cresceu geometricamente.
+
+A jurimetria, campo recente do direito ^[nunes2016]

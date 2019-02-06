@@ -4,19 +4,25 @@
 \alias{ler_decisoes_monocraticas}
 \title{Lê conteúdo das decisões monocráticas}
 \usage{
-ler_decisoes_monocraticas(path = ".")
+ler_decisoes_monocraticas(diretorio = ".")
 }
 \arguments{
-\item{path}{Diretório onde se encontram os htmls}
+\item{diretorio}{Diretório onde se encontram os htmls.}
 }
 \value{
-tibble com os htmls.
+tibble com o número do processo, o texto da decisão e a data da
+    decisão.
 }
 \description{
 Lê conteúdo das decisões monocráticas
 }
+\details{
+Em alguns processos, as decisões monocráticas estão etiquetadas como
+    despachos. Complemente a busca com a função ler_despachos.
+}
 \examples{
-
+\dontrun{
 ler_decisoes_monocraticas()
+}
 
 }
