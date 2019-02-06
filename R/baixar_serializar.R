@@ -8,8 +8,7 @@
 #'
 #' @return Arquivo em rds baixado
 #' @export
-#'
-baixar_serializar <- function(lista, dir=".", subdir=NULL,funcao = NULL) {
+baixar_serializar <- function(lista, dir=".", subdir=NULL, funcao = NULL) {
 
   diretorios <- fs::dir_create(paste0(dir,"/",subdir))
 
@@ -22,7 +21,7 @@ baixar_serializar <- function(lista, dir=".", subdir=NULL,funcao = NULL) {
       dplyr::pull("path") %>%
       fs::file_delete()
 
-    serializar_tjsp(origem = .y,
+    serializar(origem = .y,
                     destino = .y,
                     prefix = "arquivo")
     fs::dir_ls(.y, glob = "*.html") %>%

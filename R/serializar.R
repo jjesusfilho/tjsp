@@ -6,7 +6,6 @@
 #'
 #' @return Salva htmls serializados
 #' @export
-#'
 serializar <- function(origem = NULL,
                        destino = ".",
                        prefix = NULL) {
