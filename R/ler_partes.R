@@ -6,32 +6,47 @@
 #' @return tabela com informa\u00e7\u00f5es das partes.
 #' @export
 #'
-#' @examples
-#' partes<-ler_partes(path=".")
+ler_partes <- function(diretorio = ".")
+{
 
-ler_partes<-function(path="."){
-  a<- list.files(path=path,pattern=".html",full.names = T)
+  diretorio <- normalizePath(diretorio)
 
-  processo<-stringr::str_extract(a,"\\d{20}")
+  arquivos <- list.files(path = diretorio,
+                         pattern = ".html",
+                         full.names = T)
 
-  purrr::map2_dfr(a,processo,purrr::possibly(~{
+  processos <-
+    stringr::str_extract(arquivos, "\\d{20}") %>%
+    abjutils::build_id(.)
 
-    parte_nome<-xml2::read_html(.x) %>%
-      xml2::xml_find_all('//td/*[contains(@class,"mensagemExibindo")]/../following-sibling::td') %>%
-      #xml2::xml_find_all('//table[1]//td') %>%
-      xml2::xml_text() %>%
+  purrr::map2_dfr(arquivos, processos, purrr::possibly( ~ {
+
+    ## Esta primeira parte seleciona a tabela que contêm as partes e a converte em
+    ## texto. Infelizmente o html não é muito consistente. Temos de usar regex.
+    resposta<-xml2::read_html(.x) %>%
+      xml2::xml_find_first("//*[@id='tablePartesPrincipais']") %>%
+      xml2::xml_text(trim=T) %>%
+      stringr::str_squish()
+
+    ## Cria um padrão de extração a partir das partes.
+    padrao <- resposta %>%
+      stringr::str_extract_all("\\w+(\\.\\s)?\\w+?\\:") %>%
+      unlist() %>%
+      paste0(collapse="|") %>%
+      paste0("(",.,")",".+?(?=",.,"|$)")
+
+    # Extrai nome e nome da parte, converte em tibble, separa os dois.
+    stringr::str_extract_all(resposta,padrao) %>%
+      unlist() %>%
       stringr::str_trim() %>%
-      stringr::str_squish() %>%
-      stringr::str_split("\\w+:&nbsp") %>%
-      unlist()
+      tibble::tibble() %>%
+      setNames("parte") %>%
+      tidyr::separate(parte,c("parte","parte_nome"),": ") %>%
+      dplyr::mutate(processo=.y) %>%
+      dplyr::select(processo,dplyr::everything())
 
-    parte<- xml2::read_html(.x) %>%
-      xml2::xml_find_all('//td/span[@class="mensagemExibindo"]') %>%
-      #xml2::xml_find_all('//table[1]//td') %>%
-      xml2::xml_text() %>%
-      stringr::str_extract("\\w+")
+  }, otherwise = NULL))
 
-    tibble::tibble(processo=.y, parte_nome=parte_nome,parte=parte)
-  },otherwise=NULL))
 }
+
 

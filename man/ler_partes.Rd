@@ -5,7 +5,7 @@
 \title{Aplica parser para extrair informa\u00e7\u00f5es sobre as partes do
     processo.}
 \usage{
-ler_partes(path = ".")
+ler_partes(diretorio = ".")
 }
 \arguments{
 \item{path}{diret\u00f3rio onde se encontram os htmls baixados.}
@@ -16,7 +16,4 @@ tabela com informa\u00e7\u00f5es das partes.
 \description{
 Aplica parser para extrair informa\u00e7\u00f5es sobre as partes do
     processo.
-}
-\examples{
-partes<-ler_partes(path=".")
 }
