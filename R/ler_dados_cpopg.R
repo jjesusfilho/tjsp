@@ -30,8 +30,13 @@ ler_dados_cpopg <- function(diretorio = ".", wide = FALSE)
 
 
                               codigo <- resposta %>%
-                                xml2::xml_text() %>%
+                                xml2::xml_find_all("//a[contains(@href,'processo.codigo')]") %>%
+                                xml2::xml_attr('href') %>%
                                 stringr::str_extract("(?<=processo.codigo=)\\w+")
+
+                              cdProcesso <- resposta %>%
+                                xml2::xml_find_first("//*[@name='cdProcesso']") %>%
+                                xml2::xml_attr("value")
 
 
                               variavel <- resposta %>%
@@ -44,7 +49,7 @@ ler_dados_cpopg <- function(diretorio = ".", wide = FALSE)
                                 xml2::xml_text() %>%
                                 stringr::str_squish()
 
-                              tibble::tibble(processo = .y, codigo_processo=codigo, digital, variavel, valor)
+                              tibble::tibble(processo = .y, codigo_processo=codigo, cd_processo=cdProcesso, digital, variavel, valor)
                             }, NULL))
 
     if (wide == TRUE) {

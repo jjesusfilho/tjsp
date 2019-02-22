@@ -16,7 +16,7 @@ ler_dados_cposg<-function(diretorio="."){
   processo<-stringr::str_extract(a,"\\d{20}")
 
 
-  purrr::map_dfr(a,purrr::possibly(~{
+  purrr::map_dfr(a[1],purrr::possibly(~{
 
     resposta<-xml2::read_html(.x)
 
@@ -26,6 +26,13 @@ ler_dados_cposg<-function(diretorio="."){
       stringr::str_extract_all("^.*?(?=:)") %>%
       stringr::str_trim() %>%
       stringr::str_squish()
+
+    digital <- resposta %>%
+      xml2::xml_find_first("boolean(//*[@class='linkPasta'] |//*[@class='linkConsultaSG'])")
+
+    cdProcesso <- resposta %>%
+     xml2::xml_find_first("//*[@name='cdProcesso']") %>%
+     xml2::xml_attr("value")
 
     valores<- resposta %>%
       xml2::xml_find_all("//label[@class='labelClass']/parent::td/following-sibling::td") %>%
@@ -51,10 +58,11 @@ ler_dados_cposg<-function(diretorio="."){
     as.list(c(valores,valores2)) %>%
       setNames(c(nomes,nomes2)) %>%
       janitor::clean_names() %>%
-      tibble::as.tibble() %>%
-      tidyr::separate(processo,c("processo","situacao"),sep="\\w+$",extra="merge")
-
+      tibble::as_tibble() %>%
+      tidyr::separate(processo,c("processo","situacao"),sep="\\w+$",extra="merge") %>%
+      tibble::add_column(cd_processo=cdProcesso)
   },otherwise = NULL))
 }
 
 
+dados <- ler_dados_cposg("cposg/violencia_domestica/html")

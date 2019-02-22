@@ -8,7 +8,7 @@
 ler_partes(diretorio = ".")
 }
 \arguments{
-\item{path}{diret\u00f3rio onde se encontram os htmls baixados.}
+\item{diretorio}{diret\u00f3rio onde se encontram os htmls baixados.}
 }
 \value{
 tabela com informa\u00e7\u00f5es das partes.
