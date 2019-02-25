@@ -1,7 +1,7 @@
 #' Aplica parser para extrair informa\u00e7\u00f5es sobre as partes do
 #'     processo.
 #'
-#' @param path diret\u00f3rio onde se encontram os htmls baixados.
+#' @param diretorio diret\u00f3rio onde se encontram os htmls baixados.
 #'
 #' @return tabela com informa\u00e7\u00f5es das partes.
 #' @export
@@ -28,9 +28,9 @@ ler_partes <- function(diretorio = ".")
       xml2::xml_text(trim=T) %>%
       stringr::str_squish()
 
-    ## Cria um padrão de extração a partir das partes.
+    ## monta um regex padrão de extração a partir das partes.
     padrao <- resposta %>%
-      stringr::str_extract_all("\\w+(\\.\\s)?\\w+?\\:") %>%
+      stringr::str_extract_all("\\w+(\\.\\s)?/?\\w+?\\:") %>%
       unlist() %>%
       paste0(collapse="|") %>%
       paste0("(",.,")",".+?(?=",.,"|$)")
@@ -41,7 +41,7 @@ ler_partes <- function(diretorio = ".")
       stringr::str_trim() %>%
       tibble::tibble() %>%
       setNames("parte") %>%
-      tidyr::separate(parte,c("parte","parte_nome"),": ") %>%
+      tidyr::separate(parte,c("parte","parte_nome"),":\\s?") %>%
       dplyr::mutate(processo=.y) %>%
       dplyr::select(processo,dplyr::everything())
 
