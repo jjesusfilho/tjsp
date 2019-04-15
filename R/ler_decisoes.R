@@ -6,13 +6,14 @@
 #' @export
 #'
 #' @examples
-#'
-#' decisoes<-ler_decisoes()
-#'
+#' 
+#' decisoes <- ler_decisoes()
 ler_decisoes <- function(path = ".") {
-  a <- list.files(path = path,
-                  pattern = ".html",
-                  full.names = T)
+  a <- list.files(
+    path = path,
+    pattern = ".html",
+    full.names = T
+  )
 
   processo <- stringr::str_extract(a, "\\d{20}")
 
@@ -31,7 +32,6 @@ ler_decisoes <- function(path = ".") {
         purrr::pluck(1) %>%
         stats::setNames(c("data_julgamento", "situacao_julgamento", "decisao")) %>%
         cbind(processo = y[i], ., stringsAsFactors = F)
-
     }, error = function(e) {
       x[i] %>%
         xml2::read_html() %>%

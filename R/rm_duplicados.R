@@ -5,12 +5,10 @@
 #' @keywords duplicated, remove
 #' @export
 #' @examples
-#'
-#' rm_duplicados(iris,Species)
-
-rm_duplicados<-function(x,y){
-
-  y<-rlang::enexpr(y)
-  x<-x[which(duplicated(x[,rlang::quo_name(y)])==FALSE),,drop=FALSE]
+#' 
+#' rm_duplicados(iris, Species)
+rm_duplicados <- function(x, y) {
+  y <- rlang::enexpr(y)
+  x <- x[which(duplicated(x[, rlang::quo_name(y)]) == FALSE), , drop = FALSE]
   return(x)
 }

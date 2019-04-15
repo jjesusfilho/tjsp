@@ -24,7 +24,7 @@ baixar_publicacoes_dje <- function(processo, diretorio = ".") {
 
   ## Cria um vetor o primeiro dia de cada mês desde o início até o mês anterior
   ## ao atual.
-  inicios <- lubridate::floor_date(lubridate::today(), "month")  - months(1:inicio)
+  inicios <- lubridate::floor_date(lubridate::today(), "month") - months(1:inicio)
 
   ## Cria um vetor com o último dia de cada mês desde o início até o mês anterior
   ## ao mês atual.
@@ -43,8 +43,7 @@ baixar_publicacoes_dje <- function(processo, diretorio = ".") {
   processo <- deparse(processo)
 
   ## Inicía a requisição
-  purrr::walk2(inicios, finais, ~{
-
+  purrr::walk2(inicios, finais, ~ {
     body <- list(
       dadosConsulta.dtInicio = .x,
       dadosConsulta.dtFim = .y,
@@ -73,7 +72,5 @@ baixar_publicacoes_dje <- function(processo, diretorio = ".") {
     if (xml2::xml_find_first(content, "boolean(//tr[@class='ementaClass'])")) {
       xml2::write_html(content, arquivo)
     }
-
   })
-
 }

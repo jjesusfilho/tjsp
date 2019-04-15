@@ -7,6 +7,6 @@
 #'   \item{\code{comarca}}{character Nome da comarca}
 #'   \item{\code{distribuidor}}{double Código do distribuidor conforme resolução 65 CNJ}
 #'   \item{\code{descricao}}{character Descrição do distribuidor}
-#'}
+#' }
 #' @source \url{https://tjsp.jus.br/}
 "codigos"

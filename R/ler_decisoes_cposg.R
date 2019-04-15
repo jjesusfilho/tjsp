@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' decisoes<-ler_decisoes_cposg().
+#' decisoes<-ler_decisoes_cposg()
 #' }
 ler_decisoes_cposg <- function(diretorio = ".") {
   a <- list.files(path = diretorio,

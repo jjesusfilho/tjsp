@@ -6,14 +6,15 @@
 #' @export
 #'
 #' @examples
-#' cjsg<-ler_cjsg()
-#'
+#' cjsg <- ler_cjsg()
 ler_cjsg <- function(path = ".") {
-  a <- list.files(path = path,
-                  pattern = ".html",
-                  full.names = T)
+  a <- list.files(
+    path = path,
+    pattern = ".html",
+    full.names = T
+  )
 
- purrr::map_dfr(a, purrr::possibly( ~ {
+  purrr::map_dfr(a, purrr::possibly(~ {
     resposta <- xml2::read_html(.x)
 
     aC <-
@@ -43,7 +44,7 @@ ler_cjsg <- function(path = ".") {
     processo <-
       xml2::xml_find_all(resposta, '//*[@class="esajLinkLogin downloadEmenta"]') %>%
       xml2::xml_text(trim = T)
-    cdacordao <- xml2::xml_find_all(resposta, '//a[1]/@cdacordao') %>%
+    cdacordao <- xml2::xml_find_all(resposta, "//a[1]/@cdacordao") %>%
       xml2::xml_text()
     tibble::tibble(
       classe,

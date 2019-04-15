@@ -7,18 +7,17 @@
 #' @return Lista com vetores das páginas dos pdfs
 #' @export
 
-ler_acordaos <- function(diretorio=".",remover_assinatura=FALSE,combinar=FALSE){
+ler_acordaos <- function(diretorio = ".", remover_assinatura = FALSE, combinar = FALSE) {
+  pdfs <- list.files(diretorio, pattern = ".pdf$", full.names = TRUE)
 
-  pdfs<-list.files(diretorio,pattern=".pdf$",full.names=TRUE)
+  textos <- purrr::map(pdfs, pdftools::pdf_text)
 
-  textos <- purrr::map(pdfs,pdftools::pdf_text)
-
-  if(remover_assinatura==TRUE){
-    texto <- purrr::map(textos,remover_assinatura)
+  if (remover_assinatura == TRUE) {
+    texto <- purrr::map(textos, remover_assinatura)
   }
 
-  if(combinar==TRUE){
-    textos <- purrr::map(textos,~stringr::str_c(.x,collapse="\n"))
+  if (combinar == TRUE) {
+    textos <- purrr::map(textos, ~ stringr::str_c(.x, collapse = "\n"))
   }
   return(texto)
 }
