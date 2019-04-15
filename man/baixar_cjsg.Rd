@@ -32,7 +32,8 @@ Baixa consulta jurisprudencial do TJSP
 }
 \examples{
 \dontrun{
-baixar_cjsg(livre="Lei Maria da Penha")
+baixar_cjsg(livre = "Lei Maria da Penha")
 }
+
 }
 \keyword{tjsp,acórdãos}

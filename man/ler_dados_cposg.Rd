@@ -17,6 +17,6 @@ Lê metadados dos processos de segunda instância
 }
 \examples{
 \dontrun{
-dados<-ler_dados_cposg()
+dados <- ler_dados_cposg()
 }
 }

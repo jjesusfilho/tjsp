@@ -17,7 +17,8 @@ Extrai a movimentação processual de primeira e de segunda instância
 }
 \examples{
 \dontrun{
-andamento_cposg<-ler_movimentacao_cposg()
-andamento_cpopg<-ler_movimentacao_cpopg()
+andamento_cposg <- ler_movimentacao_cposg()
+andamento_cpopg <- ler_movimentacao_cpopg()
 }
+
 }

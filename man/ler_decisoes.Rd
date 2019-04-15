@@ -17,6 +17,5 @@ Ler decisoes
 }
 \examples{
 
-decisoes<-ler_decisoes()
-
+decisoes <- ler_decisoes()
 }
