@@ -18,7 +18,7 @@ lapso <- function(data_inicial = NULL,
                   unidade = "mes") {
   if (!lubridate::is.Date(data_inicial) |
       !lubridate::is.Date(data_final)) {
-    stop("As datas devem no formato data")
+    stop("As datas devem estar no formato iso 8601: yyyy-mm-dd")
   }
 
   periodo <- switch(

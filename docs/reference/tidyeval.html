@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lê conteúdo das decisões monocráticas — ler_decisoes_monocraticas • tjsp</title>
+<title>Tidy eval helpers — tidyeval • tjsp</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,29 @@
 
 
 
-<meta property="og:title" content="Lê conteúdo das decisões monocráticas — ler_decisoes_monocraticas" />
+<meta property="og:title" content="Tidy eval helpers — tidyeval" />
 
-<meta property="og:description" content="Lê conteúdo das decisões monocráticas" />
+<meta property="og:description" content="
+sym() creates a symbol from a string and
+syms() creates a list of symbols from a
+character vector.
+expr() and quo() quote
+one expression. quo() wraps the quoted expression in a quosure.
+The plural variants rlang::exprs() and
+quos() return a list of quoted expressions or
+quosures.
+enexpr() and enquo()
+capture the expression supplied as argument by the user of the
+current function (enquo() wraps this expression in a quosure).
+enexprs() and enquos()
+capture multiple expressions supplied as arguments, including
+....
+" />
+
+<meta property="og:description" content="exprs() is not exported to avoid conflicts with Biobase::exprs(),
+therefore one should always use rlang::exprs().
+To learn more about tidy eval and how to use these tools, visit
+http://rlang.r-lib.org and the Metaprogramming section of Advanced R." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,56 +119,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lê conteúdo das decisões monocráticas</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/ler_decisoes_monocraticas.R'><code>R/ler_decisoes_monocraticas.R</code></a></small>
-    <div class="hidden name"><code>ler_decisoes_monocraticas.Rd</code></div>
+    <h1>Tidy eval helpers</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/utils-tidy-eval.R'><code>R/utils-tidy-eval.R</code></a></small>
+    <div class="hidden name"><code>tidyeval.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Lê conteúdo das decisões monocráticas</p>
+    <ul>
+<li><p><code><a href='https://rlang.r-lib.org/reference/sym.html'>sym</a>()</code> creates a symbol from a string and
+<code><a href='https://rlang.r-lib.org/reference/sym.html'>syms</a>()</code> creates a list of symbols from a
+character vector.</p></li>
+<li><p><code><a href='https://rlang.r-lib.org/reference/quotation.html'>expr</a>()</code> and <code><a href='https://rlang.r-lib.org/reference/quotation.html'>quo</a>()</code> quote
+one expression. <code>quo()</code> wraps the quoted expression in a quosure.</p>
+<p>The plural variants <code><a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::exprs()</a></code> and
+<code><a href='https://rlang.r-lib.org/reference/quotation.html'>quos</a>()</code> return a list of quoted expressions or
+quosures.</p></li>
+<li><p><code><a href='https://rlang.r-lib.org/reference/quotation.html'>enexpr</a>()</code> and <code><a href='https://rlang.r-lib.org/reference/quotation.html'>enquo</a>()</code>
+capture the expression supplied as argument by the user of the
+current function (<code>enquo()</code> wraps this expression in a quosure).</p>
+<p><code><a href='https://rlang.r-lib.org/reference/quotation.html'>enexprs</a>()</code> and <code><a href='https://rlang.r-lib.org/reference/quotation.html'>enquos</a>()</code>
+capture multiple expressions supplied as arguments, including
+<code>...</code>.</p></li>
+</ul>
+
+    <p><code>exprs()</code> is not exported to avoid conflicts with <code>Biobase::exprs()</code>,
+therefore one should always use <code><a href='https://rlang.r-lib.org/reference/quotation.html'>rlang::exprs()</a></code>.</p>
+<p>To learn more about tidy eval and how to use these tools, visit
+<a href='http://rlang.r-lib.org'>http://rlang.r-lib.org</a> and the <a href='https://adv-r.hadley.nz/meta.html'>Metaprogramming section</a> of <a href='https://adv-r.hadley.nz'>Advanced R</a>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ler_decisoes_monocraticas</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>diretorio</th>
-      <td><p>Diretório onde se encontram os htmls.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
 
-    <p>tibble com o número do processo, o texto da decisão e a data da
-    decisão.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Em alguns processos, as decisões monocráticas estão etiquetadas como
-    despachos. Complemente a busca com a função ler_despachos.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>ler_decisoes_monocraticas</span>()
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

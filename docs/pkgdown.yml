@@ -1,11 +1,5 @@
-pandoc: 1.19.2.1
+pandoc: 2.3.1
 pkgdown: 1.3.0
 pkgdown_sha: ~
 articles: []
-url: https://jjesusfilho.github.io/tjsp/
 
-template:
-  params:
-    docsearch:
-      api_key: '14f380dc20e54823927273fb20602987'
-      index_name: 'tjsp'

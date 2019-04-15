@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lê conteúdo das decisões monocráticas — ler_decisoes_monocraticas • tjsp</title>
+<title>Filtra base cjsg por assunto e classe. — filtrar_cjsj • tjsp</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Lê conteúdo das decisões monocráticas — ler_decisoes_monocraticas" />
+<meta property="og:title" content="Filtra base cjsg por assunto e classe. — filtrar_cjsj" />
 
-<meta property="og:description" content="Lê conteúdo das decisões monocráticas" />
+<meta property="og:description" content="Filtra base cjsg por assunto e classe." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,44 +99,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lê conteúdo das decisões monocráticas</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/ler_decisoes_monocraticas.R'><code>R/ler_decisoes_monocraticas.R</code></a></small>
-    <div class="hidden name"><code>ler_decisoes_monocraticas.Rd</code></div>
+    <h1>Filtra base cjsg por assunto e classe.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/filtrar_cjsj.R'><code>R/filtrar_cjsj.R</code></a></small>
+    <div class="hidden name"><code>filtrar_cjsj.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Lê conteúdo das decisões monocráticas</p>
+    <p>Filtra base cjsg por assunto e classe.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ler_decisoes_monocraticas</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>filtrar_cjsj</span>(<span class='no'>base</span>, <span class='no'>assunto</span>, <span class='no'>classe</span>, <span class='kw'>negate_assunto</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>diretorio</th>
-      <td><p>Diretório onde se encontram os htmls.</p></td>
+      <th>base</th>
+      <td><p>base parseada os cjsg htmls</p></td>
+    </tr>
+    <tr>
+      <th>assunto</th>
+      <td><p>regex do assunto a ser filtrado</p></td>
+    </tr>
+    <tr>
+      <th>classe</th>
+      <td><p>regex da classe a ser filtrada</p></td>
+    </tr>
+    <tr>
+      <th>negate_assunto</th>
+      <td><p>coleque TRUE se quiser excluir os assuntos especificados.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tibble com o número do processo, o texto da decisão e a data da
-    decisão.</p>
+    <p>Mesma base filtrada.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Em alguns processos, as decisões monocráticas estão etiquetadas como
-    despachos. Complemente a busca com a função ler_despachos.</p>
+    <p>Geralmente as classes são limitadas e as descrições mais claras que
+    os assuntos. Por isso optei pela negação somente do assunto.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>ler_decisoes_monocraticas</span>()
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -146,9 +152,7 @@
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

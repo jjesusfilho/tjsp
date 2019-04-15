@@ -16,7 +16,7 @@ ler_dados_cposg<-function(diretorio="."){
   processo<-stringr::str_extract(a,"\\d{20}")
 
 
-  purrr::map_dfr(a[1],purrr::possibly(~{
+  purrr::map_dfr(a,purrr::possibly(~{
 
     resposta<-xml2::read_html(.x)
 
@@ -65,4 +65,3 @@ ler_dados_cposg<-function(diretorio="."){
 }
 
 
-dados <- ler_dados_cposg("cposg/violencia_domestica/html")

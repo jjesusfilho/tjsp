@@ -1,9 +1,9 @@
-#' Aplica parser para extrair informa\u00e7\u00f5es sobre as partes do
+#' Aplica parser para extrair informações sobre as partes do
 #'     processo.
 #'
-#' @param diretorio diret\u00f3rio onde se encontram os htmls baixados.
+#' @param diretorio diretório onde se encontram os htmls baixados.
 #'
-#' @return tabela com informa\u00e7\u00f5es das partes.
+#' @return tabela com informações das partes.
 #' @export
 #'
 ler_partes <- function(diretorio = ".")

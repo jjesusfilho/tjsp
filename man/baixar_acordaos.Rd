@@ -2,7 +2,7 @@
 % Please edit documentation in R/baixar_acordaos.R
 \name{baixar_acordaos}
 \alias{baixar_acordaos}
-\title{Baixa acórdãos do Tribunal de Justiç de São Paulo a partir do andamento}
+\title{Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento}
 \usage{
 baixar_acordaos(processos = NULL, diretorio = ".")
 }
@@ -12,8 +12,9 @@ baixar_acordaos(processos = NULL, diretorio = ".")
 \item{diretorio}{Diretório. Default para o corrente.}
 }
 \value{
-tabela com metadados do pdf e pdf do acórdão baixado o o número como nome.
+tabela com metadados do pdf e pdf do acórdão baixado com data
+   do acordao e número do processo.
 }
 \description{
-Baixa acórdãos do Tribunal de Justiç de São Paulo a partir do andamento
+Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento
 }

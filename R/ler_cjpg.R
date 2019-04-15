@@ -72,5 +72,5 @@ ler_cjpg <- function (diretorio = ".") {
                      dplyr::funs(stringi::stri_replace_first_regex(., ".*:\\s?", ""))) %>%
     dplyr::mutate_all(stringi::stri_trim_both) %>%
     rm_duplicados(processo) %>%
-    dplyr::mutate(disponibilizacao = lubridade::dmy(disponibilizacao))
+    dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao))
 }
