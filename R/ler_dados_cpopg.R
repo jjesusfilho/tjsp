@@ -10,58 +10,42 @@
 #' \dontrun{
 #' ler_dados_cpopg()
 #' }
-#' 
-ler_dados_cpopg <- function(diretorio = ".", wide = FALSE) {
-  arquivos <- list.files(
-    path = diretorio,
-    pattern = ".html",
-    full.names = TRUE
-  )
-
+#'
+ler_dados_cpopg <- function(diretorio=".",wide=FALSE)
+{
+  arquivos <- list.files(path = diretorio, pattern = ".html",
+                         full.names = TRUE)
   processos <- stringr::str_extract(arquivos, "\\d{20}")
+  dados <- purrr::map2_dfr(arquivos, processos, purrr::possibly(~{
+    resposta <- .x %>% xml2::read_html()
+    digital <- resposta %>% xml2::xml_find_first("boolean(//*[@class='linkPasta'] |//*[@class='linkConsultaSG'])")
 
-  dados <- purrr::map2_dfr(
-    arquivos,
-    processos,
-    purrr::possibly(~ {
-      resposta <- .x %>%
-        xml2::read_html()
+    codigo <- resposta %>%
+      xml2::xml_find_all("//a[contains(@href,'processo.codigo')]") %>%
+      xml2::xml_attr("href") %>%
+      stringr::str_extract("(?<=processo.codigo=)\\w+")
 
-      digital <- resposta %>%
-        xml2::xml_find_first("boolean(//*[@class='linkPasta'] |//*[@class='linkConsultaSG'])")
+    if (length(codigo)>1){
+      codigo <- duplicated(codigo) %>%
+        which() %>% codigo[.] %>%
+        unique()
+    }
 
-
-      codigo <- resposta %>%
-        xml2::xml_find_all("//a[contains(@href,'processo.codigo')]") %>%
-        xml2::xml_attr("href") %>%
-        stringr::str_extract("(?<=processo.codigo=)\\w+")
-
-      cdProcesso <- resposta %>%
-        xml2::xml_find_first("//*[@name='cdProcesso']") %>%
-        xml2::xml_attr("value")
-
-
-      variavel <- resposta %>%
-        xml2::xml_find_all("//table[@id=''][@class='secaoFormBody']//*[@width='150']") %>%
-        xml2::xml_text() %>%
-        stringr::str_squish()
-
-      valor <- resposta %>%
-        xml2::xml_find_all("//table[@id=''][@class='secaoFormBody']//*[@width='150']/following-sibling::td") %>%
-        xml2::xml_text() %>%
-        stringr::str_squish()
-
-      tibble::tibble(processo = .y, codigo_processo = codigo, cd_processo = cdProcesso, digital, variavel, valor)
-    }, NULL)
-  )
-
+    cdProcesso <- resposta %>% xml2::xml_find_first("//*[@name='cdProcesso']") %>%
+      xml2::xml_attr("value")
+    variavel <- resposta %>% xml2::xml_find_all("//table[@id=''][@class='secaoFormBody']//*[@width='150']") %>%
+      xml2::xml_text() %>% stringr::str_squish()
+    valor <- resposta %>% xml2::xml_find_all("//table[@id=''][@class='secaoFormBody']//*[@width='150']/following-sibling::td") %>%
+      xml2::xml_text() %>% stringr::str_squish()
+    tibble::tibble(processo = .y, codigo_processo = codigo,
+                   cd_processo = cdProcesso, digital, variavel, valor)
+  }, NULL))
   if (wide == TRUE) {
-    dados <- dados %>%
-      dplyr::group_by_at(dplyr::vars(-valor)) %>%
-      dplyr::mutate(row_id = 1:dplyr::n()) %>%
-      dplyr::ungroup() %>%
+    dados <- dados %>% dplyr::group_by_at(dplyr::vars(-valor)) %>%
+      dplyr::mutate(row_id = 1:dplyr::n()) %>% dplyr::ungroup() %>%
       tidyr::spread(key = variavel, value = valor) %>%
       dplyr::select(-row_id)
   }
   return(dados)
 }
+

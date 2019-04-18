@@ -13,7 +13,7 @@ if (getRversion() >= "2.15.1") {
     ".", ".x", ".y", ":=", "processo", "disponibilizacao", "valor", "variavel", "row_id",
     "size", "alternativa", "vara", "vara2", "codigo_processo",
     "digital", "v1", "assunto", "classe", "distribuicao", "juiz",
-    "filter", "branco", "v2", "area", "vara", "prioritaria",
+    "filter", "branco", "v2", "area", "vara", "prioritaria","assuntos","assunto.x",
     ""
   ))
 }
