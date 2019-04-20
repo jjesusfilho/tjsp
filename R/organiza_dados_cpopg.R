@@ -6,12 +6,12 @@
 #' @return data.frame limpo e organizado
 #' @export
 #'
-organizar_dados_cpopg <- function (df, excluir = "") {
+organiza_dados_cpopg <- function (df, excluir = "") {
   df <- df %>% janitor::clean_names()
 
   if (nrow(df)>0) {
 
-    df<- df %>%
+    df <- df %>%
       dplyr::mutate(
         branco = dplyr::case_when(stringr::str_detect(v1, "(?i)[áa]rea") ~ "area",
                                   v1 == "(Tramitação prioritária)" ~ "prioritaria",

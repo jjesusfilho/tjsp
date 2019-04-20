@@ -6,7 +6,7 @@
 #' @return mesmo df com assuntos ajustados e áreas acrescidas.
 #' @export
 #'
-ajustar_assuntos <- function(df, excluir_cartas=TRUE){
+ajusta_assuntos <- function(df, excluir_cartas=TRUE){
 
  df %>%
     dplyr::select(assunto) %>%
@@ -21,6 +21,6 @@ ajustar_assuntos <- function(df, excluir_cartas=TRUE){
     dplyr::right_join(df,by="assunto") %>%
     dplyr::select(processo,assunto,area,area2,classe,juiz,vara,foro,digital,dplyr::everything()) %>%
     dplyr::filter(if (excluir_cartas == TRUE)  stringr::str_detect(classe,"(?i)carta",negate=TRUE)) %>%
-    dplyr::distinct(processo)
+    dplyr::distinct(processo,.keep_all=TRUE)
 }
 
