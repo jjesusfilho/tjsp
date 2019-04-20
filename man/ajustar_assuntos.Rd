@@ -4,10 +4,12 @@
 \alias{ajustar_assuntos}
 \title{Ajustar os assuntos com base na tabela do TJSP}
 \usage{
-ajustar_assuntos(df)
+ajustar_assuntos(df, excluir_cartas = TRUE)
 }
 \arguments{
 \item{df}{tibble obtido a partir da função organiza_dados_cpopg}
+
+\item{excluir_cartas}{default para TRUE. Excluir cartas de ordem e pracatórias.}
 }
 \value{
 mesmo df com assuntos ajustados e áreas acrescidas.

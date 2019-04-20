@@ -46,7 +46,9 @@ organizar_dados_cpopg <- function (df, excluir = "") {
                      horario_distribuicao = stringr::str_extract(distribuicao, "\\d{2}:\\d{2}"),
                      tipo_distribuicao = stringr::str_extract(distribuicao, "(?<=-\\s).+"),
                      distribuicao = NULL ) %>%
-      tidyr::separate(vara, c("vara", "foro"), sep = " - ", extra = "merge")
+      tidyr::separate(vara, c("vara", "foro"), sep = " - ", extra = "merge") %>%
+      dplyr::mutate(area = stringr::str_remove_all(v1,"(?i)Área|\\W+)"),
+             v1 = NULL)
   }
   return(df)
 }

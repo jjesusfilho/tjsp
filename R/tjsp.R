@@ -14,6 +14,6 @@ if (getRversion() >= "2.15.1") {
     "size", "alternativa", "vara", "vara2", "codigo_processo",
     "digital", "v1", "assunto", "classe", "distribuicao", "juiz",
     "filter", "branco", "v2", "area", "vara", "prioritaria","assuntos","assunto.x",
-    ""
+    "","foro","area2"
   ))
 }
