@@ -1,17 +1,17 @@
 Package: tjsp
 Version: 0.5.0.9050
 Date: 2019-04-15
-Title: Coleta e organiza\\u00e7\\u00e3o dados do Tribunal de Justi\\u00e7a de S\\u00e3o Paulo
-Description: Funções para baixar metadados das decisões judiciais, baixar as
-    decisões mesmas de primeira e segunda instância do TJSP e organizar esses
-    dados.
+Title: Coleta e organização dados do Tribunal de Justiça de São Paulo
+Description: Funções para baixar metadados das decisõeses judiciais, baixar as
+    decisões mesmas de primeira e segunda instânncia do TJSP e organizar esses
+    dados zé..
 Authors@R: person("José", "de Jesus Filho", email = "jjesusfilho@gmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <jjesusfilho@gmail.com>
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)
-ByteCompile: true
+ByteCompile: true 
 Imports:
     xml2,
     httr,
