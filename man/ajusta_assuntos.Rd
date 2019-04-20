@@ -9,7 +9,8 @@ ajusta_assuntos(df, excluir_cartas = TRUE)
 \arguments{
 \item{df}{tibble obtido a partir da função organiza_dados_cpopg}
 
-\item{excluir_cartas}{default para TRUE. Excluir cartas de ordem e pracatórias.}
+\item{excluir_cartas}{default para TRUE. Excluir cartas de ordem e pracatórias.
+Se você optar por FALSE, verifique a compatibilidade entre o assunto e a area.}
 }
 \value{
 mesmo df com assuntos ajustados e áreas acrescidas.

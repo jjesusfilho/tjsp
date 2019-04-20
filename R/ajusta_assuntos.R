@@ -2,6 +2,7 @@
 #'
 #' @param df tibble obtido a partir da função organiza_dados_cpopg
 #' @param excluir_cartas default para TRUE. Excluir cartas de ordem e pracatórias.
+#'     Se você optar por FALSE, verifique a compatibilidade entre o assunto e a area.
 #
 #' @return mesmo df com assuntos ajustados e áreas acrescidas.
 #' @export

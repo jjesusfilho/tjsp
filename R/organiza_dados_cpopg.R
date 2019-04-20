@@ -28,14 +28,20 @@ organiza_dados_cpopg <- function (df, excluir = "") {
       dplyr::filter(!is.element(assunto, excluir)) %>%
       dplyr::mutate(data_distribuicao = stringr::str_extract(distribuicao, "\\d+/\\d+/\\d+") %>%
                       lubridate::dmy(),
-                    horario_distribuicao = stringr::str_extract(distribuicao, "\\d{2}:\\d{2}"),
+                    horario_distribuicao = stringr::str_extract(distribuicao, "\\d{2}:\\d{2}") %>%
+                      lubridate::hm(),
                     tipo_distribuicao = stringr::str_extract(distribuicao, "(?<=-\\s).+"),
                     distribuicao = NULL) %>%
+      dplyr::mutate(data_recebimento = stringr::str_extract(recebido_em, "\\d+/\\d+/\\d+") %>%
+                      lubridate::dmy(),
+                    recebido_em = NULL) %>%
       tidyr::separate(vara, c("vara", "foro"), sep = " - ", extra = "merge") %>%
       dplyr::mutate(area = stringr::str_remove_all(v1,"(?i)(Área|\\W+)"),
                     v1 = NULL) %>%
-      dplyr::mutate(ifelse(exists("execucao_de_sentenca") & is.na(classe),execucao_de_sentenca,classe)) %>%
-      dplyr::mutate(ifelse(exists("incidente") & is.na(classe),incidente,classe))
+      dplyr::mutate(classe=ifelse(exists("execucao_de_sentenca") & is.na(classe),execucao_de_sentenca,classe)) %>%
+      dplyr::mutate(classe=ifelse(exists("incidente") & is.na(classe),incidente,classe)) %>%
+      dplyr::mutate(rowid=NULL)
+
   }
   return(df)
 }
