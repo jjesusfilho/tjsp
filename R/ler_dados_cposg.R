@@ -57,9 +57,10 @@ ler_dados_cposg <- function(diretorio = ".") {
 
     as.list(c(valores, valores2)) %>%
       setNames(c(nomes, nomes2)) %>%
-      janitor::clean_names() %>%
       tibble::as_tibble() %>%
+      janitor::clean_names() %>%
       tidyr::separate(processo, c("processo", "situacao"), sep = "\\w+$", extra = "merge") %>%
-      tibble::add_column(cd_processo = cdProcesso)
+      tibble::add_column(cd_processo = cdProcesso) %>%
+      tibble::add_column(digital=digital)
   }, otherwise = NULL))
 }
