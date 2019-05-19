@@ -1,6 +1,6 @@
 #' Extrai a movimentação processual de primeira e de segunda instância
 #'
-#' @param diretorio diretório onde se encontram os htmls
+#' @param fonte objeto ou diretorio  onde se encontram os htmls
 #'
 #' @return tibble com a movimentação processual.
 #' @export
@@ -9,15 +9,21 @@
 #' andamento_cposg <- ler_movimentacao_cposg()
 #' andamento_cpopg <- ler_movimentacao_cpopg()
 #' }
-#' 
-ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
-  a <- list.files(path = diretorio, pattern = ".html", full.names = T)
+#'
+ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(fonte = ".") {
 
-  processo <- stringr::str_extract(a, "\\d{20}") %>%
-    abjutils::build_id()
+  if (is_defined(fonte)) {
+
+    arquivos <- fonte
+
+  } else {
+
+    arquivos <- list.files(path = fonte, pattern = ".html",
+                           full.names = TRUE)
+  }
 
 
-  purrr::map2_dfr(a, processo, purrr::possibly(~ {
+  purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
     texto <- xml2::read_html(.x) %>%
       xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
 

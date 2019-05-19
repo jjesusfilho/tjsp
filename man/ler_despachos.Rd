@@ -4,10 +4,10 @@
 \alias{ler_despachos}
 \title{Extrai despachos judiciais, que podem incluir decisões monocráticas, da movimentação.}
 \usage{
-ler_despachos(diretorio = ".")
+ler_despachos(fonte = ".")
 }
 \arguments{
-\item{diretorio}{Diretório onde se encontram os htmls.}
+\item{fonte}{objeto ou diretório onde se encontram os htmls.}
 }
 \value{
 tibble com o número do processo, o despacho e a data do despacho.

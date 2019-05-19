@@ -1,0 +1,15 @@
+citHeader("Para citar o pacote tjsp em publicações use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "Coleta e organização de dados do Tribunal de  Justiça de São Paulo",
+  author   = personList(as.person("José de Jesus Filho"),
+                   as.person("Julio Trecenti")),
+  year     = "2019",
+  url      = "https://jjesufilho.github.io/tjsp/",
+  textVersion = paste(
+                  "Jesus Filho, José de, Trecenti, Júlio (2019)",
+                  "Coleta e organização do Tribunal de Justiça de São Paulo",
+                  "URL https://jjesusfilho.github.io/tjsp"
+  )
+)

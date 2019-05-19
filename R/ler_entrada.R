@@ -1,6 +1,6 @@
 #' Data da entrada do processo
 #'
-#' @param diretorio Diretório onde se encontram os htmls dos processos
+#' @param fonte objeto ou diretório onde se encontram os htmls dos processos
 #'
 #' @return tibble com o número dos processos e respectivas decisões
 #' @export
@@ -10,20 +10,24 @@
 #' entrada <- ler_entrada_cposg()
 #' entrada <- ler_entrada_cpopg()
 #' }
-#' 
-ler_entrada <- ler_entrada_cposg <- ler_entrada_cpopg <- function(diretorio = ".") {
-  a <- list.files(
-    path = diretorio,
-    pattern = ".html",
-    full.names = T
-  )
+#'
+ler_entrada <- ler_entrada_cposg <- ler_entrada_cpopg <- function(fonte = ".") {
 
-  processo <- stringr::str_extract(a, "\\d{20}") %>%
+  if (is_defined(fonte)) {
+
+    arquivos <- fonte
+
+  } else {
+
+    arquivos <- list.files(path = fonte, pattern = ".html",
+                           full.names = TRUE)
+  }
+
+  processo <- stringr::str_extract(arquivos, "\\d{20}") %>%
     abjutils::build_id()
 
-  future::plan("multiprocess")
 
-  furrr::future_map2_dfr(a, processo, purrr::possibly(~ {
+  purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
     data <- xml2::read_html(.x) %>%
       rvest::html_nodes(xpath = "//td[@width='120']") %>%
       rvest::html_text() %>%
@@ -33,5 +37,5 @@ ler_entrada <- ler_entrada_cposg <- ler_entrada_cpopg <- function(diretorio = ".
       max()
 
     tibble::tibble(processo = .y, data = data)
-  }, otherwise = NULL), .progress = TRUE)
+  }, otherwise = NULL))
 }

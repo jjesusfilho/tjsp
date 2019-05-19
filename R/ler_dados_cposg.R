@@ -1,6 +1,6 @@
 #' Lê metadados dos processos de segunda instância
 #'
-#' @param diretorio diretório onde se encontram os htmls baixados.
+#' @param fonte objeto no global env ou diretório onde se encontram os htmls.
 #'
 #' @return tabela com dados do processo
 #' @export
@@ -9,13 +9,25 @@
 #' \dontrun{
 #' dados <- ler_dados_cposg()
 #' }
-ler_dados_cposg <- function(diretorio = ".") {
-  a <- list.files(path = diretorio, pattern = ".html", full.names = T)
+ler_dados_cposg <- function(fonte = ".") {
 
-  processo <- stringr::str_extract(a, "\\d{20}")
+  if (is_defined(fonte)) {
+
+    arquivos <- fonte
+
+  } else {
+
+    arquivos <- list.files(path = fonte, pattern = ".html",
+                           full.names = TRUE)
+  }
 
 
-  purrr::map_dfr(a, purrr::possibly(~ {
+
+
+  processo <- stringr::str_extract(arquivos, "\\d{20}")
+
+
+  purrr::map_dfr(arquivos, purrr::possibly(~ {
     resposta <- xml2::read_html(.x)
 
     nomes <- resposta %>%

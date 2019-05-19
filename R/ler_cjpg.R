@@ -1,6 +1,6 @@
 #' Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.
 #'
-#' @param diretorio Diretório onde se encontram as páginas.
+#' @param fonte objeto ou diretório onde se encontram as páginas.
 #'
 #' @return uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro, vara,
 #'     disponibilizacao e julgado (texto da decisão).
@@ -10,14 +10,20 @@
 #' \dontrun{
 #' ler_cjpg()
 #' }
-ler_cjpg <- function(diretorio = ".") {
-  a <- list.files(
-    path = diretorio,
-    pattern = ".html",
-    full.names = TRUE
-  )
+ler_cjpg <- function(fonte = ".") {
 
-  df <- purrr::map_dfr(a, purrr::possibly(~ {
+  if (is_defined(fonte)) {
+
+    arquivos <- fonte
+
+  } else {
+
+    arquivos <- list.files(path = fonte, pattern = ".html",
+                           full.names = TRUE)
+  }
+
+
+  df <- purrr::map_dfr(arquivos, purrr::possibly(~ {
     resposta <- .x %>%
       xml2::read_html(encoding = "UTF-8") %>%
       xml2::xml_find_all(xpath = "//*[@id='divDadosResultado']/table//td//td[@align='left']") %>%

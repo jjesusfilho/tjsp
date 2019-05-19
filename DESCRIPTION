@@ -1,10 +1,10 @@
 Package: tjsp
 Version: 0.6.0.9060
 Date: 2019-05-18
-Title: Coleta e organização dados do Tribunal de Justiça de São Paulo
+Title: Coleta e organização de dados do Tribunal de Justiça de São Paulo
 Description: Funções para baixar metadados das decisõeses judiciais, baixar as
     decisões mesmas de primeira e de segunda instância do TJSP e organizar esses
-    dados
+    dados.
 Authors@R: person("José", "de Jesus Filho", email = "jjesusfilho@gmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <jjesusfilho@gmail.com>
 License: MIT + file LICENSE
