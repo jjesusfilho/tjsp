@@ -24,5 +24,5 @@ Esta função é um mero wrapper das funções interval e time_length
     do pacote lubridate. Ela considera as variações de ano, meses e dias.
 }
 \examples{
-lapso(data_inicial=as.Date("2018-01-01"),data_final=as.Date("2018-12-31"),unidade="mes")
+lapso(data_inicial = as.Date("2018-01-01"), data_final = as.Date("2018-12-31"), unidade = "mes")
 }

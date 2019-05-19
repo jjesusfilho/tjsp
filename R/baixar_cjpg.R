@@ -19,48 +19,46 @@
 #' \dontrun{
 #' baixar_cjpg("homicídio simples")
 #' }
-#'
-baixar_cjpg<-function(
-  livre="",
-  aspas=FALSE,
-  processo="",
-  foro="",
-  vara="",
-  classe="",
-  assunto="",
-  magistrado="",
-  inicio="",
-  fim="",
-  diretorio="."
-){
-
-  if (aspas==TRUE){
-    livre<-deparse(livre)
+#' 
+baixar_cjpg <- function(
+                        livre = "",
+                        aspas = FALSE,
+                        processo = "",
+                        foro = "",
+                        vara = "",
+                        classe = "",
+                        assunto = "",
+                        magistrado = "",
+                        inicio = "",
+                        fim = "",
+                        diretorio = ".") {
+  if (aspas == TRUE) {
+    livre <- deparse(livre)
   }
 
-  httr::set_config(httr::config(ssl_verifypeer = FALSE ))
+  httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
-  if (processo!=""){
-    processo<-processo %>%
+  if (processo != "") {
+    processo <- processo %>%
       stringr::str_remove_all("\\D+") %>%
-      stringr::str_pad(width=20,"left","0") %>%
+      stringr::str_pad(width = 20, "left", "0") %>%
       abjutils::build_id()
 
-    unificado<-stringr::str_extract(processo,".+?(?=\\.8\\.26)")
+    unificado <- stringr::str_extract(processo, ".+?(?=\\.8\\.26)")
   }
 
-  if (foro==""&&processo!=""){
-    foro<-stringr::str_extract(processo,"\\d{4}$")
+  if (foro == "" && processo != "") {
+    foro <- stringr::str_extract(processo, "\\d{4}$")
   }
 
-  classe<-paste0(classe,collapse=",")
-  assunto<-paste0(assunto,collapse=",")
-  magistrado<-paste0(magistrado,collapse=",")
+  classe <- paste0(classe, collapse = ",")
+  assunto <- paste0(assunto, collapse = ",")
+  magistrado <- paste0(magistrado, collapse = ",")
 
-  if (magistrado!=""){
+  if (magistrado != "") {
     maiorAgente <- "2"
   } else {
-    maiorAgente<-"0"
+    maiorAgente <- "0"
   }
   ## O procedimento abaixo constrói a url.
   url_parseada <-
@@ -81,7 +79,7 @@ baixar_cjpg<-function(
         classeTreeSelection.text = "",
         assuntoTreeSelection.values = assunto,
         assuntoTreeSelection.text = "",
-        agenteSelectedEntitiesList = "" ,
+        agenteSelectedEntitiesList = "",
         contadoragente = "0",
         contadorMaioragente = maiorAgente,
         cdAgente = "",
@@ -96,32 +94,33 @@ baixar_cjpg<-function(
       )
     )
 
-  if (magistrado==""){
-    url_parseada$query$`dadosConsulta.agentes[0].cdAgente`<-NULL
-    url_parseada$query$`dadosConsulta.agentes[0].nmAgente`<-NULL
+  if (magistrado == "") {
+    url_parseada$query$`dadosConsulta.agentes[0].cdAgente` <- NULL
+    url_parseada$query$`dadosConsulta.agentes[0].nmAgente` <- NULL
   }
 
-  class(url_parseada)<-"url"
+  class(url_parseada) <- "url"
 
-  url<-httr::build_url(url_parseada)
+  url <- httr::build_url(url_parseada)
 
   resposta <- httr::GET(url)
 
-  paginas <- resposta  %>%
+  paginas <- resposta %>%
     httr::content() %>%
-    xml2::xml_find_first(xpath="//*[@bgcolor='#EEEEEE']") %>%
+    xml2::xml_find_first(xpath = "//*[@bgcolor='#EEEEEE']") %>%
     xml2::xml_text(trim = T) %>%
-    stringr::str_extract( "\\d+$") %>%
+    stringr::str_extract("\\d+$") %>%
     as.numeric()
 
-  max_pag <- ceiling(paginas/10)
+  max_pag <- ceiling(paginas / 10)
 
-  purrr::map(1:max_pag,purrr::possibly(~{
-
-    httr::GET(paste0("http://esaj.tjsp.jus.br/cjpg/trocarDePagina.do?pagina=",
-                     .x, "&conversationId="), httr::set_cookies(unlist(resposta$cookies)),
-              httr::write_disk(paste0(diretorio,"/pagina_",.x,".html"),overwrite = T))
-  }),otherwise=NULL)
-
+  purrr::map(1:max_pag, purrr::possibly(~ {
+    httr::GET(
+      paste0(
+        "http://esaj.tjsp.jus.br/cjpg/trocarDePagina.do?pagina=",
+        .x, "&conversationId="
+      ), httr::set_cookies(unlist(resposta$cookies)),
+      httr::write_disk(paste0(diretorio, "/pagina_", .x, ".html"), overwrite = T)
+    )
+  }), otherwise = NULL)
 }
-

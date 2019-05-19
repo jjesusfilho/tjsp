@@ -4,10 +4,10 @@
 \alias{ler_movimentacao_cposg}
 \title{Extrai a movimentação processual de primeira e de segunda instância}
 \usage{
-ler_movimentacao_cposg(diretorio = ".")
+ler_movimentacao_cposg(fonte = ".")
 }
 \arguments{
-\item{diretorio}{diretório onde se encontram os htmls}
+\item{fonte}{objeto ou diretorio  onde se encontram os htmls}
 }
 \value{
 tibble com a movimentação processual.
@@ -17,7 +17,8 @@ Extrai a movimentação processual de primeira e de segunda instância
 }
 \examples{
 \dontrun{
-andamento_cposg<-ler_movimentacao_cposg()
-andamento_cpopg<-ler_movimentacao_cpopg()
+andamento_cposg <- ler_movimentacao_cposg()
+andamento_cpopg <- ler_movimentacao_cpopg()
 }
+
 }

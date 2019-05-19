@@ -1,22 +1,32 @@
 #' Ler decisoes
 #'
-#' @param path Diretório onde se encontram os htmls baixados
+#' @param fonte objeto ou diretório onde se encontram os htmls baixados
 #'
 #' @return tibble com as os numéros dos processos e respectivas decisões
 #' @export
 #'
 #' @examples
-#'
-#' decisoes<-ler_decisoes()
-#'
-ler_decisoes <- function(path = ".") {
-  a <- list.files(path = path,
-                  pattern = ".html",
-                  full.names = T)
+#' \dontrun{
+#' ler_decisoes()
+#' }
+ler_decisoes <- function(fonte = ".") {
 
-  processo <- stringr::str_extract(a, "\\d{20}")
+  if (is_defined(fonte)) {
 
-  lista <- vector("list", length(a))
+    arquivos <- fonte
+
+  } else {
+
+    arquivos <- list.files(path = fonte, pattern = ".html",
+                           full.names = TRUE)
+  }
+
+
+
+
+  processo <- stringr::str_extract(arquivos, "\\d{20}")
+
+  lista <- vector("list", length(arquivos))
 
   ## Controle de erro e retorno da informação constante no html,
   ## quando não aparece a decisão
@@ -31,7 +41,6 @@ ler_decisoes <- function(path = ".") {
         purrr::pluck(1) %>%
         stats::setNames(c("data_julgamento", "situacao_julgamento", "decisao")) %>%
         cbind(processo = y[i], ., stringsAsFactors = F)
-
     }, error = function(e) {
       x[i] %>%
         xml2::read_html() %>%
@@ -50,7 +59,7 @@ ler_decisoes <- function(path = ".") {
   }
 
   for (i in seq_along(lista)) {
-    lista[[i]] <- tentativa(a, processo)
+    lista[[i]] <- tentativa(arquivos, processo)
   }
   do.call(rbind, lista)
 }

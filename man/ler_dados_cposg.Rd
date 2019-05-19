@@ -4,10 +4,10 @@
 \alias{ler_dados_cposg}
 \title{Lê metadados dos processos de segunda instância}
 \usage{
-ler_dados_cposg(diretorio = ".")
+ler_dados_cposg(fonte = ".")
 }
 \arguments{
-\item{diretorio}{diretório onde se encontram os htmls baixados.}
+\item{fonte}{objeto no global env ou diretório onde se encontram os htmls.}
 }
 \value{
 tabela com dados do processo
@@ -17,6 +17,6 @@ Lê metadados dos processos de segunda instância
 }
 \examples{
 \dontrun{
-dados<-ler_dados_cposg()
+dados <- ler_dados_cposg()
 }
 }

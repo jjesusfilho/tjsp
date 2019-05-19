@@ -15,21 +15,22 @@
 #'
 #' @examples
 #' \dontrun{
-#' baixar_cjsg(livre="Lei Maria da Penha")
+#' baixar_cjsg(livre = "Lei Maria da Penha")
 #' }
-
+#' 
 baixar_cjsg <-
-  function(livre="",
-           aspas = FALSE,
-           classe = "",
-           assunto= "",
-           inicio = "",
-           fim = "",
-           tipo = "A",
-           diretorio="."
-  ) {
-    httr::set_config(httr::config(ssl_verifypeer = FALSE,
-                                  accept_encoding = "latin1"))
+  function(livre = "",
+             aspas = FALSE,
+             classe = "",
+             assunto = "",
+             inicio = "",
+             fim = "",
+             tipo = "A",
+             diretorio = ".") {
+    httr::set_config(httr::config(
+      ssl_verifypeer = FALSE,
+      accept_encoding = "latin1"
+    ))
     body <-
       list(
         dados.buscaInteiroTeor = livre,
@@ -67,7 +68,7 @@ baixar_cjsg <-
         dados.dtRegistroFim = "",
         dados.origensSelecionadas = "T",
         tipoDecisaoSelecionados = tipo,
-        #tipoDecisaoSelecionados = "", tipoDecisaoSelecionados = "",
+        # tipoDecisaoSelecionados = "", tipoDecisaoSelecionados = "",
         dados.ordenacao = "data"
       )
     if (aspas == TRUE) livre <- deparse(livre)
@@ -95,7 +96,7 @@ baixar_cjsg <-
 
 
     if (tipo == "A") {
-      purrr::map(paginas, purrr::possibly( ~ {
+      purrr::map(paginas, purrr::possibly(~ {
         httr::GET(
           paste0(
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",
@@ -103,25 +104,24 @@ baixar_cjsg <-
           ),
           httr::set_cookies(unlist(a$cookies)),
           httr::accept("text/html; charset=latin1;"),
-          httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"),
-                           overwrite = TRUE)
+          httr::write_disk(paste0(diretorio, "/pagina_", .x, ".html"),
+            overwrite = TRUE
+          )
         )
       }, NULL))
-
     } else {
-      purrr::map(paginas, purrr::possibly( ~ {
+      purrr::map(paginas, purrr::possibly(~ {
         httr::GET(
           paste0(
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=",
             .x
           ),
           httr::set_cookies(unlist(a$cookies)),
-          httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"),
-                           overwrite = TRUE)
+          httr::write_disk(paste0(diretorio, "/pagina_", .x, ".html"),
+            overwrite = TRUE
+          )
         )
-        #httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"), overwrite = TRUE)
-
+        # httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"), overwrite = TRUE)
       }, NULL))
-
     }
   }

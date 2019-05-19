@@ -16,6 +16,5 @@ tabela com metadados jurisprudenciais.
 Ler metadados das decisões
 }
 \examples{
-cjsg<-ler_cjsg()
-
+cjsg <- ler_cjsg()
 }

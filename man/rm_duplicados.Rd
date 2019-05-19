@@ -16,7 +16,7 @@ Remove as linhas de um dataframe, quando há duplicidade na coluna especificada.
 }
 \examples{
 
-rm_duplicados(iris,Species)
+rm_duplicados(iris, Species)
 }
 \keyword{duplicated,}
 \keyword{remove}

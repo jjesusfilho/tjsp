@@ -9,11 +9,10 @@
 #' @return Arquivo em rds baixado
 #' @export
 #'
-baixar_serializar <- function(lista=NULL, dir=".", subdir=NULL, funcao = NULL) {
+baixar_serializar <- function(lista = NULL, dir = ".", subdir = NULL, funcao = NULL) {
+  diretorios <- fs::dir_create(paste0(dir, "/", subdir))
 
-  diretorios <- fs::dir_create(paste0(dir,"/",subdir))
-
-  purrr::walk2(lista, diretorios,  ~ {
+  purrr::walk2(lista, diretorios, ~ {
     funcao(.x, .y)
 
     fs::file_info(fs::dir_ls(.y, glob = "*.html")) %>%
@@ -22,12 +21,12 @@ baixar_serializar <- function(lista=NULL, dir=".", subdir=NULL, funcao = NULL) {
       dplyr::pull("path") %>%
       fs::file_delete()
 
-    serializar(origem = .y,
-                    destino = .y,
-                    prefix = "arquivo")
+    serializar(
+      origem = .y,
+      destino = .y,
+      prefix = "arquivo"
+    )
     fs::dir_ls(.y, glob = "*.html") %>%
       fs::file_delete()
-
   })
-
 }

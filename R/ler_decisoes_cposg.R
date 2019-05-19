@@ -1,20 +1,28 @@
 #' Lê o dispositivo das decisões de segunda instância a partir dos htmls
 #'
-#' @param diretorio Diretório onde se encontram os htmls baixados
+#' @param fonte objeto ou diretório onde se encontram os htmls baixados
 #'
 #' @return tibble com as os numéros dos processos e respectivas decisões
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' decisoes<-ler_decisoes_cposg().
+#' decisoes<-ler_decisoes_cposg()
 #' }
-ler_decisoes_cposg <- function(diretorio = ".") {
-  a <- list.files(path = diretorio,
-                  pattern = ".html",
-                  full.names = T)
+ler_decisoes_cposg <- function(fonte = ".") {
+  ''
+if (is_defined(fonte)) {
 
-  processo <- stringr::str_extract(a, "\\d{20}") %>%
+    arquivos <- fonte
+
+  } else {
+
+    arquivos <- list.files(path = fonte, pattern = ".html",
+                           full.names = TRUE)
+  }
+
+
+  processo <- stringr::str_extract(arquivos, "\\d{20}") %>%
     abjutils::build_id()
 
   lista <- listenv::listenv()
@@ -51,8 +59,8 @@ ler_decisoes_cposg <- function(diretorio = ".") {
   }
 
 
-  for (ii in seq_along(a)) {
-    lista[[ii]]  <-  tentativa(a, processo)
+  for (ii in seq_along(arquivos)) {
+    lista[[ii]]  <-  tentativa(arquivos, processo)
   }
 
   lista <- as.list(lista)

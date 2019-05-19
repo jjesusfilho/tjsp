@@ -1,6 +1,6 @@
 #' Lê conteúdo das decisões monocráticas
 #'
-#' @param diretorio Diretório onde se encontram os htmls.
+#' @param fonte objeto ou diretório onde se encontram os htmls.
 #'
 #' @return tibble com o número do processo, o texto da decisão e a data da
 #'     decisão.
@@ -15,22 +15,34 @@
 #' ler_decisoes_monocraticas()
 #' }
 #'
-ler_decisoes_monocraticas<- function (diretorio = ".") {
-  a <- list.files(path = diretorio, pattern = ".html", full.names = T)
+ler_decisoes_monocraticas <- function(fonte = ".") {
 
-  processo <- stringr::str_extract(a, "\\d{20}")
+  if (is_defined(fonte)) {
 
-  purrr::map2_dfr(a, processo, purrr::possibly(~{
+    arquivos <- fonte
 
+  } else {
+
+    arquivos <- list.files(path = fonte, pattern = ".html",
+                           full.names = TRUE)
+  }
+
+
+
+
+  processo <- stringr::str_extract(arquivos, "\\d{20}")
+
+
+  purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
     decisao <- xml2::read_html(.x) %>%
       rvest::html_nodes(xpath = "//a[contains(text(),'Decisão Monocrática')]/following-sibling::span") %>%
       rvest::html_text()
 
     data_decisao <- xml2::read_html(.x) %>%
       rvest::html_nodes(xpath = "//tr[td[a[contains(text(),'Decisão Monocrática')]]]/td[1]") %>%
-      rvest::html_text(trim=TRUE) %>%
+      rvest::html_text(trim = TRUE) %>%
       lubridate::dmy()
 
-    tibble::tibble(processo = .y, decisao = decisao,data_decisao=data_decisao)
+    tibble::tibble(processo = .y, decisao = decisao, data_decisao = data_decisao)
   }, otherwise = NULL))
 }
