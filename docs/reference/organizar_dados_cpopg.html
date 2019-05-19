@@ -100,7 +100,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Organiza metadados cpopg (apenas criminal por hora)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/organiza_dados_cpopg.R'><code>R/organiza_dados_cpopg.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/organizar_dados_cpopg.R'><code>R/organizar_dados_cpopg.R</code></a></small>
     <div class="hidden name"><code>organizar_dados_cpopg.Rd</code></div>
     </div>
 
@@ -110,7 +110,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>organizar_dados_cpopg</span>(<span class='no'>df</span>, <span class='kw'>excluir</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>organizar_dados_cpopg</span>(<span class='no'>df</span>, <span class='kw'>excluir_assunto</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>excluir_classe</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,9 +120,13 @@
       <td><p>data.frame lido com ler_dados_cpopg</p></td>
     </tr>
     <tr>
-      <th>excluir</th>
+      <th>excluir_assunto</th>
       <td><p>informar vetor de frases a serem excluídas dos assuntos.
 Há uma sugestão de palavras no dataset 'excluir_assuntos_cpopg'</p></td>
+    </tr>
+    <tr>
+      <th>excluir_classe</th>
+      <td><p>informar vetor de frases a serem excluídas das classes.</p></td>
     </tr>
     </table>
     

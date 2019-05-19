@@ -14,6 +14,8 @@ if (getRversion() >= "2.15.1") {
     "size", "alternativa", "vara", "vara2", "codigo_processo",
     "digital", "v1", "assunto", "classe", "distribuicao", "juiz",
     "filter", "branco", "v2", "area", "vara", "prioritaria","assuntos","assunto.x",
-    "","foro","area2"
+    "","foro","cod_subarea","subarea","data_distribuicao",
+    "data_recebimento","processo_2","processo_principal",
+    "valor_da_acao","incidente","execucao_de_sentenca","recebido_em"
   ))
 }

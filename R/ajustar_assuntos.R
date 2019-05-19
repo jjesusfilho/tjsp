@@ -4,10 +4,10 @@
 #' @param excluir_cartas default para TRUE. Excluir cartas de ordem e pracatórias.
 #'     Se você optar por FALSE, verifique a compatibilidade entre o assunto e a area.
 #
-#' @return mesmo df com assuntos ajustados e áreas acrescidas.
+#' @return mesmo df com assuntos ajustados e áreas e  subáreas acrescidas.
 #' @export
 #'
-ajusta_assuntos <- function(df, excluir_cartas=TRUE){
+ajustar_assuntos <- function(df, excluir_cartas=TRUE){
 
  df %>%
     dplyr::select(assunto) %>%
@@ -18,9 +18,10 @@ ajusta_assuntos <- function(df, excluir_cartas=TRUE){
                     stringr::str_squish()
     ) %>%
     dplyr::left_join(tjsp::assuntos,by="assunto_") %>%
-    dplyr::select(assunto= assunto.x,area2=area) %>%
+    dplyr::select(assunto= assunto.x,subarea=area) %>%
+    tidyr::separate(subarea,c("cod_subarea","subarea"),sep="(?<=\\d)\\s+",extra="merge") %>% 
     dplyr::right_join(df,by="assunto") %>%
-    dplyr::select(processo,assunto,area,area2,classe,juiz,vara,foro,digital,dplyr::everything()) %>%
+    dplyr::select(processo,assunto,area,cod_subarea,subarea,classe,juiz,vara,foro,digital,dplyr::everything()) %>%
     dplyr::filter(if (excluir_cartas == TRUE)  stringr::str_detect(classe,"(?i)carta",negate=TRUE)) %>%
     dplyr::distinct(processo,.keep_all=TRUE)
 }
