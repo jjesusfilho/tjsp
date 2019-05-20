@@ -17,7 +17,7 @@
 #' \dontrun{
 #' baixar_cjsg(livre = "Lei Maria da Penha")
 #' }
-#' 
+#'
 baixar_cjsg <-
   function(livre = "",
              aspas = FALSE,

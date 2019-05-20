@@ -16,15 +16,13 @@
 #' }
 #'
 ler_decisoes_monocraticas <- function(fonte = ".") {
-
   if (is_defined(fonte)) {
-
     arquivos <- fonte
-
   } else {
-
-    arquivos <- list.files(path = fonte, pattern = ".html",
-                           full.names = TRUE)
+    arquivos <- list.files(
+      path = fonte, pattern = ".html",
+      full.names = TRUE
+    )
   }
 
 

@@ -7,8 +7,7 @@
 #' @return data.frame limpo e organizado
 #' @export
 #'
-organizar_dados_cpopg <- function (df, excluir_assunto = "",excluir_classe="") {
-
+organizar_dados_cpopg <- function(df, excluir_assunto = "", excluir_classe = "") {
   df <- df %>%
     janitor::clean_names()
 
@@ -19,61 +18,61 @@ organizar_dados_cpopg <- function (df, excluir_assunto = "",excluir_classe="") {
   ## para processo_principal e processo_2.
 
   suppressWarnings({
+    df$na <- NA_character_
 
-    df$na<-NA_character_
+    df$distribuicao <- dplyr::coalesce(df$na, df$distribuicao, df$recebido_em)
+    df$classe <- dplyr::coalesce(df$na, df$classe, df$execucao_de_sentenca, df$incidente)
+    df$processo_principal <- dplyr::coalesce(df$na, df$processo_principal, df$processo_2)
 
-    df$distribuicao<-dplyr::coalesce(df$na,df$distribuicao,df$recebido_em)
-    df$classe<- dplyr::coalesce(df$na,df$classe,df$execucao_de_sentenca,df$incidente)
-    df$processo_principal<-dplyr::coalesce(df$na,df$processo_principal,df$processo_2)
-
-    df$recebido_em<-NULL
-    df$processo_2<-NULL
-    df$execucao_de_sentenca<-NULL
-    df$incidente=NULL
-    df$na<-NULL
-
+    df$recebido_em <- NULL
+    df$processo_2 <- NULL
+    df$execucao_de_sentenca <- NULL
+    df$incidente <- NULL
+    df$na <- NULL
   })
 
-  if (nrow(df)>0) {
-
+  if (nrow(df) > 0) {
     df <- df %>%
       dplyr::mutate(
-        branco = dplyr::case_when(stringr::str_detect(v1, "(?i)[áa]rea") ~ "area",
-                                  v1 == "(Tramitação prioritária)" ~ "prioritaria",
-                                  TRUE ~ "vara" )
+        branco = dplyr::case_when(
+          stringr::str_detect(v1, "(?i)[áa]rea") ~ "area",
+          v1 == "(Tramitação prioritária)" ~ "prioritaria",
+          TRUE ~ "vara"
+        )
       ) %>%
-      tidyr::unite("v2", assunto, v1, sep = "&",remove=FALSE) %>%
+      tidyr::unite("v2", assunto, v1, sep = "&", remove = FALSE) %>%
       tibble::rowid_to_column() %>%
       tidyr::spread(branco, v2) %>%
-      dplyr::mutate_at(dplyr::vars(area, vara), list(~stringr::str_remove(., "NA&"))) %>%
-      dplyr::mutate(vara = zoo::na.locf(vara, fromLast = T,na.rm=FALSE)) %>%
+      dplyr::mutate_at(dplyr::vars(area, vara), list(~ stringr::str_remove(., "NA&"))) %>%
+      dplyr::mutate(vara = zoo::na.locf(vara, fromLast = T, na.rm = FALSE)) %>%
       dplyr::filter(!is.na(distribuicao) | !is.na(classe) | !is.na(assunto)) %>%
       dplyr::filter(!is.element(assunto, excluir_assunto)) %>%
-      dplyr::mutate(data_recebimento = stringr::str_extract(distribuicao, "\\d+/\\d+/\\d+") %>%
-                      lubridate::dmy(),
-                    horario_recebimento = stringr::str_extract(distribuicao, "\\d{2}:\\d{2}") %>%
-                      lubridate::hm(),
-                    tipo_recebimento = stringr::str_extract(distribuicao, "(?<=-\\s).+"),
-                    distribuicao = NULL) %>%
+      dplyr::mutate(
+        data_recebimento = stringr::str_extract(distribuicao, "\\d+/\\d+/\\d+") %>%
+          lubridate::dmy(),
+        horario_recebimento = stringr::str_extract(distribuicao, "\\d{2}:\\d{2}") %>%
+          lubridate::hm(),
+        tipo_recebimento = stringr::str_extract(distribuicao, "(?<=-\\s).+"),
+        distribuicao = NULL
+      ) %>%
       tidyr::separate(vara, c("vara", "foro"), sep = " - ", extra = "merge") %>%
-      dplyr::mutate(area = stringr::str_remove_all(v1,"(?i)(Área|\\W+)"),
-                    v1 = NULL)
+      dplyr::mutate(
+        area = stringr::str_remove_all(v1, "(?i)(Área|\\W+)"),
+        v1 = NULL
+      )
 
 
     df <- df %>%
       dplyr::filter(!is.element(classe, excluir_classe)) %>%
       dplyr::mutate(rowid = NULL)
 
-    if (exists("prioritaria",df,inherits=FALSE)) {
-      df<- dplyr::mutate(df,prioritaria = stringr::str_remove(prioritaria, "&.+"))
+    if (exists("prioritaria", df, inherits = FALSE)) {
+      df <- dplyr::mutate(df, prioritaria = stringr::str_remove(prioritaria, "&.+"))
     }
 
-    if (exists("valor_da_acao",df,inherits = FALSE)){
-
-      df<-dplyr::mutate(df,valor_da_acao=tjsp::numero(valor_da_acao))
-
+    if (exists("valor_da_acao", df, inherits = FALSE)) {
+      df <- dplyr::mutate(df, valor_da_acao = tjsp::numero(valor_da_acao))
     }
-
   }
   return(df)
 }

@@ -5,7 +5,7 @@
 #' @keywords duplicated, remove
 #' @export
 #' @examples
-#' 
+#'
 #' rm_duplicados(iris, Species)
 rm_duplicados <- function(x, y) {
   y <- rlang::enexpr(y)

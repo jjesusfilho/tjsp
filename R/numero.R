@@ -5,9 +5,9 @@
 #' @return mesmo vetor porém numérico.
 #' @export
 #'
-numero<-function(str){
+numero <- function(str) {
   str %>%
     stringr::str_remove_all("(\\.|\\p{L}|\\$|\\s)+") %>%
-    stringr::str_replace(",",".") %>%
+    stringr::str_replace(",", ".") %>%
     as.numeric()
 }

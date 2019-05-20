@@ -10,15 +10,13 @@
 #' dados <- ler_dados_cposg()
 #' }
 ler_dados_cposg <- function(fonte = ".") {
-
   if (is_defined(fonte)) {
-
     arquivos <- fonte
-
   } else {
-
-    arquivos <- list.files(path = fonte, pattern = ".html",
-                           full.names = TRUE)
+    arquivos <- list.files(
+      path = fonte, pattern = ".html",
+      full.names = TRUE
+    )
   }
 
 
@@ -73,6 +71,6 @@ ler_dados_cposg <- function(fonte = ".") {
       janitor::clean_names() %>%
       tidyr::separate(processo, c("processo", "situacao"), sep = "\\w+$", extra = "merge") %>%
       tibble::add_column(cd_processo = cdProcesso) %>%
-      tibble::add_column(digital=digital)
+      tibble::add_column(digital = digital)
   }, otherwise = NULL))
 }
