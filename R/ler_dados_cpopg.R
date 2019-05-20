@@ -13,9 +13,6 @@
 #'
 ler_dados_cpopg<-function (fonte=".", wide = FALSE) {
 
-
-
-
   if (is_defined(fonte)) {
 
     arquivos <- fonte

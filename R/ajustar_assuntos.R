@@ -9,20 +9,26 @@
 #'
 ajustar_assuntos <- function(df, excluir_cartas=TRUE){
 
- df %>%
-    dplyr::select(assunto) %>%
-    dplyr::distinct() %>%
-    dplyr::mutate(assunto_= stringr::str_remove(assunto,"^\\d.+?\\- ") %>%
-                    abjutils::rm_accent() %>%
-                    stringr::str_to_lower() %>%
-                    stringr::str_squish()
-    ) %>%
-    dplyr::left_join(tjsp::assuntos,by="assunto_") %>%
-    dplyr::select(assunto= assunto.x,subarea=area) %>%
-    tidyr::separate(subarea,c("cod_subarea","subarea"),sep="(?<=\\d)\\s+",extra="merge") %>% 
-    dplyr::right_join(df,by="assunto") %>%
-    dplyr::select(processo,assunto,area,cod_subarea,subarea,classe,juiz,vara,foro,digital,dplyr::everything()) %>%
-    dplyr::filter(if (excluir_cartas == TRUE)  stringr::str_detect(classe,"(?i)carta",negate=TRUE)) %>%
-    dplyr::distinct(processo,.keep_all=TRUE)
+    suppressWarnings({
+
+        df %>%
+            dplyr::select(assunto) %>%
+            dplyr::distinct() %>%
+            dplyr::mutate(assunto_= stringr::str_remove(assunto,"^\\d.+?\\- ") %>%
+                              abjutils::rm_accent() %>%
+                              stringr::str_to_lower() %>%
+                              stringr::str_squish()
+            ) %>%
+            dplyr::left_join(tjsp::assuntos,by="assunto_") %>%
+            dplyr::select(assunto= assunto.x,subarea=area) %>%
+            tidyr::separate(subarea,c("cod_subarea","subarea"),sep="(?<=\\d)\\s-\\s",extra="merge") %>%
+            dplyr::right_join(df,by="assunto") %>%
+            tidyr::separate(classe,c("classe","classe_numero","classe_situacao"),sep="(\\s\\(|\\)\\s?)",extra='merge') %>%
+            tidyr::separate(processo_principal,c("processo_principal","situacao"),sep="\\s",extra="merge") %>%
+            dplyr::select(processo,assunto,area,cod_subarea,subarea,classe,classe_numero,classe_situacao,juiz,vara,foro,digital,dplyr::everything()) %>%
+            dplyr::filter(if (excluir_cartas == TRUE)  stringr::str_detect(classe,"(?i)carta",negate=TRUE)) %>%
+            dplyr::distinct(processo,.keep_all=TRUE)
+
+    })
 }
 

@@ -16,6 +16,7 @@ if (getRversion() >= "2.15.1") {
     "filter", "branco", "v2", "area", "vara", "prioritaria","assuntos","assunto.x",
     "","foro","cod_subarea","subarea","data_distribuicao",
     "data_recebimento","processo_2","processo_principal",
-    "valor_da_acao","incidente","execucao_de_sentenca","recebido_em"
+    "valor_da_acao","incidente","execucao_de_sentenca","recebido_em",
+    "classe_numero","classe_situacao"
   ))
 }
