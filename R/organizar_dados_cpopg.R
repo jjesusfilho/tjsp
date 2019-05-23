@@ -29,7 +29,7 @@ organizar_dados_cpopg <- function(df, excluir_assunto = "", excluir_classe = "")
     df$execucao_de_sentenca <- NULL
     df$incidente <- NULL
     df$na <- NULL
-  })
+
 
   if (nrow(df) > 0) {
     df <- df %>%
@@ -74,5 +74,7 @@ organizar_dados_cpopg <- function(df, excluir_assunto = "", excluir_classe = "")
       df <- dplyr::mutate(df, valor_da_acao = tjsp::numero(valor_da_acao))
     }
   }
-  return(df)
+})
+      return(df)
+
 }

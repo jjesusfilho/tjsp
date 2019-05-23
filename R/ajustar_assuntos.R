@@ -23,6 +23,7 @@ ajustar_assuntos <- function(df, excluir_cartas = TRUE) {
       tidyr::separate(classe, c("classe", "classe_numero", "classe_situacao"), sep = "(\\s\\(|\\)\\s?)", extra = "merge") %>%
       tidyr::separate(processo_principal, c("processo_principal", "situacao"), sep = "\\s", extra = "merge") %>%
       dplyr::select(processo, assunto, area, cod_subarea, subarea, classe, classe_numero, classe_situacao, juiz, vara, foro, digital, dplyr::everything()) %>%
+      dplyr::mutate(subarea=dplyr::coalesce(subarea,area)) %>%
       dplyr::filter(if (excluir_cartas == TRUE) stringr::str_detect(classe, "(?i)carta", negate = TRUE)) %>%
       dplyr::distinct(processo, .keep_all = TRUE)
   })
