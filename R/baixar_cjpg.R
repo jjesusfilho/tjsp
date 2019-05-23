@@ -19,7 +19,7 @@
 #' \dontrun{
 #' baixar_cjpg("homicídio simples")
 #' }
-#' 
+#'
 baixar_cjpg <- function(
                         livre = "",
                         aspas = FALSE,

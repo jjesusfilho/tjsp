@@ -7,18 +7,17 @@
 #'
 #' @examples
 #' \dontrun{
-#' decisoes<-ler_decisoes_cposg()
+#' decisoes <- ler_decisoes_cposg()
 #' }
 ler_decisoes_cposg <- function(fonte = ".") {
-  ''
-if (is_defined(fonte)) {
-
+  ""
+  if (is_defined(fonte)) {
     arquivos <- fonte
-
   } else {
-
-    arquivos <- list.files(path = fonte, pattern = ".html",
-                           full.names = TRUE)
+    arquivos <- list.files(
+      path = fonte, pattern = ".html",
+      full.names = TRUE
+    )
   }
 
 
@@ -40,7 +39,6 @@ if (is_defined(fonte)) {
         purrr::pluck(1) %>%
         stats::setNames(c("data_julgamento", "situacao_julgamento", "decisao")) %>%
         cbind(processo = y[ii], ., stringsAsFactors = F)
-
     }, error = function(e) {
       x[ii] %>%
         xml2::read_html() %>%
@@ -60,11 +58,10 @@ if (is_defined(fonte)) {
 
 
   for (ii in seq_along(arquivos)) {
-    lista[[ii]]  <-  tentativa(arquivos, processo)
+    lista[[ii]] <- tentativa(arquivos, processo)
   }
 
   lista <- as.list(lista)
 
   s <- do.call(rbind, lista)
-
 }

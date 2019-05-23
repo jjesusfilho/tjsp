@@ -5,25 +5,26 @@
 ## na própria função.
 
 ordem <- c(
-         "287 - DIREITO PENAL",
-         "899 - DIREITO CIVIL",
-         "1209 - DIREITO PROCESSUAL PENAL",
-         "8826 - DIREITO PROCESSUAL CIVIL E DO TRABALHO",
-         "9985 - DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-         "14 - DIREITO TRIBUTÁRIO",
-         "1156 - DIREITO DO CONSUMIDOR",
-         "9633 - DIREITO DA CRIANÇA E DO ADOLESCENTE",
-         "195 - DIREITO PREVIDENCIÁRIO",
-         "864 - DIREITO DO TRABALHO",
-         "7724 - REGISTROS PÚBLICOS",
-         "0 - Assunto não Especificado",
-         "1146 - DIREITO MARÍTIMO",
-         "6191 - DIREITO INTERNACIONAL",
-         "99999999 - ASSUNTOS ANTIGOS DO SAJ")
+  "287 - DIREITO PENAL",
+  "899 - DIREITO CIVIL",
+  "1209 - DIREITO PROCESSUAL PENAL",
+  "8826 - DIREITO PROCESSUAL CIVIL E DO TRABALHO",
+  "9985 - DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+  "14 - DIREITO TRIBUTÁRIO",
+  "1156 - DIREITO DO CONSUMIDOR",
+  "9633 - DIREITO DA CRIANÇA E DO ADOLESCENTE",
+  "195 - DIREITO PREVIDENCIÁRIO",
+  "864 - DIREITO DO TRABALHO",
+  "7724 - REGISTROS PÚBLICOS",
+  "0 - Assunto não Especificado",
+  "1146 - DIREITO MARÍTIMO",
+  "6191 - DIREITO INTERNACIONAL",
+  "99999999 - ASSUNTOS ANTIGOS DO SAJ"
+)
 
 assuntos <- esaj::cjsg_table("subjects") %>%
   dplyr::group_by(.data$name0) %>%
-  dplyr::group_map( ~ {
+  dplyr::group_map(~ {
     .x %>%
       dplyr::select(dplyr::starts_with("name")) %>%
       unlist() %>%
@@ -40,11 +41,11 @@ assuntos <- esaj::cjsg_table("subjects") %>%
       stringr::str_squish()
   ) %>%
   dplyr::arrange(.data$assunto_) %>%
-  dplyr::mutate(area = factor(.data$area,levels = !!ordem)) %>%
+  dplyr::mutate(area = factor(.data$area, levels = !!ordem)) %>%
   dplyr::arrange(area)
 
 
 
 readr::write_csv(assuntos, "data-raw/assuntos.csv")
 
-usethis::use_data(assuntos,compress = 'xz',overwrite = TRUE)
+usethis::use_data(assuntos, compress = "xz", overwrite = TRUE)
