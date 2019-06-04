@@ -11,7 +11,7 @@
 #' @return Mesma base filtrada.
 #' @export
 #'
-filtrar_cjsj <- function(base, assunto, classe, negate_assunto = FALSE) {
+filtrar_cjsg <- function(base, assunto, classe, negate_assunto = FALSE) {
   base %>%
     dplyr::mutate_all(stringr::str_squish) %>%
     dplyr::filter(stringr::str_detect(assunto, !!assunto, negate = !!negate_assunto)) %>%

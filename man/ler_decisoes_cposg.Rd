@@ -17,6 +17,6 @@ Lê o dispositivo das decisões de segunda instância a partir dos htmls
 }
 \examples{
 \dontrun{
-decisoes<-ler_decisoes_cposg()
+decisoes <- ler_decisoes_cposg()
 }
 }

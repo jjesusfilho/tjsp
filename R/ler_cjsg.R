@@ -1,15 +1,15 @@
 #' Ler metadados das decisões
 #'
-#' @param path Diretório onde se encontram os htmls.
+#' @param diretorio Diretório onde se encontram os htmls.
 #'
 #' @return tabela com metadados jurisprudenciais.
 #' @export
 #'
 #' @examples
 #' cjsg <- ler_cjsg()
-ler_cjsg <- function(path = ".") {
+ler_cjsg <- function(diretorio = ".") {
   a <- list.files(
-    path = path,
+    path = diretorio,
     pattern = ".html",
     full.names = T
   )
