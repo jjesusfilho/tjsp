@@ -1,20 +1,18 @@
 #' Aplica parser para extrair informações sobre as partes do
 #'     processo.
 #'
-#' @param fonte objeto ou diretório onde se encontram os htmls baixados.
+#' @param diretorio objeto ou diretório onde se encontram os htmls baixados.
 #'
 #' @return tabela com informações das partes.
 #' @export
 #'
-ler_partes <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
+ler_partes <- function(diretorio = ".") {
+
     arquivos <- list.files(
-      path = fonte, pattern = ".html",
+      path = diretorio, pattern = ".html",
       full.names = TRUE
     )
-  }
+
 
   processos <-
     stringr::str_extract(arquivos, "\\d{20}") %>%

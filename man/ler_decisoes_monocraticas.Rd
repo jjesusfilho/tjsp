@@ -4,10 +4,10 @@
 \alias{ler_decisoes_monocraticas}
 \title{Lê conteúdo das decisões monocráticas}
 \usage{
-ler_decisoes_monocraticas(fonte = ".")
+ler_decisoes_monocraticas(diretorio = ".")
 }
 \arguments{
-\item{fonte}{objeto ou diretório onde se encontram os htmls.}
+\item{diretorio}{objeto ou diretório onde se encontram os htmls.}
 }
 \value{
 tibble com o número do processo, o texto da decisão e a data da

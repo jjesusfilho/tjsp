@@ -4,10 +4,10 @@
 \alias{ler_decisoes}
 \title{Ler decisoes}
 \usage{
-ler_decisoes(fonte = ".")
+ler_decisoes(diretorio = ".")
 }
 \arguments{
-\item{fonte}{objeto ou diretório onde se encontram os htmls baixados}
+\item{diretorio}{objeto ou diretório onde se encontram os htmls baixados}
 }
 \value{
 tibble com as os numéros dos processos e respectivas decisões

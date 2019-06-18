@@ -1,0 +1,27 @@
+---
+title: "Coletando dados do TJSP"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Roteiro de análise dos dados do TJSP}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+options(tibble.print_min = 4L, tibble.print_max = 4L)
+library(dplyr)
+library(ggplot2)
+set.seed(1014)
+```
+
+Este tutorial mostra como coletar dados do TJSP utilizando os pacotes `esaj` e `tjsp`. 
+
+

@@ -2,7 +2,7 @@
 #'
 #' @param diretorio diretório onde se encontram os pdfs
 #' @param remover_assinatura default é FALSE
-#' @param combinar default é manter cada página em um vetor
+#' @param combinar default juntar todas as páginas em um único vetor.
 #'
 #' @return Lista com vetores das páginas dos pdfs
 #' @export

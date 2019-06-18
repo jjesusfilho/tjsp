@@ -7,7 +7,7 @@
 ler_movimentacao_cposg(fonte = ".")
 }
 \arguments{
-\item{fonte}{objeto ou diretorio  onde se encontram os htmls}
+\item{diretorio}{objeto ou diretorio  onde se encontram os htmls}
 }
 \value{
 tibble com a movimentação processual.
