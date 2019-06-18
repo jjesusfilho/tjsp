@@ -1,6 +1,6 @@
 #' Extrai a movimentação processual de primeira e de segunda instância
 #'
-#' @param fonte objeto ou diretorio  onde se encontram os htmls
+#' @param diretorio objeto ou diretorio  onde se encontram os htmls
 #'
 #' @return tibble com a movimentação processual.
 #' @export
@@ -11,14 +11,12 @@
 #' }
 #'
 ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
+
     arquivos <- list.files(
-      path = fonte, pattern = ".html",
+      path = diretorio, pattern = ".html",
       full.names = TRUE
     )
-  }
+
 
 
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {

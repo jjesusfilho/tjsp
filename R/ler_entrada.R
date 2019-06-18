@@ -1,6 +1,6 @@
 #' Data da entrada do processo
 #'
-#' @param fonte objeto ou diretório onde se encontram os htmls dos processos
+#' @param diretorio objeto ou diretório onde se encontram os htmls dos processos
 #'
 #' @return tibble com o número dos processos e respectivas decisões
 #' @export
@@ -11,15 +11,13 @@
 #' entrada <- ler_entrada_cpopg()
 #' }
 #'
-ler_entrada <- ler_entrada_cposg <- ler_entrada_cpopg <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
+ler_entrada <- ler_entrada_cposg <- ler_entrada_cpopg <- function(diretorio = ".") {
+
     arquivos <- list.files(
       path = fonte, pattern = ".html",
       full.names = TRUE
     )
-  }
+
 
   processo <- stringr::str_extract(arquivos, "\\d{20}") %>%
     abjutils::build_id()

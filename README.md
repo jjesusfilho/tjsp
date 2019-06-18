@@ -74,8 +74,14 @@ tabela<-ler_cjsg(diretorio=".")
 ### Baixando informações detalhadas dos processos
 
 O passo seguinte é realizar a busca e baixar os htmls dos processos
-individualmente considerados. O comando a seguir irá baixar todos os
-processos no diretório atual, mas você pode informar o diretório.
+individualmente considerados. Recentemente o TJSP impôs recaptcha para
+baixar os processos. Doravante, para baixar processos você deve antes se
+autenticar como advogado. Por meio da função `autenticar()`, você será
+solicitado a apresentar suas credenciais (CPF e senha), a fim de ter
+acesso aos processos sem o uso de captcha.
+
+O comando a seguir irá baixar todos os processos no diretório atual, mas
+você pode informar o diretório.
 
 ``` r
 baixar_cposg(tabela$processo)

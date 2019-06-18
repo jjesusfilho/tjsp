@@ -5,10 +5,10 @@
 \title{Aplica parser para extrair informações sobre as partes do
     processo.}
 \usage{
-ler_partes(fonte = ".")
+ler_partes(diretorio = ".")
 }
 \arguments{
-\item{fonte}{objeto ou diretório onde se encontram os htmls baixados.}
+\item{diretorio}{objeto ou diretório onde se encontram os htmls baixados.}
 }
 \value{
 tabela com informações das partes.

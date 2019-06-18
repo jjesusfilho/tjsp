@@ -1,6 +1,6 @@
 #' Ler decisoes
 #'
-#' @param fonte objeto ou diretório onde se encontram os htmls baixados
+#' @param diretorio objeto ou diretório onde se encontram os htmls baixados
 #'
 #' @return tibble com as os numéros dos processos e respectivas decisões
 #' @export
@@ -9,17 +9,13 @@
 #' \dontrun{
 #' ler_decisoes()
 #' }
-ler_decisoes <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
+ler_decisoes <- function(diretorio = ".") {
+
     arquivos <- list.files(
       path = fonte, pattern = ".html",
       full.names = TRUE
-    )
-  }
 
-
+)
 
 
   processo <- stringr::str_extract(arquivos, "\\d{20}")

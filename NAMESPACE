@@ -3,6 +3,7 @@
 export("%>%")
 export(.data)
 export(ajustar_assuntos)
+export(autenticar)
 export(baixar_acordaos)
 export(baixar_cjpg)
 export(baixar_cjsg)

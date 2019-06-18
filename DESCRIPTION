@@ -36,9 +36,14 @@ Imports:
     pdftools,
     zoo,
     readr,
-    usethis
+    usethis,
+    askpass
 RoxygenNote: 6.1.1
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues
 Suggests: 
-    roxygen2
+    roxygen2,
+    knitr,
+    rmarkdown,
+    testthat (>= 2.1.0)
+VignetteBuilder: knitr

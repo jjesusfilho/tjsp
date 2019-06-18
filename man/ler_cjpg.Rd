@@ -4,10 +4,10 @@
 \alias{ler_cjpg}
 \title{Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.}
 \usage{
-ler_cjpg(fonte = ".")
+ler_cjpg(diretorio = ".")
 }
 \arguments{
-\item{fonte}{objeto ou diretório onde se encontram as páginas.}
+\item{diretorio}{objeto ou diretório onde se encontram as páginas.}
 }
 \value{
 uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro, vara,
