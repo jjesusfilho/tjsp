@@ -12,7 +12,7 @@
 ler_decisoes <- function(diretorio = ".") {
 
     arquivos <- list.files(
-      path = fonte, pattern = ".html",
+      path = diretorio, pattern = ".html",
       full.names = TRUE
 
 )

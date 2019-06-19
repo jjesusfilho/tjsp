@@ -18,8 +18,8 @@ classificar_recurso <- function(x, dispositivo, decisao) {
   input <- rlang::enexpr(dispositivo)
   decisao_out <- rlang::enexpr(decisao)
   y <- x %>%
-    dplyr::distinct(rlang::UQ(input)) %>%
-    dplyr::mutate(alternativa = tolower(rlang::UQ(input)) %>%
+    dplyr::distinct(!!input) %>%
+    dplyr::mutate(alternativa = tolower(!!input) %>%
       stringi::stri_trans_general(., "latin-ascii"))
 
   y <- y %>%

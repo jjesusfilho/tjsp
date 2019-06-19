@@ -10,7 +10,7 @@
 #' andamento_cpopg <- ler_movimentacao_cpopg()
 #' }
 #'
-ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(fonte = ".") {
+ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
 
     arquivos <- list.files(
       path = diretorio, pattern = ".html",

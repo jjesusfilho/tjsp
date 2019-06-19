@@ -1,6 +1,6 @@
 #' Autenticar no tjsp
 #'
-#' @return
+#' @return Estabelece uma sessão, não é necessário salvar.
 #' @export
 #'
 #' @details Ao chamar esta função, abrirá duas janelas sucessivas para
