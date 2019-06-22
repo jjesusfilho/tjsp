@@ -6,6 +6,9 @@
 \usage{
 autenticar()
 }
+\value{
+Estabelece uma sessão, não é necessário salvar.
+}
 \description{
 Autenticar no tjsp
 }
