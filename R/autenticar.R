@@ -13,7 +13,7 @@ cpf<-askpass::askpass("Digite seu cpf")
 senha<-askpass::askpass("Digite sua senha")
 
 cpf<-  stringr::str_remove_all(cpf,"\\D+")
-#cpf<-  stringr::str_c(stringr::str_extract(cpf,"\\d{3}"),".",stringr::str_extract(cpf,"(?=\\d{3})\\d{3}"),".",stringr::str_extract(cpf,"(?<=\\d{6})\\d{3}"),"-",stringr::str_extract(cpf,"\\d{2}$"))
+cpf<-  stringr::str_c(stringr::str_extract(cpf,"\\d{3}"),".",stringr::str_extract(cpf,"(?=\\d{3})\\d{3}"),".",stringr::str_extract(cpf,"(?<=\\d{6})\\d{3}"),"-",stringr::str_extract(cpf,"\\d{2}$"))
 
 senha<-as.character(senha)
 
