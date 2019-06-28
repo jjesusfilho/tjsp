@@ -10,12 +10,10 @@
 #' ler_decisoes()
 #' }
 ler_decisoes <- function(diretorio = ".") {
-
-    arquivos <- list.files(
-      path = diretorio, pattern = ".html",
-      full.names = TRUE
-
-)
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
 
   processo <- stringr::str_extract(arquivos, "\\d{20}")

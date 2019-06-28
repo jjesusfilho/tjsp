@@ -7,10 +7,10 @@
 ler_dados_cpopg(diretorio = ".", wide = FALSE)
 }
 \arguments{
+\item{diretorio}{diretório onde se encontram os htmls.}
+
 \item{wide}{o padrão é o formado longo, com apenas quatro colunas:
 processo, digital, variavel, valor.}
-
-\item{fonte}{objeto no global environment ou diretório onde se encontram os htmls.}
 }
 \value{
 tibble com os metadados

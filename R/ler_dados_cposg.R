@@ -10,11 +10,10 @@
 #' dados <- ler_dados_cposg()
 #' }
 ler_dados_cposg <- function(diretorio = ".") {
-
-    arquivos <- list.files(
-      path = diretorio, pattern = ".html",
-      full.names = TRUE
-)
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
 
 

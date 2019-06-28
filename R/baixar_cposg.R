@@ -1,5 +1,5 @@
 baixar_cposg <- function(processos = NULL,
-                            diretorio = ".") {
+                         diretorio = ".") {
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
   processos <- stringr::str_remove_all(processos, "\\D+") %>%
@@ -26,8 +26,8 @@ baixar_cposg <- function(processos = NULL,
     )
 
     resposta1 <- httr::RETRY("GET",
-                             url = uri1, query = query1,
-                             quiet = TRUE, httr::timeout(2)
+      url = uri1, query = query1,
+      quiet = TRUE, httr::timeout(2)
     )
 
     conteudo1 <- httr::content(resposta1)
@@ -37,15 +37,14 @@ baixar_cposg <- function(processos = NULL,
         xml2::xml_attr("href") %>%
         xml2::url_absolute("https://esaj.tjsp.jus.br") %>%
         purrr::map(~ httr::RETRY("GET", .x, httr::timeout(2)) %>%
-                     httr::content())
+          httr::content())
     } else {
       conteudo1 <- list(conteudo1)
     }
 
-p<-str_remove_all(p,"\\D+")
-arquivo<-file.path(diretorio,paste0(format(Sys.Date(),"%Y_%m_%d_"),p,".html"))
+    p <- str_remove_all(p, "\\D+")
+    arquivo <- file.path(diretorio, paste0(format(Sys.Date(), "%Y_%m_%d_"), p, ".html"))
 
-xml2::write_html(conteudo1[[1]],arquivo)
-},NULL))
+    xml2::write_html(conteudo1[[1]], arquivo)
+  }, NULL))
 }
-

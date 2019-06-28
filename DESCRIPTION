@@ -1,6 +1,6 @@
 Package: tjsp
-Version: 0.6.0.9060
-Date: 2019-05-18
+Version: 0.7.0.9060
+Date: 2019-06-28
 Title: Coleta e organização de dados do Tribunal de Justiça de São Paulo
 Description: Funções para baixar metadados das decisõeses judiciais, baixar as
     decisões mesmas de primeira e de segunda instância do TJSP e organizar esses
@@ -37,7 +37,8 @@ Imports:
     zoo,
     readr,
     usethis,
-    askpass
+    askpass,
+    ggplot2
 RoxygenNote: 6.1.1
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues

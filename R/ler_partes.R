@@ -7,11 +7,10 @@
 #' @export
 #'
 ler_partes <- function(diretorio = ".") {
-
-    arquivos <- list.files(
-      path = diretorio, pattern = ".html",
-      full.names = TRUE
-    )
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
 
   processos <-

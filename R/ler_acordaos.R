@@ -13,7 +13,7 @@ ler_acordaos <- function(diretorio = ".", remover_assinatura = FALSE, combinar =
   textos <- purrr::map(pdfs, pdftools::pdf_text)
 
   if (remover_assinatura == TRUE) {
-    textos <- purrr::map(textos, ~remover_assinatura(.x))
+    textos <- purrr::map(textos, ~ remover_assinatura(.x))
   }
 
   if (combinar == TRUE) {

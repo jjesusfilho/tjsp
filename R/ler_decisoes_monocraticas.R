@@ -15,12 +15,11 @@
 #' ler_decisoes_monocraticas()
 #' }
 #'
-ler_decisoes_monocraticas <- function(diretorio= ".") {
-
-    arquivos <- list.files(
-      path = diretorio, pattern = ".html",
-      full.names = TRUE
-    )
+ler_decisoes_monocraticas <- function(diretorio = ".") {
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
 
 

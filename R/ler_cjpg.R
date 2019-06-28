@@ -11,12 +11,10 @@
 #' ler_cjpg()
 #' }
 ler_cjpg <- function(diretorio = ".") {
-
-    arquivos <- list.files(
-      path = diretorio, pattern = ".html",
-      full.names = TRUE
-
-)
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
   df <- purrr::map_dfr(arquivos, purrr::possibly(~ {
     resposta <- .x %>%

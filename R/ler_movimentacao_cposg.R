@@ -11,11 +11,10 @@
 #' }
 #'
 ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
-
-    arquivos <- list.files(
-      path = diretorio, pattern = ".html",
-      full.names = TRUE
-    )
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
 
 
