@@ -13,10 +13,10 @@ ler_decisoes_cposg <- function(diretorio = ".") {
   ""
 
 
-    arquivos <- list.files(
-      path = diretorio, pattern = ".html",
-      full.names = TRUE
-    )
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
 
 

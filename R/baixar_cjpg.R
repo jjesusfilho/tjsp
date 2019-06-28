@@ -45,6 +45,8 @@ baixar_cjpg <- function(
       abjutils::build_id()
 
     unificado <- stringr::str_extract(processo, ".+?(?=\\.8\\.26)")
+  } else {
+    unificado <- ""
   }
 
   if (foro == "" && processo != "") {
@@ -69,7 +71,7 @@ baixar_cjpg <- function(
       path = "cjpg/pesquisar.do",
       query = list(
         conversationId = "",
-        dadosConsulta.pesquisaLivre = "",
+        dadosConsulta.pesquisaLivre = livre,
         tipoNumero = "UNIFICADO",
         numeroDigitoAnoUnificado = unificado,
         foroNumeroUnificado = foro,
@@ -122,5 +124,5 @@ baixar_cjpg <- function(
       ), httr::set_cookies(unlist(resposta$cookies)),
       httr::write_disk(paste0(diretorio, "/pagina_", .x, ".html"), overwrite = T)
     )
-  }), otherwise = NULL)
+  }, otherwise = NULL))
 }

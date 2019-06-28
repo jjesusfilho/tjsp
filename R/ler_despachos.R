@@ -11,11 +11,10 @@
 #' }
 #'
 ler_despachos <- function(fonte = ".") {
-
-    arquivos <- list.files(
-      path = fonte, pattern = ".html",
-      full.names = TRUE
-    )
+  arquivos <- list.files(
+    path = fonte, pattern = ".html",
+    full.names = TRUE
+  )
 
 
 
