@@ -57,6 +57,10 @@ ler_cjsg <- function(diretorio = ".") {
       processo,
       ementa,
       cdacordao
-    )
+    ) %>%
+      dplyr::mutate_at(1:7,list(~iconv(.,"utf8","latin1//TRANSLIT"))) %>%
+      dplyr::mutate_at(3:7,list(~stringr::str_remove(.,".+:\\s?"))) %>%
+      dplyr::mutate_at(6:7,list(~lubridate::dmy(.)))
+
   }, otherwise = NULL))
 }
