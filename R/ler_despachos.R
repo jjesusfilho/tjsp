@@ -10,29 +10,16 @@
 #' ler_despachos()
 #' }
 #'
-ler_despachos <- function(fonte = ".") {
-  arquivos <- list.files(
-    path = fonte, pattern = ".html",
-    full.names = TRUE
-  )
-
-
-
-
-
+ler_despacho<-function (fonte = ".")
+{
+  arquivos <- list.files(path = fonte, pattern = ".html", full.names = TRUE)
   processo <- stringr::str_extract(arquivos, "\\d{20}")
-
-
-  purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
-    despacho <- xml2::read_html(.x) %>%
-      rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]//span") %>%
+  purrr::map2_dfr(arquivos, processo, purrr::possibly(~{
+    despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]//span|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decisão')]/parent::td/span") %>%
       rvest::html_text()
 
-    data_despacho <- xml2::read_html(.x) %>%
-      rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]/parent::tr/td[1]") %>%
-      rvest::html_text(trim = TRUE) %>%
-      lubridate::dmy()
-
+    data_despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]/parent::tr/td[1]|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decisão')]/parent::tr/td[1]") %>%
+      rvest::html_text(trim = TRUE) %>% lubridate::dmy()
     tibble::tibble(processo = .y, despacho = despacho, data_despacho = data_despacho) %>%
       dplyr::filter(stringr::str_detect(despacho, "\\w\\X+"))
   }, otherwise = NULL))
