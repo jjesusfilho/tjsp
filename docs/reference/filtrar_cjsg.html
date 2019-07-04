@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lê os metadados de processos de primeira instância. — ler_dados_cpopg • tjsp</title>
+<title>Filtra base cjsg por assunto e classe. — filtrar_cjsg • tjsp</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Lê os metadados de processos de primeira instância. — ler_dados_cpopg" />
+<meta property="og:title" content="Filtra base cjsg por assunto e classe. — filtrar_cjsg" />
 
-<meta property="og:description" content="Lê os metadados de processos de primeira instância." />
+<meta property="og:description" content="Filtra base cjsg por assunto e classe." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,43 +111,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lê os metadados de processos de primeira instância.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/ler_dados_cpopg.R'><code>R/ler_dados_cpopg.R</code></a></small>
-    <div class="hidden name"><code>ler_dados_cpopg.Rd</code></div>
+    <h1>Filtra base cjsg por assunto e classe.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/filtrar_cjsg.R'><code>R/filtrar_cjsg.R</code></a></small>
+    <div class="hidden name"><code>filtrar_cjsg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Lê os metadados de processos de primeira instância.</p>
+    <p>Filtra base cjsg por assunto e classe.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ler_dados_cpopg</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>wide</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>filtrar_cjsg</span>(<span class='no'>base</span>, <span class='no'>assunto</span>, <span class='no'>classe</span>, <span class='kw'>negate_assunto</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>diretorio</th>
-      <td><p>diretório onde se encontram os htmls.</p></td>
+      <th>base</th>
+      <td><p>base parseada os cjsg htmls</p></td>
     </tr>
     <tr>
-      <th>wide</th>
-      <td><p>o padrão é o formado longo, com apenas quatro colunas:
-processo, digital, variavel, valor.</p></td>
+      <th>assunto</th>
+      <td><p>regex do assunto a ser filtrado</p></td>
+    </tr>
+    <tr>
+      <th>classe</th>
+      <td><p>regex da classe a ser filtrada</p></td>
+    </tr>
+    <tr>
+      <th>negate_assunto</th>
+      <td><p>coleque TRUE se quiser excluir os assuntos especificados.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tibble com os metadados</p>
+    <p>Mesma base filtrada.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Geralmente as classes são limitadas e as descrições mais claras que
+    os assuntos. Por isso optei pela negação somente do assunto.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>ler_dados_cpopg</span>()
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -155,9 +162,9 @@ processo, digital, variavel, valor.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+
+      <li><a href="#details">Details</a></li>
+          </ul>
 
   </div>
 </div>

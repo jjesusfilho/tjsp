@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lê os metadados de processos de primeira instância. — ler_dados_cpopg • tjsp</title>
+<title>imoveis — imoveis • tjsp</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Lê os metadados de processos de primeira instância. — ler_dados_cpopg" />
+<meta property="og:title" content="imoveis — imoveis" />
 
-<meta property="og:description" content="Lê os metadados de processos de primeira instância." />
+<meta property="og:description" content="imoveis do TJSP inclusive comarca e latlong" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,53 +111,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lê os metadados de processos de primeira instância.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/ler_dados_cpopg.R'><code>R/ler_dados_cpopg.R</code></a></small>
-    <div class="hidden name"><code>ler_dados_cpopg.Rd</code></div>
+    <h1>imoveis</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/imoveis.R'><code>R/imoveis.R</code></a></small>
+    <div class="hidden name"><code>imoveis.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Lê os metadados de processos de primeira instância.</p>
+    <p>imoveis do TJSP inclusive comarca e latlong</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ler_dados_cpopg</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>wide</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>diretorio</th>
-      <td><p>diretório onde se encontram os htmls.</p></td>
-    </tr>
-    <tr>
-      <th>wide</th>
-      <td><p>o padrão é o formado longo, com apenas quatro colunas:
-processo, digital, variavel, valor.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='no'>imoveis</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>tibble com os metadados</p>
+    <p>Dataframe com 751 linhas e 15 variáveis:</p><dl class='dl-horizontal'>
+  <dt><code>nome</code></dt><dd><p>character Nome do imóvel</p></dd>
+  <dt><code>endereço</code></dt><dd><p>character Endereço do imóvel</p></dd>
+  <dt><code>telefone</code></dt><dd><p>character Telefone do imóvel</p></dd>
+  <dt><code>nome1</code></dt><dd><p>character Nome do diretor</p></dd>
+  <dt><code>fax</code></dt><dd><p>character Fax do imóvel</p></dd>
+  <dt><code>email</code></dt><dd><p>character Email do diretor</p></dd>
+  <dt><code>circunscricao</code></dt><dd><p>character Circunscrição</p></dd>
+  <dt><code>varas_instaladas</code></dt><dd><p>integer Número de varas</p></dd>
+  <dt><code>entrancia</code></dt><dd><p>character Entrância</p></dd>
+  <dt><code>comarca</code></dt><dd><p>character Nome da comarca</p></dd>
+  <dt><code>distacia_capital</code></dt><dd><p>character Distância da capital em km</p></dd>
+  <dt><code>imovel_codigo</code></dt><dd><p>character Código do imóvel</p></dd>
+</dl>
+    
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://tjsp.jus.br/'>https://tjsp.jus.br/</a></p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>ler_dados_cpopg</span>()
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#format">Format</a></li>
+
+      <li><a href="#source">Source</a></li>
+          </ul>
 
   </div>
 </div>
