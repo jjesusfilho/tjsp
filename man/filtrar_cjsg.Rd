@@ -7,13 +7,13 @@
 filtrar_cjsg(base, assunto, classe, negate_assunto = FALSE)
 }
 \arguments{
-\item{base}{base parseada os cjsg htmls}
+\item{base}{base parseada dos cjsg htmls}
 
 \item{assunto}{regex do assunto a ser filtrado}
 
 \item{classe}{regex da classe a ser filtrada}
 
-\item{negate_assunto}{coleque TRUE se quiser excluir os assuntos especificados.}
+\item{negate_assunto}{coloque TRUE se quiser excluir os assuntos especificados.}
 }
 \value{
 Mesma base filtrada.
