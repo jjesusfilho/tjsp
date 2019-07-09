@@ -34,10 +34,10 @@ devtools::install_github("jjesusfilho/tjsp")
 
 ## Utilização
 
-As funções do pacote podem ser agrupadas em três grupos. Um grupo de
-funções que inicia com o verbo baixar, as quais baixam para um
-diretório indicado pelo usuário, as decisões de primeira e de segunda
-instância em formato html.
+As funções do pacote podem ser agrupadas em três. Um grupo de funções
+que inicia com o verbo baixar, as quais baixam para um diretório
+indicado pelo usuário, as decisões de primeira e de segunda instância em
+formato html.
 
 O segundo grupo inicia com o verbo ler, as quais leem as informações
 contidas nos htmls e as dispôem numa tabela. Todas as funções de leitura
