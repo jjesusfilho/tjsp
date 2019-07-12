@@ -6,7 +6,7 @@
 \usage{
 baixar_cjpg(livre = "", aspas = FALSE, processo = "", foro = "",
   vara = "", classe = "", assunto = "", magistrado = "",
-  inicio = "", fim = "", diretorio = ".")
+  inicio = "", fim = "", diretorio = ".", paginas = NULL)
 }
 \arguments{
 \item{livre}{Busca livre. Usar os mesmos critérios da página.}

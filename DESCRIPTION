@@ -1,5 +1,5 @@
 Package: tjsp
-Version: 0.7.0.9061
+Version: 0.7.0.9062
 Date: 2019-07-08
 Title: Coleta e organização de dados do Tribunal de Justiça de São Paulo
 Description: Funções para baixar metadados das decisõeses judiciais, baixar as
