@@ -11,7 +11,7 @@
 #' @param inicio Data inicial no formato "dd/mm/aaa"
 #' @param fim  Data final no formato "dd/mm/aaaa" O lapso entre essas duas datas não deve passar de um ano.
 #' @param diretorio Diretório onde serão armazenados os htmls.
-#'
+#' @param paginas Páginas a serem baixadas
 #' @return Baixa os htmls com metadados das decisãoes de primeiro grau.
 #' @export
 #'

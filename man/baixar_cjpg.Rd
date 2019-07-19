@@ -30,6 +30,8 @@ baixar_cjpg(livre = "", aspas = FALSE, processo = "", foro = "",
 \item{fim}{Data final no formato "dd/mm/aaaa" O lapso entre essas duas datas não deve passar de um ano.}
 
 \item{diretorio}{Diretório onde serão armazenados os htmls.}
+
+\item{paginas}{Páginas a serem baixadas}
 }
 \value{
 Baixa os htmls com metadados das decisãoes de primeiro grau.
