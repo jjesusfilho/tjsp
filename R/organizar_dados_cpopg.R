@@ -1,4 +1,4 @@
-#' Organiza metadados cpopg (apenas criminal por hora)
+#' Organiza metadados cpopg (apenas criminal por ora)
 #'
 #' @param df data.frame lido com ler_dados_cpopg
 #' @param excluir_assunto informar vetor de frases a serem excluídas dos assuntos.
