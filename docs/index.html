@@ -107,6 +107,7 @@
 <p>As funções do pacote podem ser agrupadas em três. Um grupo de funções que inicia com o verbo baixar, as quais baixam para um diretório indicado pelo usuário, as decisões de primeira e de segunda instância em formato html.</p>
 <p>O segundo grupo inicia com o verbo ler, as quais leem as informações contidas nos htmls e as dispôem numa tabela. Todas as funções de leitura são paralelizadas, de modo que o tempo de leitura dependerá da configuração de sua máquina.</p>
 <p>O terceiro grupo é formado por funções auxiliares no trabalho de transformação dos dados lidos pelo grupo anterior.</p>
+<p>Há quatro siglas que você deve tomar com conta antes de baixar os dados processuais. A sigla <code>cjpg</code> significa consulta de julgados de primeiro grau, ela basicamente baixa dados do <a href="http://esaj.tjsp.jus.br/cjpg/">banco de sentenças</a>. A sigla <code>cjsg</code> signfica consulta consulta de julgados de segundo grau e baixa os <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do">julgados de segundo grau</a>. A sigla <code>cpopg</code> significa consulta processual de primeiro grau e baixa a <a href="https://esaj.tjsp.jus.br/cpopg/open.do">consulta processual de primeiro grau</a>. Por fim, a sigla <code>cposg</code> significa consulta processual de segundo grau e baixa a <a href="https://esaj.tjsp.jus.br/cposg/open.do">consulta processual de segundo grau</a>.</p>
 <div id="baixando-jurisprudencia" class="section level3">
 <h3 class="hasAnchor">
 <a href="#baixando-jurisprudencia" class="anchor"></a>Baixando jurisprudência</h3>
@@ -115,28 +116,28 @@
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/baixar_cjsg.html">baixar_cjsg</a></span>(<span class="dt">livre=</span><span class="st">"feminicídio"</span>,<span class="dt">diretorio=</span><span class="st">"."</span>)</a></code></pre></div>
 <p>Ela baixará no diretório indicado ou no atual, os htmls com os metadados das decisões. Atenção, faça a busca no TJ antes para verificar quantas páginas serão baixadas. A depender do tema, esse processo pode tomar horas.</p>
 <p>Depois disso, você pode pedir para ler tais decisões:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">tabela&lt;-<span class="kw"><a href="reference/ler_cjsg.html">ler_cjsg</a></span>(<span class="dt">diretorio=</span><span class="st">"."</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">tabela &lt;-<span class="st"> </span><span class="kw"><a href="reference/ler_cjsg.html">ler_cjsg</a></span>(<span class="dt">diretorio=</span><span class="st">"."</span>)</a></code></pre></div>
 </div>
 <div id="baixando-informacoes-detalhadas-dos-processos" class="section level3">
 <h3 class="hasAnchor">
 <a href="#baixando-informacoes-detalhadas-dos-processos" class="anchor"></a>Baixando informações detalhadas dos processos</h3>
-<p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Doravante, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
-<p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode informar o diretório.</p>
+<p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
+<p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretóio de sua escollha.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">baixar_cposg</span>(tabela<span class="op">$</span>processo)</a></code></pre></div>
 </div>
 <div id="lendo-os-processos-de-segunda-instancia-" class="section level3">
 <h3 class="hasAnchor">
 <a href="#lendo-os-processos-de-segunda-instancia-" class="anchor"></a>Lendo os processos de segunda instância.</h3>
 <p>A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">dados&lt;-<span class="kw"><a href="reference/ler_dados_cposg.html">ler_dados_cposg</a></span>(diretorio)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">dados&lt;-<span class="kw"><a href="reference/ler_dados_cposg.html">ler_dados_cposg</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
 <p>Em seguida, lemos as informações acerca da partes do processo:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">partes&lt;-<span class="kw">ler_partes_cposg</span>(diretorio)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">partes &lt;-<span class="st"> </span><span class="kw">ler_partes_cposg</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
 <p>Depois passamos para a leitura do andamento do processo.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">andamento&lt;-<span class="kw"><a href="reference/ler_movimentacao_cposg.html">ler_movimentacao_cposg</a></span>(diretorio)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">andamento &lt;-<span class="st"> </span><span class="kw"><a href="reference/ler_movimentacao_cposg.html">ler_movimentacao_cposg</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
 <p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">entrada&lt;-<span class="kw">ler_entrada_cposg</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">entrada &lt;-<span class="st"> </span><span class="kw">ler_entrada_cposg</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
 <p>Por fim, você pode ler o dispositivo da decisão:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">decisao&lt;-<span class="kw"><a href="reference/ler_decisoes_cposg.html">ler_decisoes_cposg</a></span>(diretorio)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">decisao &lt;-<span class="st"> </span><span class="kw"><a href="reference/ler_decisoes_cposg.html">ler_decisoes_cposg</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
 </div>
 <div id="baixando-decisoes-de-primeiro-grau" class="section level3">
 <h3 class="hasAnchor">

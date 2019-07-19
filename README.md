@@ -80,7 +80,7 @@ horas.
 Depois disso, você pode pedir para ler tais decisões:
 
 ``` r
-tabela<-ler_cjsg(diretorio=".")
+tabela <- ler_cjsg(diretorio=".")
 ```
 
 ### Baixando informações detalhadas dos processos
@@ -105,19 +105,19 @@ A leitura dos processos de segunda instância se dá em três etapas.
 Primeiramente, lemos os metadados:
 
 ``` r
-dados<-ler_dados_cposg(diretorio)
+dados<-ler_dados_cposg(diretorio = ".")
 ```
 
 Em seguida, lemos as informações acerca da partes do processo:
 
 ``` r
-partes<-ler_partes_cposg(diretorio)
+partes <- ler_partes_cposg(diretorio = ".")
 ```
 
 Depois passamos para a leitura do andamento do processo.
 
 ``` r
-andamento<-ler_movimentacao_cposg(diretorio)
+andamento <- ler_movimentacao_cposg(diretorio = ".")
 ```
 
 Eventualmente, você não está interessada em ler todo o andamento, mas
@@ -126,13 +126,13 @@ tarde calcular o tempo entre a entrada e a decisão. Há uma função para
 isso:
 
 ``` r
-entrada<-ler_entrada_cposg()
+entrada <- ler_entrada_cposg(diretorio = ".")
 ```
 
 Por fim, você pode ler o dispositivo da decisão:
 
 ``` r
-decisao<-ler_decisoes_cposg(diretorio)
+decisao <- ler_decisoes_cposg(diretorio = ".")
 ```
 
 ### Baixando decisões de primeiro grau
