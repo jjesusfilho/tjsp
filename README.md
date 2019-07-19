@@ -47,6 +47,18 @@ configuração de sua máquina.
 O terceiro grupo é formado por funções auxiliares no trabalho de
 transformação dos dados lidos pelo grupo anterior.
 
+Há quatro siglas que você deve tomar com conta antes de baixar os dados
+processuais. A sigla `cjpg` significa consulta de julgados de primeiro
+grau, ela basicamente baixa dados do [banco de
+sentenças](http://esaj.tjsp.jus.br/cjpg/). A sigla `cjsg` signfica
+consulta consulta de julgados de segundo grau e baixa os [julgados de
+segundo grau](https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do). A
+sigla `cpopg` significa consulta processual de primeiro grau e baixa a
+[consulta processual de primeiro
+grau](https://esaj.tjsp.jus.br/cpopg/open.do). Por fim, a sigla `cposg`
+significa consulta processual de segundo grau e baixa a [consulta
+processual de segundo grau](https://esaj.tjsp.jus.br/cposg/open.do).
+
 ### Baixando jurisprudência
 
 As decisões de segunda instância podem ser consultadas livremente por
@@ -75,13 +87,13 @@ tabela<-ler_cjsg(diretorio=".")
 
 O passo seguinte é realizar a busca e baixar os htmls dos processos
 individualmente considerados. Recentemente o TJSP impôs recaptcha para
-baixar os processos. Doravante, para baixar processos você deve antes se
-autenticar como advogado. Por meio da função `autenticar()`, você será
-solicitado a apresentar suas credenciais (CPF e senha), a fim de ter
-acesso aos processos sem o uso de captcha.
+baixar os processos. Diante disso, para baixar processos você deve antes
+se autenticar como advogado. Por meio da função `autenticar()`, você
+será solicitado a apresentar suas credenciais (CPF e senha), a fim de
+ter acesso aos processos sem o uso de captcha.
 
 O comando a seguir irá baixar todos os processos no diretório atual, mas
-você pode informar o diretório.
+você pode indicar um diretóio de sua escollha.
 
 ``` r
 baixar_cposg(tabela$processo)
