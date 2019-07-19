@@ -2,7 +2,7 @@
 % Please edit documentation in R/baixar_cpopg.R
 \name{baixar_cpopg}
 \alias{baixar_cpopg}
-\title{Baixar decisões judiciais de primeiro grau}
+\title{Baixar consulta processual de primeiro grau}
 \usage{
 baixar_cpopg(processos = NULL, diretorio = ".")
 }
@@ -15,5 +15,5 @@ baixar_cpopg(processos = NULL, diretorio = ".")
 html com dados processuais
 }
 \description{
-Baixar decisões judiciais de primeiro grau
+Baixar consulta processual de primeiro grau
 }
