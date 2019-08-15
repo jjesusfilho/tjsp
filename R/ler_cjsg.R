@@ -6,7 +6,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' cjsg <- ler_cjsg()
+#' }
+#'
 ler_cjsg <- function(diretorio = ".") {
   a <- list.files(
     path = diretorio,
@@ -60,7 +63,8 @@ ler_cjsg <- function(diretorio = ".") {
     ) %>%
       dplyr::mutate_at(1:7,list(~iconv(.,"utf8","latin1//TRANSLIT"))) %>%
       dplyr::mutate_at(3:7,list(~stringr::str_remove(.,".+:\\s?"))) %>%
-      dplyr::mutate_at(6:7,list(~lubridate::dmy(.)))
+      dplyr::mutate_at(6:7,list(~lubridate::dmy(.))) %>%
+      dplyr::mutate(processo = stringr::str_remove_all(processo,"\\D+"))
 
   }, otherwise = NULL))
 }

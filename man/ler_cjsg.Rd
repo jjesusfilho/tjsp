@@ -16,5 +16,8 @@ tabela com metadados jurisprudenciais.
 Ler metadados das decisões
 }
 \examples{
+\dontrun{
 cjsg <- ler_cjsg()
+}
+
 }

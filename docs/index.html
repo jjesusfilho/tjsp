@@ -130,9 +130,9 @@
 <a href="#lendo-os-processos-de-segunda-instancia-" class="anchor"></a>Lendo os processos de segunda instância.</h3>
 <p>A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">dados&lt;-<span class="kw"><a href="reference/ler_dados_cposg.html">ler_dados_cposg</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
-<p>Em seguida, lemos as informações acerca da partes do processo:</p>
+<p>Em seguida, lemos as informações acerca das partes dos processos:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">partes &lt;-<span class="st"> </span><span class="kw">ler_partes_cposg</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
-<p>Depois passamos para a leitura do andamento do processo.</p>
+<p>Ao final passamos para a leitura do andamento dos processos.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">andamento &lt;-<span class="st"> </span><span class="kw"><a href="reference/ler_movimentacao_cposg.html">ler_movimentacao_cposg</a></span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
 <p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">entrada &lt;-<span class="st"> </span><span class="kw">ler_entrada_cposg</span>(<span class="dt">diretorio =</span> <span class="st">"."</span>)</a></code></pre></div>
@@ -142,7 +142,7 @@
 <div id="baixando-decisoes-de-primeiro-grau" class="section level3">
 <h3 class="hasAnchor">
 <a href="#baixando-decisoes-de-primeiro-grau" class="anchor"></a>Baixando decisões de primeiro grau</h3>
-<p>As decisões de primeiro grau seguem a mesma lógica das decisões de segundo grau com algumas diferenças. Verifique a ajuda para entender como funcionam.</p>
+<p>As decisões de primeiro grau obedecem a mesma lógica das decisões de segundo grau com algumas diferenças. Verifique a ajuda para entender como operam.</p>
 </div>
 </div>
 <div id="consideracoes-eticas" class="section level2">

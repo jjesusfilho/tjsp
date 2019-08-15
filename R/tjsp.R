@@ -1,6 +1,6 @@
 #' \code{tjsp} package
 #'
-#' Text mining of Brazilian judicial decisions
+#' Baixa  e organiza decisões do TJSP
 #'
 #'
 #' @docType package
@@ -17,6 +17,6 @@ if (getRversion() >= "2.15.1") {
     "", "foro", "cod_subarea", "subarea", "data_distribuicao",
     "data_recebimento", "processo_2", "processo_principal",
     "valor_da_acao", "incidente", "execucao_de_sentenca", "recebido_em",
-    "classe_numero", "classe_situacao"
+    "classe_numero", "classe_situacao","number","n"
   ))
 }

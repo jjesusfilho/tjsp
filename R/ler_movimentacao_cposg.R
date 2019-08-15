@@ -16,7 +16,7 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
     full.names = TRUE
   )
 
-
+  processo <- stringr::str_extract(arquivos, "\\d{20}")
 
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
     texto <- xml2::read_html(.x) %>%
@@ -29,8 +29,8 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
     mov <- xml2::xml_find_all(texto, ".//td[@style='vertical-align: top; padding-bottom: 5px']") %>%
       xml2::xml_text(trim = TRUE)
 
+    processo <- stringr::str_remove_all(.y,"\\D+")
 
-
-    tibble::tibble(processo = .y, data = data, movimentacao = mov)
+    tibble::tibble(processo = processo, data = data, movimentacao = mov)
   }, otherwise = NULL))
 }

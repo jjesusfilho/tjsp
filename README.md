@@ -108,13 +108,13 @@ Primeiramente, lemos os metadados:
 dados<-ler_dados_cposg(diretorio = ".")
 ```
 
-Em seguida, lemos as informações acerca da partes do processo:
+Em seguida, lemos as informações acerca das partes dos processos:
 
 ``` r
 partes <- ler_partes_cposg(diretorio = ".")
 ```
 
-Depois passamos para a leitura do andamento do processo.
+Ao final passamos para a leitura do andamento dos processos.
 
 ``` r
 andamento <- ler_movimentacao_cposg(diretorio = ".")
@@ -137,9 +137,9 @@ decisao <- ler_decisoes_cposg(diretorio = ".")
 
 ### Baixando decisões de primeiro grau
 
-As decisões de primeiro grau seguem a mesma lógica das decisões de
+As decisões de primeiro grau obedecem a mesma lógica das decisões de
 segundo grau com algumas diferenças. Verifique a ajuda para entender
-como funcionam.
+como operam.
 
 ## Considerações éticas
 
