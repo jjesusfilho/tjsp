@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aplica parser para extrair informações sobre as partes do
-    processo. — ler_partes • tjsp</title>
+<title>Modelar decisão — modelar_decisao • tjsp</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Aplica parser para extrair informações sobre as partes do
-    processo. — ler_partes" />
+<meta property="og:title" content="Modelar decisão — modelar_decisao" />
 
-<meta property="og:description" content="Aplica parser para extrair informações sobre as partes do
-    processo." />
+<meta property="og:description" content="Modelar decisão" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,38 +111,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Aplica parser para extrair informações sobre as partes do
-    processo.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/ler_partes.R'><code>R/ler_partes.R</code></a></small>
-    <div class="hidden name"><code>ler_partes.Rd</code></div>
+    <h1>Modelar decisão</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/modelar_decisao.R'><code>R/modelar_decisao.R</code></a></small>
+    <div class="hidden name"><code>modelar_decisao.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Aplica parser para extrair informações sobre as partes do
-    processo.</p>
+    <p>Modelar decisão</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ler_partes</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>modelar_decisao</span>(<span class='no'>...</span>, <span class='no'>data</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>metodo</span> <span class='kw'>=</span> <span class='st'>"glm"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>diretorio</th>
-      <td><p>Objeto ou diretório onde se encontram os htmls baixados.</p></td>
+      <th>...</th>
+      <td><p>Fórmula conforme modelo</p></td>
     </tr>
     <tr>
-      <th>arquivos</th>
-      <td><p>O diretório é ignorado se você fornecer o vetor
-de arquivos</p></td>
+      <th>data</th>
+      <td><p>base</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>variável dependente</p></td>
+    </tr>
+    <tr>
+      <th>metodo</th>
+      <td><p>c("glm","gbm","xgboost","rf","catboost")</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tabela com informações das partes.</p>
+    <p>objeto caret</p>
     
 
   </div>

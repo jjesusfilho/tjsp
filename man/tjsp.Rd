@@ -6,5 +6,5 @@
 \alias{tjsp-package}
 \title{\code{tjsp} package}
 \description{
-Text mining of Brazilian judicial decisions
+Baixa  e organiza decisões do TJSP
 }

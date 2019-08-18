@@ -20,7 +20,11 @@ ler_despacho<-function (fonte = ".")
 
     data_despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]/parent::tr/td[1]|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decisão')]/parent::tr/td[1]") %>%
       rvest::html_text(trim = TRUE) %>% lubridate::dmy()
-    tibble::tibble(processo = .y, despacho = despacho, data_despacho = data_despacho) %>%
+
+    processo <- stringr::str_remove_all(.y,"\\D+")
+
+
+    tibble::tibble(processo = processo, despacho = despacho, data_despacho = data_despacho) %>%
       dplyr::filter(stringr::str_detect(despacho, "\\w\\X+"))
   }, otherwise = NULL))
 }

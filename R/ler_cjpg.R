@@ -81,5 +81,6 @@ ler_cjpg <- function(diretorio = ".") {
     ) %>%
     dplyr::mutate_all(stringr::str_squish) %>%
     rm_duplicados(processo) %>%
-    dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao))
+    dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao),
+                  processo = stringr::str_remove_all(processo,"\\D+"))
 }

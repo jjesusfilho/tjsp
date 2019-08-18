@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aplica parser para extrair informações sobre as partes do
-    processo. — ler_partes • tjsp</title>
+<title>Applies functions baixar_cjpg from package tjsp and sends data to psql db — psql_cjpg • tjsp</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Aplica parser para extrair informações sobre as partes do
-    processo. — ler_partes" />
+<meta property="og:title" content="Applies functions baixar_cjpg from package tjsp and sends data to psql db — psql_cjpg" />
 
-<meta property="og:description" content="Aplica parser para extrair informações sobre as partes do
-    processo." />
+<meta property="og:description" content="The dbAppendTable() method assumes that the table has been created beforehand," />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,40 +111,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Aplica parser para extrair informações sobre as partes do
-    processo.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/ler_partes.R'><code>R/ler_partes.R</code></a></small>
-    <div class="hidden name"><code>ler_partes.Rd</code></div>
+    <h1>Applies functions baixar_cjpg from package tjsp and sends data to psql db</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/psql_cjpg.R'><code>R/psql_cjpg.R</code></a></small>
+    <div class="hidden name"><code>psql_cjpg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Aplica parser para extrair informações sobre as partes do
-    processo.</p>
+    <p>The dbAppendTable() method assumes that the table has been created beforehand,</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ler_partes</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>psql_cjpg</span>(<span class='no'>con</span>, <span class='no'>tbl</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>diretorio</th>
-      <td><p>Objeto ou diretório onde se encontram os htmls baixados.</p></td>
+      <th>con</th>
+      <td><p>PostgreSQL db connection</p></td>
     </tr>
     <tr>
-      <th>arquivos</th>
-      <td><p>O diretório é ignorado se você fornecer o vetor
-de arquivos</p></td>
+      <th>tbl</th>
+      <td><p>Table name. It requires that have already created it.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed to `tjsp::baixar_cjpg`, except directory.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tabela com informações das partes.</p>
+    <p>It doesn't return anything.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>con</span><span class='kw'>&lt;-</span><span class='kw pkg'>dbx</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/dbx/topics/dbxConnect'>dbxConnect</a></span>()
+<span class='kw pkg'>DBI</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/DBI/topics/dbCreateTable'>dbCreateTable</a></span>(<span class='no'>con</span>,<span class='st'>"cjpg"</span>,
+                  <span class='kw'>fields</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"processo"</span>, <span class='st'>"classe"</span>, <span class='st'>"assunto"</span>, <span class='st'>"magistrado"</span>, <span class='st'>"comarca"</span>, <span class='st'>"foro"</span>,
+                               <span class='st'>"vara"</span>, <span class='st'>"disponibilizacao"</span>, <span class='st'>"julgado"</span>))
+ <span class='fu'>psql_cjpg</span>(<span class='no'>con</span>,<span class='st'>"cjpg"</span>,<span class='kw'>livre</span><span class='kw'>=</span><span class='st'>"feminicidio"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -155,7 +161,9 @@ de arquivos</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

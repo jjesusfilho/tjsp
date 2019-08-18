@@ -87,7 +87,7 @@ baixar_cjsg <-
       .[[1]] %>%
       .[3] %>%
       as.numeric() %>%
-      `/`(20) %>%
+      `/`(10) %>%
       ceiling()
 
     paginas <- 1:max_pag
