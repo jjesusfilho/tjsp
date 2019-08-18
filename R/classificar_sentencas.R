@@ -16,19 +16,23 @@ classificar_sentenca<- function (x, sentenca, decisao)
   input <- rlang::enexpr(sentenca)
   decisao_out <- rlang::enexpr(decisao)
 
-  y <-  x %>% dplyr::distinct(rlang::UQ(input)) %>%
-    dplyr::mutate(alternativa = stringr::str_sub(rlang::UQ(input),-2000) %>%
+  y <-  x %>% dplyr::distinct(!!input) %>%
+    dplyr::mutate(alternativa = stringr::str_sub(!!input,-2000) %>%
                     tolower(.) %>%  stringi::stri_trans_general(., "latin-ascii"))
 
   y <- y %>% dplyr::mutate(`:=`(
     !!decisao_out,
     dplyr::case_when(
+      stringr::str_detect(alternativa,"(?i)julgo\\sparcial\\w+") ~ "parcial",
       stringr::str_detect(alternativa,"(?i)\\bparcial\\w+") ~ "parcial",
+      stringr::str_detect(alternativa,"(?i)julgo\\s+procecente em parte") ~ "parcial",
       stringr::str_detect(alternativa,"(?i)\\bprocecente em parte") ~ "parcial",
       str_detect(alternativa,"desistencia") ~ "desistência",
       str_detect(alternativa,"\\bhomologo\\b") ~  "homologação",
-      stringr::str_detect(alternativa,"(?i)(\\bproced\\w+|condeno)") ~ "procedente",
-      stringr::str_detect(alternativa,"(?i)\\bimproced\\w+") ~ "improcedente",
+      stringr::str_detect(alternativa,"(?i)julgo\\s+procede\\w+") ~ "procedente",
+      stringr::str_detect(alternativa,"(?i)julgo\\simprocede\\w+") ~ "improcedente",
+      stringr::str_detect(alternativa,"(?i)\\bprocede\\w+") ~ "procedente",
+      stringr::str_detect(alternativa,"(?i)\\bimprocede\\w+") ~ "improcedente",
       stringr::str_detect(alternativa,"(?i)prejudicad[ao]") ~  "prejudicado",
       stringr::str_detect(alternativa,"(?i)(an)?nul[ao](do)?") ~ "nulo",
       stringr::str_detect(alternativa,"(?i)extin\\w+") ~ "extinto",
