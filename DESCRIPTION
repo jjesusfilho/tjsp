@@ -27,7 +27,7 @@ Imports:
     rlang (>= 0.1.2),
     janitor,
     abjutils,
-    tidyr,
+    tidyr (>= 1.0.0),
     listenv,
     fs,
     stats,
