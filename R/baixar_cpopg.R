@@ -36,7 +36,7 @@ baixar_cpopg<-function (processos = NULL, diretorio = ".")
     else
       conteudo1 <- list(conteudo1)
 
-    p <- str_remove_all(p, "\\D+")
+    p <- stringr::str_remove_all(p, "\\D+")
     arquivo <- file.path(diretorio, paste0(format(Sys.Date(),
                                                   "%Y_%m_%d_"), p, ".html"))
     xml2::write_html(conteudo1[[1]], arquivo)
