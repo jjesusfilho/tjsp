@@ -61,15 +61,14 @@ baixar_cjsg <-
         cdComarca = "",
         nmComarca = "",
         secoesTreeSelection.values = "",
-        secoesTreeSelection.text = "1",
+        secoesTreeSelection.text = "",
         dados.dtJulgamentoInicio = inicio,
         dados.dtJulgamentoFim = fim,
         dados.dtRegistroInicio = "",
         dados.dtRegistroFim = "",
         dados.origensSelecionadas = "T",
         tipoDecisaoSelecionados = tipo,
-        # tipoDecisaoSelecionados = "", tipoDecisaoSelecionados = "",
-        dados.ordenacao = "data"
+        dados.ordenacao = "dtPublicacao"
       )
     if (aspas == TRUE) livre <- deparse(livre)
 
@@ -88,7 +87,7 @@ baixar_cjsg <-
       .[[1]] %>%
       .[3] %>%
       as.numeric() %>%
-      `/`(20) %>%
+      `/`(10) %>%
       ceiling()
 
     paginas <- 1:max_pag

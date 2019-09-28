@@ -1,0 +1,1921 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script language="javascript" type="text/JavaScript" src="https://esaj.tjsp.jus.br/sajcas/verificarLogin.js?script=1559827746854"></script><script language="javascript">
+		if(window.sajcas && window.sajcas.usuarioLogadoNoCasServer) {
+			var urlRetornoSistema = '';
+			if(urlRetornoSistema === '') {
+				urlRetornoSistema = window.location.href;
+			}
+
+			if(urlRetornoSistema.lastIndexOf('?') != -1) {
+				urlRetornoSistema += '&';
+			} else {
+				urlRetornoSistema += '?';
+			}
+			urlRetornoSistema+= 'gateway=true';
+			window.location.href = urlRetornoSistema;
+		}
+	</script><title>Portal de Serviços e-SAJ</title>
+<!-- Includes do spw --><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1123.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script><link rel="stylesheet" href="/cposg/css/spw/spwConcatenado.css" type="text/css">
+<link rel="stylesheet" href="/cposg/css/esaj.css" type="text/css">
+<link rel="stylesheet" href="/cposg/css/saj/saj-captcha.css" type="text/css">
+<link rel="stylesheet" href="/cposg/css/saj/saj-popup-modal.css" type="text/css">
+<link rel="stylesheet" href="/cposg/css/cpo.css" type="text/css">
+<link rel="stylesheet" href="/cposg/css/formulario.css" type="text/css">
+<link rel="stylesheet" href="/cposg/css/tarjaDoProcesso.css" type="text/css">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<script language="javascript" type="text/JavaScript" src="/cposg/js/jquery/jquery.min.js?n=9742a9a1-04a0-4d47-a497-208dda8ec0ac"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/jquery/jquery.func_toggle.js?n=c868549d-492c-418f-b5d1-351fe7bb3c81"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/jquery/jquery.blockUI.min.js?n=334a49fc-b1f4-49c9-854f-10adf111550e"></script><script language="javascript" type="text/javascript" src="/cposg/js/jquery/jquery.browser.min.js?n=77bf8753-a879-4fbf-a90d-d35169c87077"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/saj-web-2.2.41-4.js?n=23ae6b0e-7387-4299-aa0d-99c6f2fb8c40"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/saj-tooltip.js?n=5c6136ac-3c28-4145-95ba-94170875ebf8"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/saj-browser.js?n=387da24d-acda-4675-a2c8-bef6e4790efb"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/saj-mascara-input.js?n=b3fda49f-8cc1-45bf-bf32-f91eb387b4fe"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/saj-numeroProcesso.js?n=877894ca-8ca1-4f8a-b24d-bcf936dc0b42"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/saj-popup-modal-1.0.0-1.js?n=0b2f5fe6-bc0c-4cdd-8153-0557f0b2f3c3"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/saj-popup.js?n=ac43ba54-056e-44e3-9f20-ddf2bdc2e30c"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/spw/spwConcatenado.js?n=b0810a95-b982-4b68-99d0-bd1289303344"></script><script>
+	window.saj = window.saj || {};
+	window.saj.env = window.saj.env || {};
+	window.saj.env.root = '/cposg';
+	window.saj.env.css = '/cposg/css';
+	window.saj.env.js = '/cposg/js';
+	window.saj.env.imagens = '/cposg/imagens';
+
+	window.saj.cpo = window.saj.cpo || {};
+	// transfere variavel se cpo esta rodando para totem
+	window.saj.cpo.totem = 'false' == 'true';
+
+	window.saj.cpo.instanciaConsulta = {
+		SG5: 'true' == 'true',
+		SG5TJ: 'true' == 'true',
+		SG5CR: 'false' == 'true',
+		value: 'SG5TJ'
+	}; 
+</script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj-cpo-cbpesquisa.js?n=3431705058"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/formulario.js?n=541251654"></script><script language="javascript" type="text/JavaScript" src="/cposg/js/saj/acessibilidade/acessibilidade.js?n=98b2f776-d44b-45c3-83f5-c39cfeb925bc"></script><script>
+	(function($){
+		$(function(){
+			var intervalo = 1795000;
+			$.saj.manterSessao('/cposg/manterSessao.do', intervalo);
+		});
+				
+	})(jQuery);
+</script><link rel="stylesheet" href="/cposg/css/saj/saj-paginacao.css" type="text/css">
+<script language="javascript" type="text/JavaScript" src="/cposg/js/cpo-ajax-obterFilhosProcesso.js?n=3627824218"></script><script language="javascript" type="text/JavaScript" src="/cposg/jsp/list.js?n=2793076223"></script><script>
+		window.saj.cpo.queryString = 'cbPesquisa=NUMPROC&conversationId=&dePesquisat=&dePesquisaNuUnificado=1013100-50.2017.8.26.0053&foroNumeroUnificado=0053&localPesquisa.cdLocal=-1&numeroDigitoAnoUnificado=1013100-50.2017&paginaConsulta=1&tipoNuProcesso=UNIFICADO&uuidCaptcha=';
+	</script><script>
+	(function($){
+		$(function(){
+			var intervalo = 50000;
+			$.saj.manterSessao('/cposg/manterSessao.do', intervalo);
+		});
+				
+	})(jQuery);
+</script><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<link href="https://esaj.tjsp.jus.br/esaj/tema/padrao/css/esajComum.css" rel="stylesheet" type="text/css">
+<link href="https://esaj.tjsp.jus.br/esaj/tema/padrao/css/esajLayout.css" rel="stylesheet" type="text/css">
+<link href="https://esaj.tjsp.jus.br/esaj/tema/padrao/clientes/SP/css/esajLayoutSP.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+/* botao default means o mais claro, que seria o "botï¿½o principal" */
+.spwBotaoDefault, .spwBotaoDefault-o { 
+	background-image: url(https://esaj.tjsp.jus.br/esaj/tema/padrao/clientes/SP/imagens/layout/fundoBotaoDefault.gif);
+}
+/* o botao secundario, menos provavel de ser clicado, mais escuro */
+.spwBotao, .spwBotao-o { 
+	background-image: url(https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/fundoBotao.gif);
+}
+-->
+</style>
+<script language="javascript" type="text/JavaScript" src="https://esaj.tjsp.jus.br/esaj/tema/padrao/js/menu.js?n=2553626853"></script><link rel="shortcut icon" href="https://esaj.tjsp.jus.br/esaj/tema/padrao/clientes/SP/imagens/favicon.ico" type="image/x-icon">
+<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-23111004-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script><!-- Correção temporária do alinhamento do divisor de seção de formulário do SPW --><script type="text/javascript">
+		$(function(){$('td[background$="spw/fundo_subtitulo2.gif"]').attr('valign', 'top')});
+	</script>
+</head>
+<body>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="esajTabelaCabecalhoCliente" summary=" "><tr>
+<td><a href="http://www.tjsp.jus.br"><img src="https://esaj.tjsp.jus.br/esaj/tema/padrao/clientes/SP/imagens/layout/cabecalhoLogo.jpg" width="425" height="58" alt="Tribunal de Justiça do Estado de São Paulo"></a></td>
+		<td align="right" valign="top"><img src="https://esaj.tjsp.jus.br/esaj/tema/padrao/clientes/SP/imagens/layout/cabecalhoImagem.jpg" width="353" height="58"></td>
+	</tr></table>
+<!-- cabecalho e-Saj --><table width="100%" cellpadding="0" cellspacing="0" class="esajTabelaCabecalhoServico" summary=" "><tr>
+<td class="esajCelulaCabecalhoServicoLogo">
+
+
+
+
+<a href="https://esaj.tjsp.jus.br/esaj/redirecionarNovoEsaj.do"><img src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/eSajServico.gif" title="Voltar para página inicial do e-SAJ" alt="Voltar para página inicial do e-SAJ" width="255" height="53" border="0"></a><img src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/eSajServicoInf.gif" alt=" " width="255" height="28" border="0">
+</td>
+		<td class="esajCelulaCabecalhoServicoMenu">
+		    <table width="100%" border="0" cellpadding="0" cellspacing="0" summary=" ">
+<tr>
+<td align="right">
+
+
+
+
+
+
+
+
+    
+
+    
+        <div id="divopupContato" style="display: none;">
+                <div class="quadroContato">
+<h2>Suporte Técnico de Sistemas</h2>         <div style="text-align: left; padding: 0 20px;">             <p class="locaisContato">Cadastro de Advogados, Peticionamento Eletrônico e Processos de Primeira Instância Sistemas de 1ª Instância, Sistemas de 2ª Instância, Colégio Recursal, Consulta de Acórdão, Decisões Monocráticas, Homologações de Acordo e Jurisprudência  e Sistema Pushing.</p>             <p class="telefonesLocal"> Ligue para  0800 797 9818 (ligações gratuitas para telefones fixos) ou (11) 4199-6366 (para ligações de celulares) ou abra sua solicitação pelo portal <a target="_blank" href="http://www.suportesistemastjsp.com.br/">www.suportesistemastjsp.com.br</a></p>         </div>     </div>
+        </div>
+    
+
+<!-- Devido ao alinhamento inline das imagens, elas não podem ter nenhum tipo de espaçamento entre elas, portanto é necessário finalizar a linha iniciando um comentário e fechar o comentário imediatamente antes da abertura da nova tag-->
+<img height="24" width="47" alt=" " src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/inicioMenuSup.jpg"><a href="https://esaj.tjsp.jus.br/caixapostal"><!--
+--><img height="24" width="83" border="0" alt="Caixa postal" src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/caixaPostal.gif"></a><!--
+--><img height="24" width="4" alt=" " src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/menuSeparador.jpg"><a href="https://esaj.tjsp.jus.br/esaj/cadastro.do"><!--
+--><img src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/cadastro.gif" alt="Cadastro" width="81" height="24" border="0"></a><!--
+
+    --><img height="24" width="4" alt=" " src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/menuSeparador.jpg"><a id="linkContato" href="#"><!--
+    --><img height="24" width="68" border="0" alt="Contato" src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/contato.gif"></a><!--
+
+
+    --><img height="24" width="4" alt=" " src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/menuSeparador.jpg"><a target="blank" href="https://esaj.tjsp.jus.br/WebHelp/"><!--
+    --><img height="24" width="61" border="0" alt="Ajuda do e-Saj" src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/ajuda.gif"></a><!--
+
+
+-->
+</td>
+				</tr>
+<tr>
+<td class="esajCelulaIdentificacaoServico">
+
+
+
+
+<style>
+
+    td.esajCelulaIdentificacao, td.esajCelulaIdentificacaoServico {
+        position: relative;
+    }
+
+    button.escolhaBeta {
+        border: 0;
+        background: #0078D7;
+        color: #fff;
+        margin-right: 5px;
+        font-family: verdana;
+        font-size: 12px;
+        height: 27px;
+        line-height: 14px;
+        border-radius: 0;
+        text-shadow: 1px 1px 1px #797979;
+        position: absolute;
+        top: 30px;
+        right: 3px;
+        padding: 7px 12px;
+        cursor: pointer;
+    }
+
+    button.escolhaBeta:hover {
+        background-color: #0b5c9c;
+    }
+</style>
+<span id="identificacao"></span>
+
+<button style="display: none" class="escolhaBeta"></button>
+
+
+
+
+    
+    
+        <script language="javascript" type="text/JavaScript" src="https://esaj.tjsp.jus.br/sajcas/conteudoIdentificacao?script=1559767512770"></script>
+</td>
+				</tr>
+<tr>
+<td class="esajCelulaCabecalhoServicoCaminho">
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<a href="" class="esajCaminhoLink"></a>
+
+ &gt;
+
+
+<a href="https://esaj.tjsp.jus.br/esaj/portal.do?servico=740000" class="esajCaminhoLink">Bem-vindo</a>
+
+ &gt;
+
+
+<a href="https://esaj.tjsp.jus.br/esaj/portal.do?servico=190090" class="esajCaminhoLink">Consultas Processuais</a>
+
+ &gt;
+
+
+
+Consulta de Processos do 2ºGrau
+</td>
+				</tr>
+</table>
+</td>
+	</tr></table>
+<!-- CONTEUDO --><table width="100%" border="0" cellpadding="0" cellspacing="0" class="esajTabelaTitulo"><tr>
+<td class="esajCelulaMenuSuspenso">
+		<a href="#" onclick="return showMenuSuspenso()"><img src="https://esaj.tjsp.jus.br/esaj/tema/padrao/imagens/layout/menuSuspenso.gif" alt="Menu de serviços" width="243" height="21" style="display:block"></a>
+		<div id="layerMenu" style="display:none">
+			
+
+<!-- MENU -->
+<ul id="esajMenuArea">
+<li class="esajMenuAberto">
+<a href="#" onclick="return esajMenu(this)">Consultas Processuais</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cpopg/open.do">Consulta de Processos do 1ºGrau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cposg/open.do">Consulta de Processos do 2ºGrau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cposgcr/open.do">Colégio Recursal/Turma de Uniformização</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Consulta de Ordem de Processos</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cop/abrirConsultaDeOrdemDeJulgamentoPg.do">Consulta de processos de Ordem de julgamento do 1º Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cop/abrirConsultaDeOrdemDeAtoPg.do">Consulta de Ordem de Publicação e Cumprimento de Atos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Solicitação de Conciliação</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petpg/abrirSolicitacaoConciliacaoPreProcessual.do">Solicitação de Conciliação Pré-Processual</a></li>
+</ul>
+</li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Requisitórios</a>
+<ul>
+<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Portal do Devedor</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cpopg/abrirConsultaDeRequisitorios.do">Consulta de Requisitórios</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Notificação de Requisitórios</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaNotificacoesRequisitoriosNaoRecebidas.do">Requisitórios Pendentes de Recebimento</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaNotificacoesRequisitoriosRecebidas.do">Requisitórios Recebidos</a></li>
+</ul>
+</li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaDeProcessos.do">Consulta de Processos</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Notificação de Mapas Orçamentários</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaNotificacoesMapasOrcamentariosNaoRecebidas.do">Mapas Pendentes de Recebimento</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaNotificacoesMapasOrcamentariosRecebidas.do">Mapas Recebidos</a></li>
+</ul>
+</li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirPeticionamentoIntermediario.do">Peticionamento de Intermediária</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaNotificacoesDocumentos.do">Notificação de Documentos</a></li>
+</ul>
+</li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaListaPagamentos.do">Listas de Precatórios Pendentes de Pagamento e Pagamentos Disponibilizados</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/portalDevedor/abrirConsultaListaDepositos.do">Lista de Depósitos Efetuados</a></li>
+</ul>
+</li>
+  <li class="esajMenuFechado"><a href="https://esaj.tjsp.jus.br/ctoPtl/abrirConsultaContratos.do">Contratos</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Consultas de Jurisprudência</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cjsg/consultaSimples.do">Consulta Simples</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do">Consulta Completa</a></li>
+</ul>
+</li>
+  <li class="esajMenuFechado"><a href="https://esaj.tjsp.jus.br/cdje">Diário da Justiça Eletrônico</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Biblioteca</a>
+<ul>
+<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Consultas</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/gcnPtl/jurisprudenciaAbrirConsulta.do">Jurisprudência Selecionada </a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/gcnPtl/obrasAbrirConsulta.do">Consulta de Obras, Periódicos e Artigos</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/gcnPtl/legislacaoAbrirConsulta.do">Consulta de Legislação e Normas</a></li>
+</ul>
+</li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/gcnPtl/downloadNormasAbrirConsulta.do">Download de Normas</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/gcnPtl/boletimAbrirConsulta.do">Boletins</a></li>
+</ul>
+</li>
+  <li class="esajMenuFechado"><a href="https://esaj.tjsp.jus.br/push">Push</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Certidões</a>
+<ul>
+<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Certidões de 1º Grau</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/sco/abrirCadastro.do">Cadastro de Pedido de Certidão</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/sco/abrirConferencia.do">Conferência de Certidão</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/sco/abrirDownload.do">Visualizar Certidão</a></li>
+</ul>
+</li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Certidões de 2º Grau</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/scosg/abrirCadastro.do">Cadastro de Pedido de Certidão de 2º Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/scosg/abrirConferencia.do">Conferência de Certidão de 2º Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/scosg/abrirDownload.do">Download de Certidão de 2º Grau</a></li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Corregedoria</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/cco">Consulta de Pareceres e Decisões da Corregedoria</a></li>
+</ul>
+</li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Conferência de Documento Digital</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/pastadigital/pg/abrirConferenciaDocumento.do">Conferência de Documento Digital do 1ºGrau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/pastadigital/sg/abrirConferenciaDocumento.do">Conferência de Documento Digital do 2ºGrau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/pastadigital/sgcr/abrirConferenciaDocumento.do">Conferência de Documento Digital do Colégio Recursal </a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/atendimento/abrirConferenciaDocOriginal.do">Conferência de Documento Digital de Expediente Administrativo </a></li>
+</ul>
+</li>
+  <li class="esajMenuFechado"><a href="https://esaj.tjsp.jus.br/cjpg">Consulta de Julgados de 1º Grau</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Peticionamento Eletrônico</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petpg/abrirVerificacaoRequisitosPet.do">Verificação de Requisitos</a></li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Peticionamento Eletrônico de 1º Grau</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petpg/abrirNovaPeticaoInicial.do?instancia=PG">Petição Inicial de 1° Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petpg/abrirNovaPeticaoIntermediaria.do?instancia=PG">Petição Intermediária de 1° Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petpg/abrirConsultaPeticoes.do">Consulta de Petições de 1º Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petpg/abrirNovoComplementoProcesso.do">Complemento de Cadastro de 1º Grau</a></li>
+</ul>
+</li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Peticionamento Eletrônico de 2º Grau</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petsg/abrirNovaPeticaoInicial.do?instancia=SG">Peticionamento Inicial de 2º Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petsg/abrirNovaPeticaoIntermediaria.do?instancia=SG">Peticionamento Intermediário de 2º Grau</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petsg/abrirConsultaPeticoes.do">Consulta de Petições de 2º Grau</a></li>
+</ul>
+</li>
+	<li class="esajMenuFechado">
+<a href="#" onclick="return esajMenu(this)">Peticionamento Eletrônico do Colégio Recursal</a>
+<ul>
+<li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petcr/abrirNovaPeticaoInicial.do?instancia=CR">Peticionamento Inicial - Colégio Recursal</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petcr/abrirNovaPeticaoIntermediaria.do?instancia=CR">Peticionamento Intermediário - Colégio Recursal</a></li>
+  <li class="esajMenuItem"><a href="https://esaj.tjsp.jus.br/petcr/abrirConsultaPeticoes.do">Consulta de Petições - Colégio Recursal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+		</td>
+		<td class="esajCelulaTituloServico"><h1 class="esajTituloPagina">Consulta de Processos do 2ºGrau</h1></td>
+	</tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" summary=" "><tr>
+<td class="esajCelulaConteudoServico">
+		
+	
+
+
+  
+
+
+
+        	  	
+  		 
+	    	<form name="consultarProcessoForm" method="GET" action="/cposg/search.do" id="openForm">  
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+<form name="consultarProcessoForm" method="GET" action="/cposg/search.do" autocomplete="off" enctype="" onsubmit="return applySubmit(this, eval('function spwSubmit(t, e){decodificaInputMulSelOnSubmit();if (!IS_enableSubmit) return false; return BENV_isCamposValidos(t); } spwSubmit(this, event);'));" id="formularioConsulta" target="">
+	<input type="hidden" name="conversationId" value=""><div class="">
+		
+			<br><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr valign="top">
+<td height="21" valign="top" nowrap background="/cposg/imagens/spw/fundo_subtitulo.gif"> 
+			
+				
+				
+					<h2 class="subtitle">
+						Dados para Pesquisa
+						
+					</h2>
+				
+			
+		</td>
+		<td background="/cposg/imagens/spw/fundo_subtitulo2.gif" width="90%" aria-hidden="true">
+			<img src="/cposg/imagens/spw/final_subtitulo.gif" width="16" height="20" tabindex="-1">
+</td>
+	</tr></table>
+<br><table id="secaoFormConsulta" class="secaoFormBody" width="100%" style="" cellpadding="2" cellspacing="0" border="0">
+<input type="hidden" name="paginaConsulta" value="1"><tr id="id_local" class="">
+<td id="" width="150" valign="">
+			
+			  
+		  	  
+		      
+				
+		  	    <label for="id_Seção" class="" style="text-align:right;font-weight:bold;;">Seção:</label>
+		      
+		    
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	
+		
+		
+		<select name="localPesquisa.cdLocal" id="id_Seção" obrigatorio="" rotulo="Seção"><option value="-1" selected>Todas as seções</option>
+<option value="9">Conselho Superior da Magistratura</option>
+<option value="4">Direito Criminal</option>
+<option value="1">Direito Privado 1</option>
+<option value="2">Direito Privado 2</option>
+<option value="3">Direito Privado 3</option>
+<option value="5">Direito Público</option>
+<option value="105">Feitos Em Grau de Recurso - Triagem</option>
+<option value="7">Órgão e Câmara Especial</option></select>
+</td>
+		
+			</tr>
+<tr class="">
+<td id="" width="150" valign="">
+			
+			  
+		  	  
+		      
+				
+		  	    <label for="cbPesquisa" class="" style="text-align:right;font-weight:bold;;">Pesquisar por:</label>
+		      
+		    
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	<table cellpadding="0" cellspacing="0" border="0" width=""><tr>
+<td>
+				
+				
+				
+				
+
+
+
+
+
+
+
+
+
+<select name="cbPesquisa" id="cbPesquisa"><option value="NUMPROC" selected>Número do Processo</option>
+<option value="NMPARTE">Nome da parte</option>
+<option value="DOCPARTE">Documento da Parte</option>
+<option value="NMADVOGADO">Nome do Advogado</option>
+<option value="NUMOAB">OAB</option></select>
+</td>
+		</tr></table>
+</td>
+		
+			</tr>
+<script>$.saj.numeroProcesso.desabilitarNumeroOculto = false;</script><script type="text/javascript">
+	(function($){
+		$(function() {
+			if($.browser.msie){
+				$('.grupoRadio').find('input:radio:visible:enabled').attr('aria-required','');
+				return;
+			}
+			$('.grupoRadio').attr('aria-required','').attr('required','');
+		});
+	})(jQuery);
+</script><tr class="">
+<td id="" width="150" valign="">
+			
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	<table cellspacing="0" border="0" width=""><tr>
+<td>
+				
+				<fieldset class="grupoRadio" style="margin:0;padding:0;border:none">
+<legend style="display:block;font-size:0;">
+						Tipo do número
+					</legend>
+					
+			   <input type="radio" name="tipoNuProcesso" value="UNIFICADO" checked id="radioNumeroUnificado"><label for="radioNumeroUnificado">Unificado</label>
+			   <input type="radio" name="tipoNuProcesso" value="SAJ" id="radioNumeroAntigo"><label for="radioNumeroAntigo">Outros</label>
+			
+				</fieldset>
+</td>
+		</tr></table>
+</td>
+		
+			</tr>
+<tr id="NUMPROC" class="">
+<td id="" width="150" valign="">
+			
+			  
+		  	  
+		      
+				
+		  	    <label for="" class="" style="text-align:right;font-weight:bold;;">Número do Processo:</label>
+		      
+		    
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	<table cellpadding="0" cellspacing="0" border="0" width=""><tr>
+<td>
+				
+				
+				
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+	
+	
+	
+	
+	
+		<span id="linhaProcessoUnificado">
+		
+	
+	
+	
+
+
+
+
+
+
+
+
+	
+
+
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+ 
+<input type="text" name="numeroDigitoAnoUnificado" maxlength="25" size="20" value="1013100-50.2017" formattype="TEXT" onkeypress="CT_KPS(this, event);" onblur="CT_BLR(this);" onkeydown="CT_KDN(this, event);" onmousemove="CT_MMOV(this, event);" onmouseout="CT_MOUT(this, event);" onmouseover="CT_MOV(this, event);" onfocus="C_OFC(this, event);" id="numeroDigitoAnoUnificado"><input type="text" id="JTRNumeroUnificado" size="3" disabled value="8.26"><input type="text" name="foroNumeroUnificado" maxlength="4" size="3" value="0053" formattype="TEXT" onkeypress="CT_KPS(this, event);" onblur="CT_BLR(this);" onkeydown="CT_KDN(this, event);" onmousemove="CT_MMOV(this, event);" onmouseout="CT_MOUT(this, event);" onmouseover="CT_MOV(this, event);" onfocus="C_OFC(this, event);" id="foroNumeroUnificado"><input type="hidden" name="dePesquisaNuUnificado" value="1013100-50.2017.8.26.0053" id="nuProcessoUnificadoFormatado"><script>
+	(function($){
+		$(function() {
+			var saj = $.saj;
+			var mascaraNumeroUnificado = saj.mascaraNumeroUnificado;
+			var $campoNumeroDigitoAnoUnificado = $('#numeroDigitoAnoUnificado');
+			var $campoForoNumeroUnificado = $('#foroNumeroUnificado');
+			var $campoJTRNumeroUnificado = $('#JTRNumeroUnificado');
+			saj.configurarMascaraInput($campoForoNumeroUnificado, '0000');
+			saj.configurarMascaraInput($campoNumeroDigitoAnoUnificado, mascaraNumeroUnificado, $campoForoNumeroUnificado,{
+				afterPaste: afterPaste			
+			});
+			saj.bindCamposNumeroProcesso('');
+			
+				var conteudoToolTip = '';
+				if(!conteudoToolTip){
+					conteudoToolTip = '<div style="width: 500px;" ><div><b>Número de Processo Unificado</b></div><div>O sistema disponibiliza facilidades no preenchimento do número unificado, seu formato é NNNNNNN-DD.AAAA.J.TR.OOOO:</div><div style="padding-top: 3px;"><b>NNNNNNN</b>: Caso o número possua zeros à esquerda o sistema preenche-os automaticamente, basta informar o número e o dígito "-" ou ".". Exemplo: ao informar "310-" o sistema irá preencher "0000310-".</div><div><b>DD</b>     : Deve ser preenchido pelo usuário.</div><div><b>AAAA</b>   : Ao informar dois dígitos para o ano o sistema completa o mesmo, basta pressionar a tecla Tab. Exemplo: ao informar "08" e "Tab" o sistema irá preencher "2008".</div><div><b>J.TR</b>    : São números fixos preenchidos pelo sistema.Exemplo: 8.99.</div><div><b>OOOO</b>   : Caso o número possua zeros à esquerda o sistema preenche-os automaticamente, basta informar o número pressionar a tecla Tab. Exemplo: ao informar "10" e "Tab" o sistema irá preencher "0010".</div></div>';
+				}
+				$('#numeroDigitoAnoUnificado, #foroNumeroUnificado').registrarTooltip({
+					conteudoTooltip: conteudoToolTip,
+					localImagensTooltip: '/cposg/imagens/saj',
+					offsetHorizontalExtra: '',
+					offsetVertficalExtra: '',
+					urlConteudoTooltip: '',
+					posicaoTooltip: '',
+					objReferenciaPosicaoTooltip:$campoForoNumeroUnificado
+				});
+			
+		});		
+		
+		var afterPaste = function(textoOriginal) {
+			var texto = getDigits(textoOriginal);
+			if (!texto || texto.length < 16) {
+				return;
+			}
+			
+			var jtr = $('#JTRNumeroUnificado').val();
+			jtr = getDigits(jtr);
+			var jtrDigitado = texto.substring(13,16);
+			var foroUnificado;
+			//pega os 4 ultimos digitos, e caso o jtr colado for o mesmo, coloca os 4 no campo de foro unificado
+			//se o jtr for diferente nao coloca nada no campo de foro unificado
+			if (jtr == jtrDigitado) {
+				foroUnificado = texto.substring(16,texto.length);
+			} else {
+				foroUnificado = '';
+			}
+			
+			var numeroDigitoAno = texto.substring(0,13);
+			var $numeroDigitoAno = $('#numeroDigitoAnoUnificado');
+			$numeroDigitoAno.val(numeroDigitoAno);
+			
+			var $foroNumeroUnificado = $('#foroNumeroUnificado');
+			$foroNumeroUnificado.val(foroUnificado);
+			$foroNumeroUnificado.trigger('blur');
+			$foroNumeroUnificado.focus();
+		};
+		
+		var getDigits = function(texto) {
+			return texto.replace(/[^0-9]/g, '');
+		};
+		$('#numeroDigitoAnoUnificado').attr('aria-label','Número do processo. Informe os treze primeiros dígitos do número do processo.');
+		$('#foroNumeroUnificado').attr('aria-label','Informe os quatro últimos dígitos do número do processo.');
+	})(jQuery);
+	
+</script></span>
+	
+
+
+
+				
+					
+					
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+<style>
+	/* remove borda vermelha de elementos required */
+	input:invalid {
+		box-shadow:none;
+	}
+</style>
+<script type="text/javascript">
+	(function($){
+		$(function() {
+			var saj = $.saj;
+			var id = 'nuProcessoAntigoFormatado';
+			var idObjetoReferencia = '#' + id;
+			if ('' !== '' && !false) {
+				$(idObjetoReferencia).registrarTooltip({
+					conteudoTooltip: '',
+					posicaoTooltip: 'direita',
+					objReferenciaPosicaoTooltip:$(idObjetoReferencia)
+				});
+			}
+			//remove comportamento de exibir mensagem de erro típica do html5
+			$('form:visible').attr('novalidate','');
+			if (''){
+				$(idObjetoReferencia).attr('aria-required','true').attr('required','');
+			}
+		});		
+	})(jQuery);
+	
+</script><span id="linhaProcessoAntigo">
+		
+	
+	
+	<input type="text" name="dePesquisa" size="" value="" formattype="TEXT" formato="25" obrigatorio="" rotulo="" onkeypress="CT_KPS(this, event);" onblur="CT_BLR(this);" onkeydown="CT_KDN(this, event);" onmousemove="CT_MMOV(this, event);" onmouseout="CT_MOUT(this, event);" onmouseover="CT_MOV(this, event);" onfocus="C_OFC(this, event);" disabled style="" class="spwCampoTexto disabled " id="nuProcessoAntigoFormatado" title="" alt=""></span>
+	
+
+
+
+
+
+					
+				
+				
+			
+				
+			</td>
+		</tr></table>
+</td>
+		
+			</tr>
+<tr id="NMPARTE" class="">
+<td id="" width="150" valign="">
+			
+			  
+		  	  
+		      
+				
+		  	    <label for="dePesquisaNmParte" class="" style="text-align:right;font-weight:bold;;">Nome da parte:</label>
+		      
+		    
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	<table cellpadding="0" cellspacing="0" border="0" width=""><tr>
+<td>
+				
+				
+											
+							<label for="campo_NMPARTE" style="display:block;font-size:0;">Nome da parte</label>
+							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+<style>
+	/* remove borda vermelha de elementos required */
+	input:invalid {
+		box-shadow:none;
+	}
+</style>
+<script type="text/javascript">
+	(function($){
+		$(function() {
+			var saj = $.saj;
+			var id = 'campo_NMPARTE';
+			var idObjetoReferencia = '#' + id;
+			if ('' !== '' && !false) {
+				$(idObjetoReferencia).registrarTooltip({
+					conteudoTooltip: '',
+					posicaoTooltip: 'direita',
+					objReferenciaPosicaoTooltip:$(idObjetoReferencia)
+				});
+			}
+			//remove comportamento de exibir mensagem de erro típica do html5
+			$('form:visible').attr('novalidate','');
+			if (''){
+				$(idObjetoReferencia).attr('aria-required','true').attr('required','');
+			}
+		});		
+	})(jQuery);
+	
+</script><span id="">
+		
+	
+	
+	<input type="text" name="dePesquisa" size="" value="" formattype="TEXT" formato="100" obrigatorio="" rotulo="" onkeypress="CT_KPS(this, event);" onblur="CT_BLR(this);" onkeydown="CT_KDN(this, event);" onmousemove="CT_MMOV(this, event);" onmouseout="CT_MOUT(this, event);" onmouseover="CT_MOV(this, event);" onfocus="C_OFC(this, event);" disabled style="" class="spwCampoTexto disabled spwCampoTexto" id="campo_NMPARTE" title="" alt=""></span>
+	
+
+
+
+
+
+							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+<span id="">
+	<label for="id_tag.checkbox.nomecompleto.rotulo">
+		<input type="checkbox" name="chNmCompleto" value="true" disabled style="vertical-align:middle;" id="id_tag.checkbox.nomecompleto.rotulo">
+		Pesquisar por nome completo
+	</label>
+</span>
+
+							
+						
+				
+			</td>
+		</tr></table>
+</td>
+		
+			</tr>
+<tr id="DOCPARTE" class="">
+<td id="" width="150" valign="">
+			
+			  
+		  	  
+		      
+				
+		  	    <label for="chNmCompleto" class="" style="text-align:right;font-weight:bold;;">Documento da Parte:</label>
+		      
+		    
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	<table cellpadding="0" cellspacing="0" border="0" width=""><tr>
+<td>
+				
+				
+				
+							<label for="campo_DOCPARTE" style="display:block;font-size:0;">Documento da Parte</label>
+							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+<style>
+	/* remove borda vermelha de elementos required */
+	input:invalid {
+		box-shadow:none;
+	}
+</style>
+<script type="text/javascript">
+	(function($){
+		$(function() {
+			var saj = $.saj;
+			var id = 'campo_DOCPARTE';
+			var idObjetoReferencia = '#' + id;
+			if ('' !== '' && !false) {
+				$(idObjetoReferencia).registrarTooltip({
+					conteudoTooltip: '',
+					posicaoTooltip: 'direita',
+					objReferenciaPosicaoTooltip:$(idObjetoReferencia)
+				});
+			}
+			//remove comportamento de exibir mensagem de erro típica do html5
+			$('form:visible').attr('novalidate','');
+			if (''){
+				$(idObjetoReferencia).attr('aria-required','true').attr('required','');
+			}
+		});		
+	})(jQuery);
+	
+</script><span id="">
+		
+	
+	
+	<input type="text" name="dePesquisa" size="" value="" formattype="TEXT" formato="100" obrigatorio="" rotulo="" onkeypress="CT_KPS(this, event);" onblur="CT_BLR(this);" onkeydown="CT_KDN(this, event);" onmousemove="CT_MMOV(this, event);" onmouseout="CT_MOUT(this, event);" onmouseover="CT_MOV(this, event);" onfocus="C_OFC(this, event);" disabled style="" class="spwCampoTexto disabled " id="campo_DOCPARTE" title="" alt=""></span>
+	
+
+
+
+
+
+						
+				
+			</td>
+		</tr></table>
+</td>
+		
+			</tr>
+<tr id="NMADVOGADO" class="">
+<td id="" width="150" valign="">
+			
+			  
+		  	  
+		      
+				
+		  	    <label for="dePesquisaNmParte" class="" style="text-align:right;font-weight:bold;;">Nome do Advogado:</label>
+		      
+		    
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	<table cellpadding="0" cellspacing="0" border="0" width=""><tr>
+<td>
+				
+				
+											
+							<label for="campo_NMADVOGADO" style="display:block;font-size:0;">Nome do Advogado</label>
+							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+<style>
+	/* remove borda vermelha de elementos required */
+	input:invalid {
+		box-shadow:none;
+	}
+</style>
+<script type="text/javascript">
+	(function($){
+		$(function() {
+			var saj = $.saj;
+			var id = 'campo_NMADVOGADO';
+			var idObjetoReferencia = '#' + id;
+			if ('' !== '' && !false) {
+				$(idObjetoReferencia).registrarTooltip({
+					conteudoTooltip: '',
+					posicaoTooltip: 'direita',
+					objReferenciaPosicaoTooltip:$(idObjetoReferencia)
+				});
+			}
+			//remove comportamento de exibir mensagem de erro típica do html5
+			$('form:visible').attr('novalidate','');
+			if (''){
+				$(idObjetoReferencia).attr('aria-required','true').attr('required','');
+			}
+		});		
+	})(jQuery);
+	
+</script><span id="">
+		
+	
+	
+	<input type="text" name="dePesquisa" size="" value="" formattype="TEXT" formato="100" obrigatorio="" rotulo="" onkeypress="CT_KPS(this, event);" onblur="CT_BLR(this);" onkeydown="CT_KDN(this, event);" onmousemove="CT_MMOV(this, event);" onmouseout="CT_MOUT(this, event);" onmouseover="CT_MOV(this, event);" onfocus="C_OFC(this, event);" disabled style="" class="spwCampoTexto disabled spwCampoTexto" id="campo_NMADVOGADO" title="" alt=""></span>
+	
+
+
+
+
+
+							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+<span id="">
+	<label for="id_tag.checkbox.nomecompleto.rotulo">
+		<input type="checkbox" name="chNmCompleto" value="true" disabled style="vertical-align:middle;" id="id_tag.checkbox.nomecompleto.rotulo">
+		Pesquisar por nome completo
+	</label>
+</span>
+
+							
+						
+				
+			</td>
+		</tr></table>
+</td>
+		
+			</tr>
+<tr id="NUMOAB" class="">
+<td id="" width="150" valign="">
+			
+			  
+		  	  
+		      
+				
+		  	    <label for="chNmCompleto" class="" style="text-align:right;font-weight:bold;;">OAB:</label>
+		      
+		    
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="">
+		  
+		
+			
+	
+	
+	
+	
+	
+	<table cellpadding="0" cellspacing="0" border="0" width=""><tr>
+<td>
+				
+				
+				
+							<label for="campo_NUMOAB" style="display:block;font-size:0;">OAB</label>
+							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+<style>
+	/* remove borda vermelha de elementos required */
+	input:invalid {
+		box-shadow:none;
+	}
+</style>
+<script type="text/javascript">
+	(function($){
+		$(function() {
+			var saj = $.saj;
+			var id = 'campo_NUMOAB';
+			var idObjetoReferencia = '#' + id;
+			if ('' !== '' && !false) {
+				$(idObjetoReferencia).registrarTooltip({
+					conteudoTooltip: '',
+					posicaoTooltip: 'direita',
+					objReferenciaPosicaoTooltip:$(idObjetoReferencia)
+				});
+			}
+			//remove comportamento de exibir mensagem de erro típica do html5
+			$('form:visible').attr('novalidate','');
+			if (''){
+				$(idObjetoReferencia).attr('aria-required','true').attr('required','');
+			}
+		});		
+	})(jQuery);
+	
+</script><span id="">
+		
+	
+	
+	<input type="text" name="dePesquisa" size="" value="" formattype="TEXT" formato="100" obrigatorio="" rotulo="" onkeypress="CT_KPS(this, event);" onblur="CT_BLR(this);" onkeydown="CT_KDN(this, event);" onmousemove="CT_MMOV(this, event);" onmouseout="CT_MOUT(this, event);" onmouseover="CT_MOV(this, event);" onfocus="C_OFC(this, event);" disabled style="" class="spwCampoTexto disabled " id="campo_NUMOAB" title="" alt=""></span>
+	
+
+
+
+
+
+						
+				
+			</td>
+		</tr></table>
+</td>
+		
+			</tr>
+<input id="uuidCaptcha" type="hidden" name="uuidCaptcha" value=""><tr class="">
+<td id="" width="150" valign="top">
+			
+		  </td>
+		
+		
+		
+		  
+		  
+		    <td valign="top">
+		  
+		
+			
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="padding-bottom: 5px;">
+ <script src="https://www.google.com/recaptcha/api.js?hl=pt-BR" async defer></script><div class="g-recaptcha" data-sitekey="6LcX22AUAAAAABvrd9PDOqsE2Rlj0h3AijenXoft" data-size="normal"></div>
+</div>
+
+
+<script type="text/javascript">
+	(function($) {
+		$.saj = $.saj || {};
+
+
+		$.saj.obterIdentificadorDoCaptcha = function () {
+			$.ajax({
+		        type: "POST",
+		        url: '/cposg/captchaControleAcesso.do',
+		        data: {
+		        	uuidCaptcha: $('#uuidCaptcha').val()
+				},
+		        success: function(conteudoCaptcha){
+					$('#uuidCaptcha').val(conteudoCaptcha.uuidCaptcha);
+		        },
+				error:function(error) {
+					console.log(error);
+				}
+		    });
+		};
+
+
+		$(function() {
+			$.saj.obterIdentificadorDoCaptcha();
+		});
+	})(jQuery);
+
+</script>
+</td>
+		
+			</tr>
+</table>
+</div>
+	
+	
+	
+
+
+  	
+
+
+
+
+
+
+
+
+
+
+
+	<table id="" class="secaoBotoesBody" width="100%" style="" cellpadding="2" cellspacing="0" border="0"><tr>
+<td width="150"> </td>
+ 			
+			<td align="">
+			
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	<input type="submit" name="pbEnviar" value="Pesquisar" onclick="" onmouseover="B_mOver(this);" onmouseout="B_mOut(this);" class="spwBotaoDefault " id="botaoPesquisar">
+</td>
+		</tr></table>
+<script>
+		$(function(){
+			$('input#botaoPesquisar').bind('click', function(){
+				$('input[name="paginaConsulta"]').val(1);
+				if ($('#cbPesquisa').val() === 'NUMPROC') {
+					$('#id_local option').removeAttr('selected');
+					$('#id_local option:first').attr('selected', 'selected');
+				}
+			});
+		});
+  	</script>
+</form>
+
+
+
+
+			     
+	   	
+		
+		
+  	
+        
+
+
+
+
+
+
+
+
+
+
+	
+		
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+		
+
+
+
+</td>
+</tr></table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="esajTabelaRodape" summary=" "><tr>
+<td class="esajCelulaRodapeCentro">
+            Desenvolvido pela Softplan em parceria com a Secretaria de Tecnologia da Informação - STI
+            
+        </td>
+    </tr></table>
+<link href="https://esaj.tjsp.jus.br/esaj/tema/padrao/css/saj-popup-modal.css" rel="stylesheet" type="text/css">
+<link href="https://esaj.tjsp.jus.br/esaj/tema/padrao/css/popup-beta.css" rel="stylesheet" type="text/css">
+<script>
+    var appEsajLayout = appEsajLayout || {};
+    appEsajLayout.tituloCertificadoDigital = 'Certificado digital';
+    appEsajLayout.cliente = 'SP';
+    appEsajLayout.emailParaContato = 'esajtjsp@softplan.com.br';
+    appEsajLayout.utilizarBotaoContato = 'true';
+    appEsajLayout.contexto = 'https://esaj.tjsp.jus.br/esaj';
+
+    if(window.jQuery) {
+        jQuery.saj = jQuery.saj || {};
+        jQuery.saj.certificado = jQuery.saj.certificado || {};
+        jQuery.saj.certificado.cliente = 'SP';
+        jQuery.saj.certificado.tituloCertificadoDigital = 'Certificado digital';
+        jQuery.saj.certificado.tituloProblemasAoAssinar = 'Falha de comunicação com o dispositivo de assinatura digital';
+        jQuery.saj.certificado.urlConteudoAjudaWebSigner = appEsajLayout.contexto + '/ajudaWebSigner.do';
+        jQuery.saj.certificado.licenca = 'ARkEKi50anNwLmp1cy5iciwxMC4zMy4xOTIuMTAxLDEwLjMzLjE5Mi4xMDUsMTAuMzMuMTkyLjE0NiwxMC4zMy4xOTIuMjQxLDEwLjMzLjE5Mi45MCwxMC4zMy4xOTIuOTEsMTAuMzMuMTkyLjkyLDEwLjMzLjE5Mi45NCwxMC4zMy4xOTMuMTg1LDEwLjMzLjE5My4xODYsMTAuMzMuMTkzLjE4NywxMC4zMy4xOTMuMTg4LDEwLjMzLjE5NC4yMjQsMTAuMzMuMTk0LjIyNSwxMC4zMy4xOTQuMjU1LDEwLjMzLjE5NC43NCwxMC4zMy4xOTQuNzUsMTAuMzMuMTk0Ljc2LDEwLjMzLjE5NC43NywxMC4zMy4xOTQuNzksMTAuMzMuMTk1LjEwMiwxMC4zMy4xOTUuMTAyLDEwLjMzLjE5NS4xMTksMTAuMzMuMTk1LjEyMSwxMC4zMy4xOTUuMTIyLDEwLjMzLjE5NS4xMjMsMTAuMzMuMTk1LjEyNCwxMC4zMy4xOTUuMTI1LDEwLjMzLjE5NS4xMjYsMTAuMzMuMTk1LjEyNywxMC4zMy4xOTUuMTI4LDEwLjMzLjE5NS4xMjksMTAuMzMuMTk1LjEzMCwxMC4zMy4xOTUuMTMxLDEwLjMzLjE5NS4xMzIsMTAuMzMuMTk1LjE4MywxMC4zMy4xOTUuMTg0LDEwLjMzLjE5NS4xODUsMTAuMzMuMTk1LjE4NiwxMC4zMy4xOTUuMTg3LDEwLjMzLjE5NS4xODgsMTAuMzMuMTk1LjE4OSwxMC4zMy4xOTUuMTkxLDEwLjMzLjE5NS4xOTIsMTAuMzMuMTk1LjE5MywxMC4zMy4xOTUuMTk0LDEwLjMzLjE5NS4xOTUsMTAuMzMuMTk1LjE5NSwxMC4zMy4xOTUuMTk3LDEwLjMzLjE5NS4xOTgsMTAuMzMuMTk1LjIzNCwxMC4zMy4xOTUuMjM3LDEwLjk4LjE5Mi4xMTMsMTAuOTguMTkyLjExNCwxMC45OC4xOTIuMTE3LDEwLjk4LjE5Mi4yNTAsMTAuOTguMTkyLjQyLDEwLjk4LjE5Mi43MCwxMC45OC4xOTIuNzEsMTAuOTguMTkzLjEyMSwxMC45OC4xOTMuMTIyLDEwLjk4LjE5My4xOTksMTAuOTguMTkzLjIwMCwxMC45OC4xOTMuMjAxLDEwLjk4LjE5My4yMDIsMTAuOTguMTkzLjIyNSwxMC45OC4xOTQuMTIxLDEwLjk4LjE5NC4xMjIsMTAuOTguMTk0LjE0MSwxMC45OC4xOTQuMTQyLDEwLjk4LjE5NC4xNDMsMTAuOTguMTk0LjE0NCwxMC45OC4xOTQuMTQ1LDEwLjk4LjE5NC4xNDcsMTAuOTguMzIuNzYAAAABt8T6Ov8g0lWHnOe7bekYQC1kjn/SgVPWGteqlpMDF8qEOKOxdWahBlk0uh9nfmPiUY9MXcXchlgu6V/zygYGgSfZG11odlUkrXZCAYX/pB3ArsqmrqgvMK0mxuTVOThs/flGWltXnCFEFEU1Pp6RSdlhtCOEuGx5XWov3lux8DcnB+DxL2zauU4GfGJmoXCZDMWT2g7MXIu7VjrJJEkCH/nZ0hkhUsw/k0ORu7/kXJyBufrFZYbsQ/Nadjp9CgYhlsjKXmSPSn8GU8xUetHXGX3FzFJriyk8iqcH72p4z0/Msif4S+VNz0JV3+xffRvdmKuG28jHHDUqBxIrhjs+XA==';
+        jQuery.saj.certificado.cofreDigital = jQuery.saj.certificado.cofreDigital || {};
+        jQuery.saj.certificado.cofreDigital.habilitado = 'false' === 'true';
+        jQuery.saj.certificado.cofreDigital.enderecoBase = 'https://esaj.tjsp.jus.br/esaj';
+    }
+
+</script><script src="https://esaj.tjsp.jus.br/esaj/js/app-bundle.js?n=447896787"></script><script src="https://esaj.tjsp.jus.br/sajcas/seletorVersaoBeta.js?n=5f11e2fd-7ee6-4b83-8e39-bd75f17342b2&amp;versao=1"></script><script language="javascript" type="text/JavaScript" src="https://esaj.tjsp.jus.br/esaj/js/softplan-websigner-2.5.1.js?n=736057767"></script><script language="javascript" type="text/JavaScript" src="https://esaj.tjsp.jus.br/esaj/js/saj-certificado.js?n=2205257179"></script><div id="webSignerNaoInstalado" style="display: none;">
+    <p>Para utilização do certificado digital no Portal e-SAJ é necessário a instalação do plug-in Web Signer. Por favor, realize a instalação antes de continuar.</p>
+    <div class="footer_certificado">
+        <button id="redirecionarParaPaginaInstalacao" class="actionPrincipal spwBotaoDefault">Instalar</button>
+        <button class="fecharModalInstalacao spwBotao">Cancelar</button>
+        <button class="spwBotao" onclick="window.open('https://esaj.tjsp.jus.br/WebHelp//#id_instalacao_lacuna.htm','_blank')">Ajuda</button>
+    </div>
+</div>
+
+<div id="webSignerNaoSuportado" style="display: none;">
+    <p>O navegador utilizado não é compatível com a tecnologia (Web Signer) necessária para utilização do certificado digital. Por favor, utilize um dos navegadores homologados. Em caso de dúvidas, efetue a validação de requisitos <a href="https://esaj.tjsp.jus.br/petpg/abrirVerificacaoRequisitosPet.do" target="_blank">aqui</a>.</p>
+    <div class="footer_certificado">
+        <button class="fecharModalInstalacao spwBotaoDefault actionPrincipal">OK</button>
+    </div>
+</div>
+	
+
+
+  
+	
+	
+
+
+
+	
+
+
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"errorBeacon":"bam.nr-data.net","licenseKey":"b61bdf610d","agent":"","beacon":"bam.nr-data.net","applicationTime":24,"applicationID":"218539834","transactionName":"MlZRN0QECkMAVERZDgscYBdEEBBDIFREWQ4LHFERGAYLXU9EX1YVFV9SDRgWBVpPVEBfEgIdQBdEEBBDT1ZTRAgKXR0wUwQWUwl2U0QICl0=","queueTime":0}</script>
+</body>
+</html>

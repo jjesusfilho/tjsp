@@ -2,7 +2,7 @@
 #'
 #' @param diretorio diretório onde se encontram os pdfs
 #' @param remover_assinatura default é FALSE
-#' @param combinar default é manter cada página em um vetor
+#' @param combinar default juntar todas as páginas em um único vetor.
 #'
 #' @return Lista com vetores das páginas dos pdfs
 #' @export
@@ -13,11 +13,11 @@ ler_acordaos <- function(diretorio = ".", remover_assinatura = FALSE, combinar =
   textos <- purrr::map(pdfs, pdftools::pdf_text)
 
   if (remover_assinatura == TRUE) {
-    texto <- purrr::map(textos, remover_assinatura)
+    textos <- purrr::map(textos, ~ remover_assinatura(.x))
   }
 
   if (combinar == TRUE) {
     textos <- purrr::map(textos, ~ stringr::str_c(.x, collapse = "\n"))
   }
-  return(texto)
+  return(textos)
 }

@@ -1,6 +1,6 @@
 #' Lê conteúdo das decisões monocráticas
 #'
-#' @param fonte objeto ou diretório onde se encontram os htmls.
+#' @param diretorio objeto ou diretório onde se encontram os htmls.
 #'
 #' @return tibble com o número do processo, o texto da decisão e a data da
 #'     decisão.
@@ -15,15 +15,12 @@
 #' ler_decisoes_monocraticas()
 #' }
 #'
-ler_decisoes_monocraticas <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
-    arquivos <- list.files(
-      path = fonte, pattern = ".html",
-      full.names = TRUE
-    )
-  }
+ler_decisoes_monocraticas <- function(diretorio = ".") {
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
+
 
 
 

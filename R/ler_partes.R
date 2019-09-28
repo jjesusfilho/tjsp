@@ -1,26 +1,27 @@
 #' Aplica parser para extrair informações sobre as partes do
 #'     processo.
 #'
-#' @param fonte objeto ou diretório onde se encontram os htmls baixados.
-#'
+#' @param diretorio Objeto ou diretório onde se encontram os htmls baixados.
+#' @param arquivos  O diretório é ignorado se você fornecer o vetor
+#'     de arquivos
 #' @return tabela com informações das partes.
 #' @export
 #'
-ler_partes <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
-    arquivos <- list.files(
-      path = fonte, pattern = ".html",
-      full.names = TRUE
-    )
-  }
+ler_partes <- function(diretorio = ".", arquivos = NULL) {
+
+ if (is.null(arquivos)) {
+
+   arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
+}
 
   processos <-
     stringr::str_extract(arquivos, "\\d{20}") %>%
     abjutils::build_id(.)
 
-  purrr::map2_dfr(arquivos, processos, purrr::possibly(~ {
+  purrr::map2_dfr(arquivos, processos, purrr::possibly(~{
 
     ## Esta primeira parte seleciona a tabela que contêm as partes e a converte em
     ## texto. Infelizmente o html não é muito consistente. Temos de usar regex.
@@ -43,7 +44,7 @@ ler_partes <- function(fonte = ".") {
       tibble::tibble() %>%
       setNames("parte") %>%
       tidyr::separate(parte, c("parte", "parte_nome"), ":\\s?") %>%
-      dplyr::mutate(processo = .y) %>%
+      dplyr::mutate(processo = stringr::str_remove_all(.y,"\\D")) %>%
       dplyr::select(processo, dplyr::everything())
   }, otherwise = NULL))
 }

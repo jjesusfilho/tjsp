@@ -7,7 +7,7 @@
 #' @export
 #'
 corrigir_varas <- function(df, coluna) {
-  .x <- rlang::enquo(vara)
+  .x <- rlang::enquo(coluna)
 
   df %>%
     dplyr::select(!!.x) %>%
@@ -16,8 +16,9 @@ corrigir_varas <- function(df, coluna) {
       stringr::str_replace_all("\\W+", " ") %>%
       stringr::str_squish() %>%
       stringr::str_replace("º", "ª") %>%
+      stringr::str_replace("vara juizado", "vara do juizado") %>%
       stringr::str_to_sentence(),
-    vara2 = dplyr::case_when(
+     vara2 = dplyr::case_when(
       stringr::str_detect(vara2, "(mulher|doméstica|fam.lia)") ~ "Vara de violência doméstica",
       TRUE ~ vara2
     )

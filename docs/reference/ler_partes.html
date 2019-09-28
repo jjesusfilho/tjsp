@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9060</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9070</span>
       </span>
     </div>
 
@@ -80,6 +80,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/roteiro-tjsp.html">Coletando dados do TJSP</a>
+    </li>
+  </ul>
 </li>
       </ul>
       
@@ -115,14 +127,19 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ler_partes</span>(<span class='kw'>fonte</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>ler_partes</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fonte</th>
-      <td><p>objeto ou diretório onde se encontram os htmls baixados.</p></td>
+      <th>diretorio</th>
+      <td><p>Objeto ou diretório onde se encontram os htmls baixados.</p></td>
+    </tr>
+    <tr>
+      <th>arquivos</th>
+      <td><p>O diretório é ignorado se você fornecer o vetor
+de arquivos</p></td>
     </tr>
     </table>
     

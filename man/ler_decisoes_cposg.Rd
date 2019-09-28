@@ -4,10 +4,10 @@
 \alias{ler_decisoes_cposg}
 \title{Lê o dispositivo das decisões de segunda instância a partir dos htmls}
 \usage{
-ler_decisoes_cposg(fonte = ".")
+ler_decisoes_cposg(diretorio = ".")
 }
 \arguments{
-\item{fonte}{objeto ou diretório onde se encontram os htmls baixados}
+\item{diretorio}{objeto ou diretório onde se encontram os htmls baixados}
 }
 \value{
 tibble com as os numéros dos processos e respectivas decisões
@@ -17,6 +17,6 @@ Lê o dispositivo das decisões de segunda instância a partir dos htmls
 }
 \examples{
 \dontrun{
-decisoes<-ler_decisoes_cposg()
+decisoes <- ler_decisoes_cposg()
 }
 }

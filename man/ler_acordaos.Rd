@@ -12,7 +12,7 @@ ler_acordaos(diretorio = ".", remover_assinatura = FALSE,
 
 \item{remover_assinatura}{default é FALSE}
 
-\item{combinar}{default é manter cada página em um vetor}
+\item{combinar}{default juntar todas as páginas em um único vetor.}
 }
 \value{
 Lista com vetores das páginas dos pdfs

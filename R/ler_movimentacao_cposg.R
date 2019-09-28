@@ -1,6 +1,6 @@
 #' Extrai a movimentação processual de primeira e de segunda instância
 #'
-#' @param fonte objeto ou diretorio  onde se encontram os htmls
+#' @param diretorio objeto ou diretorio  onde se encontram os htmls
 #'
 #' @return tibble com a movimentação processual.
 #' @export
@@ -10,16 +10,13 @@
 #' andamento_cpopg <- ler_movimentacao_cpopg()
 #' }
 #'
-ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
-    arquivos <- list.files(
-      path = fonte, pattern = ".html",
-      full.names = TRUE
-    )
-  }
+ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
+  processo <- stringr::str_extract(arquivos, "\\d{20}")
 
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
     texto <- xml2::read_html(.x) %>%
@@ -32,8 +29,8 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(fonte = ".") {
     mov <- xml2::xml_find_all(texto, ".//td[@style='vertical-align: top; padding-bottom: 5px']") %>%
       xml2::xml_text(trim = TRUE)
 
+    processo <- stringr::str_remove_all(.y,"\\D+")
 
-
-    tibble::tibble(processo = .y, data = data, movimentacao = mov)
+    tibble::tibble(processo = processo, data = data, movimentacao = mov)
   }, otherwise = NULL))
 }

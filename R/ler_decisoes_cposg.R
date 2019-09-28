@@ -1,6 +1,6 @@
 #' Lê o dispositivo das decisões de segunda instância a partir dos htmls
 #'
-#' @param fonte objeto ou diretório onde se encontram os htmls baixados
+#' @param diretorio objeto ou diretório onde se encontram os htmls baixados
 #'
 #' @return tibble com as os numéros dos processos e respectivas decisões
 #' @export
@@ -9,16 +9,15 @@
 #' \dontrun{
 #' decisoes <- ler_decisoes_cposg()
 #' }
-ler_decisoes_cposg <- function(fonte = ".") {
+ler_decisoes_cposg <- function(diretorio = ".") {
   ""
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
-    arquivos <- list.files(
-      path = fonte, pattern = ".html",
-      full.names = TRUE
-    )
-  }
+
+
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
+
 
 
   processo <- stringr::str_extract(arquivos, "\\d{20}") %>%

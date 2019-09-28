@@ -4,10 +4,10 @@
 \alias{ler_entrada}
 \title{Data da entrada do processo}
 \usage{
-ler_entrada(fonte = ".")
+ler_entrada(diretorio = ".")
 }
 \arguments{
-\item{fonte}{objeto ou diretório onde se encontram os htmls dos processos}
+\item{diretorio}{objeto ou diretório onde se encontram os htmls dos processos}
 }
 \value{
 tibble com o número dos processos e respectivas decisões

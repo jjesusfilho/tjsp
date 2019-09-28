@@ -1,4 +1,4 @@
-#' Organiza metadados cpopg (apenas criminal por hora)
+#' Organiza metadados cpopg (apenas criminal por ora)
 #'
 #' @param df data.frame lido com ler_dados_cpopg
 #' @param excluir_assunto informar vetor de frases a serem excluídas dos assuntos.
@@ -31,50 +31,49 @@ organizar_dados_cpopg <- function(df, excluir_assunto = "", excluir_classe = "")
     df$na <- NULL
 
 
-  if (nrow(df) > 0) {
-    df <- df %>%
-      dplyr::mutate(
-        branco = dplyr::case_when(
-          stringr::str_detect(v1, "(?i)[áa]rea") ~ "area",
-          v1 == "(Tramitação prioritária)" ~ "prioritaria",
-          TRUE ~ "vara"
+    if (nrow(df) > 0) {
+      df <- df %>%
+        dplyr::mutate(
+          branco = dplyr::case_when(
+            stringr::str_detect(v1, "(?i)[áa]rea") ~ "area",
+            v1 == "(Tramitação prioritária)" ~ "prioritaria",
+            TRUE ~ "vara"
+          )
+        ) %>%
+        tidyr::unite("v2", assunto, v1, sep = "&", remove = FALSE) %>%
+        tibble::rowid_to_column() %>%
+        tidyr::spread(branco, v2) %>%
+        dplyr::mutate_at(dplyr::vars(area, vara), list(~ stringr::str_remove(., "NA&"))) %>%
+        dplyr::mutate(vara = zoo::na.locf(vara, fromLast = T, na.rm = FALSE)) %>%
+        dplyr::filter(!is.na(distribuicao) | !is.na(classe) | !is.na(assunto)) %>%
+        dplyr::filter(!is.element(assunto, excluir_assunto)) %>%
+        dplyr::mutate(
+          data_recebimento = stringr::str_extract(distribuicao, "\\d+/\\d+/\\d+") %>%
+            lubridate::dmy(),
+          horario_recebimento = stringr::str_extract(distribuicao, "\\d{2}:\\d{2}") %>%
+            lubridate::hm(),
+          tipo_recebimento = stringr::str_extract(distribuicao, "(?<=-\\s).+"),
+          distribuicao = NULL
+        ) %>%
+        tidyr::separate(vara, c("vara", "foro"), sep = " - ", extra = "merge") %>%
+        dplyr::mutate(
+          area = stringr::str_remove_all(v1, "(?i)(Área|\\W+)"),
+          v1 = NULL
         )
-      ) %>%
-      tidyr::unite("v2", assunto, v1, sep = "&", remove = FALSE) %>%
-      tibble::rowid_to_column() %>%
-      tidyr::spread(branco, v2) %>%
-      dplyr::mutate_at(dplyr::vars(area, vara), list(~ stringr::str_remove(., "NA&"))) %>%
-      dplyr::mutate(vara = zoo::na.locf(vara, fromLast = T, na.rm = FALSE)) %>%
-      dplyr::filter(!is.na(distribuicao) | !is.na(classe) | !is.na(assunto)) %>%
-      dplyr::filter(!is.element(assunto, excluir_assunto)) %>%
-      dplyr::mutate(
-        data_recebimento = stringr::str_extract(distribuicao, "\\d+/\\d+/\\d+") %>%
-          lubridate::dmy(),
-        horario_recebimento = stringr::str_extract(distribuicao, "\\d{2}:\\d{2}") %>%
-          lubridate::hm(),
-        tipo_recebimento = stringr::str_extract(distribuicao, "(?<=-\\s).+"),
-        distribuicao = NULL
-      ) %>%
-      tidyr::separate(vara, c("vara", "foro"), sep = " - ", extra = "merge") %>%
-      dplyr::mutate(
-        area = stringr::str_remove_all(v1, "(?i)(Área|\\W+)"),
-        v1 = NULL
-      )
 
 
-    df <- df %>%
-      dplyr::filter(!is.element(classe, excluir_classe)) %>%
-      dplyr::mutate(rowid = NULL)
+      df <- df %>%
+        dplyr::filter(!is.element(classe, excluir_classe)) %>%
+        dplyr::mutate(rowid = NULL)
 
-    if (exists("prioritaria", df, inherits = FALSE)) {
-      df <- dplyr::mutate(df, prioritaria = stringr::str_remove(prioritaria, "&.+"))
+      if (exists("prioritaria", df, inherits = FALSE)) {
+        df <- dplyr::mutate(df, prioritaria = stringr::str_remove(prioritaria, "&.+"))
+      }
+
+      if (exists("valor_da_acao", df, inherits = FALSE)) {
+        df <- dplyr::mutate(df, valor_da_acao = tjsp::numero(valor_da_acao))
+      }
     }
-
-    if (exists("valor_da_acao", df, inherits = FALSE)) {
-      df <- dplyr::mutate(df, valor_da_acao = tjsp::numero(valor_da_acao))
-    }
-  }
-})
-      return(df)
-
+  })
+  return(df)
 }

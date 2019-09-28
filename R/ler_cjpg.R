@@ -1,6 +1,6 @@
 #' Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.
 #'
-#' @param fonte objeto ou diretório onde se encontram as páginas.
+#' @param diretorio objeto ou diretório onde se encontram as páginas.
 #'
 #' @return uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro, vara,
 #'     disponibilizacao e julgado (texto da decisão).
@@ -10,16 +10,11 @@
 #' \dontrun{
 #' ler_cjpg()
 #' }
-ler_cjpg <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
-    arquivos <- list.files(
-      path = fonte, pattern = ".html",
-      full.names = TRUE
-    )
-  }
-
+ler_cjpg <- function(diretorio = ".") {
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
   df <- purrr::map_dfr(arquivos, purrr::possibly(~ {
     resposta <- .x %>%
@@ -84,7 +79,8 @@ ler_cjpg <- function(fonte = ".") {
       dplyr::vars(2:8),
       dplyr::funs(stringi::stri_replace_first_regex(., ".*:\\s?", ""))
     ) %>%
-    dplyr::mutate_all(stringi::stri_trim_both) %>%
+    dplyr::mutate_all(stringr::str_squish) %>%
     rm_duplicados(processo) %>%
-    dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao))
+    dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao),
+                  processo = stringr::str_remove_all(processo,"\\D+"))
 }

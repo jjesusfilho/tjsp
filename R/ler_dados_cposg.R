@@ -1,6 +1,6 @@
 #' Lê metadados dos processos de segunda instância
 #'
-#' @param fonte objeto no global env ou diretório onde se encontram os htmls.
+#' @param diretorio objeto no global env ou diretório onde se encontram os htmls.
 #'
 #' @return tabela com dados do processo
 #' @export
@@ -9,16 +9,11 @@
 #' \dontrun{
 #' dados <- ler_dados_cposg()
 #' }
-ler_dados_cposg <- function(fonte = ".") {
-  if (is_defined(fonte)) {
-    arquivos <- fonte
-  } else {
-    arquivos <- list.files(
-      path = fonte, pattern = ".html",
-      full.names = TRUE
-    )
-  }
-
+ler_dados_cposg <- function(diretorio = ".") {
+  arquivos <- list.files(
+    path = diretorio, pattern = ".html",
+    full.names = TRUE
+  )
 
 
 

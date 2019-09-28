@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9060</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0.9070</span>
       </span>
     </div>
 
@@ -74,6 +74,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/roteiro-tjsp.html">Coletando dados do TJSP</a>
+    </li>
+  </ul>
 </li>
       </ul>
       
@@ -129,6 +141,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="autenticar.html">autenticar()</a></code> </p>
+        </td>
+        <td><p>Autenticar no tjsp</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="baixar_acordaos.html">baixar_acordaos()</a></code> </p>
         </td>
         <td><p>Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento</p></td>
@@ -144,6 +162,12 @@
           <p><code><a href="baixar_cjsg.html">baixar_cjsg()</a></code> </p>
         </td>
         <td><p>Baixa consulta jurisprudencial do TJSP</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="baixar_cpopg.html">baixar_cpopg()</a></code> </p>
+        </td>
+        <td><p>Baixar consulta processual de primeiro grau</p></td>
       </tr><tr>
         
         <td>
@@ -166,6 +190,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="classificar_sentenca.html">classificar_sentenca()</a></code> </p>
+        </td>
+        <td><p>Classifica decisões de primeiro grau</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="codigos.html">codigos</a></code> </p>
         </td>
         <td><p>Códigos</p></td>
@@ -184,9 +214,21 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="filtrar_cjsj.html">filtrar_cjsj()</a></code> </p>
+          <p><code><a href="filtrar_cjsg.html">filtrar_cjsg()</a></code> </p>
         </td>
         <td><p>Filtra base cjsg por assunto e classe.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ggdecisao.html">ggdecisao()</a></code> </p>
+        </td>
+        <td><p>Plota distribuição das decisões conforme a câmara e o recorrente</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="imoveis.html">imoveis</a></code> </p>
+        </td>
+        <td><p>imoveis</p></td>
       </tr><tr>
         
         <td>
@@ -244,7 +286,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="ler_despachos.html">ler_despachos()</a></code> </p>
+          <p><code><a href="ler_despacho.html">ler_despacho()</a></code> </p>
         </td>
         <td><p>Extrai despachos judiciais, que podem incluir decisões monocráticas, da movimentação.</p></td>
       </tr><tr>
@@ -269,15 +311,33 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="modelar_decisao.html">modelar_decisao()</a></code> </p>
+        </td>
+        <td><p>Modelar decisão</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="numero.html">numero()</a></code> </p>
         </td>
         <td><p>Converte valor da ação para número ou qualquer outra string.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="obter_cpopg_oab.html">obter_cpopg_oab()</a></code> </p>
+        </td>
+        <td><p>Busca os números de processos no primeiro grau com base na oab do advogado</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="organizar_dados_cpopg.html">organizar_dados_cpopg()</a></code> </p>
         </td>
-        <td><p>Organiza metadados cpopg (apenas criminal por hora)</p></td>
+        <td><p>Organiza metadados cpopg (apenas criminal por ora)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="psql_cjpg.html">psql_cjpg()</a></code> </p>
+        </td>
+        <td><p>Applies functions baixar_cjpg from package tjsp and sends data to psql db</p></td>
       </tr><tr>
         
         <td>

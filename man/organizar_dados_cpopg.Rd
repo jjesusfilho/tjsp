@@ -2,7 +2,7 @@
 % Please edit documentation in R/organizar_dados_cpopg.R
 \name{organizar_dados_cpopg}
 \alias{organizar_dados_cpopg}
-\title{Organiza metadados cpopg (apenas criminal por hora)}
+\title{Organiza metadados cpopg (apenas criminal por ora)}
 \usage{
 organizar_dados_cpopg(df, excluir_assunto = "", excluir_classe = "")
 }
@@ -18,5 +18,5 @@ Há uma sugestão de palavras no dataset 'excluir_assuntos_cpopg'}
 data.frame limpo e organizado
 }
 \description{
-Organiza metadados cpopg (apenas criminal por hora)
+Organiza metadados cpopg (apenas criminal por ora)
 }

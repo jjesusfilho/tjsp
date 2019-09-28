@@ -18,8 +18,8 @@ classificar_recurso <- function(x, dispositivo, decisao) {
   input <- rlang::enexpr(dispositivo)
   decisao_out <- rlang::enexpr(decisao)
   y <- x %>%
-    dplyr::distinct(rlang::UQ(input)) %>%
-    dplyr::mutate(alternativa = tolower(rlang::UQ(input)) %>%
+    dplyr::distinct(!!input) %>%
+    dplyr::mutate(alternativa = tolower(!!input) %>%
       stringi::stri_trans_general(., "latin-ascii"))
 
   y <- y %>%
@@ -38,7 +38,7 @@ classificar_recurso <- function(x, dispositivo, decisao) {
         stringi::stri_detect_regex(alternativa, "^prove\\w+") ~ "provido",
         stringi::stri_detect_regex(alternativa, "^mantiveram") ~ "improvido",
         stringi::stri_detect_regex(alternativa, "acolh\\w+") ~ "provido",
-        stringi::stri_detect_regex(alternativa, "(deram|da\\-*\\s*se|dando\\-*(se)*|comporta|\\bdou\\b|confere\\-se|se\\s*\\-*da|merece)") ~ "provido",
+        stringi::stri_detect_regex(alternativa, "(deu|deram|da\\-*\\s*se|dando\\-*(se)*|comporta|\\bdou\\b|confere\\-se|se\\s*\\-*da|merece)") ~ "provido",
         stringi::stri_detect_regex(alternativa, "(nao\\sderam|nao\\smerece|se\\snega|nega\\-*\\s*se|negar\\-*\\s*lhe|nao\\scomporta|negram|negararam|nego|negar)") ~ "improvido",
         stringi::stri_detect_regex(alternativa, "(homolog|desistencia)") ~ "desistência",
         stringi::stri_detect_regex(alternativa, "(anular\\w*|nulo|nula|nulidade)") ~ "anulado",
