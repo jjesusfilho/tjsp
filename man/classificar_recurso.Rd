@@ -4,7 +4,7 @@
 \alias{classificar_recurso}
 \title{Classifica acórdãos}
 \usage{
-classificar_recurso(x, dispositivo, decisao)
+classificar_recurso(x, dispositivo, decisao, inteiro_teor = FALSE)
 }
 \arguments{
 \item{x}{data.frame com a coluna a ser classificada}
@@ -12,6 +12,8 @@ classificar_recurso(x, dispositivo, decisao)
 \item{dispositivo}{Coluna onde se encontram os dispositivos do acórdão}
 
 \item{decisao}{Nome da coluna a ser criada com a decisão}
+
+\item{inteiro_teor}{Colocar TRUE se a coluna conter o inteiro teor}
 }
 \value{
 x adicionado da coluna decisão.

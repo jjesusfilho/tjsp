@@ -3,11 +3,11 @@
 #' @param x data.frame com a coluna a ser classificada
 #' @param dispositivo Coluna onde se encontram os dispositivos do acórdão
 #' @param decisao Nome da coluna a ser criada com a decisão
-#'
+#' @param inteiro_teor Colocar TRUE se a coluna conter o inteiro teor
 #' @return x adicionado da coluna decisão.
 #' @export
 #'
-classificar_recurso <- function(x, dispositivo, decisao) {
+classificar_recurso <- function(x, dispositivo, decisao, inteiro_teor = FALSE) {
 
   ## Para reduzir o tempo de computação, eu optei por dar um count na coluna a ser classificada.
   ## Poderia usar somente a coluna, mas count rearranja por ordem alfabética, ou por outra ordem,
@@ -17,10 +17,20 @@ classificar_recurso <- function(x, dispositivo, decisao) {
 
   input <- rlang::enexpr(dispositivo)
   decisao_out <- rlang::enexpr(decisao)
-  y <- x %>%
+
+
+  if (inteiro_teor == TRUE){
+    y <-  x %>% dplyr::distinct(!!input) %>%
+      dplyr::mutate(alternativa = stringr::str_sub(!!input,-2000) %>%
+                      tolower(.) %>%  stringi::stri_trans_general(., "latin-ascii"))
+
+  } else
+
+    y <- x %>%
     dplyr::distinct(!!input) %>%
     dplyr::mutate(alternativa = tolower(!!input) %>%
-      stringi::stri_trans_general(., "latin-ascii"))
+                    stringi::stri_trans_general(., "latin-ascii"))
+
 
   y <- y %>%
     dplyr::mutate(!!decisao_out :=

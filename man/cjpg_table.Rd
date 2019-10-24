@@ -9,6 +9,14 @@ cjpg_table(tipo)
 \arguments{
 \item{tipo}{classe ou assunto}
 }
+\value{
+tibble com classe ou assunto
+}
 \description{
 Extrai assuntos e classes
+}
+\examples{
+\dontrun{
+df <- cjpg_table(tipo="classe")
+}
 }
