@@ -4,8 +4,7 @@
 \alias{ler_acordaos}
 \title{Lê pdfs dos acórdãos, remove assinatura e eventualmente combina}
 \usage{
-ler_acordaos(diretorio = ".", remover_assinatura = FALSE,
-  combinar = FALSE)
+ler_acordaos(diretorio = ".", remover_assinatura = FALSE, combinar = FALSE)
 }
 \arguments{
 \item{diretorio}{diretório onde se encontram os pdfs}

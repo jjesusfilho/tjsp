@@ -1,6 +1,8 @@
 #' Ler decisoes
 #'
-#' @param diretorio objeto ou diretório onde se encontram os htmls baixados
+#' @param arquivos Caminho para os htmls baixados. Se NULL,
+#'     usar diretório
+#' @param diretorio Diretório onde se encontram os htmls baixados
 #'
 #' @return tibble com as os numéros dos processos e respectivas decisões
 #' @export
@@ -9,12 +11,14 @@
 #' \dontrun{
 #' ler_decisoes()
 #' }
-ler_decisoes <- function(diretorio = ".") {
+ler_decisoes <- function(arquivos = NULL, diretorio = ".") {
+
+  if (is.null(arquivos)){
   arquivos <- list.files(
-    path = diretorio, pattern = ".html",
+    path = diretorio, pattern = "html$",
     full.names = TRUE
   )
-
+}
 
   processo <- stringr::str_extract(arquivos, "\\d{20}")
 
@@ -25,7 +29,7 @@ ler_decisoes <- function(diretorio = ".") {
   tentativa <- function(x, y) {
     tryCatch({
       x[i] %>%
-        xml2::read_html() %>%
+       xml2::read_html() %>%
         xml2::xml_find_all(
           "//table/tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]"
         ) %>%

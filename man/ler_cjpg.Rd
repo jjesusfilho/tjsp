@@ -4,9 +4,11 @@
 \alias{ler_cjpg}
 \title{Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.}
 \usage{
-ler_cjpg(diretorio = ".")
+ler_cjpg(arquivos = NULL, diretorio = ".")
 }
 \arguments{
+\item{arquivos}{Se NULL, informar diretorio}
+
 \item{diretorio}{objeto ou diretório onde se encontram as páginas.}
 }
 \value{

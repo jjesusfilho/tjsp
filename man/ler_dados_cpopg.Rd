@@ -4,10 +4,12 @@
 \alias{ler_dados_cpopg}
 \title{Lê os metadados de processos de primeira instância.}
 \usage{
-ler_dados_cpopg(diretorio = ".", wide = FALSE)
+ler_dados_cpopg(arquivos = NULL, diretorio = ".", wide = FALSE)
 }
 \arguments{
-\item{diretorio}{diretório onde se encontram os htmls.}
+\item{arquivos}{Opcional. Informar se não informar o diretório}
+
+\item{diretorio}{Diretório onde se encontram os htmls.}
 
 \item{wide}{o padrão é o formado longo, com apenas quatro colunas:
 processo, digital, variavel, valor.}

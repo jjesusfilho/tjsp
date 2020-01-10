@@ -4,10 +4,18 @@
 \alias{ggdecisao}
 \title{Plota distribuição das decisões conforme a câmara e o recorrente}
 \usage{
-ggdecisao(data, title = "", x = NULL, facet = NULL, fill = NULL,
-  ordered = TRUE, x_label = "Câmara",
-  y_label = "Número de decisões", legend = "Decisão",
-  caption = "Fonte: TJSP")
+ggdecisao(
+  data,
+  title = "",
+  x = NULL,
+  facet = NULL,
+  fill = NULL,
+  ordered = TRUE,
+  x_label = "Câmara",
+  y_label = "Número de decisões",
+  legend = "Decisão",
+  caption = "Fonte: TJSP"
+)
 }
 \arguments{
 \item{data}{dataframe}

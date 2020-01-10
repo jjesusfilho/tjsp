@@ -7,7 +7,7 @@
 #' @return tabela com informações das partes.
 #' @export
 #'
-ler_partes <- function(diretorio = ".", arquivos = NULL) {
+ler_partes <- function(arquivos = NULL,diretorio = ".") {
 
  if (is.null(arquivos)) {
 

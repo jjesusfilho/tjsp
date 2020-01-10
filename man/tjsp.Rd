@@ -3,7 +3,6 @@
 \docType{package}
 \name{tjsp}
 \alias{tjsp}
-\alias{tjsp-package}
 \title{\code{tjsp} package}
 \description{
 Baixa  e organiza decisões do TJSP

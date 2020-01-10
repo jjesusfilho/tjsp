@@ -4,10 +4,13 @@
 \alias{ler_decisoes}
 \title{Ler decisoes}
 \usage{
-ler_decisoes(diretorio = ".")
+ler_decisoes(arquivos = NULL, diretorio = ".")
 }
 \arguments{
-\item{diretorio}{objeto ou diretório onde se encontram os htmls baixados}
+\item{arquivos}{Caminho para os htmls baixados. Se NULL,
+usar diretório}
+
+\item{diretorio}{Diretório onde se encontram os htmls baixados}
 }
 \value{
 tibble com as os numéros dos processos e respectivas decisões
