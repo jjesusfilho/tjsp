@@ -1,15 +1,15 @@
 #' Classifica decisões de primeiro grau
 #'
-#' @param sentenca vetor de sentenças
+#' @param x vetor de sentenças
 #'
 #' @return decisão
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' x <- classificar_sentenca2(sentenca)
+#' x <- classificar_sentenca2(x = sentenca)
 #' }
-classificar_sentenca2<- function (sentenca)
+classificar_sentenca2<- function (x)
 {
 
  x %>%
