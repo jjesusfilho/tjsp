@@ -12,10 +12,11 @@
 classificar_sentenca2<- function (x)
 {
 
- x %>%
+x<- x %>%
      stringr::str_sub(-2000) %>%
       tolower() %>%
-      stringi::stri_trans_general("latin-ascii") %>%
+      stringi::stri_trans_general("latin-ascii")
+
       dplyr::case_when(
       stringr::str_detect(x,"(?i)julgo\\sparcial\\w+") ~ "parcial",
       stringr::str_detect(x,"(?i)\\bparcial\\w+") ~ "parcial",
