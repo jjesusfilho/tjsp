@@ -4,9 +4,11 @@
 \alias{ler_movimentacao_cposg}
 \title{Extrai a movimentação processual de primeira e de segunda instância}
 \usage{
-ler_movimentacao_cposg(diretorio = ".")
+ler_movimentacao_cposg(arquivos = NULL, diretorio = ".")
 }
 \arguments{
+\item{arquivos}{se não informados, informar diretório}
+
 \item{diretorio}{objeto ou diretorio  onde se encontram os htmls}
 }
 \value{

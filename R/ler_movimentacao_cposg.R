@@ -1,5 +1,6 @@
 #' Extrai a movimentação processual de primeira e de segunda instância
 #'
+#' @param arquivos se não informados, informar diretório
 #' @param diretorio objeto ou diretorio  onde se encontram os htmls
 #'
 #' @return tibble com a movimentação processual.
@@ -10,15 +11,19 @@
 #' andamento_cpopg <- ler_movimentacao_cpopg()
 #' }
 #'
-ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
-  arquivos <- list.files(
+ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(arquivos = NULL,diretorio = ".") {
+
+   if (is.null(arquivos)){
+   arquivos <- list.files(
     path = diretorio, pattern = ".html",
     full.names = TRUE
   )
+}
 
-  processo <- stringr::str_extract(arquivos, "\\d{20}")
+  purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~{
 
-  purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
+    processo <- stringr::str_extract(.x, "\\d{20}")
+
     texto <- xml2::read_html(.x) %>%
       xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
 
@@ -29,8 +34,7 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(diretorio = ".") {
     mov <- xml2::xml_find_all(texto, ".//td[@style='vertical-align: top; padding-bottom: 5px']") %>%
       xml2::xml_text(trim = TRUE)
 
-    processo <- stringr::str_remove_all(.y,"\\D+")
 
     tibble::tibble(processo = processo, data = data, movimentacao = mov)
-  }, otherwise = NULL))
+  }), otherwise = NULL))
 }
