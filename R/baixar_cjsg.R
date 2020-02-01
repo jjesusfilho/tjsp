@@ -95,7 +95,8 @@ baixar_cjsg <-
 
 
     if (tipo == "A") {
-      purrr::map(paginas, purrr::possibly(~ {
+      purrr::map(paginas, purrr::possibly(~{
+       Sys.sleep(1)
         httr::GET(
           paste0(
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",
@@ -110,6 +111,8 @@ baixar_cjsg <-
       }, NULL))
     } else {
       purrr::map(paginas, purrr::possibly(~ {
+        Sys.sleep(1)
+
         httr::GET(
           paste0(
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=",
