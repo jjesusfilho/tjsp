@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Classifica acórdãos — classificar_recurso • tjsp</title>
+<title>Busca os números de processos no primeiro grau no parametro especificado — obter_cpopg_par • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Classifica acórdãos — classificar_recurso" />
-<meta property="og:description" content="Classifica acórdãos" />
+<meta property="og:title" content="Busca os números de processos no primeiro grau no parametro especificado — obter_cpopg_par" />
+<meta property="og:description" content="Busca os números de processos no primeiro grau no parametro especificado" />
 
 
 
@@ -111,42 +111,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Classifica acórdãos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/classificar_recurso.R'><code>R/classificar_recurso.R</code></a></small>
-    <div class="hidden name"><code>classificar_recurso.Rd</code></div>
+    <h1>Busca os números de processos no primeiro grau no parametro especificado</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/obter_cpopg_par.R'><code>R/obter_cpopg_par.R</code></a></small>
+    <div class="hidden name"><code>obter_cpopg_par.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Classifica acórdãos</p>
+    <p>Busca os números de processos no primeiro grau no parametro especificado</p>
     </div>
 
-    <pre class="usage"><span class='fu'>classificar_recurso</span>(<span class='no'>x</span>, <span class='no'>dispositivo</span>, <span class='no'>decisao</span>, <span class='kw'>inteiro_teor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>obter_cpopg_par</span>(<span class='kw'>oab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parte</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>data.frame com a coluna a ser classificada</p></td>
+      <th>oab</th>
+      <td><p>Número da oab seguido pela uf, ex. 123456SP</p></td>
     </tr>
     <tr>
-      <th>dispositivo</th>
-      <td><p>Coluna onde se encontram os dispositivos do acórdão</p></td>
-    </tr>
-    <tr>
-      <th>decisao</th>
-      <td><p>Nome da coluna a ser criada com a decisão</p></td>
-    </tr>
-    <tr>
-      <th>inteiro_teor</th>
-      <td><p>Colocar TRUE se a coluna conter o inteiro teor</p></td>
+      <th>parte</th>
+      <td><p>Nome da parte</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>x adicionado da coluna decisão.</p>
+    <p>tibble com os números dos processos</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>obter_cpopg_par</span>(<span class='kw'>oab</span><span class='kw'>=</span><span class='st'>"123456SP"</span>)
+<span class='fu'>obter_cpopg_par</span>(<span class='kw'>parte</span> <span class='kw'>=</span> <span class='st'>"José da Silva Pereira"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Classifica acórdãos — classificar_recurso • tjsp</title>
+<title>Procura a palavra ou frase do segundo vetor que melhor
+   se aproxima do primeiro. Particularmente útil para
+   comparar nomes de municípios. — fuzzy_search • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +41,12 @@
 
 
 
-<meta property="og:title" content="Classifica acórdãos — classificar_recurso" />
-<meta property="og:description" content="Classifica acórdãos" />
+<meta property="og:title" content="Procura a palavra ou frase do segundo vetor que melhor
+   se aproxima do primeiro. Particularmente útil para
+   comparar nomes de municípios. — fuzzy_search" />
+<meta property="og:description" content="Procura a palavra ou frase do segundo vetor que melhor
+   se aproxima do primeiro. Particularmente útil para
+   comparar nomes de municípios." />
 
 
 
@@ -111,42 +117,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Classifica acórdãos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/classificar_recurso.R'><code>R/classificar_recurso.R</code></a></small>
-    <div class="hidden name"><code>classificar_recurso.Rd</code></div>
+    <h1>Procura a palavra ou frase do segundo vetor que melhor
+   se aproxima do primeiro. Particularmente útil para
+   comparar nomes de municípios.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/fuzzy_search.R'><code>R/fuzzy_search.R</code></a></small>
+    <div class="hidden name"><code>fuzzy_search.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Classifica acórdãos</p>
+    <p>Procura a palavra ou frase do segundo vetor que melhor
+   se aproxima do primeiro. Particularmente útil para
+   comparar nomes de municípios.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>classificar_recurso</span>(<span class='no'>x</span>, <span class='no'>dispositivo</span>, <span class='no'>decisao</span>, <span class='kw'>inteiro_teor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>fuzzy_search</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>data.frame com a coluna a ser classificada</p></td>
+      <td><p>Vetor de strings supostamente erradas</p></td>
     </tr>
     <tr>
-      <th>dispositivo</th>
-      <td><p>Coluna onde se encontram os dispositivos do acórdão</p></td>
-    </tr>
-    <tr>
-      <th>decisao</th>
-      <td><p>Nome da coluna a ser criada com a decisão</p></td>
-    </tr>
-    <tr>
-      <th>inteiro_teor</th>
-      <td><p>Colocar TRUE se a coluna conter o inteiro teor</p></td>
+      <th>y</th>
+      <td><p>Vetor de strings suportamente corretas</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>x adicionado da coluna decisão.</p>
+    <p>vetor com as strings de y próximos
+    de x.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>wrong_names</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Mogi das Cruses"</span>,<span class='st'>"Sao Paulo"</span>,<span class='st'>"CANTA GALLO"</span>)
+<span class='no'>correct_names</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Canta Galo"</span>,<span class='st'>"Mogi das Cruzes"</span>,<span class='st'>"São Paulo"</span>)
+<span class='fu'>fuzzy_search</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>wrong_names</span>,<span class='kw'>y</span><span class='kw'>=</span><span class='no'>correct_names</span>)</div><div class='output co'>#&gt; [1] "Mogi das Cruzes" "São Paulo"       "Canta Galo"     </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

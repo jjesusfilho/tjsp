@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Classifica acórdãos — classificar_recurso • tjsp</title>
+<title>Remove acentos — remover_acentos • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Classifica acórdãos — classificar_recurso" />
-<meta property="og:description" content="Classifica acórdãos" />
+<meta property="og:title" content="Remove acentos — remover_acentos" />
+<meta property="og:description" content="Remove acentos" />
 
 
 
@@ -111,41 +111,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Classifica acórdãos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/classificar_recurso.R'><code>R/classificar_recurso.R</code></a></small>
-    <div class="hidden name"><code>classificar_recurso.Rd</code></div>
+    <h1>Remove acentos</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/remover_acentos.R'><code>R/remover_acentos.R</code></a></small>
+    <div class="hidden name"><code>remover_acentos.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Classifica acórdãos</p>
+    <p>Remove acentos</p>
     </div>
 
-    <pre class="usage"><span class='fu'>classificar_recurso</span>(<span class='no'>x</span>, <span class='no'>dispositivo</span>, <span class='no'>decisao</span>, <span class='kw'>inteiro_teor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>remover_acentos</span>(<span class='no'>x</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>data.frame com a coluna a ser classificada</p></td>
-    </tr>
-    <tr>
-      <th>dispositivo</th>
-      <td><p>Coluna onde se encontram os dispositivos do acórdão</p></td>
-    </tr>
-    <tr>
-      <th>decisao</th>
-      <td><p>Nome da coluna a ser criada com a decisão</p></td>
-    </tr>
-    <tr>
-      <th>inteiro_teor</th>
-      <td><p>Colocar TRUE se a coluna conter o inteiro teor</p></td>
+      <td><p>vetor de caracteres</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>x adicionado da coluna decisão.</p>
+    <p>mesmo vetor com acentos removidos</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

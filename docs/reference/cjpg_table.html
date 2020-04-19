@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Classifica acórdãos — classificar_recurso • tjsp</title>
+<title>Extrai assuntos e classes — cjpg_table • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Classifica acórdãos — classificar_recurso" />
-<meta property="og:description" content="Classifica acórdãos" />
+<meta property="og:title" content="Extrai assuntos e classes — cjpg_table" />
+<meta property="og:description" content="Extrai assuntos e classes" />
 
 
 
@@ -111,42 +111,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Classifica acórdãos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/classificar_recurso.R'><code>R/classificar_recurso.R</code></a></small>
-    <div class="hidden name"><code>classificar_recurso.Rd</code></div>
+    <h1>Extrai assuntos e classes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/cjpg_table.R'><code>R/cjpg_table.R</code></a></small>
+    <div class="hidden name"><code>cjpg_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Classifica acórdãos</p>
+    <p>Extrai assuntos e classes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>classificar_recurso</span>(<span class='no'>x</span>, <span class='no'>dispositivo</span>, <span class='no'>decisao</span>, <span class='kw'>inteiro_teor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>cjpg_table</span>(<span class='no'>tipo</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>data.frame com a coluna a ser classificada</p></td>
-    </tr>
-    <tr>
-      <th>dispositivo</th>
-      <td><p>Coluna onde se encontram os dispositivos do acórdão</p></td>
-    </tr>
-    <tr>
-      <th>decisao</th>
-      <td><p>Nome da coluna a ser criada com a decisão</p></td>
-    </tr>
-    <tr>
-      <th>inteiro_teor</th>
-      <td><p>Colocar TRUE se a coluna conter o inteiro teor</p></td>
+      <th>tipo</th>
+      <td><p>classe ou assunto</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>x adicionado da coluna decisão.</p>
+    <p>tibble com classe ou assunto</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>cjpg_table</span>(<span class='kw'>tipo</span><span class='kw'>=</span><span class='st'>"classe"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

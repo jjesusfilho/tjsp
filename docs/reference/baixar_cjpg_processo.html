@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Classifica acórdãos — classificar_recurso • tjsp</title>
+<title>Baixa processo da consulta do cjpg — baixar_cjpg_processo • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Classifica acórdãos — classificar_recurso" />
-<meta property="og:description" content="Classifica acórdãos" />
+<meta property="og:title" content="Baixa processo da consulta do cjpg — baixar_cjpg_processo" />
+<meta property="og:description" content="Baixa processo da consulta do cjpg" />
 
 
 
@@ -111,41 +111,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Classifica acórdãos</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/classificar_recurso.R'><code>R/classificar_recurso.R</code></a></small>
-    <div class="hidden name"><code>classificar_recurso.Rd</code></div>
+    <h1>Baixa processo da consulta do cjpg</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/baixar_cjpg_processo.R'><code>R/baixar_cjpg_processo.R</code></a></small>
+    <div class="hidden name"><code>baixar_cjpg_processo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Classifica acórdãos</p>
+    <p>Baixa processo da consulta do cjpg</p>
     </div>
 
-    <pre class="usage"><span class='fu'>classificar_recurso</span>(<span class='no'>x</span>, <span class='no'>dispositivo</span>, <span class='no'>decisao</span>, <span class='kw'>inteiro_teor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>baixar_cjpg_processo</span>(<span class='kw'>processo</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>data.frame com a coluna a ser classificada</p></td>
+      <th>processo</th>
+      <td><p>número do processo</p></td>
     </tr>
     <tr>
-      <th>dispositivo</th>
-      <td><p>Coluna onde se encontram os dispositivos do acórdão</p></td>
-    </tr>
-    <tr>
-      <th>decisao</th>
-      <td><p>Nome da coluna a ser criada com a decisão</p></td>
-    </tr>
-    <tr>
-      <th>inteiro_teor</th>
-      <td><p>Colocar TRUE se a coluna conter o inteiro teor</p></td>
+      <th>diretorio</th>
+      <td><p>diretório</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>x adicionado da coluna decisão.</p>
+    <p>html</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -8,21 +8,29 @@
 
 <title>Function reference • tjsp</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +38,9 @@
 
 
 
+
 <meta property="og:title" content="Function reference" />
+
 
 
 
@@ -44,9 +54,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -68,31 +79,21 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/roteiro-tjsp.html">Coletando dados do TJSP</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jjesusfilho/tjsp">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/jjesusfilho/tjsp/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -103,6 +104,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -126,6 +128,11 @@
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -147,7 +154,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="baixar_acordaos.html">baixar_acordaos()</a></code> </p>
+          <p><code><a href="baixar_acordaos.html">baixar_acordaos()</a></code> <code><a href="baixar_acordaos.html">baixar_acordaos()</a></code> </p>
         </td>
         <td><p>Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento</p></td>
       </tr><tr>
@@ -156,6 +163,12 @@
           <p><code><a href="baixar_cjpg.html">baixar_cjpg()</a></code> </p>
         </td>
         <td><p>Baixa julgados de primeiro grau de São Paulo</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="baixar_cjpg_processo.html">baixar_cjpg_processo()</a></code> </p>
+        </td>
+        <td><p>Baixa processo da consulta do cjpg</p></td>
       </tr><tr>
         
         <td>
@@ -168,6 +181,12 @@
           <p><code><a href="baixar_cpopg.html">baixar_cpopg()</a></code> </p>
         </td>
         <td><p>Baixar consulta processual de primeiro grau</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="baixar_cposg.html">baixar_cposg()</a></code> </p>
+        </td>
+        <td><p>Baixar processos de segunda instância</p></td>
       </tr><tr>
         
         <td>
@@ -184,13 +203,31 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="cjpg_table.html">cjpg_table()</a></code> </p>
+        </td>
+        <td><p>Extrai assuntos e classes</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="classificar_recurso.html">classificar_recurso()</a></code> </p>
         </td>
         <td><p>Classifica acórdãos</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="classificar_recurso2.html">classificar_recurso2()</a></code> </p>
+        </td>
+        <td><p>Classifica recursos</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="classificar_sentenca.html">classificar_sentenca()</a></code> </p>
+        </td>
+        <td><p>Classifica decisões de primeiro grau</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="classificar_sentenca2.html">classificar_sentenca2()</a></code> </p>
         </td>
         <td><p>Classifica decisões de primeiro grau</p></td>
       </tr><tr>
@@ -220,6 +257,14 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="fuzzy_search.html">fuzzy_search()</a></code> </p>
+        </td>
+        <td><p>Procura a palavra ou frase do segundo vetor que melhor
+   se aproxima do primeiro. Particularmente útil para
+   comparar nomes de municípios.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="ggdecisao.html">ggdecisao()</a></code> </p>
         </td>
         <td><p>Plota distribuição das decisões conforme a câmara e o recorrente</p></td>
@@ -235,6 +280,12 @@
           <p><code><a href="lapso.html">lapso()</a></code> </p>
         </td>
         <td><p>Retorna o lapso temporal na unidade especificada entre duas datas.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="latlong_comarca.html">latlong_comarca()</a></code> </p>
+        </td>
+        <td><p>Encontra latlong das comarcas</p></td>
       </tr><tr>
         
         <td>
@@ -323,9 +374,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="obter_cpopg_oab.html">obter_cpopg_oab()</a></code> </p>
+          <p><code><a href="obter_cpopg_par.html">obter_cpopg_par()</a></code> </p>
         </td>
-        <td><p>Busca os números de processos no primeiro grau com base na oab do advogado</p></td>
+        <td><p>Busca os números de processos no primeiro grau no parametro especificado</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ordenar_camaras.html">ordenar_camaras()</a></code> </p>
+        </td>
+        <td><p>Limpa e ordena câmaras de direito</p></td>
       </tr><tr>
         
         <td>
@@ -338,6 +395,12 @@
           <p><code><a href="psql_cjpg.html">psql_cjpg()</a></code> </p>
         </td>
         <td><p>Applies functions baixar_cjpg from package tjsp and sends data to psql db</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="remover_acentos.html">remover_acentos()</a></code> </p>
+        </td>
+        <td><p>Remove acentos</p></td>
       </tr><tr>
         
         <td>
@@ -373,33 +436,36 @@
         <td>
           <p><code><a href="votacao.html">votacao()</a></code> </p>
         </td>
-        <td><p>Cria coluna no dataframe informando se o voto por por unanimidade</p></td>
+        <td><p>Cria vetor informando se o voto por por unanimidade ou por maioria</p></td>
       </tr>
     </tbody>
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
-  <p>Developed by José de Jesus Filho.</p>
+  <p>Developed by <a href='https://jjesusfilho.github.io/tjsp'>José de Jesus Filho</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
