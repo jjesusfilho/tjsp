@@ -4,10 +4,13 @@
 \alias{ler_cjsg}
 \title{Ler metadados das decisões}
 \usage{
-ler_cjsg(diretorio = ".")
+ler_cjsg(arquivos = NULL, diretorio = ".")
 }
 \arguments{
-\item{diretorio}{Diretório onde se encontram os htmls.}
+\item{arquivos}{Caminhos para os htmls}
+
+\item{diretorio}{Diretório onde se encontram os htmls,
+se arquivos for NULL.}
 }
 \value{
 tabela com metadados jurisprudenciais.

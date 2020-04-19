@@ -2,13 +2,13 @@
 #'
 #' @param data dataframe
 #' @param title Título do gráfico
-#' @param x orgao julgador, geralmente a câmara criminal
+#' @param x orgao julgador, geralmente a câmara
 #' @param facet facetas para facet_grid, geralmente o recorrente
 #' @param fill preenchimento, geralmente a decisão
 #' @param ordered se verdadeiro irá extrair somente os números e as siglas
 #'     e ordená-la adequadaemente.
-#' @param x_label etiqueta para órgão julgador, geralmente câmara
-#' @param y_label etiqueta para número de casos, geralmente número de decisões
+#' @param x_label etiqueta para órgão julgador, geralmente "câmara"
+#' @param y_label etiqueta para número de casos, geralmente "número de decisões"
 #' @param legend título da legenda
 #' @param caption indicação da fonte
 #'
@@ -29,33 +29,33 @@ ggdecisao <-
     fill <- rlang::enquo(fill)
     facet <- rlang::enquo(facet)
     x <- rlang::enquo(x)
-    
+
     data <- data %>%
       dplyr::select(x := !!x, facet := !!facet, fill := !!fill)
-    
+
     if (ordered == TRUE) {
       data <- data %>%
         dplyr::mutate(x = stringr::str_remove_all(x, "(\\s+|[:lower:]+)"))
-      
+
       l <- data %>%
         dplyr::distinct(x) %>%
         dplyr::mutate(number = stringr::str_extract(x, "\\d+") %>%  as.numeric) %>%
         dplyr::arrange(number) %>%
         dplyr::pull("x")
-      
+
       data <- data %>%
         dplyr::mutate(x =  factor(x, levels = l)) %>%
         dplyr::count(x, facet, fill)
-      
+
     } else {
       data <- data %>%
         dplyr::count(x, facet, fill)
-      
+
     }
-    
+
     lege <- paste0(legend, ":")
-    
-    
+
+
     ggplot2::ggplot(data, ggplot2::aes(x = x, y = n, fill = fill)) +
       ggplot2::geom_bar(stat = "identity",
                         position = "dodge",

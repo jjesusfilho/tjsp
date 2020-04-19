@@ -4,11 +4,13 @@
 \name{excluir_classes_cpopg}
 \alias{excluir_classes_cpopg}
 \title{excluir_classes_cpopg}
-\format{vector:
+\format{
+vector:
 \describe{
   \item{\code{excluir_classes_cpopg}}{character with suggestions classes to remove}
 
-}}
+}
+}
 \source{
 \url{https://tjsp.jus.br/}
 }

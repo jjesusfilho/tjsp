@@ -4,7 +4,8 @@
 \name{imoveis}
 \alias{imoveis}
 \title{imoveis}
-\format{Dataframe com 751 linhas e 15 variáveis:
+\format{
+Dataframe com 751 linhas e 15 variáveis:
 \describe{
   \item{\code{nome}}{character Nome do imóvel}
   \item{\code{endereço}}{character Endereço do imóvel}
@@ -18,7 +19,8 @@
   \item{\code{comarca}}{character Nome da comarca}
   \item{\code{distacia_capital}}{character Distância da capital em km}
   \item{\code{imovel_codigo}}{character Código do imóvel}
-}}
+}
+}
 \source{
 \url{https://tjsp.jus.br/}
 }

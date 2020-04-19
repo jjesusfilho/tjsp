@@ -27,7 +27,7 @@ cjpg_table <- function (tipo)
     dplyr::nth(2) %>%
     purrr::keep(~is.list(.x)) %>%
   tree_to_tibble() %>%
-  k<- k %>%   dplyr::mutate(name0 = ifelse(is.na(name0),name5, name0),
+  dplyr::mutate(name0 = ifelse(is.na(name0),name5, name0),
                   id0 = ifelse(is.na(id0), id5, id0)) %>%
     dplyr::select(
       dplyr::ends_with("0"),

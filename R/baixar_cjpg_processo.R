@@ -1,7 +1,15 @@
-baixar_cjsg_processo <- function(processo = NULL, diretorio = ".") {
+#' Baixa processo da consulta do cjpg
+#'
+#' @param processo número do processo
+#' @param diretorio diretório
+#'
+#' @return html
+#' @export
+#'
+baixar_cjpg_processo <- function(processo = NULL, diretorio = ".") {
   dia <- Sys.Date() %>% stringr::str_replace_all("-", "_")
 
-  purrr::walk(processo, purrr::possibly(~ {
+  purrr::walk(processo, purrr::possibly(purrrogress::with_progress(~ {
     p <- .x %>%
       stringr::str_remove_all("\\D+") %>%
       stringr::str_pad(width = 20, "left", "0") %>%
@@ -40,5 +48,5 @@ baixar_cjsg_processo <- function(processo = NULL, diretorio = ".") {
     arquivo <- stringr::str_c(diretorio, "/", dia, "_", .x, ".html")
 
     httr::GET(url, httr::write_disk(arquivo, overwrite = TRUE))
-  }, otherwise = NULL))
+  }), otherwise = NULL))
 }

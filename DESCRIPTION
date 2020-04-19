@@ -42,8 +42,9 @@ Imports:
     caret,
     dbx,
     rsample,
-    stringdist
-RoxygenNote: 7.0.2
+    stringdist,
+    purrrogress
+RoxygenNote: 7.1.0
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues
 Suggests: 

@@ -42,6 +42,7 @@ autenticar <- function() {
     certificadoSelecionado = "",
     certificado = ""
   )
+url2 <- "https://esaj.tjsp.jus.br/sajcas/login?service=https%3A%2F%2Fesaj.tjsp.jus.br%2Fesaj%2Fj_spring_cas_security_check"
 
 httr::POST("https://esaj.tjsp.jus.br/sajcas/login?service=https%3A%2F%2Fesaj.tjsp.jus.br%2Fesaj%2Fj_spring_cas_security_check",
     body = form, encode = "form"

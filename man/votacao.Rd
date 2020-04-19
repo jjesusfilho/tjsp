@@ -2,18 +2,16 @@
 % Please edit documentation in R/votacao.R
 \name{votacao}
 \alias{votacao}
-\title{Cria coluna no dataframe informando se o voto por por unanimidade}
+\title{Cria vetor informando se o voto por por unanimidade ou por maioria}
 \usage{
-votacao(df, x = NULL)
+votacao(x = NULL)
 }
 \arguments{
-\item{df}{base lida por ler_dados}
-
-\item{x}{coluna lida com dispositivo da decisão.}
+\item{x}{Vetor de dispositivos}
 }
 \value{
-mesmo dataframe adicionado da coluna votacao
+Vetor
 }
 \description{
-Cria coluna no dataframe informando se o voto por por unanimidade
+Cria vetor informando se o voto por por unanimidade ou por maioria
 }

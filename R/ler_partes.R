@@ -21,30 +21,38 @@ ler_partes <- function(arquivos = NULL,diretorio = ".") {
     stringr::str_extract(arquivos, "\\d{20}") %>%
     abjutils::build_id(.)
 
-  purrr::map2_dfr(arquivos, processos, purrr::possibly(~{
+  purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
 
     ## Esta primeira parte seleciona a tabela que contêm as partes e a converte em
     ## texto. Infelizmente o html não é muito consistente. Temos de usar regex.
-    resposta <- xml2::read_html(.x) %>%
+    x <- xml2::read_html(.x)
+
+    r_partes <- x %>%
       xml2::xml_find_first("//*[@id='tablePartesPrincipais']") %>%
       xml2::xml_text(trim = T) %>%
       stringr::str_squish()
 
     ## monta um regex padrão de extração a partir das partes.
-    padrao <- resposta %>%
+    padrao <- r_partes %>%
       stringr::str_extract_all("\\w+(\\.\\s)?/?\\w+?\\:") %>%
       unlist() %>%
       paste0(collapse = "|") %>%
       paste0("(", ., ")", ".+?(?=", ., "|$)")
 
+    processo <- x %>%
+           xml2::xml_find_first("//label[@class='labelClass']/../following-sibling::td//td/span") %>%
+           xml2::xml_text(trim=T) %>%
+           stringr::str_remove_all("\\D")
+
     # Extrai nome e nome da parte, converte em tibble, separa os dois.
-    stringr::str_extract_all(resposta, padrao) %>%
+    stringr::str_extract_all(r_partes, padrao) %>%
       unlist() %>%
       stringr::str_trim() %>%
       tibble::tibble() %>%
       setNames("parte") %>%
       tidyr::separate(parte, c("parte", "parte_nome"), ":\\s?") %>%
-      dplyr::mutate(processo = stringr::str_remove_all(.y,"\\D")) %>%
+      dplyr::mutate(processo = !!processo) %>%
+      dplyr::mutate(parte_nome = stringr::str_remove(parte_nome,"&nbsp")) %>%
       dplyr::select(processo, dplyr::everything())
-  }, otherwise = NULL))
+  }), otherwise = NULL))
 }

@@ -4,10 +4,13 @@
 \alias{ler_dados_cposg}
 \title{Lê metadados dos processos de segunda instância}
 \usage{
-ler_dados_cposg(diretorio = ".")
+ler_dados_cposg(arquivos = NULL, diretorio = ".")
 }
 \arguments{
-\item{diretorio}{objeto no global env ou diretório onde se encontram os htmls.}
+\item{arquivos}{Vetor de arquivos. Se NULL, informar diretório.}
+
+\item{diretorio}{Diretório onde se encontram os htmls. Informar
+apenas se os arquivos não forem informados.}
 }
 \value{
 tabela com dados do processo

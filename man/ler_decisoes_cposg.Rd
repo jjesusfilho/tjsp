@@ -4,13 +4,15 @@
 \alias{ler_decisoes_cposg}
 \title{Lê o dispositivo das decisões de segunda instância a partir dos htmls}
 \usage{
-ler_decisoes_cposg(diretorio = ".")
+ler_decisoes_cposg(arquivos = NULL, diretorio = ".")
 }
 \arguments{
-\item{diretorio}{objeto ou diretório onde se encontram os htmls baixados}
+\item{arquivos}{Informar arquivos ou diretório.}
+
+\item{diretorio}{Diretório onde se encontram os htmls baixados}
 }
 \value{
-tibble com as os numéros dos processos e respectivas decisões
+tibble com as os numéros dos processos e respectivos dispositivos
 }
 \description{
 Lê o dispositivo das decisões de segunda instância a partir dos htmls

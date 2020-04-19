@@ -1,23 +1,24 @@
 #' Lê o dispositivo das decisões de segunda instância a partir dos htmls
 #'
-#' @param diretorio objeto ou diretório onde se encontram os htmls baixados
+#' @param arquivos Informar arquivos ou diretório.
+#' @param diretorio  Diretório onde se encontram os htmls baixados
 #'
-#' @return tibble com as os numéros dos processos e respectivas decisões
+#' @return tibble com as os numéros dos processos e respectivos dispositivos
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' decisoes <- ler_decisoes_cposg()
 #' }
-ler_decisoes_cposg <- function(diretorio = ".") {
+ler_decisoes_cposg <- function(arquivos  = NULL, diretorio = ".") {
   ""
 
-
+   if(is.null(arquivos)){
   arquivos <- list.files(
     path = diretorio, pattern = ".html",
     full.names = TRUE
   )
-
+}
 
 
   processo <- stringr::str_extract(arquivos, "\\d{20}") %>%
@@ -36,7 +37,7 @@ ler_decisoes_cposg <- function(diretorio = ".") {
         ) %>%
         rvest::html_table() %>%
         purrr::pluck(1) %>%
-        stats::setNames(c("data_julgamento", "situacao_julgamento", "decisao")) %>%
+        stats::setNames(c("data_julgamento", "situacao_julgamento", "dispositivo")) %>%
         cbind(processo = y[ii], ., stringsAsFactors = F)
     }, error = function(e) {
       x[ii] %>%
@@ -50,7 +51,7 @@ ler_decisoes_cposg <- function(diretorio = ".") {
           processo = y[ii],
           data_julgamento = NA_character_,
           situacao_julgamento = .,
-          decisao = "a decisao não foi disponibilizada no andamento"
+          dispositivo = "a decisao não foi disponibilizada no andamento"
         )
     })
   }

@@ -1,19 +1,17 @@
-#' Cria coluna no dataframe informando se o voto por por unanimidade
+#' Cria vetor informando se o voto por por unanimidade ou por maioria
 #'
-#' @param df base lida por ler_dados
-#' @param x  coluna lida com dispositivo da decisão.
+#' @param x  Vetor de dispositivos
 #'
-#' @return mesmo dataframe adicionado da coluna votacao
+#' @return Vetor
 #' @export
 #'
-votacao <- function(df, x = NULL) {
-  x1 <- rlang::enquo(x)
+votacao <- function(x = NULL) {
 
-  df %>%
-    dplyr::mutate(votacao = dplyr::case_when(
-      stringr::str_detect(!!x1, "(?i)(v\\.\\s?u\\.?|un.ni)") ~ "unânime",
-      stringr::str_detect(!!x1, "(?i)v\\.?\\s?u\\.?\\)?\\.?$") ~ "unânime",
-      stringr::str_detect(!!x1, "(?i)maioria") ~ "maioria",
-      TRUE ~ "indefinido"
-    ))
+
+    dplyr::case_when(
+      stringr::str_detect(x, "(?i)(v\\.\\s?u\\.?|un.ni)") ~ "unânime",
+      stringr::str_detect(x, "(?i)v\\.?\\s?u\\.?\\)?\\.?$") ~ "unânime",
+      stringr::str_detect(x, "(?i)maioria") ~ "maioria",
+      TRUE ~ NA_character
+    )
 }

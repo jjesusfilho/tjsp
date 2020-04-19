@@ -1,3 +1,11 @@
+#' Baixar processos de segunda instância
+#'
+#' @param processos processos de segunda instância
+#' @param diretorio diretório
+#'
+#' @return html com dados processuais
+#' @export
+#'
 baixar_cposg <- function(processos = NULL,
                          diretorio = ".") {
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
@@ -8,8 +16,11 @@ baixar_cposg <- function(processos = NULL,
 
   uri1 <- "https://esaj.tjsp.jus.br/cposg/search.do?"
 
-  purrr::map_dfr(processos, purrr::possibly(~ {
-    p <- .x
+  purrr::walk(processos, purrr::possibly(purrrogress::with_progress(~{
+
+  r<-  httr::GET("https://esaj.tjsp.jus.br/cposg/open.do?gateway=true")
+
+     p <- .x
 
     unificado <- p %>%
       stringr::str_extract(".{15}")
@@ -17,13 +28,10 @@ baixar_cposg <- function(processos = NULL,
     foro <- p %>%
       stringr::str_extract("\\d{4}$")
 
-    query1 <- list(
-      cbPesquisa = "NUMPROC", conversationId = "",
-      dePesquisat = "", dePesquisaNuUnificado = p, foroNumeroUnificado = foro,
-      localPesquisa.cdLocal = "-1", numeroDigitoAnoUnificado = unificado,
-      paginaConsulta = "1", tipoNuProcesso = "UNIFICADO",
-      uuidCaptcha = ""
-    )
+  query1<-  list(conversationId = "", paginaConsulta = "1", localPesquisa.cdLocal = "-1",
+         cbPesquisa = "NUMPROC", tipoNuProcesso = "UNIFICADO", numeroDigitoAnoUnificado = unificado,
+         foroNumeroUnificado = foro, dePesquisaNuUnificado = p,
+         dePesquisa = "", uuidCaptcha = "", pbEnviar = "Pesquisar")
 
     resposta1 <- httr::RETRY("GET",
       url = uri1, query = query1,
@@ -42,9 +50,9 @@ baixar_cposg <- function(processos = NULL,
       conteudo1 <- list(conteudo1)
     }
 
-    p <- str_remove_all(p, "\\D+")
+    p <- stringr::str_remove_all(p, "\\D+")
     arquivo <- file.path(diretorio, paste0(format(Sys.Date(), "%Y_%m_%d_"), p, ".html"))
 
     xml2::write_html(conteudo1[[1]], arquivo)
-  }, NULL))
+  }), NULL))
 }

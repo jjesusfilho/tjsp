@@ -22,7 +22,7 @@ ggdecisao(
 
 \item{title}{Título do gráfico}
 
-\item{x}{orgao julgador, geralmente a câmara criminal}
+\item{x}{orgao julgador, geralmente a câmara}
 
 \item{facet}{facetas para facet_grid, geralmente o recorrente}
 
@@ -31,9 +31,9 @@ ggdecisao(
 \item{ordered}{se verdadeiro irá extrair somente os números e as siglas
 e ordená-la adequadaemente.}
 
-\item{x_label}{etiqueta para órgão julgador, geralmente câmara}
+\item{x_label}{etiqueta para órgão julgador, geralmente "câmara"}
 
-\item{y_label}{etiqueta para número de casos, geralmente número de decisões}
+\item{y_label}{etiqueta para número de casos, geralmente "número de decisões"}
 
 \item{legend}{título da legenda}
 

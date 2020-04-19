@@ -1,6 +1,8 @@
 #' Lê metadados dos processos de segunda instância
 #'
-#' @param diretorio objeto no global env ou diretório onde se encontram os htmls.
+#' @param arquivos Vetor de arquivos. Se NULL, informar diretório.
+#' @param diretorio Diretório onde se encontram os htmls. Informar
+#'     apenas se os arquivos não forem informados.
 #'
 #' @return tabela com dados do processo
 #' @export
@@ -9,18 +11,17 @@
 #' \dontrun{
 #' dados <- ler_dados_cposg()
 #' }
-ler_dados_cposg <- function(diretorio = ".") {
+ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
+
+  if(is.null(arquivos)){
   arquivos <- list.files(
     path = diretorio, pattern = ".html",
     full.names = TRUE
   )
+}
 
 
-
-  processo <- stringr::str_extract(arquivos, "\\d{20}")
-
-
-  purrr::map_dfr(arquivos, purrr::possibly(~ {
+  purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~ {
     resposta <- xml2::read_html(.x)
 
     nomes <- resposta %>%
@@ -66,6 +67,9 @@ ler_dados_cposg <- function(diretorio = ".") {
       janitor::clean_names() %>%
       tidyr::separate(processo, c("processo", "situacao"), sep = "\\w+$", extra = "merge") %>%
       tibble::add_column(cd_processo = cdProcesso) %>%
-      tibble::add_column(digital = digital)
-  }, otherwise = NULL))
+      tibble::add_column(digital = digital) %>%
+      dplyr::mutate(processo = stringr::str_trim(processo) %>%
+                      stringr::str_extract(.,"\\S+") %>%
+                      stringr::str_remove_all(.,"\\D"))
+  }), otherwise = NULL))
 }

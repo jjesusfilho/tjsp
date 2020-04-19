@@ -1,6 +1,8 @@
 #' Ler metadados das decisões
 #'
-#' @param diretorio Diretório onde se encontram os htmls.
+#' @param arquivos Caminhos para os htmls
+#' @param diretorio Diretório onde se encontram os htmls,
+#'       se arquivos for NULL.
 #'
 #' @return tabela com metadados jurisprudenciais.
 #' @export
@@ -10,14 +12,16 @@
 #' cjsg <- ler_cjsg()
 #' }
 #'
-ler_cjsg <- function(diretorio = ".") {
-  a <- list.files(
+ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
+
+  if (is.null(arquivos)){
+  arquivos <- list.files(
     path = diretorio,
     pattern = ".html",
     full.names = T
   )
-
-  purrr::map_dfr(a, purrr::possibly(~ {
+}
+  purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~{
     resposta <- xml2::read_html(.x)
 
     aC <-
@@ -62,9 +66,13 @@ ler_cjsg <- function(diretorio = ".") {
       cdacordao
     ) %>%
       dplyr::mutate_at(1:7,list(~iconv(.,"utf8","latin1//TRANSLIT"))) %>%
+      dplyr::mutate_at(1:7,list(~iconv(.,"latin1","utf8"))) %>%
       dplyr::mutate_at(3:7,list(~stringr::str_remove(.,".+:\\s?"))) %>%
       dplyr::mutate_at(6:7,list(~lubridate::dmy(.))) %>%
-      dplyr::mutate(processo = stringr::str_remove_all(processo,"\\D+"))
+      dplyr::mutate(processo = stringr::str_remove_all(processo,"\\D+")) %>%
+      dplyr::mutate(ano_julgamento = lubridate::year(data_julgamento),
+                    mes_julgamento = lubridate::month(data_julgamento,abbr = FALSE,label = TRUE),
+                    dia_julgamento = lubridate::wday(data_julgamento,abbr = FALSE, label = TRUE))
 
-  }, otherwise = NULL))
+  }), otherwise = NULL))
 }
