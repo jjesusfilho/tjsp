@@ -1,4 +1,4 @@
-#' Baixar processos de segunda instância
+#' Baixar processos de segunda instância do tjsp
 #'
 #' @param processos processos de segunda instância
 #' @param diretorio diretório
@@ -8,6 +8,7 @@
 #'
 baixar_cposg <- function(processos = NULL,
                          diretorio = ".") {
+
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
   processos <- stringr::str_remove_all(processos, "\\D+") %>%

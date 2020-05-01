@@ -4,7 +4,12 @@
 \alias{autenticar}
 \title{Autenticar no tjsp}
 \usage{
-autenticar()
+autenticar(login = NULL, password = NULL)
+}
+\arguments{
+\item{login}{cpf}
+
+\item{password}{senha}
 }
 \value{
 Estabelece uma sessão, não é necessário salvar.

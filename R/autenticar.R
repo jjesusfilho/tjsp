@@ -1,50 +1,91 @@
 #' Autenticar no tjsp
 #'
+#' @param login cpf
+#' @param password senha
 #' @return Estabelece uma sessão, não é necessário salvar.
 #' @export
 #'
 #' @details Ao chamar esta função, abrirá duas janelas sucessivas para
 #'     digitar cpf e senha.
 
-autenticar <- function() {
-  cpf <- askpass::askpass("Digite seu cpf")
+autenticar <- function(login = NULL, password = NULL) {
 
-  senha <- askpass::askpass("Digite sua senha")
+  # Check if isn't already logged in
+  if (check_login()) {
+    return(TRUE)
+  }
 
-  cpf <- stringr::str_remove_all(cpf, "\\D+")
-  cpf <- stringr::str_c(stringr::str_extract(cpf, "\\d{3}"), ".", stringr::str_extract(cpf, "(?=\\d{3})\\d{3}"), ".", stringr::str_extract(cpf, "(?<=\\d{6})\\d{3}"), "-", stringr::str_extract(cpf, "\\d{2}$"))
+  # Prompt for information if necessary
+  if (is.null(login) || is.null(password)) {
+    login <- as.character(readline(prompt = "Enter your login: "))
+    password <- as.character(readline(prompt = "Enter your password: "))
+  }
 
-  senha <- as.character(senha)
+  # Initial access
+  base <- "https://esaj.tjsp.jus.br/"
+  httr::GET(stringr::str_c(base, "esaj/portal.do?servico=740000"), httr::config(ssl_verifypeer = FALSE))
 
-  # httr::handle("https://esaj.tjsp.jus.br/esaj/identificacao.do?retorno=https%3A//esaj.tjsp.jus.br/cpopg/open.do")
+  # Get login page file
+  f_login <- stringr::str_c(
+    base, "sajcas/login?service=",
+    utils::URLencode(
+      stringr::str_c(base, "esaj/j_spring_cas_security_check"),
+      reserved = TRUE
+    )
+  ) %>%
+    httr::GET(httr::config(ssl_verifypeer = FALSE))
 
-  url <- "https://esaj.tjsp.jus.br/esaj/identificacao.do?retorno=https%3A//esaj.tjsp.jus.br/esaj/portal.do%3Fservico%3D740000"
-
-  h <- httr::handle(url)
-
-  e <- url %>%
-    httr::GET(handle = h) %>%
-    httr::content()
-
-  execucao <- e %>%
-    xml2::xml_find_first("//*[@name='execution']") %>%
+  # Get parameters for POST
+  lt <- f_login %>%
+    httr::content("text") %>%
+    xml2::read_html() %>%
+    xml2::xml_find_first("//input[@name='lt']") %>%
+    xml2::xml_attr("value")
+  e2 <- f_login %>%
+    httr::content("text") %>%
+    xml2::read_html() %>%
+    xml2::xml_find_first("//input[@name='execution']") %>%
     xml2::xml_attr("value")
 
-  form <- list(
-    username = cpf,
-    password = senha,
-    lt = "",
-    execution = execucao,
-    `_eventId` = "submit",
-    # submit="",
+  # Create POST quert
+  query_post <- list(
+    username = login,
+    password = password,
+    lt = lt,
+    execution = e2,
+    "_eventId" = "submit",
     pbEntrar = "Entrar",
     signature = "",
     certificadoSelecionado = "",
     certificado = ""
   )
-url2 <- "https://esaj.tjsp.jus.br/sajcas/login?service=https%3A%2F%2Fesaj.tjsp.jus.br%2Fesaj%2Fj_spring_cas_security_check"
 
-httr::POST("https://esaj.tjsp.jus.br/sajcas/login?service=https%3A%2F%2Fesaj.tjsp.jus.br%2Fesaj%2Fj_spring_cas_security_check",
-    body = form, encode = "form"
-  )
+  # Try to login
+  stringr::str_c(
+    base, "sajcas/login?service=",
+    utils::URLencode(
+      stringr::str_c(base, "esaj/j_spring_cas_security_check"),
+      reserved = TRUE
+    )
+  ) %>%
+    httr::POST(body = query_post, httr::config(ssl_verifypeer = FALSE), encode = "form")
+
+  # Message
+  flag <- check_login()
+  if (flag) {
+    message("You're logged in")
+  }
+  else {
+    message("Login failed")
+  }
+
+  return(flag)
+}
+
+check_login <- function() {
+  flag <- "https://esaj.tjsp.jus.br/" %>%
+    stringr::str_c("sajcas/verificarLogin.js") %>%
+    httr::GET(httr::config(ssl_verifypeer = FALSE)) %>%
+    httr::content("text") %>%
+    stringr::str_detect("true")
 }

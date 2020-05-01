@@ -2,7 +2,7 @@
 % Please edit documentation in R/baixar_cposg.R
 \name{baixar_cposg}
 \alias{baixar_cposg}
-\title{Baixar processos de segunda instância}
+\title{Baixar processos de segunda instância do tjsp}
 \usage{
 baixar_cposg(processos = NULL, diretorio = ".")
 }
@@ -15,5 +15,5 @@ baixar_cposg(processos = NULL, diretorio = ".")
 html com dados processuais
 }
 \description{
-Baixar processos de segunda instância
+Baixar processos de segunda instância do tjsp
 }
