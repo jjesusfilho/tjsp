@@ -1,6 +1,4 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # Pacote tjsp
 
 ## Baixando e lendo decisões de primeiro e segundo grau.
