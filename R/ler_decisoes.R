@@ -31,7 +31,7 @@ ler_decisoes <- function(arquivos = NULL, diretorio = ".") {
       x[i] %>%
        xml2::read_html() %>%
         xml2::xml_find_all(
-          "//table/tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]"
+          "//table//tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]"
         ) %>%
         rvest::html_table() %>%
         purrr::pluck(1) %>%
@@ -41,7 +41,7 @@ ler_decisoes <- function(arquivos = NULL, diretorio = ".") {
       x[i] %>%
         xml2::read_html() %>%
         xml2::xml_find_all(
-          "//table/tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=1]"
+          "//table//tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=1]"
         ) %>%
         rvest::html_text() %>%
         stringr::str_trim() %>%
