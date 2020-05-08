@@ -12,6 +12,6 @@ votacao <- function(x = NULL) {
       stringr::str_detect(x, "(?i)(v\\.\\s?u\\.?|un.ni)") ~ "unânime",
       stringr::str_detect(x, "(?i)v\\.?\\s?u\\.?\\)?\\.?$") ~ "unânime",
       stringr::str_detect(x, "(?i)maioria") ~ "maioria",
-      TRUE ~ NA_character
+      TRUE ~ NA_character_
     )
 }
