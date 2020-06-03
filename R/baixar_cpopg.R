@@ -12,7 +12,7 @@ baixar_cpopg<-function (processos = NULL, diretorio = ".")
   processos <- stringr::str_remove_all(processos, "\\D+") %>%
     stringr::str_pad(width = 20, "left", "0") %>% abjutils::build_id()
 
-  uri1 <- "https://esaj.tjsp.jus.br/cpopg/search.do?"
+  uri1 <- "https://esaj.tjsp.jus.br/cpopg/search.do?gateway=true"
 
   purrr::map_dfr(processos, purrr::possibly(~{
     p <- .x

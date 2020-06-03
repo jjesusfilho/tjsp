@@ -61,7 +61,7 @@ autenticar <- function(login = NULL, password = NULL) {
   )
 
   # Try to login
-  stringr::str_c(
+ stringr::str_c(
     base, "sajcas/login?service=",
     utils::URLencode(
       stringr::str_c(base, "esaj/j_spring_cas_security_check"),
@@ -83,7 +83,7 @@ autenticar <- function(login = NULL, password = NULL) {
 }
 
 check_login <- function() {
-  flag <- "https://esaj.tjsp.jus.br/" %>%
+  "https://esaj.tjsp.jus.br/" %>%
     stringr::str_c("sajcas/verificarLogin.js") %>%
     httr::GET(httr::config(ssl_verifypeer = FALSE)) %>%
     httr::content("text") %>%
