@@ -116,9 +116,15 @@ baixar_cjpg <-
 
       paginas <- 1:max_pag
     }
+
+    pb <- progress::progress_bar(total = max_pag)
+
     purrr::walk(paginas,
                 purrr::possibly(~ {
-                  httr::RETRY(
+
+                  pb$tick()
+
+                   httr::RETRY(
                     "GET",
                     url = paste0(
                       "http://esaj.tjsp.jus.br/cjpg/trocarDePagina.do?pagina=",
