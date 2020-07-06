@@ -15,7 +15,7 @@ ler_despacho<-function (fonte = ".")
   arquivos <- list.files(path = fonte, pattern = ".html", full.names = TRUE)
   processo <- stringr::str_extract(arquivos, "\\d{20}")
 
-  pb <- progress::progress_bar(total = length(arquivos))
+  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~{
 

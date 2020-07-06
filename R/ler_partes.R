@@ -21,7 +21,7 @@ ler_partes <- function(arquivos = NULL,diretorio = ".") {
     stringr::str_extract(arquivos, "\\d{20}") %>%
     abjutils::build_id(.)
 
-  pb <- progress::progress_bar(total= length(arquivos))
+  pb <- progress::progress_bar$new(total= length(arquivos))
 
   purrr::map_dfr(arquivos,purrr::possibly(~{
 

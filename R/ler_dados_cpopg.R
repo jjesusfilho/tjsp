@@ -22,7 +22,7 @@ ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE) {
   }
   processos <- stringr::str_extract(arquivos, "\\d{20}")
 
-  pb <- progress::progress_bar(total = length(processos))
+  pb <- progress::progress_bar$new(total = length(processos))
 
   dados <- purrr::map2_dfr(arquivos, processos, purrr::possibly(~ {
 

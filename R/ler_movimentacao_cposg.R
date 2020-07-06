@@ -20,7 +20,7 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(arquivos = NULL,dir
   )
 }
 
-  pb <- progress::progress_bar(total = length(arquivos))
+  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map_dfr(arquivos, purrr::possibly(~{
 

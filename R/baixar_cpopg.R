@@ -14,7 +14,7 @@ baixar_cpopg<-function (processos = NULL, diretorio = ".")
 
   uri1 <- "https://esaj.tjsp.jus.br/cpopg/search.do?gateway=true"
 
-  pb <- progress::progress_bar(total = length(processos))
+  pb <- progress::progress_bar$new(total = length(processos))
 
   purrr::map_dfr(processos, purrr::possibly(~{
 

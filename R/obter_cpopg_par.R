@@ -64,7 +64,11 @@ obter_cpopg_par <- function(oab = NULL, parte = NULL) {
 
   paginas <- 1:max_pag %>% as.character()
 
+  pb <- progress::progress_bar$new(total = max_pag)
+
 purrr::map_dfr(paginas,purrr::possibly(~{
+
+  pb$tick()
 
      query2 <-
        list(

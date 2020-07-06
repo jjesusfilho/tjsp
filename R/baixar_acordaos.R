@@ -18,7 +18,7 @@ baixar_acordaos <- function(processos = NULL,
 
   uri1 <- "https://esaj.tjsp.jus.br/cposg/search.do?"
 
-  pb <- progress::progress_bar(total = length(processos))
+  pb <- progress::progress_bar$new(total = length(processos))
 
   purrr::map_dfr(processos, purrr::possibly(~ {
 

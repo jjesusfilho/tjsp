@@ -54,7 +54,7 @@ ler_decisoes <- function(arquivos = NULL, diretorio = ".") {
     })
   }
 
-  pb <- progress::progress_bar(total = length(lista))
+  pb <- progress::progress_bar$new(total = length(lista))
 
   for (i in seq_along(lista)) {
 

@@ -19,7 +19,12 @@ ler_cjpg<-function (arquivos = NULL, diretorio = ".")
                            full.names = TRUE)
   }
 
+  pb <- progress::progress_bar$new(total = length(arquivos))
+
   df <- purrr::map_dfr(arquivos, purrr::possibly(~{
+
+    pb$tick()
+
     resposta <- .x %>% xml2::read_html(encoding = "UTF-8") %>%
       xml2::xml_find_all(xpath = "//*[@id='divDadosResultado']/table//td//td[@align='left']") %>%
       xml2::xml_text(trim = TRUE) %>% stringr::str_squish() %>%

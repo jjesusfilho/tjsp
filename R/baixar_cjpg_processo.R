@@ -9,7 +9,7 @@
 baixar_cjpg_processo <- function(processo = NULL, diretorio = ".") {
   dia <- Sys.Date() %>% stringr::str_replace_all("-", "_")
 
-  pb <- progress::progress_bar(total = length(processo))
+  pb <- progress::progress_bar$new(total = length(processo))
 
   purrr::walk(processo, purrr::possibly(~ {
     p <- .x %>%

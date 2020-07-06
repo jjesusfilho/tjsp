@@ -28,7 +28,7 @@ ler_decisoes_monocraticas <- function(diretorio = ".") {
   processo <- stringr::str_extract(arquivos, "\\d{20}")
 
 
-  pb <- progress::progress_bar(total = length(arquivos))
+  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
 

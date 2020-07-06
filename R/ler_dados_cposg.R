@@ -20,7 +20,7 @@ ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
   )
 }
 
- pb <- progress::progress_bar(total = length(arquivos))
+ pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map_dfr(arquivos, purrr::possibly(~{
 

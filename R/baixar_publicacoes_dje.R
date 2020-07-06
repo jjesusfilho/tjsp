@@ -44,7 +44,7 @@ baixar_publicacoes_dje <- function(processo, diretorio = ".") {
 
   ## Inicía a requisição
 
-  pb <- progress::progress_bar(total = length(inicios))
+  pb <- progress::progress_bar$new(total = length(inicios))
 
   purrr::walk2(inicios, finais, ~ {
 
