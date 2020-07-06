@@ -14,7 +14,12 @@ baixar_cpopg<-function (processos = NULL, diretorio = ".")
 
   uri1 <- "https://esaj.tjsp.jus.br/cpopg/search.do?gateway=true"
 
+  pb <- progress::progress_bar(total = length(processos))
+
   purrr::map_dfr(processos, purrr::possibly(~{
+
+    pb$tick()
+
     p <- .x
     unificado <- p %>% stringr::str_extract(".{15}")
     foro <- p %>% stringr::str_extract("\\d{4}$")

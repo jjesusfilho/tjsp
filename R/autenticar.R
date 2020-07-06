@@ -41,6 +41,7 @@ autenticar <- function(login = NULL, password = NULL) {
     xml2::read_html() %>%
     xml2::xml_find_first("//input[@name='lt']") %>%
     xml2::xml_attr("value")
+
   e2 <- f_login %>%
     httr::content("text") %>%
     xml2::read_html() %>%

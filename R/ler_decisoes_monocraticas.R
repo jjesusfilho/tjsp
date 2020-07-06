@@ -28,7 +28,12 @@ ler_decisoes_monocraticas <- function(diretorio = ".") {
   processo <- stringr::str_extract(arquivos, "\\d{20}")
 
 
+  pb <- progress::progress_bar(total = length(aquivos))
+
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
+
+    pb$tick()
+
     decisao <- xml2::read_html(.x) %>%
       rvest::html_nodes(xpath = "//a[contains(text(),'Decisão Monocrática')]/following-sibling::span") %>%
       rvest::html_text()

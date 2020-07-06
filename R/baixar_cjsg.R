@@ -31,6 +31,10 @@ baixar_cjsg <-
       ssl_verifypeer = FALSE,
       accept_encoding = "latin1"
     ))
+
+    if (aspas == TRUE) livre <- deparse(livre)
+
+
     body <-
       list(
         dados.buscaInteiroTeor = livre,
@@ -70,7 +74,6 @@ baixar_cjsg <-
         tipoDecisaoSelecionados = tipo,
         dados.ordenacao = "dtPublicacao"
       )
-    if (aspas == TRUE) livre <- deparse(livre)
 
     a <-
       httr::POST(
@@ -87,16 +90,22 @@ baixar_cjsg <-
       .[[1]] %>%
       .[3] %>%
       as.numeric() %>%
-      `/`(10) %>%
+      `/`(20) %>%
       ceiling()
 
     paginas <- 1:max_pag
+    pb <- progress::progress_bar$new(total = max_pag)
 
 
 
     if (tipo == "A") {
+
+
       purrr::map(paginas, purrr::possibly(~{
-       Sys.sleep(1)
+
+      pb$tick()
+
+      Sys.sleep(1)
         httr::GET(
           paste0(
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",
@@ -111,6 +120,9 @@ baixar_cjsg <-
       }, NULL))
     } else {
       purrr::map(paginas, purrr::possibly(~ {
+
+        pb$tick()
+
         Sys.sleep(1)
 
         httr::GET(

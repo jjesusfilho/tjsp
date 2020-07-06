@@ -17,7 +17,11 @@ baixar_cposg <- function(processos = NULL,
 
   uri1 <- "https://esaj.tjsp.jus.br/cposg/search.do?"
 
-  purrr::walk(processos, purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar(total = length(processos))
+
+  purrr::walk(processos, purrr::possibly(~{
+
+    pb$tick()
 
   r<-  httr::GET("https://esaj.tjsp.jus.br/cposg/open.do?gateway=true")
 
@@ -55,5 +59,5 @@ baixar_cposg <- function(processos = NULL,
     arquivo <- file.path(diretorio, paste0(format(Sys.Date(), "%Y_%m_%d_"), p, ".html"))
 
     xml2::write_html(conteudo1[[1]], arquivo)
-  }), NULL))
+  }, NULL))
 }

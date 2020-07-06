@@ -56,8 +56,12 @@ ler_decisoes_cposg <- function(arquivos  = NULL, diretorio = ".") {
     })
   }
 
+ pb <- progress::progress_bar(total = length(arquivos))
 
   for (ii in seq_along(arquivos)) {
+
+    pb$tick()
+
     lista[[ii]] <- tentativa(arquivos, processo)
   }
 

@@ -43,7 +43,13 @@ baixar_publicacoes_dje <- function(processo, diretorio = ".") {
   processo <- deparse(processo)
 
   ## Inicía a requisição
+
+  pb <- progress::progress_bar(total = length(incicios))
+
   purrr::walk2(inicios, finais, ~ {
+
+    pb$tick()
+
     body <- list(
       dadosConsulta.dtInicio = .x,
       dadosConsulta.dtFim = .y,

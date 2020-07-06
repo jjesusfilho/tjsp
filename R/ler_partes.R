@@ -21,7 +21,11 @@ ler_partes <- function(arquivos = NULL,diretorio = ".") {
     stringr::str_extract(arquivos, "\\d{20}") %>%
     abjutils::build_id(.)
 
-  purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar(total= length(arquivos))
+
+  purrr::map_dfr(arquivos,purrr::possibly(~{
+
+    pb$tick()
 
     ## Esta primeira parte seleciona a tabela que contêm as partes e a converte em
     ## texto. Infelizmente o html não é muito consistente. Temos de usar regex.
@@ -54,5 +58,5 @@ ler_partes <- function(arquivos = NULL,diretorio = ".") {
       dplyr::mutate(processo = !!processo) %>%
       dplyr::mutate(parte_nome = stringr::str_remove(parte_nome,"&nbsp")) %>%
       dplyr::select(processo, dplyr::everything())
-  }), otherwise = NULL))
+  }, otherwise = NULL))
 }

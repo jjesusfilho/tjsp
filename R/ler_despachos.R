@@ -14,7 +14,13 @@ ler_despacho<-function (fonte = ".")
 {
   arquivos <- list.files(path = fonte, pattern = ".html", full.names = TRUE)
   processo <- stringr::str_extract(arquivos, "\\d{20}")
+
+  pb <- progress::progress_bar(total = length(arquivos))
+
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~{
+
+  pb$tick()
+
     despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]//span|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decisão')]/parent::td/span") %>%
       rvest::html_text()
 

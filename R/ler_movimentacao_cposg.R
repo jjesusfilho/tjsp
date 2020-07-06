@@ -20,7 +20,12 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(arquivos = NULL,dir
   )
 }
 
-  purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar(total = length(arquivos))
+
+  purrr::map_dfr(arquivos, purrr::possibly(~{
+
+
+    pb$tick()
 
     processo <- stringr::str_extract(.x, "\\d{20}")
 
@@ -36,5 +41,5 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(arquivos = NULL,dir
 
 
     tibble::tibble(processo = processo, data = data, movimentacao = mov)
-  }), otherwise = NULL))
+  }, otherwise = NULL))
 }

@@ -20,8 +20,12 @@ ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
   )
 }
 
+ pb <- progress::progress_bar(total = length(arquivos))
 
-  purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~ {
+  purrr::map_dfr(arquivos, purrr::possibly(~{
+
+    pb$tick()
+
     resposta <- xml2::read_html(.x)
 
     nomes <- resposta %>%
@@ -71,5 +75,5 @@ ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
       dplyr::mutate(processo = stringr::str_trim(processo) %>%
                       stringr::str_extract(.,"\\S+") %>%
                       stringr::str_remove_all(.,"\\D"))
-  }), otherwise = NULL))
+  }, otherwise = NULL))
 }

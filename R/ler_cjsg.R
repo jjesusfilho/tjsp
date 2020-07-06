@@ -20,8 +20,14 @@ ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
     pattern = ".html",
     full.names = T
   )
-}
-  purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~{
+  }
+
+  pb <- progress::progress_bar(total = length(arquivos))
+
+  purrr::map_dfr(arquivos, purrr::possibly(~{
+
+    pb$tick()
+
     resposta <- xml2::read_html(.x)
 
     aC <-
@@ -66,7 +72,6 @@ ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
       cdacordao
     ) %>%
       dplyr::mutate_at(1:7,list(~iconv(.,"utf8","latin1//TRANSLIT"))) %>%
-      dplyr::mutate_at(1:7,list(~iconv(.,"latin1","utf8"))) %>%
       dplyr::mutate_at(3:7,list(~stringr::str_remove(.,".+:\\s?"))) %>%
       dplyr::mutate_at(6:7,list(~lubridate::dmy(.))) %>%
       dplyr::mutate(processo = stringr::str_remove_all(processo,"\\D+")) %>%
@@ -74,5 +79,5 @@ ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
                     mes_julgamento = lubridate::month(data_julgamento,abbr = FALSE,label = TRUE),
                     dia_julgamento = lubridate::wday(data_julgamento,abbr = FALSE, label = TRUE))
 
-  }), otherwise = NULL))
+  }, otherwise = NULL))
 }

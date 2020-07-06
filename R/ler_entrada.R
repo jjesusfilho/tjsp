@@ -22,7 +22,12 @@ ler_entrada <- ler_entrada_cposg <- ler_entrada_cpopg <- function(diretorio = ".
     abjutils::build_id()
 
 
+  pb <- progress::progress_bar(total = length(arquivos))
+
   purrr::map2_dfr(arquivos, processo, purrr::possibly(~ {
+
+    pb$tick()
+
     data <- xml2::read_html(.x) %>%
       rvest::html_nodes(xpath = "//td[@width='120']") %>%
       rvest::html_text() %>%

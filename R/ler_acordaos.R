@@ -10,7 +10,11 @@
 ler_acordaos <- function(diretorio = ".", remover_assinatura = FALSE, combinar = FALSE) {
   pdfs <- list.files(diretorio, pattern = ".pdf$", full.names = TRUE)
 
+  pb <- progress::progress_bar(total= length(pdfs))
+
   textos <- purrr::map(pdfs, pdftools::pdf_text)
+
+  pb$tick()
 
   if (remover_assinatura == TRUE) {
     textos <- purrr::map(textos, ~ remover_assinatura(.x))
