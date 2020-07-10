@@ -43,10 +43,7 @@ ler_partes <- function(arquivos = NULL,diretorio = ".") {
       paste0(collapse = "|") %>%
       paste0("(", ., ")", ".+?(?=", ., "|$)")
 
-    processo <- x %>%
-           xml2::xml_find_first("//label[@class='labelClass']/../following-sibling::td//td/span") %>%
-           xml2::xml_text(trim=T) %>%
-           stringr::str_remove_all("\\D")
+   processo <- stringr::str_extract(.x,"\\d{20}")
 
     # Extrai nome e nome da parte, converte em tibble, separa os dois.
     stringr::str_extract_all(r_partes, padrao) %>%

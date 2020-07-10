@@ -26,54 +26,33 @@ ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
 
     pb$tick()
 
+    processo <- stringr::str_extract(.x,"\\d{20}")
+
     resposta <- xml2::read_html(.x)
 
     nomes <- resposta %>%
-      xml2::xml_find_all("//label[@class='labelClass']") %>%
-      xml2::xml_text() %>%
-      stringr::str_extract_all("^.*?(?=:)") %>%
-      stringr::str_trim() %>%
-      stringr::str_squish()
+      xml2::xml_find_all("//span[@class='unj-label']") %>%
+      xml2::xml_text(trim=TRUE)
 
     digital <- resposta %>%
-      xml2::xml_find_first("boolean(//*[@class='linkPasta'] |//*[@class='linkConsultaSG'])")
+      xml2::xml_find_first("boolean(//*[@title='Pasta Digital'] |//*[@class='linkConsultaSG'])")
 
     cdProcesso <- resposta %>%
       xml2::xml_find_first("//*[@name='cdProcesso']") %>%
       xml2::xml_attr("value")
 
     valores <- resposta %>%
-      xml2::xml_find_all("//label[@class='labelClass']/parent::td/following-sibling::td") %>%
-      xml2::xml_text() %>%
-      stringr::str_trim() %>%
-      stringr::str_squish()
+      xml2::xml_find_all("//span[@class='unj-label']/following-sibling::div") %>%
+      xml2::xml_text()
 
-    nomes2 <- resposta %>%
-      xml2::xml_find_all("//span[@class='labelClass']") %>%
-      xml2::xml_text() %>%
-      stringr::str_trim() %>%
-      stringr::str_squish() %>%
-      paste0("ultima_carga_", .)
+    tibble::tibble(processo = processo, cd_processo = cdProcesso, variavel = nomes,
+                   valor = valores)
 
-    valores2 <- resposta %>%
-      xml2::xml_find_all("//span[@class='labelClass']/following-sibling::text()") %>%
-      xml2::xml_text() %>%
-      stringr::str_trim() %>%
-      stringr::str_squish() %>%
-      {
-        if (length(.) == 0) . <- NA_character_ else . <- .
-      }
-
-
-    as.list(c(valores, valores2)) %>%
-      setNames(c(nomes, nomes2)) %>%
-      tibble::as_tibble() %>%
-      janitor::clean_names() %>%
-      tidyr::separate(processo, c("processo", "situacao"), sep = "\\w+$", extra = "merge") %>%
-      tibble::add_column(cd_processo = cdProcesso) %>%
-      tibble::add_column(digital = digital) %>%
-      dplyr::mutate(processo = stringr::str_trim(processo) %>%
-                      stringr::str_extract(.,"\\S+") %>%
-                      stringr::str_remove_all(.,"\\D"))
-  }, otherwise = NULL))
+  }, otherwise = NULL)) %>%
+    dplyr::group_by_at(dplyr::vars(-valor)) %>%
+    dplyr::mutate(row_id = 1:dplyr::n()) %>%
+    dplyr::ungroup() %>%
+    tidyr::spread(key = variavel, value = valor) %>%
+    dplyr::select(-row_id) %>%
+    janitor::clean_names()
 }

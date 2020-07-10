@@ -31,9 +31,9 @@ ler_decisoes_cposg <- function(arquivos  = NULL, diretorio = ".") {
   tentativa <- function(x, y) {
     tryCatch({
       x[ii] %>%
-        xml2::read_html() %>%
+        xml2::read_html(.x) %>%
         xml2::xml_find_all(
-          "//table//tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]"
+          "//div/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]"
         ) %>%
         rvest::html_table() %>%
         purrr::pluck(1) %>%
@@ -43,7 +43,7 @@ ler_decisoes_cposg <- function(arquivos  = NULL, diretorio = ".") {
       x[ii] %>%
         xml2::read_html() %>%
         xml2::xml_find_all(
-          "//table//tr/td/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=1]"
+          "//div/h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=1]"
         ) %>%
         rvest::html_text() %>%
         stringr::str_trim() %>%
@@ -67,5 +67,6 @@ ler_decisoes_cposg <- function(arquivos  = NULL, diretorio = ".") {
 
   lista <- as.list(lista)
 
-  s <- do.call(rbind, lista)
+  do.call(rbind, lista) %>%
+    dplyr::mutate(dispositivo = iconv(dispositivo,'utf-8','latin1//translit'))
 }
