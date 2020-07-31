@@ -9,6 +9,7 @@ baixar_cjsg(
   aspas = FALSE,
   classe = "",
   assunto = "",
+  orgao_julgador = "",
   inicio = "",
   fim = "",
   tipo = "A",
@@ -23,6 +24,8 @@ baixar_cjsg(
 \item{classe}{Código da classe processual}
 
 \item{assunto}{Código do assunto}
+
+\item{orgao_julgador}{Código do órgão julgador}
 
 \item{inicio}{data inicial}
 

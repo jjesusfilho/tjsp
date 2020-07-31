@@ -4,6 +4,7 @@
 #' @param aspas lógico. Colocar a expressão entre aspas?
 #' @param classe Código da classe processual
 #' @param assunto Código do assunto
+#' @param orgao_julgador Código do órgão julgador
 #' @param inicio  data inicial
 #' @param fim  Data final
 #' @param tipo "A" Para acórdãos, "D" para decisões monocráticas.
@@ -23,6 +24,7 @@ baixar_cjsg <-
              aspas = FALSE,
              classe = "",
              assunto = "",
+             orgao_julgador = "",
              inicio = "",
              fim = "",
              tipo = "A",
@@ -64,7 +66,7 @@ baixar_cjsg <-
         contadorMaiorcomarca = "0",
         cdComarca = "",
         nmComarca = "",
-        secoesTreeSelection.values = "",
+        secoesTreeSelection.values = orgao_julgador,
         secoesTreeSelection.text = "",
         dados.dtJulgamentoInicio = inicio,
         dados.dtJulgamentoFim = fim,
