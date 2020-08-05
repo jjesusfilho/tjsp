@@ -17,6 +17,7 @@ if (getRversion() >= "2.15.1") {
     "", "foro", "cod_subarea", "subarea", "data_distribuicao",
     "data_recebimento", "processo_2", "processo_principal",
     "valor_da_acao", "incidente", "execucao_de_sentenca", "recebido_em",
-    "classe_numero", "classe_situacao","number","n","comarca","imoveis", "lat","lng"
+    "classe_numero", "classe_situacao","number","n","comarca","imoveis", "lat","lng",
+    "id0","dispositivo","id5","name0","name5"
   ))
 }

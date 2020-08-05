@@ -6,7 +6,6 @@
 #' @return dataframe
 #' @export
 #'
-#' @examples
 ler_dados_cposg2 <- function(arquivos = NULL, diretorio = ".") {
 
  if (is.null(arquivos)){
