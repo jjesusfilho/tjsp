@@ -1,11 +1,11 @@
 #' Classificar writs(HC, MS, revisão criminal)
 #'
-#' @param texto Texto da decisão
+#' @param x Texto da decisão
 #'
 #' @return classificação
 #' @export
 #'
-classificar_writ <- function(texto){
+classificar_writ <- function(x){
 
   x<- x %>%
     stringr::str_sub(-2000) %>%

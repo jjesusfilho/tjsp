@@ -4,10 +4,10 @@
 \alias{classificar_writ}
 \title{Classificar writs(HC, MS, revisão criminal)}
 \usage{
-classificar_writ(texto)
+classificar_writ(x)
 }
 \arguments{
-\item{texto}{Texto da decisão}
+\item{x}{Texto da decisão}
 }
 \value{
 classificação
