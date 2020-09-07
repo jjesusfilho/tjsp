@@ -8,7 +8,7 @@
 #' @export
 #'
 
-baixar_acordaos <- function(processos = NULL,
+baixar_acordaos2 <- function(processos = NULL,
                             diretorio = ".") {
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
 

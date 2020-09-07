@@ -29,7 +29,7 @@ baixar_cjsg <-
              fim = "",
              tipo = "A",
              diretorio = ".") {
-    httr::set_config(httr::config(
+     httr::set_config(httr::config(
       ssl_verifypeer = FALSE,
       accept_encoding = "latin1"
     ))

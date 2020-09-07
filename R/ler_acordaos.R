@@ -1,27 +1,44 @@
 #' Lê pdfs dos acórdãos, remove assinatura e eventualmente combina
 #'
-#' @param diretorio diretório onde se encontram os pdfs
-#' @param remover_assinatura default é FALSE
-#' @param combinar default juntar todas as páginas em um único vetor.
+#' @param arquivos Arquivos onde se encontram os pdfs
+#' @param diretorio Diretório onde se encontram os pdfs (alternativa a arquivos)
+#' @param remover_assinatura Padrão para FALSE
+#' @param combinar Default para TRUE juntar todas as páginas em um único texto.
 #'
-#' @return Lista com vetores das páginas dos pdfs
+#' @return Tibble com data do acórdão, processo e texto
 #' @export
 
-ler_acordaos <- function(diretorio = ".", remover_assinatura = FALSE, combinar = FALSE) {
-  pdfs <- list.files(diretorio, pattern = ".pdf$", full.names = TRUE)
+ler_acordaos <- function(arquivos = NULL, diretorio = ".", remover_assinatura = FALSE, combinar = TRUE) {
 
-  pb <- progress::progress_bar$new(total= length(pdfs))
+  if (is.null(arquivos)){
 
-  textos <- purrr::map(pdfs, pdftools::pdf_text)
+ arquivos   <- list.files(diretorio, pattern = "\\.pdf$", full.names = TRUE)
+
+  }
+
+  pb <- progress::progress_bar$new(total= length(arquivos))
+
+purrr::map_dfr(arquivos, purrr::possibly(~{
 
   pb$tick()
 
-  if (remover_assinatura == TRUE) {
-    textos <- purrr::map(textos, ~ remover_assinatura(.x))
+  data_acordao <- stringr::str_extract(.x,"\\d{4}\\D\\d{2}\\D\\d{2}") %>%
+                  lubridate::ymd()
+
+  processo <- stringr::str_extract(.x,"\\d{20}")
+
+  texto <- pdftools::pdf_text(.x)
+
+  if (remover_assinatura) {
+    texto <- remover_assinatura(texto)
   }
 
-  if (combinar == TRUE) {
-    textos <- purrr::map(textos, ~ stringr::str_c(.x, collapse = "\n"))
+  if (combinar) {
+    texto <- stringr::str_c(texto, collapse = "\n")
   }
-  return(textos)
+
+  tibble::tibble(processo = processo, data_julgado = data_acordao, julgado = texto)
+
+},NULL))
+
 }

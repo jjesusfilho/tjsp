@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento — baixar_acordaos • tjsp</title>
+<title>Ler acórdãos baixados com tjsp_baixar_acordao_cjsg — tjsp_ler_acordaos_cjsg • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento — baixar_acordaos" />
-<meta property="og:description" content="Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento" />
+<meta property="og:title" content="Ler acórdãos baixados com tjsp_baixar_acordao_cjsg — tjsp_ler_acordaos_cjsg" />
+<meta property="og:description" content="Ler acórdãos baixados com tjsp_baixar_acordao_cjsg" />
 
 
 
@@ -111,34 +111,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/baixar_acordaos.R'><code>R/baixar_acordaos.R</code></a></small>
-    <div class="hidden name"><code>baixar_acordaos.Rd</code></div>
+    <h1>Ler acórdãos baixados com tjsp_baixar_acordao_cjsg</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/tjsp_ler_acordaos_cjsg.R'><code>R/tjsp_ler_acordaos_cjsg.R</code></a></small>
+    <div class="hidden name"><code>tjsp_ler_acordaos_cjsg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Baixa acórdãos do Tribunal de Justiça de São Paulo a partir do andamento</p>
+    <p>Ler acórdãos baixados com tjsp_baixar_acordao_cjsg</p>
     </div>
 
-    <pre class="usage"><span class='fu'>baixar_acordaos</span>(<span class='kw'>processos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>tjsp_ler_acordaos_cjsg</span>(
+  <span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>remover_assinatura</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>combinar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>processos</th>
-      <td><p>vetor com o número do processo com ou sem os separadores</p></td>
+      <th>arquivos</th>
+      <td><p>Arquivos dos pdfs</p></td>
     </tr>
     <tr>
       <th>diretorio</th>
-      <td><p>Diretório. Default para o corrente.</p></td>
+      <td><p>Informar se não informar arquivos</p></td>
+    </tr>
+    <tr>
+      <th>remover_assinatura</th>
+      <td><p>Remover assinatura digital?</p></td>
+    </tr>
+    <tr>
+      <th>combinar</th>
+      <td><p>Combinar as páginas em uma</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tabela com metadados do pdf e pdf do acórdão baixado com data
-   do acordao e número do processo.</p>
+    <p>tibble</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

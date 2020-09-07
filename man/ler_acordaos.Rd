@@ -4,17 +4,24 @@
 \alias{ler_acordaos}
 \title{Lê pdfs dos acórdãos, remove assinatura e eventualmente combina}
 \usage{
-ler_acordaos(diretorio = ".", remover_assinatura = FALSE, combinar = FALSE)
+ler_acordaos(
+  arquivos = NULL,
+  diretorio = ".",
+  remover_assinatura = FALSE,
+  combinar = TRUE
+)
 }
 \arguments{
-\item{diretorio}{diretório onde se encontram os pdfs}
+\item{arquivos}{Arquivos onde se encontram os pdfs}
 
-\item{remover_assinatura}{default é FALSE}
+\item{diretorio}{Diretório onde se encontram os pdfs (alternativa a arquivos)}
 
-\item{combinar}{default juntar todas as páginas em um único vetor.}
+\item{remover_assinatura}{Padrão para FALSE}
+
+\item{combinar}{Default para TRUE juntar todas as páginas em um único texto.}
 }
 \value{
-Lista com vetores das páginas dos pdfs
+Tibble com data do acórdão, processo e texto
 }
 \description{
 Lê pdfs dos acórdãos, remove assinatura e eventualmente combina

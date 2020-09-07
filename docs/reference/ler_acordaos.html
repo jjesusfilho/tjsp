@@ -120,28 +120,37 @@
     <p>Lê pdfs dos acórdãos, remove assinatura e eventualmente combina</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ler_acordaos</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>remover_assinatura</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>combinar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>ler_acordaos</span>(
+  <span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>remover_assinatura</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>combinar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>arquivos</th>
+      <td><p>Arquivos onde se encontram os pdfs</p></td>
+    </tr>
+    <tr>
       <th>diretorio</th>
-      <td><p>diretório onde se encontram os pdfs</p></td>
+      <td><p>Diretório onde se encontram os pdfs (alternativa a arquivos)</p></td>
     </tr>
     <tr>
       <th>remover_assinatura</th>
-      <td><p>default é FALSE</p></td>
+      <td><p>Padrão para FALSE</p></td>
     </tr>
     <tr>
       <th>combinar</th>
-      <td><p>default juntar todas as páginas em um único vetor.</p></td>
+      <td><p>Default para TRUE juntar todas as páginas em um único texto.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Lista com vetores das páginas dos pdfs</p>
+    <p>Tibble com data do acórdão, processo e texto</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
