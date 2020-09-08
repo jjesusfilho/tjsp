@@ -50,5 +50,6 @@ Suggests:
     future,
     furrr,
     zoo,
-    usethis
+    usethis,
+    jsonlite
 VignetteBuilder: knitr 
