@@ -15,7 +15,7 @@ tjsp_baixar_docs <- function(processos  = NULL, doc_id = NULL, urls = NULL, dire
 
   id <- stringr::str_c(processos,"_","doc_id",doc_id)
 
-  pb <- progress::progress_bar$new(total = length(processo))
+  pb <- progress::progress_bar$new(total = length(processos))
 
 
   purrr::walk2(urls,id,purrr::possibly(~{
