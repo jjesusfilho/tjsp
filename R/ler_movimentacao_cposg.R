@@ -34,7 +34,8 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(arquivos = NULL,dir
 
 
     data <- xml2::xml_find_all(texto, ".//td[@width='120']") %>%
-      xml2::xml_text(trim = TRUE)
+      xml2::xml_text(trim = TRUE) %>%
+      lubridate::dmy()
 
     mov <- xml2::xml_find_all(texto, ".//td[@style='vertical-align: top; padding-bottom: 5px']") %>%
       xml2::xml_text(trim = TRUE)
