@@ -130,7 +130,7 @@
    comparar nomes de municípios.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fuzzy_search</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>fuzzy_search</span>(x = <span class='kw'>NULL</span>, y = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,9 +151,10 @@
     de x.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>wrong_names</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Mogi das Cruses"</span>,<span class='st'>"Sao Paulo"</span>,<span class='st'>"CANTA GALLO"</span>)
-<span class='no'>correct_names</span><span class='kw'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Canta Galo"</span>,<span class='st'>"Mogi das Cruzes"</span>,<span class='st'>"São Paulo"</span>)
-<span class='fu'>fuzzy_search</span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>wrong_names</span>,<span class='kw'>y</span><span class='kw'>=</span><span class='no'>correct_names</span>)</div><div class='output co'>#&gt; [1] "Mogi das Cruzes" "São Paulo"       "Canta Galo"     </div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>wrong_names</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Mogi das Cruses"</span>,<span class='st'>"Sao Paulo"</span>,<span class='st'>"CANTA GALLO"</span>)
+<span class='kw'>correct_names</span><span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Canta Galo"</span>,<span class='st'>"Mogi das Cruzes"</span>,<span class='st'>"São Paulo"</span>)
+<span class='fu'>fuzzy_search</span>(x=<span class='kw'>wrong_names</span>,y=<span class='kw'>correct_names</span>)
+</div><div class='output co'>#&gt; [1] "Mogi das Cruzes" "São Paulo"       "Canta Galo"     </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -169,7 +170,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

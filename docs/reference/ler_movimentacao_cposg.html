@@ -120,7 +120,7 @@
     <p>Extrai a movimentação processual de primeira e de segunda instância</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ler_movimentacao_cposg</span>(<span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>ler_movimentacao_cposg</span>(arquivos = <span class='kw'>NULL</span>, diretorio = <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,10 +140,12 @@
     <p>tibble com a movimentação processual.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>andamento_cposg</span> <span class='kw'>&lt;-</span> <span class='fu'>ler_movimentacao_cposg</span>()
-<span class='no'>andamento_cpopg</span> <span class='kw'>&lt;-</span> <span class='fu'>ler_movimentacao_cpopg</span>()
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>andamento_cposg</span> <span class='op'>&lt;-</span> <span class='fu'>ler_movimentacao_cposg</span>()
+<span class='kw'>andamento_cpopg</span> <span class='op'>&lt;-</span> <span class='fu'>ler_movimentacao_cpopg</span>()
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -159,7 +161,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -28,6 +28,7 @@ baixar_cjsg <-
              inicio = "",
              fim = "",
              tipo = "A",
+             n = NULL,
              diretorio = ".") {
      httr::set_config(httr::config(
       ssl_verifypeer = FALSE,
@@ -85,6 +86,16 @@ baixar_cjsg <-
         httr::accept("text/html; charset=latin1;")
       )
 
+    if (!is.null(n)){
+
+      paginas <- 1:n
+
+      pb <- progress::progress_bar$new(total = n)
+
+
+    } else {
+
+
     max_pag <- a %>%
       httr::content() %>%
       xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") %>%
@@ -95,15 +106,19 @@ baixar_cjsg <-
       `/`(20) %>%
       ceiling()
 
+
+
     paginas <- 1:max_pag
+
+
     pb <- progress::progress_bar$new(total = max_pag)
 
-
+    }
 
     if (tipo == "A") {
 
 
-      purrr::map(paginas, purrr::possibly(~{
+    purrr::map(paginas, purrr::possibly(~{
 
       pb$tick()
 

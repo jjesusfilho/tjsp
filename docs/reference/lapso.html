@@ -120,7 +120,7 @@
     <p>Retorna o lapso temporal na unidade especificada entre duas datas.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lapso</span>(<span class='kw'>data_inicial</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>data_final</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>unidade</span> <span class='kw'>=</span> <span class='st'>"mes"</span>)</pre>
+    <pre class="usage"><span class='fu'>lapso</span>(data_inicial = <span class='kw'>NULL</span>, data_final = <span class='kw'>NULL</span>, unidade = <span class='st'>"mes"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,7 +148,8 @@
     do pacote lubridate. Ela considera as variações de ano, meses e dias.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>lapso</span>(<span class='kw'>data_inicial</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2018-01-01"</span>), <span class='kw'>data_final</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2018-12-31"</span>), <span class='kw'>unidade</span> <span class='kw'>=</span> <span class='st'>"mes"</span>)</div><div class='output co'>#&gt; [1] 11.96774</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>lapso</span>(data_inicial = <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2018-01-01"</span>), data_final = <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2018-12-31"</span>), unidade = <span class='st'>"mes"</span>)
+</div><div class='output co'>#&gt; [1] 11.96774</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -164,7 +165,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

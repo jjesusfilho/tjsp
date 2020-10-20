@@ -5,8 +5,10 @@
 #' @return Estabelece uma sessão, não é necessário salvar.
 #' @export
 #'
-#' @details Ao chamar esta função, abrirá duas janelas sucessivas para
-#'     digitar cpf e senha.
+#' @details Você pode informar as credenciais nos argumentos ou
+#'      criar variáveis de ambiente: "LOGINADV" e "PASSWORDADV", ou
+#'      chamar a função e aguardar o prompt para informar
+#'      login e password
 
 autenticar <- function(login = NULL, password = NULL) {
 
@@ -17,9 +19,17 @@ autenticar <- function(login = NULL, password = NULL) {
 
   # Prompt for information if necessary
   if (is.null(login) || is.null(password)) {
-    login <- as.character(readline(prompt = "Enter your login: "))
-    password <- as.character(readline(prompt = "Enter your password: "))
-  }
+
+    login <- Sys.getenv("LOGINADV")
+    password <- Sys.getenv("PASSWORDADV")
+
+    if ( login =="" || password == "") {
+
+    login <- as.character(getPass::getPass(msg = "Enter your login: "))
+    password <- as.character(getPass::getPass(msg = "Enter your password: "))
+    }
+
+    }
 
   # Initial access
   base <- "https://esaj.tjsp.jus.br/"

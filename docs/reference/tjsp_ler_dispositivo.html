@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs — tjsp_baixar_docs • tjsp</title>
+<title>Ler dispositivo do cposg — tjsp_ler_dispositivo • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs — tjsp_baixar_docs" />
-<meta property="og:description" content="Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs" />
+<meta property="og:title" content="Ler dispositivo do cposg — tjsp_ler_dispositivo" />
+<meta property="og:description" content="Ler dispositivo do cposg" />
 
 
 
@@ -111,46 +111,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/tjsp_baixar_docs.R'><code>R/tjsp_baixar_docs.R</code></a></small>
-    <div class="hidden name"><code>tjsp_baixar_docs.Rd</code></div>
+    <h1>Ler dispositivo do cposg</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/tjsp_ler_dispositivo.R'><code>R/tjsp_ler_dispositivo.R</code></a></small>
+    <div class="hidden name"><code>tjsp_ler_dispositivo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs</p>
+    <p>Ler dispositivo do cposg</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tjsp_baixar_docs</span>(
-  processos = <span class='kw'>NULL</span>,
-  doc_id = <span class='kw'>NULL</span>,
-  urls = <span class='kw'>NULL</span>,
-  diretorio = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>tjsp_ler_dispositivo</span>(arquivos = <span class='kw'>NULL</span>, diretorio = <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>processos</th>
-      <td><p>Número do processo</p></td>
-    </tr>
-    <tr>
-      <th>doc_id</th>
-      <td><p>Id do documento</p></td>
-    </tr>
-    <tr>
-      <th>urls</th>
-      <td><p>Urls dos documentos</p></td>
+      <th>arquivos</th>
+      <td><p>Vetor de arquivos</p></td>
     </tr>
     <tr>
       <th>diretorio</th>
-      <td><p>Diretório</p></td>
+      <td><p>Diretorio se não informar arquivos</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>pdfs</p>
+    <p>Tibble</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

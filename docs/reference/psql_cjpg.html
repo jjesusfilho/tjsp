@@ -120,7 +120,7 @@
     <p>The dbAppendTable() method assumes that the table has been created beforehand,</p>
     </div>
 
-    <pre class="usage"><span class='fu'>psql_cjpg</span>(<span class='no'>con</span>, <span class='no'>tbl</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>psql_cjpg</span>(<span class='kw'>con</span>, <span class='kw'>tbl</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,13 +144,14 @@
     <p>It doesn't return anything.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>con</span><span class='kw'>&lt;-</span><span class='kw pkg'>dbx</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/dbx/man/dbxConnect.html'>dbxConnect</a></span>()
-<span class='kw pkg'>DBI</span><span class='kw ns'>::</span><span class='fu'><a href='https://dbi.r-dbi.org/reference/dbCreateTable.html'>dbCreateTable</a></span>(<span class='no'>con</span>,<span class='st'>"cjpg"</span>,
-                  <span class='kw'>fields</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"processo"</span>, <span class='st'>"classe"</span>, <span class='st'>"assunto"</span>, <span class='st'>"magistrado"</span>, <span class='st'>"comarca"</span>, <span class='st'>"foro"</span>,
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>con</span><span class='op'>&lt;-</span><span class='kw'>dbx</span>::<span class='fu'><a href='https://rdrr.io/pkg/dbx/man/dbxConnect.html'>dbxConnect</a></span>()
+<span class='kw'>DBI</span>::<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbCreateTable.html'>dbCreateTable</a></span>(<span class='kw'>con</span>,<span class='st'>"cjpg"</span>,
+                  fields=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"processo"</span>, <span class='st'>"classe"</span>, <span class='st'>"assunto"</span>, <span class='st'>"magistrado"</span>, <span class='st'>"comarca"</span>, <span class='st'>"foro"</span>, 
                                <span class='st'>"vara"</span>, <span class='st'>"disponibilizacao"</span>, <span class='st'>"julgado"</span>))
- <span class='fu'>psql_cjpg</span>(<span class='no'>con</span>,<span class='st'>"cjpg"</span>,<span class='kw'>livre</span><span class='kw'>=</span><span class='st'>"feminicidio"</span>)
-}</div></pre>
+ <span class='fu'>psql_cjpg</span>(<span class='kw'>con</span>,<span class='st'>"cjpg"</span>,livre=<span class='st'>"feminicidio"</span>)                      
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -166,7 +167,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

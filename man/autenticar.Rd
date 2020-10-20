@@ -18,6 +18,8 @@ Estabelece uma sessão, não é necessário salvar.
 Autenticar no tjsp
 }
 \details{
-Ao chamar esta função, abrirá duas janelas sucessivas para
-    digitar cpf e senha.
+Você pode informar as credenciais nos argumentos ou
+     criar variáveis de ambiente: "LOGINADV" e "PASSWORDADV", ou
+     chamar a função e aguardar o prompt para informar
+     login e password
 }
