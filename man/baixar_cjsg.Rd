@@ -12,7 +12,10 @@ baixar_cjsg(
   orgao_julgador = "",
   inicio = "",
   fim = "",
+  inicio_pb = "",
+  fim_pb = "",
   tipo = "A",
+  n = NULL,
   diretorio = "."
 )
 }
@@ -27,13 +30,19 @@ baixar_cjsg(
 
 \item{orgao_julgador}{Código do órgão julgador}
 
-\item{inicio}{data inicial}
+\item{inicio}{data inicial julgamento}
 
-\item{fim}{Data final}
+\item{fim}{Data final julgamento}
 
-\item{tipo}{"A" Para acórdãos, "D" para decisões monocráticas.}
+\item{inicio_pb}{data inicial registro/publicação}
 
-\item{diretorio}{Diretório onde serão armazenadas as páginas html.}
+\item{fim_pb}{data final registr/publicacao}
+
+\item{tipo}{"A" Para acórdãos, "D" para decisões monocráticas}
+
+\item{n}{Número de páginas}
+
+\item{diretorio}{Diretório onde serão armazenadas as páginas html}
 }
 \value{
 baixa os htmls das decisões de segunda instância

@@ -5,10 +5,13 @@
 #' @param classe Código da classe processual
 #' @param assunto Código do assunto
 #' @param orgao_julgador Código do órgão julgador
-#' @param inicio  data inicial
-#' @param fim  Data final
-#' @param tipo "A" Para acórdãos, "D" para decisões monocráticas.
-#' @param diretorio Diretório onde serão armazenadas as páginas html.
+#' @param inicio  data inicial julgamento
+#' @param fim  Data final julgamento
+#' @param inicio_pb data inicial registro/publicação
+#' @param fim_pb    data final registr/publicacao
+#' @param tipo "A" Para acórdãos, "D" para decisões monocráticas
+#' @param n Número de páginas
+#' @param diretorio Diretório onde serão armazenadas as páginas html
 #' @keywords tjsp,acórdãos
 #'
 #' @return baixa os htmls das decisões de segunda instância
@@ -27,6 +30,8 @@ baixar_cjsg <-
              orgao_julgador = "",
              inicio = "",
              fim = "",
+             inicio_pb = "",
+             fim_pb = "",
              tipo = "A",
              n = NULL,
              diretorio = ".") {
@@ -71,8 +76,8 @@ baixar_cjsg <-
         secoesTreeSelection.text = "",
         dados.dtJulgamentoInicio = inicio,
         dados.dtJulgamentoFim = fim,
-        dados.dtRegistroInicio = "",
-        dados.dtRegistroFim = "",
+        dados.dtRegistroInicio = inicio_pb,
+        dados.dtRegistroFim = fim_pb,
         dados.origensSelecionadas = "T",
         tipoDecisaoSelecionados = tipo,
         dados.ordenacao = "dtPublicacao"

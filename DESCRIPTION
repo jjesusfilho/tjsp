@@ -31,7 +31,6 @@ Imports:
     stats,
     pdftools,
     readr,
-    askpass,
     listenv,
     janitor,
     getPass
