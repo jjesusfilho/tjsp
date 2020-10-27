@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Baixa consulta jurisprudencial do TJSP — baixar_cjsg • tjsp</title>
+<title>Baixa tabela de documentos dos processos do TJSP — tjsp_cpopg_baixar_tabela_docs • tjsp</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Baixa consulta jurisprudencial do TJSP — baixar_cjsg" />
-<meta property="og:description" content="Baixa consulta jurisprudencial do TJSP" />
+<meta property="og:title" content="Baixa tabela de documentos dos processos do TJSP — tjsp_cpopg_baixar_tabela_docs" />
+<meta property="og:description" content="Baixa tabela de documentos dos processos do TJSP" />
 
 
 
@@ -111,93 +111,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Baixa consulta jurisprudencial do TJSP</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/baixar_cjsg.R'><code>R/baixar_cjsg.R</code></a></small>
-    <div class="hidden name"><code>baixar_cjsg.Rd</code></div>
+    <h1>Baixa tabela de documentos dos processos do TJSP</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/tjsp/blob/master/R/tjsp_cpopg_baixar_tabela_docs.R'><code>R/tjsp_cpopg_baixar_tabela_docs.R</code></a></small>
+    <div class="hidden name"><code>tjsp_cpopg_baixar_tabela_docs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Baixa consulta jurisprudencial do TJSP</p>
+    <p>Baixa tabela de documentos dos processos do TJSP</p>
     </div>
 
-    <pre class="usage"><span class='fu'>baixar_cjsg</span>(
-  livre = <span class='st'>""</span>,
-  aspas = <span class='fl'>FALSE</span>,
-  classe = <span class='st'>""</span>,
-  assunto = <span class='st'>""</span>,
-  orgao_julgador = <span class='st'>""</span>,
-  inicio = <span class='st'>""</span>,
-  fim = <span class='st'>""</span>,
-  inicio_pb = <span class='st'>""</span>,
-  fim_pb = <span class='st'>""</span>,
-  tipo = <span class='st'>"A"</span>,
-  n = <span class='kw'>NULL</span>,
-  diretorio = <span class='st'>"."</span>
-)</pre>
+    <pre class="usage"><span class='fu'>tjsp_cpopg_baixar_tabela_docs</span>(processos = <span class='kw'>NULL</span>, diretorio = <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>livre</th>
-      <td><p>palavra ou texto a ser buscado nas ementas e nos acórdãos</p></td>
-    </tr>
-    <tr>
-      <th>aspas</th>
-      <td><p>lógico. Colocar a expressão entre aspas?</p></td>
-    </tr>
-    <tr>
-      <th>classe</th>
-      <td><p>Código da classe processual</p></td>
-    </tr>
-    <tr>
-      <th>assunto</th>
-      <td><p>Código do assunto</p></td>
-    </tr>
-    <tr>
-      <th>orgao_julgador</th>
-      <td><p>Código do órgão julgador</p></td>
-    </tr>
-    <tr>
-      <th>inicio</th>
-      <td><p>data inicial julgamento</p></td>
-    </tr>
-    <tr>
-      <th>fim</th>
-      <td><p>Data final julgamento</p></td>
-    </tr>
-    <tr>
-      <th>inicio_pb</th>
-      <td><p>data inicial registro/publicação</p></td>
-    </tr>
-    <tr>
-      <th>fim_pb</th>
-      <td><p>data final registr/publicacao</p></td>
-    </tr>
-    <tr>
-      <th>tipo</th>
-      <td><p>"A" Para acórdãos, "D" para decisões monocráticas</p></td>
-    </tr>
-    <tr>
-      <th>n</th>
-      <td><p>Número de páginas</p></td>
+      <th>processos</th>
+      <td><p>Número do processo</p></td>
     </tr>
     <tr>
       <th>diretorio</th>
-      <td><p>Diretório onde serão armazenadas as páginas html</p></td>
+      <td><p>Diretório onde armazenar as tabelas</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>baixa os htmls das decisões de segunda instância</p>
+    <p>html</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>baixar_cjsg</span>(livre = <span class='st'>"Lei Maria da Penha"</span>)
-}
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
