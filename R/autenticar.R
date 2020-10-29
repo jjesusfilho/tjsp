@@ -9,7 +9,6 @@
 #'      criar variáveis de ambiente: "LOGINADV" e "PASSWORDADV", ou
 #'      chamar a função e aguardar o prompt para informar
 #'      login e password
-
 autenticar <- function(login = NULL, password = NULL) {
 
   # Check if isn't already logged in
