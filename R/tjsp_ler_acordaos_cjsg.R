@@ -22,7 +22,7 @@ tjsp_ler_acordaos_cjsg <- function(arquivos = NULL, diretorio = ".", remover_ass
 
      pb$tick()
 
-    cdacordao <- stringr::str_extract(.x,"\\d+")
+    cdacordao <- stringr::str_extract(.x, "(?<=cdacordao_)\\d+")
 
     texto <- pdftools::pdf_text(.x)
 
