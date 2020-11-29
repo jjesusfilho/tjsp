@@ -46,6 +46,5 @@ ler_decisoes_cposg <- function (arquivos = NULL, diretorio = ".")
     lista[[ii]] <- tentativa(arquivos, processo)
   }
   lista <- as.list(lista)
-  do.call(rbind, lista) %>% dplyr::mutate(dispositivo = iconv(dispositivo,
-                                                              "utf-8", "latin1//translit"))
+  do.call(rbind, lista)
 }
