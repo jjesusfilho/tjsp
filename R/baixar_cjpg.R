@@ -117,7 +117,7 @@ baixar_cjpg <-
       paginas <- 1:max_pag
     }
 
-    pb <- progress::progress_bar$new(total = max_pag)
+    pb <- progress::progress_bar$new(total = length(paginas))
 
     purrr::walk(paginas,
                 purrr::possibly(~ {
