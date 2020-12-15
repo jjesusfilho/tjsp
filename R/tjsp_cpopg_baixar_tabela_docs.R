@@ -16,7 +16,7 @@ tjsp_cpopg_baixar_tabela_docs <- function (processos = NULL, diretorio = ".")
 
   pb <- progress::progress_bar$new(total = length(processos))
 
-  purrr::map_dfr(processos, purrr::possibly(~{
+  purrr::walk(processos, purrr::possibly(~{
 
     pb$tick()
 
