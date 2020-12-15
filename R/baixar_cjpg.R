@@ -124,6 +124,29 @@ baixar_cjpg <-
 
                   pb$tick()
 
+
+      if (inicio != "" & fim != ""){
+
+        i <- lubridate::dmy(inicio) %>%
+          stringr::str_replace_all("\\D","_")
+
+        f <- lubridate::dmy(fim) %>%
+          stringr::str_replace_all("\\D","_")
+
+        hora <- stringr::str_replace_all(Sys.time(), "\\D", "_")
+
+        arquivo <- file.path(diretorio,paste0(hora,"_inicio_",i,"_fim_",f,"_pagina_",.x,".html"))
+
+      }  else {
+
+        hora <- stringr::str_replace_all(Sys.time(), "\\D", "_")
+
+        arquivo <- file.path(diretorio,paste0(hora,"_pagina_",.x,".html"))
+
+
+      }
+
+
                    httr::RETRY(
                     "GET",
                     url = paste0(
@@ -133,17 +156,7 @@ baixar_cjpg <-
                     ),
                     quiet = TRUE,
                     httr::set_cookies(unlist(resposta$cookies)),
-                    httr::write_disk(
-                      paste0(
-                        diretorio,
-                        "/",
-                        stringr::str_replace_all(Sys.time(), "\\D", "_"),
-                        "_pagina_",
-                        .x,
-                        ".html"
-                      ),
-                      overwrite = T
-                    ),
+                    httr::write_disk(arquivo,overwrite = T),
                     timeout = 30,
                     times = 5
                   )
