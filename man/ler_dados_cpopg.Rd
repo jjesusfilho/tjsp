@@ -20,6 +20,10 @@ tibble com os metadados
 \description{
 Lê os metadados de processos de primeira instância.
 }
+\details{
+Esta função será descontinuada. Provavelmente você
+    quer usar a função tjsp_ler_dados_cpopg
+}
 \examples{
 \dontrun{
 ler_dados_cpopg()

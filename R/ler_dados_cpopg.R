@@ -4,6 +4,9 @@
 #' @param diretorio  Diretório onde se encontram os htmls.
 #' @param wide o padrão é o formado longo, com apenas quatro colunas:
 #'      processo, digital, variavel, valor.
+#'
+#' @details Esta função será descontinuada. Provavelmente você
+#'     quer usar a função tjsp_ler_dados_cpopg
 #' @return tibble com os metadados
 #' @export
 #'
