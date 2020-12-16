@@ -24,7 +24,8 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE)
     pb <- pb$tick()
 
     resposta <- .x %>% xml2::read_html()
-    digital <- resposta %>% xml2::xml_find_first("boolean(//*[@class='linkPasta'] |//*[@class='linkConsultaSG'])")
+    digital <- resposta %>% xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
+
     codigo <- resposta %>%
       xml2::xml_find_all("//a[contains(@href,'processo.codigo')]") %>%
       xml2::xml_attr("href") %>%
