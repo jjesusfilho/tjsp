@@ -18,7 +18,7 @@ tjsp_ler_dispositivo <- function(arquivos = NULL,
     .x %>%
       xml2::read_html() %>%
       xml2::xml_find_all(
-        "//table//h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]"
+        "//div//h2[@class='subtitle'][contains(.,'Julgamentos')]/following::table[position()=2]"
       ) %>%
       rvest::html_text() %>%
       stringr::str_trim() %>%
