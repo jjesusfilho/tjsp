@@ -22,7 +22,8 @@ tjsp_ler_tabela_docs <- function(arquivos = NULL, diretorio = "."){
 
     processo <- stringr::str_extract(.x,"\\d{20}")
 
-    .x %>%
+    suppressMessages({
+ df <-   .x %>%
       xml2::read_html() %>%
       xml2::xml_text() %>%
       stringr::str_extract("(?<=requestScope = )\\X+?(?=;)") %>%
@@ -39,7 +40,9 @@ tjsp_ler_tabela_docs <- function(arquivos = NULL, diretorio = "."){
       dplyr::select(processo, doc_id,doc_name,paginas,pagina_inicial, pagina_final, url_doc)
 
 
+})
 
+    df
 
   },NULL))
 
