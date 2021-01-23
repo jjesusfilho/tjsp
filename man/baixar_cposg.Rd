@@ -2,9 +2,12 @@
 % Please edit documentation in R/baixar_cposg.R
 \name{baixar_cposg}
 \alias{baixar_cposg}
+\alias{tjsp_baixar_cposg}
 \title{Baixar processos de segunda instância do tjsp}
 \usage{
 baixar_cposg(processos = NULL, diretorio = ".")
+
+tjsp_baixar_cposg(processos = NULL, diretorio = ".")
 }
 \arguments{
 \item{processos}{processos de segunda instância}

@@ -55,9 +55,18 @@ baixar_cposg <- function(processos = NULL,
       conteudo1 <- list(conteudo1)
     }
 
-    p <- stringr::str_remove_all(p, "\\D+")
-    arquivo <- file.path(diretorio, paste0(format(Sys.Date(), "%Y_%m_%d_"), p, ".html"))
+    p <- stringr::str_remove_all(p, "\\D+") %>%
+      paste0("_",1:length(conteudo1))
 
-    xml2::write_html(conteudo1[[1]], arquivo)
+    arquivo <- file.path(diretorio, paste0(format(Sys.Date(),
+                                                  "%Y_%m_%d_"), p, ".html"))
+
+    purrr::walk2(conteudo1, arquivo, ~xml2::write_html(.x, .y))
+
   }, NULL))
 }
+
+
+#' @rdname baixar_cposg
+#' @export
+tjsp_baixar_cposg <- baixar_cposg
