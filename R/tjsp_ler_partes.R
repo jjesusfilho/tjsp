@@ -29,14 +29,34 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
     lista <- purrr::map2_dfr(arquivos,processos,purrr::possibly(~{
       pb$tick()
       x <- xml2::read_html(.x)
+
+      if (
+      xml2::xml_find_first(x,"boolean(//table[@id='tableTodasPartes'])")
+      ) {
+
       x %>%
-        xml2::xml_find_first("//table[@id='tablePartesPrincipais']") %>%
+        xml2::xml_find_first("//table[@id='tableTodasPartes']") %>%
         rvest::html_table() %>%
         setNames(c("tipo_parte","parte")) %>%
-        tidyr::separate(parte,c("parte","representate"),sep = "(?<=\\w)\\s{10,}") %>%
+        tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}") %>%
         tibble::add_column(processo = .y, .before = 1)
+      } else {
 
+        x %>%
+          xml2::xml_find_first("//table[@id='tablePartesPrincipais']") %>%
+          rvest::html_table() %>%
+          setNames(c("tipo_parte","parte")) %>%
+          tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}") %>%
+          tibble::add_column(processo = .y, .before = 1)
+
+      }
 
     },NULL))
 
 }
+
+#' @rdname tjsp_ler_partes
+#' @export
+ler_partes <- tjsp_ler_partes
+
+

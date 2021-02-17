@@ -9,17 +9,17 @@
 #'
 #' @examples
 #' \dontrun{
-#' cjsg <- ler_cjsg()
+#' cjsg <- tjsp_ler_cjsg()
 #' }
 #'
-ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
+tjsp_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
 
   if (is.null(arquivos)){
-  arquivos <- list.files(
-    path = diretorio,
-    pattern = ".html",
-    full.names = T
-  )
+    arquivos <- list.files(
+      path = diretorio,
+      pattern = ".html",
+      full.names = T
+    )
   }
 
   pb <- progress::progress_bar$new(total = length(arquivos))
@@ -71,13 +71,19 @@ ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
       ementa,
       cdacordao
     ) %>%
-      dplyr::mutate_at(1:7,list(~iconv(.,"utf8","latin1//TRANSLIT"))) %>%
-      dplyr::mutate_at(3:7,list(~stringr::str_remove(.,".+:\\s?"))) %>%
-      dplyr::mutate_at(6:7,list(~lubridate::dmy(.))) %>%
-      dplyr::mutate(processo = stringr::str_remove_all(processo,"\\D+")) %>%
-      dplyr::mutate(ano_julgamento = lubridate::year(data_julgamento),
-                    mes_julgamento = lubridate::month(data_julgamento,abbr = FALSE,label = TRUE),
-                    dia_julgamento = lubridate::wday(data_julgamento,abbr = FALSE, label = TRUE))
+      dplyr::mutate(dplyr::across(1:7,~iconv(.x,"utf-8","latin1//TRANSLIT"))) %>%
+      dplyr::mutate(dplyr::across(3:7,~stringr::str_remove(.x,".+:\\s?") %>%
+                                    stringr::str_trim())) %>%
+      dplyr::mutate(dplyr::across(6:7,~lubridate::dmy(.x))) %>%
+      dplyr::mutate(processo = stringr::str_remove_all(processo,"\\D+"))
+
 
   }, otherwise = NULL))
 }
+
+
+#' @rdname tjsp_ler_cjsg
+#' @export
+ler_cjsg <- tjsp_ler_cjsg
+
+
