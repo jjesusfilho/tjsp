@@ -76,7 +76,7 @@ tjsp_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
                     relator = iconv(relator,"utf-8","latin1//TRANSLIT",
                     comarca = iconv(comarca,"utf-8","latin1//TRANSLIT",
                     orgao_julgador = iconv(orgao_julgador,"utf-8","latin1//TRANSLIT"
-                    ) %>%
+                    )) %>%
 
 
 
