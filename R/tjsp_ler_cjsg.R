@@ -71,12 +71,7 @@ tjsp_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
       ementa,
       cdacordao
     ) %>%
-      dplyr::mutate(classe = iconv(classe,"utf-8","latin1//TRANSLIT"),
-                    assunto = iconv(assunto,"utf-8","latin1//TRANSLIT"),
-                    relator = iconv(relator,"utf-8","latin1//TRANSLIT"),
-                    comarca = iconv(comarca,"utf-8","latin1//TRANSLIT"),
-                    orgao_julgador = iconv(orgao_julgador,"utf-8","latin1//TRANSLIT")
-                    ) %>%
+      dplyr::mutate(dplyr::across(1:7, ~iconv(.x, "UTF-8","latin1//TRANSLIT"))) %>%
       dplyr::mutate(dplyr::across(3:7,~stringr::str_remove(.x,".+:\\s?") %>%
                                     stringr::str_trim())) %>%
       dplyr::mutate(dplyr::across(6:7,~lubridate::dmy(.x))) %>%

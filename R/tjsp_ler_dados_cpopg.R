@@ -34,7 +34,8 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE)
       codigo <- duplicated(codigo) %>%
         which() %>%
         codigo[.] %>%
-        unique()
+        unique() %>%
+        stringr::str_c(collapse = "\n")
     }
 
 
