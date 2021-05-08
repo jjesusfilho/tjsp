@@ -24,6 +24,8 @@ tjsp_ler_acordaos_cjsg <- function(arquivos = NULL, diretorio = ".", remover_ass
 
     cdacordao <- stringr::str_extract(.x, "(?<=cdacordao_)\\d+")
 
+    suppressMessages({
+
     texto <- pdftools::pdf_text(.x)
 
 
@@ -35,6 +37,8 @@ tjsp_ler_acordaos_cjsg <- function(arquivos = NULL, diretorio = ".", remover_ass
     if (combinar) {
       texto <- stringr::str_c(texto, collapse = "\n")
     }
+
+    })
 
     tibble::tibble(cdacordao = cdacordao, julgado = texto)
 
