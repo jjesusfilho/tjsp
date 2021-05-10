@@ -28,7 +28,7 @@ tjsp_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
 
     pb$tick()
 
-    resposta <- xml2::read_html(.x)
+    resposta <- xml2::read_html(.x, encoding = "UTF-8")
 
     aC <-
       xml2::xml_find_all(resposta, '//*[@class="assuntoClasse"]') %>%
@@ -71,7 +71,7 @@ tjsp_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
       ementa,
       cdacordao
     ) %>%
-      dplyr::mutate(dplyr::across(1:7, ~iconv(.x, "UTF-8","latin1//TRANSLIT"))) %>%
+     # dplyr::mutate(dplyr::across(1:7, ~iconv(.x, "UTF-8","latin1//TRANSLIT"))) %>%
       dplyr::mutate(dplyr::across(3:7,~stringr::str_remove(.x,".+:\\s?") %>%
                                     stringr::str_trim())) %>%
       dplyr::mutate(dplyr::across(6:7,~lubridate::dmy(.x))) %>%
