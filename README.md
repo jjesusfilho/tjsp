@@ -26,8 +26,8 @@ Portanto, instale versão em desenvolvimento:
 [GitHub](https://github.com/) com:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("jjesusfilho/tjsp")
+install.packages("remotes")
+remotes::install_github("jjesusfilho/tjsp")
 ```
 
 ## Utilização

@@ -28,9 +28,9 @@ Este pacote não será incluído no cran. Você deverá fazer uso da versão em 
 
 Portanto, instale versão em desenvolvimento: [GitHub](https://github.com/) com:
 
-``` {r, eval=FALSE}
-# install.packages("devtools")
-devtools::install_github("jjesusfilho/tjsp")
+```r
+install.packages("remotes")
+remotes::install_github("jjesusfilho/tjsp")
 ```
 
 ## Utilização
