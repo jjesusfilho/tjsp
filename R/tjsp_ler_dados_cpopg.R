@@ -27,9 +27,10 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE)
     digital <- resposta %>% xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
 
     codigo <- resposta %>%
-      xml2::xml_find_all("//a[contains(@href,'processo.codigo')]") %>%
-      xml2::xml_attr("href") %>%
+      xml2::xml_find_all("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") %>%
+      xml2::xml_text() %>%
       stringr::str_extract("(?<=processo.codigo=)\\w+")
+
     if (length(codigo) > 1) {
       codigo <- duplicated(codigo) %>%
         which() %>%
