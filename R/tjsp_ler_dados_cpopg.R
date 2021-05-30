@@ -24,7 +24,12 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE)
     pb <- pb$tick()
 
     resposta <- .x %>% xml2::read_html()
+
     digital <- resposta %>% xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
+
+    situacao <- resposta %>%
+      xml2::xml_find_first("//span[@id='labelSituacaoProcesso']") %>%
+      xml2::xml_text()
 
     codigo <- resposta %>%
       xml2::xml_find_all("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") %>%
@@ -51,7 +56,7 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE)
       stringr::str_squish()
 
     tibble::tibble(
-      processo = .y, codigo_processo = codigo, digital, variavel, valor
+      processo = .y, codigo_processo = codigo, digital, situacao, variavel, valor
     )
   }, NULL))
   if (wide == TRUE) {
