@@ -8,9 +8,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' ler_cjpg()
+#' tjsp_ler_cjpg()
 #' }
-ler_cjpg<-function (arquivos = NULL, diretorio = ".")
+tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
 {
 
   if (is.null(arquivos)){
@@ -30,31 +30,50 @@ ler_cjpg<-function (arquivos = NULL, diretorio = ".")
       xml2::xml_text(trim = TRUE) %>% stringr::str_squish() %>%
       paste0(collapse = "\n") %>% stringi::stri_split_regex("\n(?=\\d{4,})") %>%
       unlist()
+
+    pagina <- stringr::str_extract(.x, "(?<=pagina_)\\d+") %>%
+      as.integer()
+
     processo <- stringi::stri_extract_first_regex(resposta,
-                                                  "\\d+-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4}", omit_no_match = F)
+                                                  "\\d+-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4}")
+
     classe <- stringi::stri_extract_first_regex(resposta,
-                                                "Classe:.*", omit_no_match = F)
+                                                "Classe:.*")
+
     assunto <- stringi::stri_extract_first_regex(resposta,
-                                                 "Assunto:.*", omit_no_match = F)
+                                                 "Assunto:.*")
+
     magistrado <- stringi::stri_extract_first_regex(resposta,
-                                                    "Magistrado:.*", omit_no_match = F)
+                                                    "Magistrado:.*")
+
     comarca <- stringi::stri_extract_first_regex(resposta,
-                                                 "Comarca:.*", omit_no_match = F)
-    foro <- stringi::stri_extract_first_regex(resposta, "Foro:.*",
-                                              omit_no_match = F)
-    vara <- stringi::stri_extract_first_regex(resposta, "Vara:.*",
-                                              omit_no_match = F)
+                                                 "Comarca:.*")
+
+    foro <- stringi::stri_extract_first_regex(resposta, "Foro:.*")
+
+
+    vara <- stringi::stri_extract_first_regex(resposta, "Vara:.*")
+
     disponibilizacao <- stringi::stri_extract_first_regex(resposta,
-                                                          "Data\\s+de\\s+Disponibilização:.*", omit_no_match = F)
+                                                          "Data\\s+de\\s+Disponibiliza\u00e7\u00e3o:.*")
+
     julgado <- stringi::stri_extract_last_regex(resposta,
-                                                "(?<=\n).*", omit_no_match = F)
-    tibble::tibble(processo, classe, assunto, magistrado,
+                                                "(?<=\n).*")
+
+    tibble::tibble(processo, pagina,classe, assunto, magistrado,
                    comarca, foro, vara, disponibilizacao, julgado)
   }, NULL)) %>%
-    dplyr::mutate(dplyr::across(2:8,~stringi::stri_replace_first_regex(., ".*:\\s?",""))) %>%
 
-    dplyr::mutate(dplyr::across(dplyr::everything(),stringr::str_squish)) %>%
-    rm_duplicados(processo) %>%
+    dplyr::mutate(dplyr::across(3:9, ~stringi::stri_replace_first_regex(., ".*:\\s?",""))) %>%
+
+    dplyr::mutate_if(is.character, stringr::str_squish) %>%
+
     dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao),
-                                              processo = stringr::str_remove_all(processo, "\\D+"))
+                  processo = stringr::str_remove_all(processo, "\\D+")) %>%
+    dplyr::mutate(duplicado = vctrs::vec_duplicate_detect(processo), .after = pagina)
 }
+
+
+#' @rdname tjsp_ler_cjpg
+#' @export
+ler_cjpg <- tjsp_ler_cjpg
