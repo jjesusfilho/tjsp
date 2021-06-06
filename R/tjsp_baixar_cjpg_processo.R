@@ -6,7 +6,7 @@
 #' @return html
 #' @export
 #'
-baixar_cjpg_processo <- function(processo = NULL, diretorio = ".") {
+tjsp_baixar_cjpg_processo <- function(processo = NULL, diretorio = ".") {
   dia <- Sys.Date() %>% stringr::str_replace_all("-", "_")
 
   pb <- progress::progress_bar$new(total = length(processo))

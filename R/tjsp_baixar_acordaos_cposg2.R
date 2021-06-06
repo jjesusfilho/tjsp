@@ -8,7 +8,7 @@
 #' @export
 #'
 
-baixar_acordaos <- function(processos = NULL,
+tjsp_baixar_acordaos_cposg2 <- function(processos = NULL,
                             diretorio = ".") {
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
@@ -34,14 +34,17 @@ baixar_acordaos <- function(processos = NULL,
     foro <- p %>%
       stringr::str_extract("\\d{4}$")
 
-    query1<-  list(conversationId = "", paginaConsulta = "1", localPesquisa.cdLocal = "-1",
-                   cbPesquisa = "NUMPROC", tipoNuProcesso = "UNIFICADO", numeroDigitoAnoUnificado = unificado,
-                   foroNumeroUnificado = foro, dePesquisaNuUnificado = p,
-                   dePesquisa = "", uuidCaptcha = "", pbEnviar = "Pesquisar")
+    query1 <- list(
+      cbPesquisa = "NUMPROC", conversationId = "",
+      dePesquisat = "", dePesquisaNuUnificado = p, foroNumeroUnificado = foro,
+      localPesquisa.cdLocal = "-1", numeroDigitoAnoUnificado = unificado,
+      paginaConsulta = "1", tipoNuProcesso = "UNIFICADO",
+      uuidCaptcha = ""
+    )
 
     resposta1 <- httr::RETRY("GET",
-      url = uri1, query = query1,
-      quiet = TRUE, httr::timeout(2)
+                             url = uri1, query = query1,
+                             quiet = TRUE, httr::timeout(2)
     )
 
     conteudo1 <- httr::content(resposta1)
@@ -51,7 +54,7 @@ baixar_acordaos <- function(processos = NULL,
         xml2::xml_attr("href") %>%
         xml2::url_absolute("https://esaj.tjsp.jus.br") %>%
         purrr::map(~ httr::RETRY("GET", .x, httr::timeout(2)) %>%
-          httr::content())
+                     httr::content())
     } else {
       conteudo1 <- list(conteudo1)
     }
@@ -60,7 +63,7 @@ baixar_acordaos <- function(processos = NULL,
       purrr::map_dfr(purrr::possibly(~ {
         cc <- .x
 
-        doc <- cc %>% xml2::xml_find_all("//tr/td/a[contains(.,'Acordão Finalizado')]|//tr/td/a[contains(.,'Julgado virtualmente')]")
+        doc <- cc %>% xml2::xml_find_all("//tr/td/a[contains(.,'Acord\\u00e3o Finalizado')]|//tr/td/a[contains(.,'Julgado virtualmente')]")
 
         doc_num <- doc %>%
           xml2::xml_attr("href") %>%
@@ -129,3 +132,4 @@ baixar_acordaos <- function(processos = NULL,
       }, otherwise = NULL))
   }, otherwise = NULL))
 }
+

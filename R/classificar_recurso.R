@@ -40,7 +40,7 @@ classificar_recurso <- function(x, dispositivo, decisao, inteiro_teor = FALSE) {
         stringi::stri_detect_regex(alternativa, "(?=.*\\bneg[oa]\\w*\\b)(?=.*\\bprejudicado\\b)") ~ "duvida",
         stringi::stri_detect_regex(alternativa, "(?=.*\\bacolh\\w+\\b)(?=.*\\bneg[ao]\\w*\\b)") ~ "duvida",
         stringi::stri_detect_regex(alternativa, "parcial\\w*\\sprovi\\w+") ~ "parcial",
-        stringi::stri_detect_regex(alternativa, "(nao\\sconhec\\w+|nao\\sse\\sconhec\\w+)") ~ "não conhecido",
+        stringi::stri_detect_regex(alternativa, "(nao\\sconhec\\w+|nao\\sse\\sconhec\\w+)") ~ "n\u00e3o conhecido",
         stringi::stri_detect_regex(alternativa, "desconh\\w+") ~ "desconhecido",
         stringi::stri_detect_regex(alternativa, "nao\\s+conhec\\w+") ~ "desconhecido",
         stringi::stri_detect_regex(alternativa, "(desprov\\w+|improv\\w+)") ~ "improvido",
@@ -50,9 +50,9 @@ classificar_recurso <- function(x, dispositivo, decisao, inteiro_teor = FALSE) {
         stringi::stri_detect_regex(alternativa, "acolh\\w+") ~ "provido",
         stringi::stri_detect_regex(alternativa, "(deu|deram|da\\-*\\s*se|dando\\-*(se)*|comporta|\\bdou\\b|confere\\-se|se\\s*\\-*da|merece)") ~ "provido",
         stringi::stri_detect_regex(alternativa, "(nao\\sderam|nao\\smerece|se\\snega|nega\\-*\\s*se|negar\\-*\\s*lhe|nao\\scomporta|negram|negararam|nego|negar)") ~ "improvido",
-        stringi::stri_detect_regex(alternativa, "(homolog|desistencia)") ~ "desistência",
+        stringi::stri_detect_regex(alternativa, "(homolog|desistencia)") ~ "desist\u00eancia",
         stringi::stri_detect_regex(alternativa, "(anular\\w*|nulo|nula|nulidade)") ~ "anulado",
-        stringi::stri_detect_regex(alternativa, "diligencia") ~ "conversão em diligência",
+        stringi::stri_detect_regex(alternativa, "diligencia") ~ "convers\u00e3o em dilig\u00eancia",
         stringi::stri_detect_regex(alternativa, "(prej|extin)") ~ "prejudicado/extinto",
         TRUE ~ "outros"
       )) %>%

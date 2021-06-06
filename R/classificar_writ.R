@@ -5,7 +5,7 @@
 #' @return classificação
 #' @export
 #'
-classificar_writ <- function(x){
+tjsp_classificar_writ <- function(x){
 
   x<- x %>%
     stringr::str_sub(-2000) %>%
@@ -32,12 +32,17 @@ classificar_writ <- function(x){
   stringr::str_detect(x,"de*neg") ~ "denegado",
   stringr::str_detect(x,"^conce\\w+") ~ "concedido",
   stringr::str_detect(x,"^conhe\\w+") ~ "concedido",
-  stringr::str_detect(x, "(nao\\sconhec\\w+|nao\\sse\\sconhec\\w+)") ~ "não conhecido",
+  stringr::str_detect(x, "(nao\\sconhec\\w+|nao\\sse\\sconhec\\w+)") ~ "n\u00e3o conhecido",
   stringr::str_detect(x,"^desconh\\w+") ~ "desconhecido",
-  stringr::str_detect(x,"(homolog|desistencia)") ~ "desistência",
-  stringr::str_detect(x, "diligencia") ~ "conversão em diligência",
+  stringr::str_detect(x,"(homolog|desistencia)") ~ "desist\u00eancia",
+  stringr::str_detect(x, "diligencia") ~ "convers\u00e3o em dilig\u00eancia",
   stringr::str_detect(x,"(,|e|votos)\\s+conce\\w+")~ "concedido",
   TRUE ~ NA_character_
 )
 
 }
+
+
+#' @rdname tjsp_classificar_writ
+#' @export
+classificar_writ <- tjsp_classificar_writ

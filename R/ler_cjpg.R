@@ -50,9 +50,11 @@ ler_cjpg<-function (arquivos = NULL, diretorio = ".")
                                                 "(?<=\n).*", omit_no_match = F)
     tibble::tibble(processo, classe, assunto, magistrado,
                    comarca, foro, vara, disponibilizacao, julgado)
-  }, NULL)) %>% dplyr::mutate_at(dplyr::vars(2:8),
-                                  dplyr::funs(stringi::stri_replace_first_regex(., ".*:\\s?",
-                                                                                ""))) %>% dplyr::mutate_all(stringr::str_squish) %>%
-    rm_duplicados(processo) %>% dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao),
+  }, NULL)) %>%
+    dplyr::mutate(dplyr::across(2:8,~stringi::stri_replace_first_regex(., ".*:\\s?",""))) %>%
+
+    dplyr::mutate(dplyr::across(dplyr::everything(),stringr::str_squish)) %>%
+    rm_duplicados(processo) %>%
+    dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao),
                                               processo = stringr::str_remove_all(processo, "\\D+"))
 }

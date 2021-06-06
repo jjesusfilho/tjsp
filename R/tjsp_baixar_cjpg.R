@@ -17,10 +17,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' baixar_cjpg("homicídio simples")
+#' tjsp_baixar_cjpg("homicídio simples")
 #' }
 #'
-baixar_cjpg <-
+tjsp_baixar_cjpg <-
   function (livre = "",
             aspas = FALSE,
             processo = "",
@@ -162,3 +162,9 @@ baixar_cjpg <-
                   )
                 }, otherwise = NULL))
   }
+
+
+
+#' @rdname tjsp_baixar_cjpg
+#' @export
+baixar_cjpg <- tjsp_baixar_cjpg

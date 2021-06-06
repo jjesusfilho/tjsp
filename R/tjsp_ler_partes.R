@@ -38,7 +38,7 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
         xml2::xml_find_first("//table[@id='tableTodasPartes']") %>%
         rvest::html_table() %>%
         setNames(c("tipo_parte","parte")) %>%
-        tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}") %>%
+        tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}", extra = "merge") %>%
         tibble::add_column(processo = .y, .before = 1)
       } else {
 
@@ -46,7 +46,7 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
           xml2::xml_find_first("//table[@id='tablePartesPrincipais']") %>%
           rvest::html_table() %>%
           setNames(c("tipo_parte","parte")) %>%
-          tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}") %>%
+          tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}", extra = "merge") %>%
           tibble::add_column(processo = .y, .before = 1)
 
       }

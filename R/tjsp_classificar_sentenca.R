@@ -7,9 +7,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' x <- classificar_sentenca2(x = sentenca)
+#' x <- tjsp_classificar_sentenca(x = sentenca)
 #' }
-classificar_sentenca2<- function (x)
+tjsp_classificar_sentenca <- function (x)
 {
 
 x<- x %>%
@@ -22,8 +22,8 @@ x<- x %>%
       stringr::str_detect(x,"(?i)\\bparcial\\w+") ~ "parcial",
       stringr::str_detect(x,"(?i)julgo\\s+procecente em parte") ~ "parcial",
       stringr::str_detect(x,"(?i)\\bprocecente em parte") ~ "parcial",
-      stringr::str_detect(x,"desistencia") ~ "desistência",
-      stringr::str_detect(x,"\\bhomologo\\b") ~  "homologação",
+      stringr::str_detect(x,"desistencia") ~ "desist\u00eancia",
+      stringr::str_detect(x,"\\bhomologo\\b") ~  "homologa\u00e7\u00e3o",
       stringr::str_detect(x,"(?i)julgo\\s+procede\\w+") ~ "procedente",
       stringr::str_detect(x,"(?i)julgo\\simprocede\\w+") ~ "improcedente",
       stringr::str_detect(x,"(?i)\\bprocede\\w+") ~ "procedente",
@@ -34,3 +34,8 @@ x<- x %>%
       TRUE ~ NA_character_
     )
 }
+
+#' @rdname tjsp_classificar_sentenca
+#' @export
+classificar_sentenca2 <- tjsp_classificar_sentenca
+

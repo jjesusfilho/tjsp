@@ -19,10 +19,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' baixar_cjsg(livre = "Lei Maria da Penha")
+#' tjsp_baixar_cjsg(livre = "Lei Maria da Penha")
 #' }
 #'
-baixar_cjsg <-
+tjsp_baixar_cjsg <-
   function(livre = "",
              aspas = FALSE,
              classe = "",
@@ -161,3 +161,8 @@ baixar_cjsg <-
       }, NULL))
     }
   }
+
+
+#' @rdname tjsp_baixar_cjsg
+#' @export
+baixar_cjsg <- tjsp_baixar_cjsg
