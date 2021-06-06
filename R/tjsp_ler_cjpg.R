@@ -25,7 +25,13 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
 
     pb$tick()
 
-    resposta <- .x %>% xml2::read_html(encoding = "UTF-8") %>%
+    x <- .x %>% xml2::read_html(encoding = "UTF-8")
+
+    cd_doc <- x %>%
+      xml2::xml_find_all("//a[@title='Visualizar Inteiro Teor']") %>%
+      xml2::xml_attr("name")
+
+    resposta <- x %>%
       xml2::xml_find_all(xpath = "//*[@id='divDadosResultado']/table//td//td[@align='left']") %>%
       xml2::xml_text(trim = TRUE) %>% stringr::str_squish() %>%
       paste0(collapse = "\n") %>% stringi::stri_split_regex("\n(?=\\d{4,})") %>%
@@ -58,13 +64,14 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
     vara <- stringi::stri_extract_first_regex(resposta, "Vara:.*")
 
     disponibilizacao <- stringi::stri_extract_first_regex(resposta,
-                                                          "Data\\s+de\\s+Disponibiliza\u00e7\u00e3o:.*")
+                                                          "Data\\s+de\\s+Disponibilização:.*")
 
     julgado <- stringi::stri_extract_last_regex(resposta,
                                                 "(?<=\n).*")
 
+
     tibble::tibble(processo, pagina, hora_coleta,classe, assunto, magistrado,
-                   comarca, foro, vara, disponibilizacao, julgado)
+                   comarca, foro, vara, disponibilizacao, julgado, cd_doc)
   }, NULL)) %>%
 
     dplyr::mutate(dplyr::across(4:10, ~stringi::stri_replace_first_regex(., ".*:\\s?",""))) %>%
@@ -73,9 +80,9 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
 
     dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao),
                   processo = stringr::str_remove_all(processo, "\\D+")) %>%
-    dplyr::mutate(duplicado = vctrs::vec_duplicate_detect(processo), .after = pagina)
-}
 
+    dplyr::mutate(duplicado = vctrs::vec_duplicate_detect(processo), .after = hora_coleta)
+}
 
 #' @rdname tjsp_ler_cjpg
 #' @export
