@@ -18,6 +18,6 @@ if (getRversion() >= "2.15.1") {
     "data_recebimento", "processo_2", "processo_principal",
     "valor_da_acao", "incidente", "execucao_de_sentenca", "recebido_em",
     "classe_numero", "classe_situacao","number","n","comarca","imoveis", "lat","lng",
-    "id0","dispositivo","id5","name0","name5"
+    "id0","dispositivo","id5","name0","name5", "pagina", "hora_coleta"
   ))
 }

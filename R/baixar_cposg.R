@@ -13,7 +13,7 @@ baixar_cposg <- function(processos = NULL,
 
   processos <- stringr::str_remove_all(processos, "\\D+") %>%
     stringr::str_pad(width = 20, "left", "0") %>%
-    abjutils::build_id()
+    pontuar_cnj()
 
   uri1 <- "https://esaj.tjsp.jus.br/cposg/search.do?"
 

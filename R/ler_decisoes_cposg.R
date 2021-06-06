@@ -19,7 +19,7 @@ ler_decisoes_cposg <- function (arquivos = NULL, diretorio = ".")
   }
 
   processo <- stringr::str_extract(arquivos, "\\d{20}") %>%
-    abjutils::build_id()
+    pontuar_cnj()
 
   lista <- listenv::listenv()
 

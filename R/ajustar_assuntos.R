@@ -13,7 +13,7 @@ ajustar_assuntos <- function(df, excluir_cartas = TRUE) {
       dplyr::select(assunto) %>%
       dplyr::distinct() %>%
       dplyr::mutate(assunto_ = stringr::str_remove(assunto, "^\\d.+?\\- ") %>%
-        abjutils::rm_accent() %>%
+        stringi::stri_trans_general("latin-ascii") %>%
         stringr::str_to_lower() %>%
         stringr::str_squish()) %>%
       dplyr::left_join(tjsp::assuntos, by = "assunto_") %>%

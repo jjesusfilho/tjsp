@@ -6,11 +6,12 @@
 #' @return html com dados processuais
 #' @export
 #'
-baixar_cpopg<-function (processos = NULL, diretorio = ".")
+tjsp_baixar_cpopg <- function (processos = NULL, diretorio = ".")
 {
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
   processos <- stringr::str_remove_all(processos, "\\D+") %>%
-    stringr::str_pad(width = 20, "left", "0") %>% abjutils::build_id()
+    stringr::str_pad(width = 20, "left", "0") %>%
+    pontuar_cnj()
 
   uri1 <- "https://esaj.tjsp.jus.br/cpopg/search.do?gateway=true"
 
@@ -47,3 +48,7 @@ baixar_cpopg<-function (processos = NULL, diretorio = ".")
     xml2::write_html(conteudo1[[1]], arquivo)
   }, NULL))
 }
+
+#' @rdname tjsp_baixar_cpopg
+#' @export
+baixar_cpopg <- tjsp_baixar_cpopg

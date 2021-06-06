@@ -34,6 +34,9 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
     pagina <- stringr::str_extract(.x, "(?<=pagina_)\\d+") %>%
       as.integer()
 
+    hora_coleta <- stringr::str_extract(.x, "\\d{4}.+(?=_p)") %>%
+      lubridate::ymd_hms(tz="America/Sao_Paulo")
+
     processo <- stringi::stri_extract_first_regex(resposta,
                                                   "\\d+-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4}")
 
@@ -60,11 +63,11 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
     julgado <- stringi::stri_extract_last_regex(resposta,
                                                 "(?<=\n).*")
 
-    tibble::tibble(processo, pagina,classe, assunto, magistrado,
+    tibble::tibble(processo, pagina, hora_coleta,classe, assunto, magistrado,
                    comarca, foro, vara, disponibilizacao, julgado)
   }, NULL)) %>%
 
-    dplyr::mutate(dplyr::across(3:9, ~stringi::stri_replace_first_regex(., ".*:\\s?",""))) %>%
+    dplyr::mutate(dplyr::across(4:10, ~stringi::stri_replace_first_regex(., ".*:\\s?",""))) %>%
 
     dplyr::mutate_if(is.character, stringr::str_squish) %>%
 

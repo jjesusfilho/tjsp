@@ -12,7 +12,7 @@ baixar_publicacoes_dje <- function(processo, diretorio = ".") {
   ## Assegura que o o número do processo está no formato cnj.
   processo <- stringr::str_remove_all(processo, "\\D+") %>%
     stringr::str_pad(width = 20, "left", "0") %>%
-    abjutils::build_id()
+    pontuar_cnj()
 
   ## Verifica o número de meses entre a data atual e o mês de janeiro do ano
   ## da distribuição do processo.
