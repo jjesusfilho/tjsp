@@ -13,7 +13,7 @@ tjsp_baixar_sentenca_cjpg <- function(cd_doc, diretorio = "."){
                               port = NULL, path = "pastadigital/getPDF.do", query = NULL,
                               params = NULL, fragment = NULL, username = NULL, password = NULL), class = "url")
 
-  progress::progress_bar$new(total = length(cd_doc))
+  pb <- progress::progress_bar$new(total = length(cd_doc))
 
   purrr::walk(cd_doc, purrr::possibly(~{
 
