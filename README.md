@@ -139,6 +139,16 @@ As decisões de primeiro grau obedecem a mesma lógica das decisões de
 segundo grau com algumas diferenças. Verifique a ajuda para entender
 como operam.
 
+## Aviso legal (Disclaimer)
+
+O pacote tjsp não mantêm nem atualiza os dados do TJSP/ESAJ, não altera
+nem transforma os dados durante a coleta. Algumas funções, tais como
+classificar\_recurso, classificar\_sentença, numero e votacao criam
+novas variáveis a partir das existentes e devem ser usadas por conta e
+risco de quem utiliza o pacote. Elas não estão isentas de erro e seus
+resultados devem ser validados. O autor do pacote não assume qualquer
+responsabilidade sobre o seu uso e resultados.
+
 ## Considerações éticas
 
 1 - Este pacote foi criado por colaboradores voluntários. Você também é

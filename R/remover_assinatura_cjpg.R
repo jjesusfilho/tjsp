@@ -1,0 +1,10 @@
+#' Remove assinutura das sentencas
+#'
+#' @param x Texto
+#'
+#' @return Texto com assinaturas removidas
+#' @export
+#'
+remover_assinatura_cjpg <- function(x) {
+  stringr::str_remove_all(x, "(?i)(Este documento é cópia|para conferir).+?\n")
+}
