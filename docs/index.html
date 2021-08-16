@@ -41,7 +41,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -55,7 +55,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jjesusfilho/tjsp/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -86,10 +86,9 @@
 <p>1 - Pacotes para web scraping estão em constante desenvolvimento. Pǻginas web são repentinamente alteradas ou mesmo inteiramente substituídas, o que pode obrigar o desenvolvedor a reescrever o pacote do zero;</p>
 <p>2 - Os usuários do pacote serão em sua maioria brasileiros, e mesmo que não lusófonos venham a utilizá-lo, a familiaridade com a lingua portuguesa e com o direito brasileiro é indispensável;</p>
 <p>Portanto, instale versão em desenvolvimento: <a href="https://github.com/">GitHub</a> com:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install.packages("devtools")</span>
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"jjesusfilho/tjsp"</span>)
-</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"jjesusfilho/tjsp"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="utilização" class="section level2">
 <h2 class="hasAnchor">
@@ -102,54 +101,51 @@
 <h3 class="hasAnchor">
 <a href="#baixando-jurisprud%C3%AAncia" class="anchor"></a>Baixando jurisprudência</h3>
 <p>As decisões de segunda instância podem ser consultadas livremente por meio da <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do?f=1">página jurisprudência do TJSP</a>. Por exemplo, para realizar uma busca livre sobre o tema feminicídio, faça o seguinte:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/jjesusfilho/tjsp">tjsp</a></span>)
-<span class="fu"><a href="reference/baixar_cjsg.html">baixar_cjsg</a></span>(livre=<span class="st">"feminicídio"</span>,diretorio=<span class="st">"."</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jjesusfilho/tjsp">tjsp</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/tjsp_baixar_cjsg.html">baixar_cjsg</a></span><span class="op">(</span>livre<span class="op">=</span><span class="st">"feminicídio"</span>,diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></code></pre></div>
 <p>Ela baixará no diretório indicado ou no atual, os htmls com os metadados das decisões. Atenção, faça a busca no TJ antes para verificar quantas páginas serão baixadas. A depender do tema, esse processo pode tomar horas.</p>
 <p>Depois disso, você pode pedir para ler tais decisões:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">tabela</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ler_cjsg.html">ler_cjsg</a></span>(diretorio=<span class="st">"."</span>)
-</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tabela</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_cjsg.html">ler_cjsg</a></span><span class="op">(</span>diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="baixando-informações-detalhadas-dos-processos" class="section level3">
 <h3 class="hasAnchor">
 <a href="#baixando-informa%C3%A7%C3%B5es-detalhadas-dos-processos" class="anchor"></a>Baixando informações detalhadas dos processos</h3>
 <p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
 <p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretóio de sua escollha.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="reference/baixar_cposg.html">baixar_cposg</a></span>(<span class="kw">tabela</span><span class="op">$</span><span class="kw">processo</span>)
-</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/baixar_cposg.html">baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="lendo-os-processos-de-segunda-instância" class="section level3">
 <h3 class="hasAnchor">
 <a href="#lendo-os-processos-de-segunda-inst%C3%A2ncia" class="anchor"></a>Lendo os processos de segunda instância.</h3>
 <p>A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">dados</span><span class="op">&lt;-</span><span class="fu"><a href="reference/ler_dados_cposg.html">ler_dados_cposg</a></span>(diretorio = <span class="st">"."</span>)
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dados</span><span class="op">&lt;-</span><span class="fu"><a href="reference/ler_dados_cposg.html">ler_dados_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
 <p>Em seguida, lemos as informações acerca das partes dos processos:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">partes</span> <span class="op">&lt;-</span> <span class="fu">ler_partes_cposg</span>(diretorio = <span class="st">"."</span>)
-</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">partes</span> <span class="op">&lt;-</span> <span class="fu">ler_partes_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
 <p>Ao final passamos para a leitura do andamento dos processos.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">andamento</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ler_movimentacao_cposg.html">ler_movimentacao_cposg</a></span>(diretorio = <span class="st">"."</span>)
-</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ler_movimentacao_cposg.html">ler_movimentacao_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
 <p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">entrada</span> <span class="op">&lt;-</span> <span class="fu">ler_entrada_cposg</span>(diretorio = <span class="st">"."</span>)
-</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">ler_entrada_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
 <p>Por fim, você pode ler o dispositivo da decisão:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="kw">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ler_decisoes_cposg.html">ler_decisoes_cposg</a></span>(diretorio = <span class="st">"."</span>)
-</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ler_decisoes_cposg.html">ler_decisoes_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="baixando-decisões-de-primeiro-grau" class="section level3">
 <h3 class="hasAnchor">
 <a href="#baixando-decis%C3%B5es-de-primeiro-grau" class="anchor"></a>Baixando decisões de primeiro grau</h3>
 <p>As decisões de primeiro grau obedecem a mesma lógica das decisões de segundo grau com algumas diferenças. Verifique a ajuda para entender como operam.</p>
 </div>
+</div>
+<div id="aviso-legal-disclaimer" class="section level2">
+<h2 class="hasAnchor">
+<a href="#aviso-legal-disclaimer" class="anchor"></a>Aviso legal (Disclaimer)</h2>
+<p>O pacote tjsp não mantêm nem atualiza os dados do TJSP/ESAJ, não altera nem transforma os dados durante a coleta. Algumas funções, tais como classificar_recurso, classificar_sentença, numero e votacao criam novas variáveis a partir das existentes e devem ser usadas por conta e risco de quem utiliza o pacote. Elas não estão isentas de erro e seus resultados devem ser validados. O autor do pacote não assume qualquer responsabilidade sobre o seu uso e resultados.</p>
 </div>
 <div id="considerações-éticas" class="section level2">
 <h2 class="hasAnchor">

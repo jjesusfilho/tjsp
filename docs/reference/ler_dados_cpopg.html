@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jjesusfilho/tjsp/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -120,7 +120,7 @@
     <p>Lê os metadados de processos de primeira instância.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ler_dados_cpopg</span>(arquivos = <span class='kw'>NULL</span>, diretorio = <span class='st'>"."</span>, wide = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>ler_dados_cpopg</span><span class='op'>(</span>arquivos <span class='op'>=</span> <span class='cn'>NULL</span>, diretorio <span class='op'>=</span> <span class='st'>"."</span>, wide <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,11 +143,15 @@ processo, digital, variavel, valor.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>tibble com os metadados</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Esta função será descontinuada. Provavelmente você
+    quer usar a função tjsp_ler_dados_cpopg</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>ler_dados_cpopg</span>()
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>ler_dados_cpopg</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>

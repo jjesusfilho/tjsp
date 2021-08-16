@@ -4,11 +4,12 @@
 #' @param arquivos Se NULL, informar diretorio
 #' @return uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro, vara,
 #'     disponibilizacao e julgado (texto da decisão).
+#' @details Esta função é experimental. Eventualmente, substituirá a função ler_cjpg
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' tjsp_ler_cjpg()
+#' tjsp_ler_cjpg2()
 #' }
 tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
 {
@@ -66,8 +67,9 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
     disponibilizacao <- stringi::stri_extract_first_regex(resposta,
                                                           "Data\\s+de\\s+Disponibilização:.*")
 
-    julgado <- stringi::stri_extract_last_regex(resposta,
-                                                "(?<=\n).*")
+    julgado <- x %>%
+      xml2::xml_find_all("//div[@align='justify'][@style='display: none;']") %>%
+      xml2::xml_text()
 
 
     tibble::tibble(processo, pagina, hora_coleta,classe, assunto, magistrado,

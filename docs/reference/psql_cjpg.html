@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +94,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/jjesusfilho/tjsp/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -120,7 +120,7 @@
     <p>The dbAppendTable() method assumes that the table has been created beforehand,</p>
     </div>
 
-    <pre class="usage"><span class='fu'>psql_cjpg</span>(<span class='kw'>con</span>, <span class='kw'>tbl</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>psql_cjpg</span><span class='op'>(</span><span class='va'>con</span>, <span class='va'>tbl</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,13 +144,13 @@
     <p>It doesn't return anything.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>con</span><span class='op'>&lt;-</span><span class='kw'>dbx</span>::<span class='fu'><a href='https://rdrr.io/pkg/dbx/man/dbxConnect.html'>dbxConnect</a></span>()
-<span class='kw'>DBI</span>::<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbCreateTable.html'>dbCreateTable</a></span>(<span class='kw'>con</span>,<span class='st'>"cjpg"</span>,
-                  fields=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"processo"</span>, <span class='st'>"classe"</span>, <span class='st'>"assunto"</span>, <span class='st'>"magistrado"</span>, <span class='st'>"comarca"</span>, <span class='st'>"foro"</span>, 
-                               <span class='st'>"vara"</span>, <span class='st'>"disponibilizacao"</span>, <span class='st'>"julgado"</span>))
- <span class='fu'>psql_cjpg</span>(<span class='kw'>con</span>,<span class='st'>"cjpg"</span>,livre=<span class='st'>"feminicidio"</span>)                      
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>con</span><span class='op'>&lt;-</span><span class='fu'>dbx</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/dbx/man/dbxConnect.html'>dbxConnect</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>DBI</span><span class='fu'>::</span><span class='fu'><a href='https://dbi.r-dbi.org/reference/dbCreateTable.html'>dbCreateTable</a></span><span class='op'>(</span><span class='va'>con</span>,<span class='st'>"cjpg"</span>,
+                  fields<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"processo"</span>, <span class='st'>"classe"</span>, <span class='st'>"assunto"</span>, <span class='st'>"magistrado"</span>, <span class='st'>"comarca"</span>, <span class='st'>"foro"</span>, 
+                               <span class='st'>"vara"</span>, <span class='st'>"disponibilizacao"</span>, <span class='st'>"julgado"</span><span class='op'>)</span><span class='op'>)</span>
+ <span class='fu'>psql_cjpg</span><span class='op'>(</span><span class='va'>con</span>,<span class='st'>"cjpg"</span>,livre<span class='op'>=</span><span class='st'>"feminicidio"</span><span class='op'>)</span>                      
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

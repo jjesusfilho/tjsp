@@ -21,8 +21,11 @@ uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro
 \description{
 Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.
 }
+\details{
+Esta função é experimental. Eventualmente, substituirá a função ler_cjpg
+}
 \examples{
 \dontrun{
-tjsp_ler_cjpg()
+tjsp_ler_cjpg2()
 }
 }
