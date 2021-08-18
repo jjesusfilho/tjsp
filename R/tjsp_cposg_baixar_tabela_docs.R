@@ -6,7 +6,7 @@
 #' @return html
 #' @export
 #'
-tjsp_baixar_tabela_docs <- function(processos, diretorio = "."){
+tjsp_cposg_baixar_tabela_docs <- function(processos, diretorio = "."){
 
 
 
@@ -83,6 +83,9 @@ tjsp_baixar_tabela_docs <- function(processos, diretorio = "."){
   }
 
 
+#' @rdname tjsp_cposg_baixar_tabela_docs
+#' @export
+tjsp_baixar_tabela_docs <- tjsp_cposg_baixar_tabela_docs
 
 
 
