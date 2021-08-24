@@ -38,7 +38,8 @@ tjsp_baixar_cjpg <-
       livre <- deparse(livre)
     }
     httr::set_config(httr::config(ssl_verifypeer = FALSE))
-    if (processo != "") {
+
+    if (any(processo != "")) {
       processo <- processo %>%
         stringr::str_remove_all("\\D+") %>%
         stringr::str_pad(width = 20, "left", "0") %>%
@@ -48,13 +49,13 @@ tjsp_baixar_cjpg <-
     else {
       unificado <- ""
     }
-    if (foro == "" && processo != "") {
+    if (any(foro == "") && any(processo != "")) {
       foro <- stringr::str_extract(processo, "\\d{4}$")
     }
     classe <- paste0(classe, collapse = ",")
     assunto <- paste0(assunto, collapse = ",")
     magistrado <- paste0(magistrado, collapse = ",")
-    if (magistrado != "") {
+    if (any(magistrado != "")) {
       maiorAgente <- "2"
     }
     else {
@@ -92,7 +93,7 @@ tjsp_baixar_cjpg <-
           dadosConsulta.ordenacao = "DESC"
         )
       )
-    if (magistrado == "") {
+    if (any(magistrado == "")) {
       url_parseada$query$`dadosConsulta.agentes[0].cdAgente` <- NULL
       url_parseada$query$`dadosConsulta.agentes[0].nmAgente` <- NULL
     }
