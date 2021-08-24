@@ -35,11 +35,11 @@ ler_decisoes_monocraticas <- function(diretorio = ".") {
     pb$tick()
 
     decisao <- xml2::read_html(.x) %>%
-      rvest::html_nodes(xpath = "//a[contains(text(),'Decisão Monocrática')]/following-sibling::span") %>%
+      rvest::html_nodes(xpath = "//a[contains(text(),'Decis\u00e3o Monocr\u00e1tica')]/following-sibling::span") %>%
       rvest::html_text()
 
     data_decisao <- xml2::read_html(.x) %>%
-      rvest::html_nodes(xpath = "//tr[td[a[contains(text(),'Decisão Monocrática')]]]/td[1]") %>%
+      rvest::html_nodes(xpath = "//tr[td[a[contains(text(),'Decis\u00e3o Monocr\u00e1tica')]]]/td[1]") %>%
       rvest::html_text(trim = TRUE) %>%
       lubridate::dmy()
 

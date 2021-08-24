@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' tjsp_ler_cjpg2()
+#' tjsp_ler_cjpg()
 #' }
 tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
 {
@@ -65,7 +65,7 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
     vara <- stringi::stri_extract_first_regex(resposta, "Vara:.*")
 
     disponibilizacao <- stringi::stri_extract_first_regex(resposta,
-                                                          "Data\\s+de\\s+Disponibilização:.*")
+                                                          "Data\\s+de\\s+Disponibiliza\u00e7\u00e3o:.*")
 
     julgado <- x %>%
       xml2::xml_find_all("//div[@align='justify'][@style='display: none;']") %>%

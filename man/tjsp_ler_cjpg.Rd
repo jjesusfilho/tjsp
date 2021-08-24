@@ -26,6 +26,6 @@ Esta função é experimental. Eventualmente, substituirá a função ler_cjpg
 }
 \examples{
 \dontrun{
-tjsp_ler_cjpg2()
+tjsp_ler_cjpg()
 }
 }

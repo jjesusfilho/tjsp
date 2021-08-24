@@ -13,11 +13,11 @@
 obter_cpopg_par <- function(oab = NULL, parte = NULL) {
 
   if (is.null(oab) & is.null(parte)) {
-    stop("Você deve informar um dos parâmetros")
+    stop("Voc\u00ea deve informar um dos par\u00e2metros")
   }
 
   if (!is.null(oab) & !is.null(parte)) {
-    stop("Você deve informar apenas um parâmetro")
+    stop("Voc\u00ea deve informar apenas um par\u00e2metro")
   }
 
   if (is.null(parte)) {

@@ -13,24 +13,27 @@ tjsp_classificar_sentenca <- function (x)
 {
 
 x<- x %>%
-     stringr::str_sub(-2000) %>%
+    # stringr::str_sub(-2000) %>%
       tolower() %>%
       stringi::stri_trans_general("latin-ascii")
 
       dplyr::case_when(
-      stringr::str_detect(x,"(?i)julgo\\sparcial\\w+") ~ "parcial",
-      stringr::str_detect(x,"(?i)\\bparcial\\w+") ~ "parcial",
-      stringr::str_detect(x,"(?i)julgo\\s+procecente em parte") ~ "parcial",
-      stringr::str_detect(x,"(?i)\\bprocecente em parte") ~ "parcial",
-      stringr::str_detect(x,"desistencia") ~ "desist\u00eancia",
-      stringr::str_detect(x,"\\bhomologo\\b") ~  "homologa\u00e7\u00e3o",
-      stringr::str_detect(x,"(?i)julgo\\s+procede\\w+") ~ "procedente",
-      stringr::str_detect(x,"(?i)julgo\\simprocede\\w+") ~ "improcedente",
-      stringr::str_detect(x,"(?i)\\bprocede\\w+") ~ "procedente",
-      stringr::str_detect(x,"(?i)\\bimprocede\\w+") ~ "improcedente",
-      stringr::str_detect(x,"(?i)prejudicad[ao]") ~  "prejudicado",
-      stringr::str_detect(x,"(?i)(an)?nul[ao](do)?") ~ "nulo",
-      stringr::str_detect(x,"(?i)extin\\w+") ~ "extinto",
+      re2::re2_detect(x,"julgo\\sparcial\\w+") ~ "parcial",
+      re2::re2_detect(x,"\\bparcial\\w+") ~ "parcial",
+      re2::re2_detect(x,"julgo\\s+procecente em parte") ~ "parcial",
+      re2::re2_detect(x,"\\bprocecente em parte") ~ "parcial",
+      re2::re2_detect(x,"desistencia") ~ "desist\u00eancia",
+      re2::re2_detect(x,"\\bhomologo\\b") ~  "homologa\u00e7\u00e3o",
+      re2::re2_detect(x,"julgo\\s+procede\\w+") ~ "procedente",
+      re2::re2_detect(x,"julgo\\simprocede\\w+") ~ "improcedente",
+      re2::re2_detect(x,"\\bprocede\\w+") ~ "procedente",
+      re2::re2_detect(x,"\\bimprocede\\w+") ~ "improcedente",
+      re2::re2_detect(x,"prejudicad[ao]") ~  "prejudicado",
+      re2::re2_detect(x,"(an)?nul[ao](do)?") ~ "nulo",
+      re2::re2_detect(x,"extin\\w+") ~ "extinto",
+      re2::re2_detect(x,"rejeit\\w+ (os) embargor") ~  "rejeitar embargos",
+      re2::re2_detect(x,"\\bdefiro") ~ "deferido",
+      re2::re2_detect(x, "\\bindefiro") ~ "indefiro",
       TRUE ~ NA_character_
     )
 }

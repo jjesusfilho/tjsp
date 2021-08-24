@@ -22,9 +22,9 @@ ggdecisao <-
            facet = NULL,
            fill = NULL ,
            ordered = TRUE,
-           x_label = "Câmara",
-           y_label = "Número de decisões",
-           legend = "Decisão",
+           x_label = "C\u00e2mara",
+           y_label = "N\u00famero de decis\u00f5es",
+           legend = "Decis\u00e3o",
            caption = "Fonte: TJSP") {
     fill <- rlang::enquo(fill)
     facet <- rlang::enquo(facet)

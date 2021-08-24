@@ -21,10 +21,10 @@ ler_despacho<-function (fonte = ".")
 
   pb$tick()
 
-    despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]//span|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decisão')]/parent::td/span") %>%
+    despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]//span|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decis\u00e3o')]/parent::td/span") %>%
       rvest::html_text()
 
-    data_despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]/parent::tr/td[1]|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decisão')]/parent::tr/td[1]") %>%
+    data_despacho <- xml2::read_html(.x) %>% rvest::html_nodes(xpath = "//td[@style='vertical-align: top; padding-bottom: 5px'][contains(text(),'Despacho')]/parent::tr/td[1]|//td[@style='vertical-align: top; padding-bottom: 5px']/a[contains(text(),'Decis\u00e3o')]/parent::tr/td[1]") %>%
       rvest::html_text(trim = TRUE) %>% lubridate::dmy()
 
     processo <- stringr::str_remove_all(.y,"\\D+")

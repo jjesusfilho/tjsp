@@ -43,7 +43,7 @@ organizar_dados_cpopg <- function (df, excluir_assunto = "", excluir_classe = ""
 
     if (nrow(df) > 0) {
       df <- df %>% dplyr::mutate(branco = dplyr::case_when(stringr::str_detect(v1,
-                                                                               "(?i)[áa]rea") ~ "area", v1 == "(Tramitação prioritária)" ~
+                                                                               "(?i)[\\u00e1a]rea") ~ "area", v1 == "(Tramita\\u00e7\\u00e3o priorit\\u00e1ria)" ~
                                                              "prioritaria", TRUE ~ "vara")) %>% tidyr::unite("v2",
                                                                                                              assunto, v1, sep = "&", remove = FALSE) %>% tibble::rowid_to_column() %>%
         tidyr::spread(branco, v2) %>% dplyr::mutate_at(dplyr::vars(area,
@@ -57,7 +57,7 @@ organizar_dados_cpopg <- function (df, excluir_assunto = "", excluir_classe = ""
                                                                                                                                                                                                                                                                                                                                                                                            "(?<=-\\s).+"), distribuicao = NULL) %>% tidyr::separate(vara,
                                                                                                                                                                                                                                                                                                                                                                                                                                                     c("vara", "foro"), sep = " - ", extra = "merge") %>%
         dplyr::mutate(area = stringr::str_remove_all(v1,
-                                                     "(?i)(Área|\\W+)"), v1 = NULL)
+                                                     "(?i)(\\u00c1rea|\\W+)"), v1 = NULL)
       df <- df %>% dplyr::filter(!is.element(classe, excluir_classe)) %>%
         dplyr::mutate(rowid = NULL)
       if (exists("prioritaria", df, inherits = FALSE)) {
