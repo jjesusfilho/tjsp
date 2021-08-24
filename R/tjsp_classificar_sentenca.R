@@ -20,8 +20,8 @@ x<- x %>%
       dplyr::case_when(
       re2::re2_detect(x,"julgo\\sparcial\\w+") ~ "parcial",
       re2::re2_detect(x,"\\bparcial\\w+") ~ "parcial",
-      re2::re2_detect(x,"julgo\\s+procecente em parte") ~ "parcial",
-      re2::re2_detect(x,"\\bprocecente em parte") ~ "parcial",
+      re2::re2_detect(x,"julgo\\s+procedente em parte") ~ "parcial",
+      re2::re2_detect(x,"\\bprocedente em parte") ~ "parcial",
       re2::re2_detect(x,"desistencia") ~ "desist\u00eancia",
       re2::re2_detect(x,"\\bhomologo\\b") ~  "homologa\u00e7\u00e3o",
       re2::re2_detect(x,"julgo\\s+procede\\w+") ~ "procedente",
@@ -34,6 +34,8 @@ x<- x %>%
       re2::re2_detect(x,"rejeit\\w+ (os) embargor") ~  "rejeitar embargos",
       re2::re2_detect(x,"\\bdefiro") ~ "deferido",
       re2::re2_detect(x, "\\bindefiro") ~ "indefiro",
+      re2::re2_detect(x, "\\bdeneg\\w+") ~ "denegado",
+
       TRUE ~ NA_character_
     )
 }
