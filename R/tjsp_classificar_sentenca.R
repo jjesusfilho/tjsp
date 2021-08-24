@@ -31,7 +31,7 @@ x<- x %>%
       re2::re2_detect(x,"prejudicad[ao]") ~  "prejudicado",
       re2::re2_detect(x,"(an)?nul[ao](do)?") ~ "nulo",
       re2::re2_detect(x,"extin\\w+") ~ "extinto",
-      re2::re2_detect(x,"rejeit\\w+ (os) embargor") ~  "rejeitar embargos",
+      re2::re2_detect(x,"rejeit\\w+ (os)? embargos") ~  "rejeitar embargos",
       re2::re2_detect(x,"\\bdefiro") ~ "deferido",
       re2::re2_detect(x, "\\bindefiro") ~ "indefiro",
       re2::re2_detect(x, "\\bdeneg\\w+") ~ "denegado",
