@@ -15,7 +15,6 @@ ByteCompile: true
 Imports:
     xml2,
     httr,
-    stringi,
     stringr,
     purrr,
     dplyr,
@@ -27,7 +26,6 @@ Imports:
     rlang (>= 0.1.2),
     abjutils,
     tidyr (>= 1.0.0),
-    fs,
     stats,
     pdftools,
     readr,
@@ -36,7 +34,7 @@ Imports:
     getPass,
     vctrs,
     re2
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues
 Suggests: 
@@ -53,5 +51,7 @@ Suggests:
     furrr,
     zoo,
     usethis,
-    jsonlite
+    jsonlite,
+    stringi,
+    qpdf
 VignetteBuilder: knitr 
