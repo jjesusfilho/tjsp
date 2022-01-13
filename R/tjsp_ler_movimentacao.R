@@ -11,7 +11,7 @@
 #' andamento_cpopg <- ler_movimentacao_cpopg()
 #' }
 #'
-tjsp_ler_movimentacao <- <- function(arquivos = NULL,diretorio = ".") {
+tjsp_ler_movimentacao <- function(arquivos = NULL,diretorio = ".") {
 
    if (is.null(arquivos)){
    arquivos <- list.files(
