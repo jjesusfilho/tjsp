@@ -10,7 +10,7 @@
 #' \dontrun{
 #' decisoes <- ler_decisoes_cposg()
 #' }
-ler_decisoes_cposg <- function (arquivos = NULL, diretorio = ".")
+tjsp_ler_decisoes_cposg <- function (arquivos = NULL, diretorio = ".")
 {
   ""
   if (is.null(arquivos)) {
@@ -48,3 +48,7 @@ ler_decisoes_cposg <- function (arquivos = NULL, diretorio = ".")
   lista <- as.list(lista)
   do.call(rbind, lista)
 }
+
+#' @rdname tjsp_ler_decisoes_cposg
+#' @export
+ler_decisoes_cposg <- tjsp_ler_decisoes_cposg

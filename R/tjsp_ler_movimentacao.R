@@ -11,7 +11,7 @@
 #' andamento_cpopg <- ler_movimentacao_cpopg()
 #' }
 #'
-ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(arquivos = NULL,diretorio = ".") {
+tjsp_ler_movimentacao <- <- function(arquivos = NULL,diretorio = ".") {
 
    if (is.null(arquivos)){
    arquivos <- list.files(
@@ -44,3 +44,8 @@ ler_movimentacao_cposg <- ler_movimentacao_cpopg <- function(arquivos = NULL,dir
     tibble::tibble(processo = processo, data = data, movimentacao = mov)
   }, otherwise = NULL))
 }
+
+
+#' @rdname tjsp_ler_movimentacao
+#' @export
+ler_movimentacao_cposg <- ler_movimentacao_cpopg <- tjsp_ler_movimentacao

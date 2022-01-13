@@ -65,7 +65,8 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE)
       dplyr::mutate(row_id = 1:dplyr::n()) %>%
       dplyr::ungroup() %>%
       tidyr::spread(key = variavel, value = valor) %>%
-      dplyr::select(-row_id)
+      dplyr::select(-row_id) %>%
+      janitor::clean_names()
   }
   return(dados)
 }

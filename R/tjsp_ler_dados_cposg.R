@@ -11,7 +11,7 @@
 #' \dontrun{
 #' dados <- ler_dados_cposg()
 #' }
-ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
+tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
 
   if(is.null(arquivos)){
   arquivos <- list.files(
@@ -56,3 +56,7 @@ ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
     dplyr::select(-row_id) %>%
     janitor::clean_names()
 }
+
+#' @rdname tjsp_ler_dados_cposg
+#' @export
+ler_dados_cposg <- tjsp_ler_dados_cposg
