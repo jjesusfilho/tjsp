@@ -30,7 +30,7 @@ tjsp_baixar_sentenca_cjpg <- function(cd_doc, diretorio = "."){
         nmAlias = parametros[[3]],
         origemDocumento = "M",
         nuPagina = "0",
-        #numInicial = "122",
+        numInicial = "1",
         tpOrigem = "2",
         flOrigem = "P",
         deTipoDocDigital = "Senten\xe7as",
@@ -38,7 +38,7 @@ tjsp_baixar_sentenca_cjpg <- function(cd_doc, diretorio = "."){
         cdFormatoDoc = "5",
         cdForo = parametros[[2]],
         #idDocumento = "55277239-122-0",
-        #numFinal = "122",
+        numFinal = "163",
         sigiloExterno = "N"
       )
 
