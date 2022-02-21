@@ -15,7 +15,7 @@
 #' }
 cnj_sequencial <- function(inicio, fim, ano, segmento, uf, distribuidor) {
   if (!is.numeric(inicio) | !is.numeric(fim)) {
-    stop("Início e fim devem ser num\u00e9ricos")
+    stop("In\u00edcio e fim devem ser num\\u00e9ricos")
   }
   o <- stringr::str_pad(inicio:fim, width = 7, "left", "0")
   uf <- stringr::str_pad(uf, 2, "left", "0")
