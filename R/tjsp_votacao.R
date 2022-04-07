@@ -5,7 +5,7 @@
 #' @return Vetor
 #' @export
 #'
-votacao <- function(x = NULL) {
+tjsp_votacao <- function(x = NULL) {
 
 
     dplyr::case_when(
@@ -15,3 +15,8 @@ votacao <- function(x = NULL) {
       TRUE ~ NA_character_
     )
 }
+
+
+#' @rdname tjsp_votacao
+#' @export
+votacao <- tjsp_votacao
