@@ -26,20 +26,20 @@ tjsp_combinar_docs <- function(arquivos = NULL, dir_origem = ".",  dir_destino =
 
 
   lista <- tibble::tibble(arquivos) %>%
-    dplyr::mutate(processo = stringr::str_extract(arquivos,"\\d+"),
+    dplyr::mutate(processo = stringr::str_extract(arquivos,"\\d{20}"),
                   doc_id = stringr::str_extract(arquivos,'\\d+(?=\\.pdf)')) %>%
     #inner_join(select(df,processo,doc_id,url_doc), by = c("processo","doc_id")) %>%
     dplyr::mutate(doc_id = as.integer(doc_id)) %>%
     dplyr::arrange(processo,doc_id) %>%
     dplyr::group_split(processo)
 
-  purrr::walk(lista, ~{
+  purrr::walk(lista, purrr::possibly(~{
 
     processo <- unique(.x$processo)
 
     qpdf::pdf_combine(.x$arquivos, file.path(dir_destino,paste0(processo,".pdf")))
 
-  })
+  },NULL))
 
 
 }
