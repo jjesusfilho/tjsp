@@ -7,11 +7,11 @@
 lapso(data_inicial = NULL, data_final = NULL, unidade = "mes")
 }
 \arguments{
-\item{data_inicial}{incluir a data no formato Date.}
+\item{data_inicial}{data inicial}
 
-\item{data_final}{incluir a data no formato Date.}
+\item{data_final}{data final}
 
-\item{unidade}{uma das opções: ano, mes, semana, dia.}
+\item{unidade}{ano, mes, semana ou dia.}
 }
 \value{
 double com o lapso temporal
@@ -21,8 +21,9 @@ Retorna o lapso temporal na unidade especificada entre duas datas.
 }
 \details{
 Esta função é um mero wrapper das funções interval e time_length
-    do pacote lubridate. Ela considera as variações de ano, meses e dias.
+    do pacote lubridate. Ela considera as variações de
+    ano, mes,semana, dia, hora, minuto e segundo.
 }
 \examples{
-lapso(data_inicial = as.Date("2018-01-01"), data_final = as.Date("2018-12-31"), unidade = "mes")
+lapso(data_inicial=as.Date("2018-01-01"),data_final=as.Date("2018-12-31"),unidade="mes")
 }
