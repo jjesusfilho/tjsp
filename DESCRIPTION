@@ -28,7 +28,6 @@ Imports:
     tidyr (>= 1.0.0),
     stats,
     pdftools,
-    readr,
     listenv,
     janitor,
     getPass,
