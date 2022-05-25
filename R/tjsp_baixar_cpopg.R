@@ -9,6 +9,7 @@
 tjsp_baixar_cpopg <- function (processos = NULL, diretorio = ".")
 {
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
+
   processos <- stringr::str_remove_all(processos, "\\D+") %>%
     stringr::str_pad(width = 20, "left", "0") %>%
     pontuar_cnj()
@@ -22,15 +23,20 @@ tjsp_baixar_cpopg <- function (processos = NULL, diretorio = ".")
     pb$tick()
 
     p <- .x
+
     unificado <- p %>% stringr::str_extract(".{15}")
+
     foro <- p %>% stringr::str_extract("\\d{4}$")
-    query1 <- list(conversationId = "", dadosConsulta.localPesquisa.cdLocal = "-1",
+
+     query1 <- list(conversationId = "", dadosConsulta.localPesquisa.cdLocal = "-1",
                    cbPesquisa = "NUMPROC", dadosConsulta.tipoNuProcesso = "UNIFICADO",
                    numeroDigitoAnoUnificado = unificado, foroNumeroUnificado = foro,
                    dadosConsulta.valorConsultaNuUnificado = p, dadosConsulta.valorConsulta = "",
                    uuidCaptcha = "")
+
     resposta1 <- httr::RETRY("GET", url = uri1, query = query1,
                              quiet = TRUE, httr::timeout(2))
+
     conteudo1 <- httr::content(resposta1)
 
     if (xml2::xml_find_first(conteudo1, "boolean(//div[@id='listagemDeProcessos'])")) {

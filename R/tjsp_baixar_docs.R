@@ -8,7 +8,10 @@
 #' @return pdfs
 #' @export
 #'
-tjsp_baixar_docs <- function(processos  = NULL, doc_id = NULL, urls = NULL, diretorio = NULL){
+tjsp_baixar_docs <- function(processos  = NULL,
+                             doc_id = NULL,
+                             urls = NULL,
+                             diretorio = NULL){
 
 
   processos <- stringr::str_remove_all(processos,"\\D")
