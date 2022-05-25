@@ -41,7 +41,7 @@ tjsp_ler_cjpg<-function (arquivos = NULL, diretorio = ".")
     pagina <- stringr::str_extract(.x, "(?<=pagina_)\\d+") %>%
       as.integer()
 
-    hora_coleta <- stringr::str_extract(.x, "\\d{4}.+(?=_p)") %>%
+    hora_coleta <- stringr::str_extract(.x, "\\d{4}[\\d_/]+") %>%
       lubridate::ymd_hms(tz="America/Sao_Paulo")
 
     processo <- stringi::stri_extract_first_regex(resposta,

@@ -9,7 +9,7 @@
 #'      criar variáveis de ambiente: "LOGINADV" e "PASSWORDADV", ou
 #'      chamar a função e aguardar o prompt para informar
 #'      login e password
-autenticar <- function(login = NULL, password = NULL) {
+tjsp_autenticar <- function(login = NULL, password = NULL) {
 
   # Check if isn't already logged in
   if (check_login()) {
@@ -99,3 +99,7 @@ check_login <- function() {
     httr::content("text") %>%
     stringr::str_detect("true")
 }
+
+#' @rdname tjsp_autenticar
+#' @export
+autenticar <- tjsp_autenticar
