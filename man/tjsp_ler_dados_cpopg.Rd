@@ -11,7 +11,7 @@ tjsp_ler_dados_cpopg(arquivos = NULL, diretorio = ".", wide = FALSE)
 
 \item{diretorio}{Informar apenas se não informou arquivos}
 
-\item{wide}{Padrão para FALSE. Colocar TRUE se quiser manter em formato wide}
+\item{wide}{Padrão para TRUE. Colocar FALSE se quiser manter em formato longo.}
 }
 \value{
 tibble

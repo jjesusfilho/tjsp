@@ -3,7 +3,7 @@
 \name{tjsp_ler_cjpg}
 \alias{tjsp_ler_cjpg}
 \alias{ler_cjpg}
-\title{Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.}
+\title{Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.}
 \usage{
 tjsp_ler_cjpg(arquivos = NULL, diretorio = ".")
 
@@ -19,10 +19,7 @@ uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro
     disponibilizacao e julgado (texto da decisão).
 }
 \description{
-Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.
-}
-\details{
-Esta função é experimental. Eventualmente, substituirá a função ler_cjpg
+Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 #'
 #' @param arquivos Vetor de arquivos
 #' @param diretorio Informar apenas se não informou arquivos
-#' @param wide Padrão para FALSE. Colocar TRUE se quiser manter em formato wide
+#' @param wide Padrão para TRUE. Colocar FALSE se quiser manter em formato longo.
 #'
 #' @return tibble
 #' @export

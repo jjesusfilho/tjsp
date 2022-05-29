@@ -1,10 +1,9 @@
-#' Lê decisões de primeira instância do TJSP baixadas por meio da função baixar_cjpg.
+#' Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.
 #'
 #' @param diretorio objeto ou diretório onde se encontram as páginas.
 #' @param arquivos Se NULL, informar diretorio
 #' @return uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro, vara,
 #'     disponibilizacao e julgado (texto da decisão).
-#' @details Esta função é experimental. Eventualmente, substituirá a função ler_cjpg
 #' @export
 #'
 #' @examples
@@ -87,7 +86,7 @@ tjsp_ler_cjpg <- function(arquivos = NULL, diretorio = ".")
 
     disponibilizacao <- x %>%
       xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
-      purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Data de Disponibilização:')]/following-sibling::text()") |>
+      purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Data de Disponibiliza\u00E7\u00E3o:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
