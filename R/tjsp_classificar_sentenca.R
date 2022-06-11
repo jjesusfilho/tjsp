@@ -22,7 +22,6 @@ x<- x %>%
       re2::re2_detect(x,"\\bparcial\\w+") ~ "parcial",
       re2::re2_detect(x,"julgo\\s+procedente em parte") ~ "parcial",
       re2::re2_detect(x,"\\bprocedente em parte") ~ "parcial",
-      re2::re2_detect(x,"desistencia") ~ "desistencia",
       re2::re2_detect(x,"\\bhomolog\\w+\\b") ~  "homologacao",
       re2::re2_detect(x,"julgo\\s+procede\\w+") ~ "procedente",
       re2::re2_detect(x,"julgo\\simprocede\\w+") ~ "improcedente",
@@ -36,6 +35,7 @@ x<- x %>%
       re2::re2_detect(x,"\\bdefiro") ~ "deferido",
       re2::re2_detect(x, "\\bindefiro") ~ "indefiro",
       re2::re2_detect(x, "\\bdeneg\\w+") ~ "denegado",
+      re2::re2_detect(x,"desistencia") ~ "desistencia",
       TRUE ~ NA_character_
     )
 }
