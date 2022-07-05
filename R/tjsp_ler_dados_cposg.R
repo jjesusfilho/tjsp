@@ -30,12 +30,15 @@ tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
 
     resposta <- xml2::read_html(.x)
 
+    digital <- resposta %>% xml2::xml_find_first("boolean(//*[@id='pbVisualizarAutos'] |//*[@id='linkConsultaSG'])")
+
+    situacao <- resposta %>% xml2::xml_find_first("//span[@id='situacaoProcesso']") %>%
+      xml2::xml_text()
+
     nomes <- resposta %>%
       xml2::xml_find_all("//span[@class='unj-label']") %>%
       xml2::xml_text(trim=TRUE)
 
-    digital <- resposta %>%
-      xml2::xml_find_first("boolean(//*[@title='Pasta Digital'] |//*[@class='linkConsultaSG'])")
 
     cdProcesso <- resposta %>%
       xml2::xml_find_first("//*[@name='cdProcesso']") %>%
@@ -45,7 +48,7 @@ tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
       xml2::xml_find_all("//span[@class='unj-label']/following-sibling::div") %>%
       xml2::xml_text()
 
-    tibble::tibble(processo = processo, cd_processo = cdProcesso, variavel = nomes,
+    tibble::tibble(processo = processo, digital, situacao, cd_processo = cdProcesso, variavel = nomes,
                    valor = valores)
 
   }, otherwise = NULL)) %>%
