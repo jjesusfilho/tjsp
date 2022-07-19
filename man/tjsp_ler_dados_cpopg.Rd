@@ -4,7 +4,7 @@
 \alias{tjsp_ler_dados_cpopg}
 \title{Lê os metadados de processos de primeira instância.}
 \usage{
-tjsp_ler_dados_cpopg(arquivos = NULL, diretorio = ".", wide = FALSE)
+tjsp_ler_dados_cpopg(arquivos = NULL, diretorio = ".", wide = TRUE)
 }
 \arguments{
 \item{arquivos}{Vetor de arquivos}

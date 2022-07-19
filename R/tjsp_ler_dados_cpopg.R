@@ -7,7 +7,7 @@
 #' @return tibble
 #' @export
 #'
-tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = FALSE) {
+tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) {
 
   if (is.null(arquivos)){
     arquivos <- list.files(
