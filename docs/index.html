@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.0.9070</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0.9070</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -54,7 +50,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jjesusfilho/tjsp/">
+  <a href="https://github.com/jjesusfilho/tjsp/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -71,85 +67,85 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="pacote-tjsp" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#pacote-tjsp" class="anchor"></a>Pacote tjsp</h1></div>
-<div id="baixando-e-lendo-decisões-de-primeiro-e-segundo-grau" class="section level2">
-<h2 class="hasAnchor">
-<a href="#baixando-e-lendo-decis%C3%B5es-de-primeiro-e-segundo-grau" class="anchor"></a>Baixando e lendo decisões de primeiro e segundo grau.</h2>
+<div class="section level1">
+<div class="page-header"><h1 id="pacote-tjsp">Pacote tjsp<a class="anchor" aria-label="anchor" href="#pacote-tjsp"></a>
+</h1></div>
+<div class="section level2">
+<h2 id="baixando-e-lendo-decisões-de-primeiro-e-segundo-grau">Baixando e lendo decisões de primeiro e segundo grau.<a class="anchor" aria-label="anchor" href="#baixando-e-lendo-decis%C3%B5es-de-primeiro-e-segundo-grau"></a>
+</h2>
 <p>O objetivo deste pacote é disponibilizar ferramentas a acadêmicos, jornalistas e organizações não governamentais para coletar e organizar decisões judiciais de primeira e de segunda instância do Tribunal de Justiça de São Paulo.</p>
 </div>
-<div id="instalação" class="section level2">
-<h2 class="hasAnchor">
-<a href="#instala%C3%A7%C3%A3o" class="anchor"></a>Instalação</h2>
+<div class="section level2">
+<h2 id="instalação">Instalação<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o"></a>
+</h2>
 <p>Este pacote não será incluído no cran. Você deverá fazer uso da versão em desenvolvimento. Há pelo menos duas razões para não incluir no cran:</p>
 <p>1 - Pacotes para web scraping estão em constante desenvolvimento. Pǻginas web são repentinamente alteradas ou mesmo inteiramente substituídas, o que pode obrigar o desenvolvedor a reescrever o pacote do zero;</p>
 <p>2 - Os usuários do pacote serão em sua maioria brasileiros, e mesmo que não lusófonos venham a utilizá-lo, a familiaridade com a lingua portuguesa e com o direito brasileiro é indispensável;</p>
-<p>Portanto, instale versão em desenvolvimento: <a href="https://github.com/">GitHub</a> com:</p>
+<p>Portanto, instale versão em desenvolvimento: <a href="https://github.com/" class="external-link">GitHub</a> com:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"jjesusfilho/tjsp"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jjesusfilho/tjsp"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="utilização" class="section level2">
-<h2 class="hasAnchor">
-<a href="#utiliza%C3%A7%C3%A3o" class="anchor"></a>Utilização</h2>
+<div class="section level2">
+<h2 id="utilização">Utilização<a class="anchor" aria-label="anchor" href="#utiliza%C3%A7%C3%A3o"></a>
+</h2>
 <p>As funções do pacote podem ser agrupadas em três. Um grupo de funções que inicia com o verbo baixar, as quais baixam para um diretório indicado pelo usuário, as decisões de primeira e de segunda instância em formato html.</p>
 <p>O segundo grupo inicia com o verbo ler, as quais leem as informações contidas nos htmls e as dispôem numa tabela. Todas as funções de leitura são paralelizadas, de modo que o tempo de leitura dependerá da configuração de sua máquina.</p>
 <p>O terceiro grupo é formado por funções auxiliares no trabalho de transformação dos dados lidos pelo grupo anterior.</p>
-<p>Há quatro siglas que você deve tomar com conta antes de baixar os dados processuais. A sigla <code>cjpg</code> significa consulta de julgados de primeiro grau, ela basicamente baixa dados do <a href="http://esaj.tjsp.jus.br/cjpg/">banco de sentenças</a>. A sigla <code>cjsg</code> signfica consulta consulta de julgados de segundo grau e baixa os <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do">julgados de segundo grau</a>. A sigla <code>cpopg</code> significa consulta processual de primeiro grau e baixa a <a href="https://esaj.tjsp.jus.br/cpopg/open.do">consulta processual de primeiro grau</a>. Por fim, a sigla <code>cposg</code> significa consulta processual de segundo grau e baixa a <a href="https://esaj.tjsp.jus.br/cposg/open.do">consulta processual de segundo grau</a>.</p>
-<div id="baixando-jurisprudência" class="section level3">
-<h3 class="hasAnchor">
-<a href="#baixando-jurisprud%C3%AAncia" class="anchor"></a>Baixando jurisprudência</h3>
-<p>As decisões de segunda instância podem ser consultadas livremente por meio da <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do?f=1">página jurisprudência do TJSP</a>. Por exemplo, para realizar uma busca livre sobre o tema feminicídio, faça o seguinte:</p>
+<p>Há quatro siglas que você deve tomar com conta antes de baixar os dados processuais. A sigla <code>cjpg</code> significa consulta de julgados de primeiro grau, ela basicamente baixa dados do <a href="http://esaj.tjsp.jus.br/cjpg/" class="external-link">banco de sentenças</a>. A sigla <code>cjsg</code> signfica consulta consulta de julgados de segundo grau e baixa os <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do" class="external-link">julgados de segundo grau</a>. A sigla <code>cpopg</code> significa consulta processual de primeiro grau e baixa a <a href="https://esaj.tjsp.jus.br/cpopg/open.do" class="external-link">consulta processual de primeiro grau</a>. Por fim, a sigla <code>cposg</code> significa consulta processual de segundo grau e baixa a <a href="https://esaj.tjsp.jus.br/cposg/open.do" class="external-link">consulta processual de segundo grau</a>.</p>
+<div class="section level3">
+<h3 id="baixando-jurisprudência">Baixando jurisprudência<a class="anchor" aria-label="anchor" href="#baixando-jurisprud%C3%AAncia"></a>
+</h3>
+<p>As decisões de segunda instância podem ser consultadas livremente por meio da <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do?f=1" class="external-link">página jurisprudência do TJSP</a>. Por exemplo, para realizar uma busca livre sobre o tema feminicídio, faça o seguinte:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jjesusfilho/tjsp">tjsp</a></span><span class="op">)</span>
-<span class="fu"><a href="reference/tjsp_baixar_cjsg.html">baixar_cjsg</a></span><span class="op">(</span>livre<span class="op">=</span><span class="st">"feminicídio"</span>,diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jjesusfilho/tjsp" class="external-link">tjsp</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/tjsp_baixar_cjsg.html">baixar_cjsg</a></span><span class="op">(</span>livre<span class="op">=</span><span class="st">"feminicídio"</span>,diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Ela baixará no diretório indicado ou no atual, os htmls com os metadados das decisões. Atenção, faça a busca no TJ antes para verificar quantas páginas serão baixadas. A depender do tema, esse processo pode tomar horas.</p>
 <p>Depois disso, você pode pedir para ler tais decisões:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tabela</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_cjsg.html">ler_cjsg</a></span><span class="op">(</span>diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tabela</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_cjsg.html">ler_cjsg</a></span><span class="op">(</span>diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="baixando-informações-detalhadas-dos-processos" class="section level3">
-<h3 class="hasAnchor">
-<a href="#baixando-informa%C3%A7%C3%B5es-detalhadas-dos-processos" class="anchor"></a>Baixando informações detalhadas dos processos</h3>
-<p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
+<div class="section level3">
+<h3 id="baixando-informações-detalhadas-dos-processos">Baixando informações detalhadas dos processos<a class="anchor" aria-label="anchor" href="#baixando-informa%C3%A7%C3%B5es-detalhadas-dos-processos"></a>
+</h3>
+<p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/tjsp_autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
 <p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretóio de sua escollha.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/baixar_cposg.html">baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/baixar_cposg.html">baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="lendo-os-processos-de-segunda-instância" class="section level3">
-<h3 class="hasAnchor">
-<a href="#lendo-os-processos-de-segunda-inst%C3%A2ncia" class="anchor"></a>Lendo os processos de segunda instância.</h3>
+<div class="section level3">
+<h3 id="lendo-os-processos-de-segunda-instância">Lendo os processos de segunda instância.<a class="anchor" aria-label="anchor" href="#lendo-os-processos-de-segunda-inst%C3%A2ncia"></a>
+</h3>
 <p>A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dados</span><span class="op">&lt;-</span><span class="fu"><a href="reference/ler_dados_cposg.html">ler_dados_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dados</span><span class="op">&lt;-</span><span class="fu"><a href="reference/tjsp_ler_dados_cposg.html">ler_dados_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Em seguida, lemos as informações acerca das partes dos processos:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">partes</span> <span class="op">&lt;-</span> <span class="fu">ler_partes_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">partes</span> <span class="op">&lt;-</span> <span class="fu">ler_partes_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Ao final passamos para a leitura do andamento dos processos.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ler_movimentacao_cposg.html">ler_movimentacao_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_movimentacao.html">ler_movimentacao_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">ler_entrada_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">ler_entrada_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Por fim, você pode ler o dispositivo da decisão:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ler_decisoes_cposg.html">ler_decisoes_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_decisoes_cposg.html">ler_decisoes_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="baixando-decisões-de-primeiro-grau" class="section level3">
-<h3 class="hasAnchor">
-<a href="#baixando-decis%C3%B5es-de-primeiro-grau" class="anchor"></a>Baixando decisões de primeiro grau</h3>
+<div class="section level3">
+<h3 id="baixando-decisões-de-primeiro-grau">Baixando decisões de primeiro grau<a class="anchor" aria-label="anchor" href="#baixando-decis%C3%B5es-de-primeiro-grau"></a>
+</h3>
 <p>As decisões de primeiro grau obedecem a mesma lógica das decisões de segundo grau com algumas diferenças. Verifique a ajuda para entender como operam.</p>
 </div>
 </div>
-<div id="aviso-legal-disclaimer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#aviso-legal-disclaimer" class="anchor"></a>Aviso legal (Disclaimer)</h2>
+<div class="section level2">
+<h2 id="aviso-legal-disclaimer">Aviso legal (Disclaimer)<a class="anchor" aria-label="anchor" href="#aviso-legal-disclaimer"></a>
+</h2>
 <p>O pacote tjsp não mantêm nem atualiza os dados do TJSP/ESAJ, não altera nem transforma os dados durante a coleta. Algumas funções, tais como classificar_recurso, classificar_sentença, numero e votacao criam novas variáveis a partir das existentes e devem ser usadas por conta e risco de quem utiliza o pacote. Elas não estão isentas de erro e seus resultados devem ser validados. O autor do pacote não assume qualquer responsabilidade sobre o seu uso e resultados.</p>
 </div>
-<div id="considerações-éticas" class="section level2">
-<h2 class="hasAnchor">
-<a href="#considera%C3%A7%C3%B5es-%C3%A9ticas" class="anchor"></a>Considerações éticas</h2>
+<div class="section level2">
+<h2 id="considerações-éticas">Considerações éticas<a class="anchor" aria-label="anchor" href="#considera%C3%A7%C3%B5es-%C3%A9ticas"></a>
+</h2>
 <p>1 - Este pacote foi criado por colaboradores voluntários. Você também é convidado a contribuir. Se encontrar uma falha, não hesite em criar um “issue”, mas também procure fazer um esforço para corrigir você mesma(o) o erro e dar um “pull request”;</p>
 <p>2 - O pacote é destinado principalmente ao público acadêmico, jornalistas e membros de organizações sem fins econômicos.</p>
 <p>3 - Use o pacote com parcimônia. Não bombardeie a página do TJSP, pois a navegação de milhares de usuários poderá ser afetada. Você realmente precisa baixar tantas decisões? Precisa ser durante o dia, não pode ser à noite? Propositalmente, não incluímos opções de requisições assincrônicas ou paralelas.</p>
@@ -162,45 +158,51 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/jjesusfilho/tjsp/">https://​github.com/​jjesusfilho/​tjsp/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/jjesusfilho/tjsp/issues">https://​github.com/​jjesusfilho/​tjsp/​issues</a>
-</li>
+<li><a href="https://github.com/jjesusfilho/tjsp/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/jjesusfilho/tjsp/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing tjsp</a></li>
+<li><a href="authors.html#citation">Citing tjsp</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://jjesusfilho.github.io/tjsp">José de Jesus Filho</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<a href="https://jjesusfilho.github.io/tjsp" class="external-link">José de Jesus Filho</a> <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://jjesusfilho.github.io/tjsp">José de Jesus Filho</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://jjesusfilho.github.io/tjsp" class="external-link">José de Jesus Filho</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -208,6 +210,8 @@
 
   
 
+
+  
 
   </body>
 </html>
