@@ -24,7 +24,7 @@ tjsp_baixar_cpopg <- function(processos = NULL, sono = 1, diretorio = "."){
 
     pb$tick()
 
-    tjsp_baixar_cpopg1(.x, )
+    tjsp_baixar_cpopg1(.x,diretorio)
 
     Sys.sleep(sono)
 
@@ -38,7 +38,7 @@ tjsp_baixar_cpopg <- function(processos = NULL, sono = 1, diretorio = "."){
 
 
 
-tjsp_baixar_cpopg1 <- function (processo = NULL, diretorio = ".")
+tjsp_baixar_cpopg1 <- function (processo = NULL, diretorio)
 {
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
