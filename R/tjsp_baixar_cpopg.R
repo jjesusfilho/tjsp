@@ -15,7 +15,6 @@ tjsp_baixar_cpopg <- function(processos = NULL, sono = 1, diretorio = "."){
     stringr::str_pad(width = 20, "left", "0") |>
     pontuar_cnj()
 
-  uri1 <- "https://esaj.tjsp.jus.br/cpopg/search.do?gateway=true"
 
   pb <- progress::progress_bar$new(total = length(processos))
 
@@ -40,12 +39,10 @@ tjsp_baixar_cpopg <- function(processos = NULL, sono = 1, diretorio = "."){
 
 tjsp_baixar_cpopg1 <- function (processo = NULL, diretorio)
 {
+
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
   uri1 <- "https://esaj.tjsp.jus.br/cpopg/search.do?gateway=true"
-
-
-
 
     unificado <- processo %>% stringr::str_extract(".{15}")
 
