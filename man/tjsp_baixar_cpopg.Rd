@@ -5,12 +5,14 @@
 \alias{baixar_cpopg}
 \title{Baixar consulta processual de primeiro grau}
 \usage{
-tjsp_baixar_cpopg(processos = NULL, diretorio = ".")
+tjsp_baixar_cpopg(processos = NULL, sono = 1, diretorio = ".")
 
-baixar_cpopg(processos = NULL, diretorio = ".")
+baixar_cpopg(processos = NULL, sono = 1, diretorio = ".")
 }
 \arguments{
 \item{processos}{Número do processo (cnj)}
+
+\item{sono}{Tempo em segundos entre requisições.}
 
 \item{diretorio}{Diretório onde serão armazenados os htmls}
 }

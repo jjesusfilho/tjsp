@@ -123,7 +123,7 @@ tjsp_baixar_cjsg <-
     if (tipo == "A") {
 
 
-    purrr::map(paginas, purrr::possibly(~{
+    purrr::walk(paginas, purrr::possibly(~{
 
       pb$tick()
 
