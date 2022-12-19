@@ -7,45 +7,54 @@
 #' @export
 #'
 tjsp_ler_tabela_docs <- function(arquivos = NULL, diretorio = "."){
-
+  
   if (is.null(arquivos)) {
-
+    
     arquivos <- list.files(diretorio,full.names = TRUE)
-
+    
   }
-
+  
   pb <- progress::progress_bar$new(total = length(arquivos))
-
+  
   purrr::map_dfr(arquivos,purrr::possibly(~{
-
+    
     pb$tick()
-
+    
     processo <- stringr::str_extract(.x,"\\d{20}")
-
+    
     suppressMessages({
- df <-   .x %>%
-      xml2::read_html() %>%
-      xml2::xml_text() %>%
-      stringr::str_extract("(?<=requestScope = )\\X+?(?=;)") %>%
-      jsonlite::fromJSON() %>%
-      tidyr::unnest_longer(children,names_repair="unique") %>%
-      purrr::flatten_dfc() %>%
-      dplyr::select(dplyr::matches("(title|parametros)")) %>%
-      setNames(c("doc_name","paginas","url_doc")) %>%
-      tibble::rownames_to_column("doc_id") %>%
-      dplyr::mutate(pagina_inicial = stringr::str_extract(paginas,"\\d+"),
-                    pagina_final = stringr::str_extract(paginas,"\\d+$"),
-                    processo = processo,
-                    url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc)) %>%
-      dplyr::select(processo, doc_id,doc_name,paginas,pagina_inicial, pagina_final, url_doc)
-
-
-})
-
-    df
-
-  },NULL))
-
-
-
+      
+       doc <-   .x %>%
+        xml2::read_html() %>%
+        xml2::xml_text() %>%
+        stringr::str_extract("(?<=requestScope = )\\X+?(?=;)") |> 
+        jsonlite::fromJSON()
+       
+  
+  doc_name <- tibble::tibble(doc_name= doc$data$title) |> 
+              tibble::rownames_to_column("id_doc")
+       
+  paginas  <- doc$children[[2]]$data$indicePagina
+  
+ df <- purrr::imap_dfr(doc$children,~{
+    
+   url_doc <-  .x$data$parametros
+   pagina <- .x$data$indicePagina
+   
+  tibble::tibble(id_doc = .y, pagina, url_doc) |> 
+          dplyr::mutate(id_doc = as.character(id_doc))
+  
+  }) |> 
+   dplyr::left_join(doc_name) |> 
+   dplyr::select(id_doc, doc_name, pagina, url_doc) |> 
+   dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc)) |> 
+      dplyr::group_by(id_doc) |> 
+   dplyr::mutate(pagina_inicial = dplyr::first(pagina),
+          pagina_final = dplyr::last(pagina)) |> 
+   dplyr::ungroup() |> 
+   tibble::add_column(processo, .before =1)
+    
+    }) 
+    
+  }, NULL))
 }
