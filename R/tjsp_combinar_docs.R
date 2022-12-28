@@ -28,7 +28,7 @@ tjsp_combinar_docs <- function(arquivos = NULL, dir_origem = ".",  dir_destino =
   lista <- tibble::tibble(arquivos) |>
     dplyr::mutate(processo = stringr::str_extract(arquivos,"\\d{20}"),
                   doc_id = stringr::str_extract(arquivos,'(?<=doc_id_)\\d+') |> as.integer(),
-		  pagina_inicial = stringr::str_extract(arquivos, '(?<=inicial_)\\d+') |> as.integer()) |>
+		  pagina_inicial = stringr::str_extract(arquivos, '(?<=inicial_)\\d+') |> as.integer()) |> # nolint
     dplyr::arrange(processo,doc_id,pagina_inicial) |>
     dplyr::group_split(processo)
 
