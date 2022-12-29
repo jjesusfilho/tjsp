@@ -49,7 +49,8 @@ As decisões de segunda instância podem ser consultadas livremente por meio da 
 
 ```{r, eval=FALSE}
 library(tjsp)
-baixar_cjsg(livre="feminicídio",diretorio=".")
+dir.create("feminicidio")
+tjsp_baixar_cjsg(livre="feminicídio", diretorio="feminicidio")
 ```
 
 Ela baixará no  diretório indicado ou no atual, os htmls com os metadados das decisões. Atenção, faça a busca no TJ antes para verificar quantas páginas serão baixadas. A depender do tema, esse processo pode tomar horas.
@@ -57,7 +58,7 @@ Ela baixará no  diretório indicado ou no atual, os htmls com os metadados das 
 Depois disso, você pode pedir para ler tais decisões:
 
 ```{r, eval=FALSE}
-tabela <- ler_cjsg(diretorio=".")
+tabela <- tjsp_ler_cjsg(diretorio = "feminicidio")
 ```
 
 ### Baixando informações detalhadas dos processos
@@ -68,7 +69,7 @@ O passo seguinte é realizar a busca e baixar os htmls dos processos individualm
 O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretóio de sua escollha.
 
 ```{r, eval=FALSE}
-baixar_cposg(tabela$processo)
+tjsp_baixar_cposg(tabela$processo)
 ```
 
 ### Lendo os processos de segunda instância.
@@ -76,31 +77,31 @@ baixar_cposg(tabela$processo)
 A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:
 
 ```{r, eval=FALSE}
-dados<-ler_dados_cposg(diretorio = ".")
+dados <- tjsp_ler_dados_cposg(diretorio = ".")
 ```
 
 Em seguida, lemos as informações acerca das partes dos processos:
 
 ```{r, eval=FALSE}
-partes <- ler_partes_cposg(diretorio = ".")
+partes <- tjsp_ler_partes(diretorio = ".")
 ```
 
 Ao final passamos para a leitura do andamento dos processos. 
 
 ```{r, eval=FALSE}
-andamento <- ler_movimentacao_cposg(diretorio = ".")
+andamento <- tjsp_ler_movimentacao_cposg(diretorio = ".")
 ```
 
 Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:
 
 ```{r, eval=FALSE}
-entrada <- ler_entrada_cposg(diretorio = ".")
+entrada <- tjsp_ler_entrada_cposg(diretorio = ".")
 ```
 
 Por fim, você pode ler o dispositivo da decisão:
 
 ```{r, eval=FALSE}
-decisao <- ler_decisoes_cposg(diretorio = ".")
+decisao <- tjsp_ler_dispositivo(diretorio = ".")
 ```
 
 

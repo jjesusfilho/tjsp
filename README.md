@@ -67,7 +67,8 @@ seguinte:
 
 ``` r
 library(tjsp)
-baixar_cjsg(livre="feminicídio",diretorio=".")
+dir.create("feminicidio")
+tjsp_baixar_cjsg(livre="feminicídio", diretorio="feminicidio")
 ```
 
 Ela baixará no diretório indicado ou no atual, os htmls com os metadados
@@ -78,7 +79,7 @@ horas.
 Depois disso, você pode pedir para ler tais decisões:
 
 ``` r
-tabela <- ler_cjsg(diretorio=".")
+tabela <- tjsp_ler_cjsg(diretorio = "feminicidio")
 ```
 
 ### Baixando informações detalhadas dos processos
@@ -94,7 +95,7 @@ O comando a seguir irá baixar todos os processos no diretório atual, mas
 você pode indicar um diretóio de sua escollha.
 
 ``` r
-baixar_cposg(tabela$processo)
+tjsp_baixar_cposg(tabela$processo)
 ```
 
 ### Lendo os processos de segunda instância.
@@ -103,19 +104,19 @@ A leitura dos processos de segunda instância se dá em três etapas.
 Primeiramente, lemos os metadados:
 
 ``` r
-dados<-ler_dados_cposg(diretorio = ".")
+dados <- tjsp_ler_dados_cposg(diretorio = ".")
 ```
 
 Em seguida, lemos as informações acerca das partes dos processos:
 
 ``` r
-partes <- ler_partes_cposg(diretorio = ".")
+partes <- tjsp_ler_partes(diretorio = ".")
 ```
 
 Ao final passamos para a leitura do andamento dos processos.
 
 ``` r
-andamento <- ler_movimentacao_cposg(diretorio = ".")
+andamento <- tjsp_ler_movimentacao_cposg(diretorio = ".")
 ```
 
 Eventualmente, você não está interessada em ler todo o andamento, mas
@@ -124,13 +125,13 @@ tarde calcular o tempo entre a entrada e a decisão. Há uma função para
 isso:
 
 ``` r
-entrada <- ler_entrada_cposg(diretorio = ".")
+entrada <- tjsp_ler_entrada_cposg(diretorio = ".")
 ```
 
 Por fim, você pode ler o dispositivo da decisão:
 
 ``` r
-decisao <- ler_decisoes_cposg(diretorio = ".")
+decisao <- tjsp_ler_dispositivo(diretorio = ".")
 ```
 
 ### Baixando decisões de primeiro grau
@@ -143,9 +144,9 @@ como operam.
 
 O pacote tjsp não mantêm nem atualiza os dados do TJSP/ESAJ, não altera
 nem transforma os dados durante a coleta. Algumas funções, tais como
-classificar\_recurso, classificar\_sentença, numero e votacao criam
-novas variáveis a partir das existentes e devem ser usadas por conta e
-risco de quem utiliza o pacote. Elas não estão isentas de erro e seus
+classificar_recurso, classificar_sentença, numero e votacao criam novas
+variáveis a partir das existentes e devem ser usadas por conta e risco
+de quem utiliza o pacote. Elas não estão isentas de erro e seus
 resultados devem ser validados. O autor do pacote não assume qualquer
 responsabilidade sobre o seu uso e resultados.
 
@@ -153,8 +154,8 @@ responsabilidade sobre o seu uso e resultados.
 
 1 - Este pacote foi criado por colaboradores voluntários. Você também é
 convidado a contribuir. Se encontrar uma falha, não hesite em criar um
-“issue”, mas também procure fazer um esforço para corrigir você
-mesma(o) o erro e dar um “pull request”;
+“issue”, mas também procure fazer um esforço para corrigir você mesma(o)
+o erro e dar um “pull request”;
 
 2 - O pacote é destinado principalmente ao público acadêmico,
 jornalistas e membros de organizações sem fins econômicos.

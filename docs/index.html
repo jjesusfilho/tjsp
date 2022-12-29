@@ -99,11 +99,12 @@
 <p>As decisões de segunda instância podem ser consultadas livremente por meio da <a href="https://esaj.tjsp.jus.br/cjsg/consultaCompleta.do?f=1" class="external-link">página jurisprudência do TJSP</a>. Por exemplo, para realizar uma busca livre sobre o tema feminicídio, faça o seguinte:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jjesusfilho/tjsp" class="external-link">tjsp</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/tjsp_baixar_cjsg.html">baixar_cjsg</a></span><span class="op">(</span>livre<span class="op">=</span><span class="st">"feminicídio"</span>,diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"feminicidio"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/tjsp_baixar_cjsg.html">tjsp_baixar_cjsg</a></span><span class="op">(</span>livre<span class="op">=</span><span class="st">"feminicídio"</span>, diretorio<span class="op">=</span><span class="st">"feminicidio"</span><span class="op">)</span></span></code></pre></div>
 <p>Ela baixará no diretório indicado ou no atual, os htmls com os metadados das decisões. Atenção, faça a busca no TJ antes para verificar quantas páginas serão baixadas. A depender do tema, esse processo pode tomar horas.</p>
 <p>Depois disso, você pode pedir para ler tais decisões:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tabela</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_cjsg.html">ler_cjsg</a></span><span class="op">(</span>diretorio<span class="op">=</span><span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tabela</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_cjsg.html">tjsp_ler_cjsg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"feminicidio"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="baixando-informações-detalhadas-dos-processos">Baixando informações detalhadas dos processos<a class="anchor" aria-label="anchor" href="#baixando-informa%C3%A7%C3%B5es-detalhadas-dos-processos"></a>
@@ -111,26 +112,26 @@
 <p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/tjsp_autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
 <p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretóio de sua escollha.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/baixar_cposg.html">baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/baixar_cposg.html">tjsp_baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="lendo-os-processos-de-segunda-instância">Lendo os processos de segunda instância.<a class="anchor" aria-label="anchor" href="#lendo-os-processos-de-segunda-inst%C3%A2ncia"></a>
 </h3>
 <p>A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dados</span><span class="op">&lt;-</span><span class="fu"><a href="reference/tjsp_ler_dados_cposg.html">ler_dados_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_dados_cposg.html">tjsp_ler_dados_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Em seguida, lemos as informações acerca das partes dos processos:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">partes</span> <span class="op">&lt;-</span> <span class="fu">ler_partes_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">partes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_partes.html">tjsp_ler_partes</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Ao final passamos para a leitura do andamento dos processos.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_movimentacao.html">ler_movimentacao_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu">tjsp_ler_movimentacao_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">ler_entrada_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">tjsp_ler_entrada_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Por fim, você pode ler o dispositivo da decisão:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_decisoes_cposg.html">ler_decisoes_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_dispositivo.html">tjsp_ler_dispositivo</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="baixando-decisões-de-primeiro-grau">Baixando decisões de primeiro grau<a class="anchor" aria-label="anchor" href="#baixando-decis%C3%B5es-de-primeiro-grau"></a>
