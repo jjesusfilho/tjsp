@@ -14,7 +14,7 @@ tjsp_ler_dados_cpopg(arquivos = NULL, diretorio = ".", wide = TRUE)
 \item{wide}{Padrão para TRUE. Colocar FALSE se quiser manter em formato longo.}
 }
 \value{
-tibble
+Tibble com variáveis em formato longo ou wide ou NULL se não houver dados.
 }
 \description{
 Lê os metadados de processos de primeira instância.

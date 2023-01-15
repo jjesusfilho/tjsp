@@ -4,7 +4,7 @@
 #' @param diretorio Informar apenas se não informou arquivos
 #' @param wide Padrão para TRUE. Colocar FALSE se quiser manter em formato longo.
 #'
-#' @return tibble
+#' @return Tibble com variáveis em formato longo ou wide ou NULL se não houver dados.
 #' @export
 #'
 tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) {
@@ -59,7 +59,16 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
       processo = .y, codigo_processo = codigo, digital, situacao, variavel, valor
     )
   }, NULL))
+
+
+  if (nrow(dados) == 0){
+
+    return(NULL)
+
+  }
+
   if (wide == TRUE) {
+
     dados <- dados %>%
       dplyr::group_by_at(dplyr::vars(-valor)) %>%
       dplyr::mutate(row_id = 1:dplyr::n()) %>%
@@ -68,5 +77,8 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
       dplyr::select(-row_id) %>%
       janitor::clean_names()
   }
+
+
   return(dados)
+
 }
