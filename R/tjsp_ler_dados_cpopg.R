@@ -23,17 +23,18 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
 
     pb <- pb$tick()
 
-    resposta <- .x %>% xml2::read_html()
+    resposta <- .x |>  xml2::read_html()
 
-    digital <- resposta %>% xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
+    digital <- resposta |>
+      xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
 
-    situacao <- resposta %>%
-      xml2::xml_find_first("//span[@id='labelSituacaoProcesso']") %>%
+    situacao <- resposta |>
+      xml2::xml_find_first("//span[@id='labelSituacaoProcesso']") |>
       xml2::xml_text()
 
-    codigo <- resposta %>%
+    codigo <- resposta |>
       xml2::xml_find_all("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") %>%
-      xml2::xml_text() %>%
+      xml2::xml_text() |>
       stringr::str_extract("(?<=processo.codigo=)\\w+")
 
     if (length(codigo) > 1) {
