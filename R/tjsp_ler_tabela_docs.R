@@ -32,7 +32,7 @@ tjsp_ler_tabela_docs <- function(arquivos = NULL, diretorio = "."){
        
   
   doc_name <- tibble::tibble(doc_name= doc$data$title) |> 
-              tibble::rownames_to_column("id_doc")
+              tibble::rownames_to_column("doc_id")
        
   paginas  <- doc$children[[2]]$data$indicePagina
   
