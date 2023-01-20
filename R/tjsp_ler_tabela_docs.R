@@ -42,13 +42,13 @@ tjsp_ler_tabela_docs <- function(arquivos = NULL, diretorio = "."){
    pagina <- .x$data$indicePagina
    
   tibble::tibble(id_doc = .y, pagina, url_doc) |> 
-          dplyr::mutate(doc_id = as.character(doc_id))
+          dplyr::mutate(id_doc = as.character(id_doc))
   
   }) |> 
    dplyr::left_join(doc_name) |> 
    dplyr::select(id_doc, doc_name, pagina, url_doc) |> 
    dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc)) |> 
-      dplyr::group_by(doc_id) |> 
+      dplyr::group_by(id_doc) |> 
    dplyr::mutate(pagina_inicial = dplyr::first(pagina),
           pagina_final = dplyr::last(pagina)) |> 
    dplyr::ungroup() |> 
