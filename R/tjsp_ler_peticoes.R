@@ -24,7 +24,7 @@ tjsp_ler_peticoes <- function(arquivos = NULL, diretorio = ".", remover_assinatu
 
     processo <- stringr::str_extract(.x,"\\d{20}")
 
-    doc_id <- stringr::str_extract(.x,"\\d+(?=\\.pdf$)") %>%
+    id_doc <- stringr::str_extract(.x,"\\d+(?=\\.pdf$)") %>%
       as.integer()
 
 
@@ -45,7 +45,7 @@ tjsp_ler_peticoes <- function(arquivos = NULL, diretorio = ".", remover_assinatu
 
     }
 
-    tibble::tibble(processo = processo, doc_id = doc_id, texto = texto)
+    tibble::tibble(processo = processo, id_doc = id_doc, texto = texto)
 
 
   },NULL))

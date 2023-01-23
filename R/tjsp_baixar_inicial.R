@@ -21,6 +21,6 @@ tjsp_baixar_inicial <- function(processo, diretorio){
 
   unlink(dir, recursive= TRUE, force = TRUE)
 
-  tjsp_baixar_docs(doc$processo, doc_id = doc$doc_id, urls = doc$url_doc, diretorio= diretorio)
+  tjsp_baixar_docs(doc$processo, id_doc = doc$id_doc, urls = doc$url_doc, diretorio= diretorio)
 
 }

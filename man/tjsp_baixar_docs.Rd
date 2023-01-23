@@ -6,7 +6,7 @@
 \usage{
 tjsp_baixar_docs(
   processos = NULL,
-  doc_id = NULL,
+  id_doc = NULL,
   pagina = NULL,
   urls = NULL,
   diretorio = NULL
@@ -15,7 +15,7 @@ tjsp_baixar_docs(
 \arguments{
 \item{processos}{Número do processo}
 
-\item{doc_id}{Id do documento}
+\item{id_doc}{Id do documento}
 
 \item{pagina}{Pagina}
 

@@ -70,7 +70,7 @@ tjsp_baixar_cpopg_docs <- function(df,
       r2<-  httr::GET(url1)
 
 
-      tjsp_baixar_docs(dd$processo, dd$doc_id, dd$pagina,  dd$url_doc, diretorio)
+      tjsp_baixar_docs(dd$processo, dd$id_doc, dd$pagina,  dd$url_doc, diretorio)
 
 
     },NULL))
@@ -82,7 +82,7 @@ tjsp_baixar_cpopg_docs <- function(df,
 
 #' Função interna do tjsp_baixar_cpopg_docs
 #' @param processos Número do processo
-#' @param doc_id Id do documento
+#' @param id_doc Id do documento
 #' @param pagina Pagina
 #' @param urls Urls dos documentos
 #' @param diretorio Diretório
@@ -90,7 +90,7 @@ tjsp_baixar_cpopg_docs <- function(df,
 #' @return pdfs
 #'
 tjsp_baixar_docs <- function(processos  = NULL,
-                             doc_id = NULL,
+                             id_doc = NULL,
 			     pagina = NULL,
                              urls = NULL,
                              diretorio = NULL){
@@ -99,7 +99,7 @@ tjsp_baixar_docs <- function(processos  = NULL,
   processos <- stringr::str_remove_all(processos,"\\D")
 
   id <- stringr::str_c(processos,
-                       "_doc_id_",doc_id,
+                       "_id_doc_",id_doc,
                        "_pagina_",pagina
                        )
 
