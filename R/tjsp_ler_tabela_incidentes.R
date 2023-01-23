@@ -42,7 +42,10 @@ tjsp_ler_tabela_incidentes <- function(arquivos = NULL,diretorio = ".") {
     xml2::xml_attr("href") |>
     xml2::url_absolute("https://esaj.tjsp.jus.br")
 
-  tibble::tibble(processo, data_recebimento, classe, url)
+  tibble::tibble(processo, data_recebimento, classe, url) |>
+                 dplyr::mutate(codigo_processo = stringr::str_extract(url, "(?<=codigo=)[^&]+"), .after = processo) |>
+                 dplyr::mutate(codigo_local = stringr::str_extract(url, "(?i)(?<=cdLocal=)\\d+"), .after = codigo_processo)
+
 
   }, otherwise = NULL))
 }
