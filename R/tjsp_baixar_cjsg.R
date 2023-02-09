@@ -37,11 +37,21 @@ tjsp_baixar_cjsg <-
            diretorio = ".") {
 
 
-    if (all(inicio != "", fim != "", inicio_pb != "", fim_pb != "")){
 
-      stop("Voc\u00EA n\u00E3o pode informar datas de julgamente e de publica\u00E7\u00E3o na mesma pesquisa")
-    }
 
+
+
+
+  data_errada <-   verificar_datas(inicio, fim, inicio_pb, fim_pb)
+
+  if (data_errada){
+
+    stop("Verifique se:
+         Colocou as datas no formato esperado;
+         informou somente publica\u00E7\u00E3o ou julgamento;
+         colocou uma data inferior ou igual \u00E0 data de hoje.")
+
+  }
 
     if(inicio != "" && fim != ""){
 
@@ -193,6 +203,38 @@ agrupar_datas <- function(data_inicial = NULL,
                              format(formato)))
 
 }
+
+
+#' Verifica se está tudo ok com as datas.
+#'
+#' @param inicio Data inicial de julgamento
+#' @param fim Data final de julgamento
+#' @param inicio_pb Data inicial de publicação
+#' @param fim_pb Data final de publicação
+#'
+#' @return Retorna TRUE se tem algo errado.
+#' @export
+#'
+verificar_datas <- function(inicio, fim, inicio_pb, fim_pb){
+
+  ### Verifica se nenhuma data é seperior à data atual
+
+  datas <- lubridate::dmy(inicio, fim, inicio_pb, fim_pb)
+
+  x <- any(datas > Sys.Date(), na.rm = TRUE)
+
+  ### Verifica se o usuário colocou data de publicação e data de julgamento.
+
+  y <-  all(inicio != "", fim != "", inicio_pb != "", fim_pb != "")
+
+
+  ### verifica se o usuário escreveu a data em formato errado.
+
+  z <- any(c(inicio, fim, inicio_pb, fim_pb) |> stringr::str_detect("(\\d{2}/\\d{2}/\\d{4}|^$)", negate =T ))
+
+  any(x,y,z)
+
+  }
 
 
 #' Qualquer data
