@@ -24,23 +24,206 @@
 #'
 tjsp_baixar_cjsg <-
   function(livre = "",
-             aspas = FALSE,
-             classe = "",
-             assunto = "",
-             orgao_julgador = "",
-             inicio = "",
-             fim = "",
-             inicio_pb = "",
-             fim_pb = "",
-             tipo = "A",
-             n = NULL,
-             diretorio = ".") {
-     httr::set_config(httr::config(
+           aspas = FALSE,
+           classe = "",
+           assunto = "",
+           orgao_julgador = "",
+           inicio = "",
+           fim = "",
+           inicio_pb = "",
+           fim_pb = "",
+           tipo = "A",
+           n = NULL,
+           diretorio = ".") {
+
+
+    if (all(inicio != "", fim != "", inicio_pb != "", fim_pb != "")){
+
+      stop("Voc\u00EA n\u00E3o pode informar datas de julgamente e de publica\u00E7\u00E3o na mesma pesquisa")
+    }
+
+
+    if(inicio != "" && fim != ""){
+
+      datas <- agrupar_datas(inicio, fim)
+
+
+      purrr::walk2(datas$data_inicial, datas$data_final, purrr::possibly(~{
+
+        tjsp_baixar_cjsg1(livre = livre,
+                          aspas = aspas,
+                          classe = classe,
+                          assunto = assunto,
+                          orgao_julgador = orgao_julgador,
+                          inicio = .x,
+                          fim = .y,
+                          inicio_pb = inicio_pb,
+                          fim_pb = fim_pb,
+                          tipo = tipo,
+                          n = n,
+                          diretorio = diretorio
+        )
+
+
+      },NULL))
+
+    } else if(inicio_pb != "" && fim_pb != ""){
+
+      datas <- agrupar_datas(inicio_pb, fim_pb)
+
+      purrr::walk2(datas$data_inicial, datas$data_final, ~{
+
+        tjsp_baixar_cjsg1(livre,
+                          aspas,
+                          classe,
+                          assunto,
+                          orgao_julgador,
+                          inicio = inicio,
+                          fim = fim,
+                          inicio_pb = .x,
+                          fim_pb = .x,
+                          tipo,
+                          n,
+                          diretorio
+        )
+
+
+      })
+
+    } else {
+
+      tjsp_baixar_cjsg1(livre = livre,
+                        aspas  = aspas,
+                        classe,
+                        assunto,
+                        orgao_julgador,
+                        inicio = inicio,
+                        fim = fim,
+                        inicio_pb = inicio_pb,
+                        fim_pb = fim_pb,
+                        tipo,
+                        n,
+                        diretorio)
+
+    }
+
+  }
+
+
+#' @rdname tjsp_baixar_cjsg
+#' @export
+baixar_cjsg <- tjsp_baixar_cjsg
+
+#' Função para criar o nome do arquivo
+#'
+#' @param inicio  data inicial julgamento
+#' @param fim  Data final julgamento
+#' @param inicio_pb data inicial registro/publicação
+#' @param fim_pb    data final registr/publicacao
+#' @param pagina página
+#' @param diretorio diretorio
+#'
+#' @return Arquivo
+#'
+formatar_arquivo <- function(inicio,
+                            fim,
+                            inicio_pb,
+                            fim_pb,
+                            pagina,
+                            diretorio){
+
+
+  hora <- stringr::str_replace_all(Sys.time(), "\\D", "_")
+
+
+  if (inicio != "" & fim != ""){
+
+    i <- lubridate::dmy(inicio) %>%
+      stringr::str_replace_all("\\D","_")
+
+    f <- lubridate::dmy(fim) %>%
+      stringr::str_replace_all("\\D","_")
+
+    arquivo <- file.path(diretorio,paste0(hora,"_inicio_",i,"_fim_",f,"_pagina_",pagina,".html"))
+
+
+
+  } else  if (inicio_pb != "" & fim_pb != "") {
+
+    i <- lubridate::dmy(inicio_pb) %>%
+      stringr::str_replace_all("\\D","_")
+
+    f <- lubridate::dmy(fim_pb) %>%
+      stringr::str_replace_all("\\D","_")
+
+
+    arquivo <- file.path(diretorio,paste0(hora,"_inicio_pb_",i,"_fim_pb_",f,"_pagina_",pagina,".html"))
+
+  } else {
+
+    arquivo <- file.path(diretorio,paste0(hora,"_pagina_",pagina,".html"))
+
+  }
+
+  return(arquivo)
+}
+
+
+
+#' Subdivide as data em intervalos de um ano
+#'
+#' @param data_inicial Data inicial dd/mm/aaaa
+#' @param data_final Data final dd/mm/aaaa
+#' @param formato Formato de retorno. Default para dd/mm/aaaa
+#'
+#' @return tibble com duas colunas com data inicial e final
+#'
+agrupar_datas <- function(data_inicial = NULL,
+                          data_final = NULL,
+                          formato = "%d/%m/%Y"){
+
+  tibble::tibble(.datas = seq(lubridate::dmy(data_inicial),
+                           lubridate::dmy(data_final),1)) |>
+    dplyr::mutate(.ano = lubridate::year(.datas)) |>
+    dplyr::group_split(.ano) |>
+    purrr::map_dfr(~dplyr::pull(.x,".datas") |>
+                     range() |>
+                     setNames(c("data_inicial","data_final"))) |>
+    dplyr::mutate_all(list(~as.Date(.,origin='1970-01-01') |>
+                             format(formato)))
+
+}
+
+
+#' Qualquer data
+#'
+#' @inheritParams tjsp_baixar_cjsg
+#'
+#' @return htmls
+#'
+
+tjsp_baixar_cjsg1 <-
+  function(livre = "",
+           aspas = FALSE,
+           classe = "",
+           assunto = "",
+           orgao_julgador = "",
+           inicio = "",
+           fim = "",
+           inicio_pb = "",
+           fim_pb = "",
+           tipo = "A",
+           n = NULL,
+           diretorio = ".") {
+    httr::set_config(httr::config(
       ssl_verifypeer = FALSE,
       accept_encoding = "latin1"
     ))
 
     if (aspas == TRUE) livre <- deparse(livre)
+
+
+
 
 
     body <-
@@ -101,33 +284,40 @@ tjsp_baixar_cjsg <-
     } else {
 
 
-    max_pag <- a %>%
-      httr::content() %>%
-      xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") %>%
-      xml2::xml_attrs() %>%
-      .[[1]] %>%
-      .[3] %>%
-      as.numeric() %>%
-      `/`(20) %>%
-      ceiling()
+      max_pag <- a %>%
+        httr::content() %>%
+        xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") %>%
+        xml2::xml_attrs() %>%
+        .[[1]] %>%
+        .[3] %>%
+        as.numeric() %>%
+        `/`(20) %>%
+        ceiling()
 
 
 
-    paginas <- 1:max_pag
+      paginas <- 1:max_pag
 
 
-    pb <- progress::progress_bar$new(total = max_pag)
+      pb <- progress::progress_bar$new(total = max_pag)
 
     }
 
     if (tipo == "A") {
 
 
-    purrr::walk(paginas, purrr::possibly(~{
+      purrr::walk(paginas, purrr::possibly(~{
 
-      pb$tick()
+        pb$tick()
 
-      Sys.sleep(1)
+        arquivo <- formatar_arquivo(inicio,
+                                    fim,
+                                    inicio_pb,
+                                    fim_pb,
+                                    pagina = .x,
+                                    diretorio)
+
+        Sys.sleep(1)
         httr::GET(
           paste0(
             "https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=",
@@ -135,15 +325,21 @@ tjsp_baixar_cjsg <-
           ),
           httr::set_cookies(unlist(a$cookies)),
           httr::accept("text/html; charset=latin1;"),
-          httr::write_disk(paste0(diretorio, "/pagina_", .x, ".html"),
-            overwrite = TRUE
-          )
+          httr::write_disk(arquivo,overwrite = TRUE)
         )
       }, NULL))
     } else {
-      purrr::map(paginas, purrr::possibly(~ {
+
+      purrr::walk(paginas, purrr::possibly(~ {
 
         pb$tick()
+
+        arquivo <- formatar_arquivo(inicio,
+                                    fim,
+                                    inicio_pb,
+                                    fim_pb,
+                                    pagina = .x,
+                                    diretorio)
 
         Sys.sleep(1)
 
@@ -153,16 +349,10 @@ tjsp_baixar_cjsg <-
             .x
           ),
           httr::set_cookies(unlist(a$cookies)),
-          httr::write_disk(paste0(diretorio, "/pagina_", .x, ".html"),
-            overwrite = TRUE
+          httr::write_disk(arquivo, overwrite = TRUE
           )
         )
         # httr::write_disk(paste0(diretorio, "/pagina_", .x,".html"), overwrite = TRUE)
       }, NULL))
     }
   }
-
-
-#' @rdname tjsp_baixar_cjsg
-#' @export
-baixar_cjsg <- tjsp_baixar_cjsg

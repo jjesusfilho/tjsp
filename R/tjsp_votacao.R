@@ -9,8 +9,8 @@ tjsp_votacao <- function(x = NULL) {
 
 
     dplyr::case_when(
-      stringr::str_detect(x, "(?i)(v\\.\\s?u\\.?|un.ni)") ~ "un\\u00e2nime",
-      stringr::str_detect(x, "(?i)v\\.?\\s?u\\.?\\)?\\.?$") ~ "un\\u00e2nime",
+      stringr::str_detect(x, "(?i)(v\\.\\s?u\\.?|un.ni)") ~ "unanime",
+      stringr::str_detect(x, "(?i)v\\.?\\s?u\\.?\\)?\\.?$") ~ "unanima",
       stringr::str_detect(x, "(?i)maioria") ~ "maioria",
       TRUE ~ NA_character_
     )

@@ -60,6 +60,8 @@ tjsp_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
     cdacordao <- xml2::xml_find_all(resposta, "//a[1]/@cdacordao") %>%
       xml2::xml_text()
     tibble::tibble(
+      processo,
+      cdacordao,
       classe,
       assunto,
       relator,
@@ -67,9 +69,7 @@ tjsp_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
       orgao_julgador,
       data_julgamento,
       data_publicacao,
-      processo,
-      ementa,
-      cdacordao
+      ementa
     ) %>%
      # dplyr::mutate(dplyr::across(1:7, ~iconv(.x, "UTF-8","latin1//TRANSLIT"))) %>%
       dplyr::mutate(dplyr::across(3:7,~stringr::str_remove(.x,".+:\\s?") %>%
