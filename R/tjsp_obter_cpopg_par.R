@@ -1,35 +1,18 @@
 #' Busca os números de processos no primeiro grau no parametro especificado
 #'
-#' @param oab Número da oab seguido pela uf, ex. 123456SP
-#' @param parte Nome da parte
+#' @param consulta Valor da consulta
+#' @param parametro Uma dessas: "NUMOAB", "NMPARTE", "DOCPARTE"
 #' @return tibble com os números dos processos
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' obter_cpopg_par(oab="123456SP")
-#' obter_cpopg_par(parte = "José da Silva Pereira")
+#' obter_cpopg_par(consulta="123456SP", parametro = "NUMOAB")
+#' obter_cpopg_par(consulta = "José da Silva Pereira", parametro = "NMPARTE")
 #' }
-obter_cpopg_par <- function(oab = NULL, parte = NULL) {
+tjsp_obter_cpopg_par <- function(consulta = NULL, parametro = NULL) {
 
-  if (is.null(oab) & is.null(parte)) {
-    stop("Voc\u00ea deve informar um dos par\u00e2metros")
-  }
 
-  if (!is.null(oab) & !is.null(parte)) {
-    stop("Voc\u00ea deve informar apenas um par\u00e2metro")
-  }
-
-  if (is.null(parte)) {
-   parametro <-  "NUMOAB"
-   consulta<-stringr::str_remove_all(oab,"\\W+") %>%
-     stringr::str_to_upper()
-  }
-
-  if (is.null(oab)) {
-    parametro <-  "NMPARTE"
-    consulta <- parte
-  }
 
 
 
