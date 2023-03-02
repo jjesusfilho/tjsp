@@ -47,7 +47,7 @@ tjsp_quantidade <-
 
 
      cnj_sequencial(intervalo[1], intervalo[2], ano, segmento =8, uf=26, distribuidor) %>%
-        funcao(diretorio = diretorio)
+        tjsp_baixar_cpopg(diretorio = diretorio)
 
     arquivos <- list.files(diretorio, full.names = TRUE)
 
