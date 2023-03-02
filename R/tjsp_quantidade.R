@@ -1,22 +1,21 @@
 #' Calcula quantidade de processos distribuídos por fórum
 #'
-#' @param inicio Geralmente 1
+#' @param inicio Número inicial da sequência. Depende muito do
+#'     distribuidor e da classe processual.
 #' @param fim Inteiro grande o suficiente
 #' @param ano Ano
 #' @param distribuidor Verifique os códigos em codigos2
-#' @param funcao Geralmente baixar_cposg
 #' @param diretorio Um diretório vazio para downloads provisórios
 #'
 #' @return vetor
 #' @export
 #'
 tjsp_quantidade <-
-  function(inicio = 0,
+  function(inicio = NULL,
            fim=NULL,
            ano = NULL,
            distribuidor = NULL,
-           funcao = "baixar_cpopg",
-           diretorio = "data-raw") {
+           diretorio = ".") {
     ## Para encontrar o maior número do processo do ano, eu usei a lógica da busca binária.
     ## fim pode ser qualquer número grande o bastante para ser superior ao número total de processos
     ## distribuídos.
@@ -24,7 +23,7 @@ tjsp_quantidade <-
 
     # O loop abaixo faz requisição ao modo de busca binária. Pode haver uma pequena diferença de 2.
 
-    while (`-`(fim, inicio) > 11) {
+    while (`-`(fim, inicio) > 7) {
       inicio <- mean(c(inicio,fim)) ## Calculo a média, mas não vejo necessidade de arrendondar.
 
 
@@ -52,12 +51,13 @@ tjsp_quantidade <-
 
     arquivos <- list.files(diretorio, full.names = TRUE)
 
-    soma <- purrr::map_dbl(arquivos,~{
+    ### Retorna 1 se todos os arquivos forem do mesmo tamanho. Se forem, tudo indica que são vazios.
 
-      file.size(.x) %>%  `<`(92160)
+    tamanhos_iguais <- arquivos |>
+      file.size() |>
+      unique() |>
+      length()
 
-    }) %>%
-      sum()
 
 
       file.remove(arquivos) ## remove o diretório.
@@ -67,11 +67,11 @@ tjsp_quantidade <-
       ## Se o último for maior que inicio, fim é preservado e inicio passa a ser
       ## a média entre inicio e fim.
 
-      if (soma == 11) {
+      ### Se todos estão vazios, o fim cai pela metade e o inicio volta a ser o que era imediamente antes.
+
+      if (tamanhos_iguais == 1) {
         inicio <- inicio - (fim - inicio)
-
-        fim <- mean(c(inicio,fim))
-
+        fim <- mean(c(inicio, fim))
       }
 
     }

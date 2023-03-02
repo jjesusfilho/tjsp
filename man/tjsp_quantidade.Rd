@@ -5,24 +5,22 @@
 \title{Calcula quantidade de processos distribuídos por fórum}
 \usage{
 tjsp_quantidade(
-  inicio = 0,
+  inicio = NULL,
   fim = NULL,
   ano = NULL,
   distribuidor = NULL,
-  funcao = "baixar_cpopg",
-  diretorio = "data-raw"
+  diretorio = "."
 )
 }
 \arguments{
-\item{inicio}{Geralmente 1}
+\item{inicio}{Número inicial da sequência. Depende muito do
+distribuidor e da classe processual.}
 
 \item{fim}{Inteiro grande o suficiente}
 
 \item{ano}{Ano}
 
 \item{distribuidor}{Verifique os códigos em codigos2}
-
-\item{funcao}{Geralmente baixar_cposg}
 
 \item{diretorio}{Um diretório vazio para downloads provisórios}
 }
