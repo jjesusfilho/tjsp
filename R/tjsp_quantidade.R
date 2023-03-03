@@ -37,7 +37,7 @@ tjsp_quantidade <-
       ## Criamos um intervalo de oito números em torno de y
       ## para assegurar que ao menos um deles existirá caso o último seja
       ## superior ou igual a y.
-      intervalo <- round(inicio + -5:5) %>%
+      intervalo <- round(inicio + -3:3) %>%
         range()
 
       ## aqui eu uso a função cnj_sequencial para criar a numeracao conforme o CNJ,
