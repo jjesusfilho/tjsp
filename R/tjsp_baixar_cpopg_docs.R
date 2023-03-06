@@ -67,7 +67,11 @@ tjsp_baixar_cpopg_docs <- function(df,
         xml2::xml_attr("href") %>%
         paste0("https://esaj.tjsp.jus.br",.)
 
-      r2<-  httr::GET(url1)
+        r2<-  httr::GET(url1) |> 
+            httr::content("text") |> 
+            httr::GET()
+      
+      
 
 
       tjsp_baixar_docs(dd$processo, dd$id_doc, dd$pagina,  dd$url_doc, diretorio)
