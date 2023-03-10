@@ -4,7 +4,7 @@
 #' @param parametro Uma dessas: "NUMOAB", "NMPARTE", "DOCPARTE"
 #' @param distribuidor Informar código do distribuidor.
 #'      Você pode obtê-los com `tjsp_distribuidor()`
-#' @param Diretorio Informar diretorio onde armazenar os htmls
+#' @param diretorio Informar diretorio onde armazenar os htmls
 #' @return htmls
 #' @export
 #'
@@ -48,7 +48,7 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
       uuidCaptcha = ""
     )
 
-  resposta<-httr::RETRY(verb="GET",url=url1,query=query1,httr::timeout(30))
+  resposta <- httr::RETRY(verb="GET",url=url1,query=query1,httr::timeout(30))
 
   max_pag <- resposta |>
     httr::content() |>

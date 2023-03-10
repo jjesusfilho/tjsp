@@ -19,7 +19,7 @@ tjsp_baixar_cpopg_par(
 \item{distribuidor}{Informar código do distribuidor.
 Você pode obtê-los com `tjsp_distribuidor()`}
 
-\item{Diretorio}{Informar diretorio onde armazenar os htmls}
+\item{diretorio}{Informar diretorio onde armazenar os htmls}
 }
 \value{
 htmls
