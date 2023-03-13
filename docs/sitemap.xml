@@ -22,6 +22,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/agrupar_datas.html</loc>
+  </url>
+  <url>
     <loc>/reference/ajusta_assuntos.html</loc>
   </url>
   <url>
@@ -104,6 +107,9 @@
   </url>
   <url>
     <loc>/reference/filtrar_cjsj.html</loc>
+  </url>
+  <url>
+    <loc>/reference/formatar_arquivo.html</loc>
   </url>
   <url>
     <loc>/reference/fuzzy_search.html</loc>
@@ -229,6 +235,12 @@
     <loc>/reference/tjsp.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_api_extrair.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_api_quantidade.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_autenticar.html</loc>
   </url>
   <url>
@@ -250,10 +262,16 @@
     <loc>/reference/tjsp_baixar_cjsg.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_baixar_cjsg1.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_baixar_cpopg.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_baixar_cpopg_docs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_baixar_cpopg_par.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_baixar_docs.html</loc>
@@ -331,6 +349,9 @@
     <loc>/reference/tjsp_ler_tabela_docs.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_ler_tabela_incidentes.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_obter_cposg_oab.html</loc>
   </url>
   <url>
@@ -346,10 +367,16 @@
     <loc>/reference/tjsp_quantidade.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_varas.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_votacao.html</loc>
   </url>
   <url>
     <loc>/reference/tpu.html</loc>
+  </url>
+  <url>
+    <loc>/reference/verificar_datas.html</loc>
   </url>
   <url>
     <loc>/reference/votacao.html</loc>

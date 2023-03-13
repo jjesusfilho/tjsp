@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0.9070</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.11.0</span>
       </span>
     </div>
 
@@ -51,6 +51,10 @@
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
+          <p><code><a href="agrupar_datas.html">agrupar_datas()</a></code> </p>
+        </td>
+        <td><p>Subdivide as data em intervalos de um ano</p></td>
+      </tr><tr><td>
           <p><code><a href="ajustar_assuntos.html">ajustar_assuntos()</a></code> </p>
         </td>
         <td><p>Ajustar os assuntos com base na tabela do TJSP</p></td>
@@ -99,6 +103,10 @@
           <p><code><a href="filtrar_cjsg.html">filtrar_cjsg()</a></code> </p>
         </td>
         <td><p>Filtra base cjsg por assunto e classe.</p></td>
+      </tr><tr><td>
+          <p><code><a href="formatar_arquivo.html">formatar_arquivo()</a></code> </p>
+        </td>
+        <td><p>Função para criar o nome do arquivo</p></td>
       </tr><tr><td>
           <p><code><a href="fuzzy_search.html">fuzzy_search()</a></code> </p>
         </td>
@@ -166,10 +174,6 @@
         </td>
         <td><p>Converte valor da ação para número ou qualquer outra string.</p></td>
       </tr><tr><td>
-          <p><code><a href="obter_cpopg_par.html">obter_cpopg_par()</a></code> </p>
-        </td>
-        <td><p>Busca os números de processos no primeiro grau no parametro especificado</p></td>
-      </tr><tr><td>
           <p><code><a href="ordenar_camaras.html">ordenar_camaras()</a></code> </p>
         </td>
         <td><p>Limpa e ordena câmaras de direito</p></td>
@@ -202,6 +206,14 @@
         </td>
         <td><p><code>tjsp</code> package</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_api_extrair.html">tjsp_api_extrair()</a></code> </p>
+        </td>
+        <td><p>Extrai dataframe da api do TJSP, função auxiliar.</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_api_quantidade.html">tjsp_api_quantidade()</a></code> </p>
+        </td>
+        <td><p>Estima quantidade de processos com base na api do tjsp</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_autenticar.html">tjsp_autenticar()</a></code> <code><a href="tjsp_autenticar.html">autenticar()</a></code> </p>
         </td>
         <td><p>Autenticar no tjsp</p></td>
@@ -230,6 +242,10 @@
         </td>
         <td><p>Baixa consulta jurisprudencial do TJSP</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_baixar_cjsg1.html">tjsp_baixar_cjsg1()</a></code> </p>
+        </td>
+        <td><p>Qualquer data</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_baixar_cpopg.html">tjsp_baixar_cpopg()</a></code> <code><a href="tjsp_baixar_cpopg.html">baixar_cpopg()</a></code> </p>
         </td>
         <td><p>Baixar consulta processual de primeiro grau</p></td>
@@ -237,6 +253,10 @@
           <p><code><a href="tjsp_baixar_cpopg_docs.html">tjsp_baixar_cpopg_docs()</a></code> </p>
         </td>
         <td><p>Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_baixar_cpopg_par.html">tjsp_baixar_cpopg_par()</a></code> </p>
+        </td>
+        <td><p>Busca os números de processos no primeiro grau no parametro especificado</p></td>
       </tr><tr><td>
           <p><code><a href="tjsp_baixar_docs.html">tjsp_baixar_docs()</a></code> </p>
         </td>
@@ -334,6 +354,10 @@
         </td>
         <td><p>Ler tabelas baixadas com tjsp_baixar_tabela_docs</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_ler_tabela_incidentes.html">tjsp_ler_tabela_incidentes()</a></code> </p>
+        </td>
+        <td><p>Extrai a tabela de incidentes</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_obter_cposg_oab.html">tjsp_obter_cposg_oab()</a></code> </p>
         </td>
         <td><p>Obter processos de segunda instância pela oab</p></td>
@@ -354,6 +378,10 @@
         </td>
         <td><p>Calcula quantidade de processos distribuídos por fórum</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_varas.html">tjsp_varas()</a></code> </p>
+        </td>
+        <td><p>Lista varas e distribuidores do tjsp</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_votacao.html">tjsp_votacao()</a></code> <code><a href="tjsp_votacao.html">votacao()</a></code> </p>
         </td>
         <td><p>Cria vetor informando se o voto por por unanimidade ou por maioria</p></td>
@@ -361,6 +389,10 @@
           <p><code><a href="tpu.html">tpu</a></code> </p>
         </td>
         <td><p>tpu</p></td>
+      </tr><tr><td>
+          <p><code><a href="verificar_datas.html">verificar_datas()</a></code> </p>
+        </td>
+        <td><p>Verifica se está tudo ok com as datas.</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -374,7 +406,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
