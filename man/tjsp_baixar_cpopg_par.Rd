@@ -7,7 +7,7 @@
 tjsp_baixar_cpopg_par(
   consulta = NULL,
   parametro = NULL,
-  distribuidor = "",
+  distribuidor = "-1",
   diretorio = "."
 )
 }

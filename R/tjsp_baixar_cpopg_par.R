@@ -15,7 +15,7 @@
 #' }
 tjsp_baixar_cpopg_par <- function(consulta = NULL,
                                   parametro = NULL,
-                                  distribuidor = "",
+                                  distribuidor = "-1",
                                   diretorio = ".") {
 
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
@@ -27,10 +27,10 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
 
   if(parametro == "NUMOAB"){
 
-    consulta <- stringr::str_remove_all(consulta, "\\D")
+    consulta <- stringr::str_remove_all(consulta, "\\W")
   }
 
-  pb <- progress::progress_bar$new(total = max_pag)
+  pb <- progress::progress_bar$new(total = length(consulta))
 
 
   purrr::pmap(list(x = consulta, y = parametro, z = distribuidor), purrr::possibly(function(x, y, z){
@@ -40,7 +40,7 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
   query1 <-
     list(
       conversationId = "",
-      dadosConsulta.localPesquisa.cdLocal = "-1",
+      #dadosConsulta.localPesquisa.cdLocal = "-1",
       cbPesquisa = y,
       dadosConsulta.tipoNuProcesso = "UNIFICADO",
       dadosConsulta.valorConsulta = x,
@@ -64,17 +64,17 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
 
   purrr::walk(paginas,purrr::possibly(~{
 
-  arquivo <- file.path(diretorio, paste0("consulta_", x,"_parametro_", y,"_distribuidor_", z,".html"))
+  arquivo <- file.path(diretorio, paste0("consulta_", x,"_parametro_", y,"_distribuidor_", z,"_pagina_", .x, ".html"))
 
     query2 <-
       list(
         paginaConsulta = .x,
         conversationId = "",
-        dadosConsulta.localPesquisa.cdLocal = "-1",
-        cbPesquisa = parametro,
+        #dadosConsulta.localPesquisa.cdLocal = "-1",
+        cbPesquisa = y,
         dadosConsulta.tipoNuProcesso = "UNIFICADO",
-        dadosConsulta.valorConsulta = consulta,
-        cdForo = distribuidor,
+        dadosConsulta.valorConsulta = x,
+        cdForo = z,
         uuidCaptcha = ""
       )
 
