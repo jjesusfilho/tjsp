@@ -27,7 +27,7 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
 
   if(parametro == "NUMOAB" | paramentro == "DOCPARTE"){
 
-    consulta <- stringr::str_remove_all(consulta, "\\D")
+    consulta <- stringr::str_remove_all(consulta, "\\W")
   }
 
   pb <- progress::progress_bar$new(total = length(consulta))
@@ -40,7 +40,7 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
   query1 <-
     list(
       conversationId = "",
-      dadosConsulta.localPesquisa.cdLocal = "-1",
+      #dadosConsulta.localPesquisa.cdLocal = "-1",
       cbPesquisa = y,
       dadosConsulta.tipoNuProcesso = "UNIFICADO",
       dadosConsulta.valorConsulta = x,
@@ -64,17 +64,17 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
 
   purrr::walk(paginas,purrr::possibly(~{
 
-  arquivo <- file.path(diretorio, paste0("consulta_", x,"_parametro_", y,"_distribuidor_", z,".html"))
+  arquivo <- file.path(diretorio, paste0("consulta_", x,"_parametro_", y,"_distribuidor_", z,"_pagina_", .x, ".html"))
 
     query2 <-
       list(
         paginaConsulta = .x,
         conversationId = "",
-        dadosConsulta.localPesquisa.cdLocal = "-1",
-        cbPesquisa = parametro,
+        #dadosConsulta.localPesquisa.cdLocal = "-1",
+        cbPesquisa = y,
         dadosConsulta.tipoNuProcesso = "UNIFICADO",
-        dadosConsulta.valorConsulta = consulta,
-        cdForo = distribuidor,
+        dadosConsulta.valorConsulta = x,
+        cdForo = z,
         uuidCaptcha = ""
       )
 

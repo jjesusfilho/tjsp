@@ -1,8 +1,17 @@
+#' Lê busca por paramêtro diferente do processo
+#'
+#' @param arquivos Vetor de arquivos
+#' @param diretorio Alternativa aos arquivos
+#'
+#' @return tibble
+#' @export
+#'
 tjsp_ler_cpopg_par <- function(arquivos = NULL, diretorio = "."){
 
   if(is.null(arquivos)){
 
     arquivos <- list.files(diretorio, full.names = T, pattern = "html$")
+
   }
 
 
@@ -15,7 +24,9 @@ purrr::map_dfr(arquivos, purrr::possibly(~{
 
 
 consulta <- stringr::str_extract(.x, "(?<=consulta_).+?(?=_)")
+
 parametro <- stringr::str_extract(.x, "(?<=parametro_).+?(?=_)")
+
 distribuidor <- stringr::str_extract(.x, "(?<=distribuidor_).+?(?=_)")
 
 x <- .x |>
@@ -26,21 +37,39 @@ processo<- xml2::xml_find_all(x,"//a[@class='linkProcesso']") |>
   stringr::str_remove_all("\\s.+")
 
 
-coluna<- xml2::xml_find_all(x,"//div[@class='espacamentoLinhas']/span") |>
+tipo_participacao <- xml2::xml_find_all(x,"//li//div[@class='nuProcesso col-md-3']/following-sibling::div[1]") |>
+  purrr::map(~xml2::xml_child(.x, "/label[@class='unj-label tipoDeParticipacao']") |>
+                  xml2::xml_text(trim = TRUE) |>
+                  stringr::str_remove_all("\\:.*")) |>
+      unlist()
+
+
+
+nome_parte <- xml2::xml_find_all(x,"//li//div[@class='nuProcesso col-md-3']/following-sibling::div[1]") |>
+  purrr::map(~xml2::xml_child(.x,"/div[@class='unj-base-alt nomeParte']") |>
+  xml2::xml_text(trim=T) |>
+  stringr::str_remove_all("\\:.*")) |>
+  unlist()
+
+recebimento <- xml2::xml_find_all(x,"//div/label[@class='unj-label labelRecebidoEm']/following-sibling::div") |>
   xml2::xml_text(trim=T) |>
   stringr::str_remove_all("\\:.*")
 
-valor<- xml2::xml_find_all(x,"//div[@class='espacamentoLinhas']") |>
-  xml2::xml_text(trim=TRUE) |>
-  stringr::str_extract("(?<=:\\s{1,5}).+") |>
-  stringr::str_squish()
+ data_distribuicao <- recebimento |>
+                     stringr::str_extract("\\S+") |>
+                     lubridate::dmy()
 
-tibble::tibble(processo,consulta, parametro, distribuidor, coluna,valor) |>
-  tidyr::pivot_wider(names_from=coluna, values_from = valor) %>%
-  janitor::clean_names() %>%
-  tidyr::separate(recebido_em,c("data_entrada","unidade"), sep = " - ") %>%
-  dplyr::mutate(data_entrada= lubridate::dmy(data_entrada)) %>%
-  dplyr::select(processo,data_entrada, unidade, dplyr::everything())
+ local_distribuicao <- recebimento |>
+                      stringr::str_extract("(?<=- ).+")
+
+
+
+tibble::tibble(processo,consulta, parametro, distribuidor,
+               tipo_participacao,
+               nome_parte,
+               data_distribuicao,
+               local_distribuicao)
+
 
 }, NULL))
 }
