@@ -3,7 +3,7 @@
 #' @param consulta Valor da consulta
 #' @param parametro Uma dessas: "NUMOAB", "NMPARTE", "DOCPARTE"
 #' @param distribuidor Informar código do distribuidor.
-#'      Você pode obtê-los com `tjsp_distribuidor()`
+#'      Você pode obtê-los com `tjsp_varas()`
 #' @param diretorio Informar diretorio onde armazenar os htmls
 #' @return htmls
 #' @export
@@ -15,7 +15,7 @@
 #' }
 tjsp_baixar_cpopg_par <- function(consulta = NULL,
                                   parametro = NULL,
-                                  distribuidor = "",
+                                  distribuidor = "-1",
                                   diretorio = ".") {
 
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
@@ -25,12 +25,12 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
   url2<- "https://esaj.tjsp.jus.br/cpopg/trocarPagina.do?"
 
 
-  if(parametro == "NUMOAB"){
+  if(parametro == "NUMOAB" | paramentro == "DOCPARTE"){
 
     consulta <- stringr::str_remove_all(consulta, "\\D")
   }
 
-  pb <- progress::progress_bar$new(total = max_pag)
+  pb <- progress::progress_bar$new(total = length(consulta))
 
 
   purrr::pmap(list(x = consulta, y = parametro, z = distribuidor), purrr::possibly(function(x, y, z){
