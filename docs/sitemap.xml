@@ -280,6 +280,9 @@
     <loc>/reference/tjsp_baixar_inicial.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_baixar_partes_docs.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_baixar_sentenca_cjpg.html</loc>
   </url>
   <url>
@@ -365,6 +368,9 @@
   </url>
   <url>
     <loc>/reference/tjsp_parsear_distribuicao.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_partes_credenciais.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_quantidade.html</loc>

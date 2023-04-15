@@ -25,7 +25,7 @@ tjsp_baixar_cpopg_par <- function(consulta = NULL,
   url2<- "https://esaj.tjsp.jus.br/cpopg/trocarPagina.do?"
 
 
-  if(parametro == "NUMOAB" | paramentro == "DOCPARTE"){
+  if(parametro == "NUMOAB" | parametro == "DOCPARTE"){
 
     consulta <- stringr::str_remove_all(consulta, "\\W")
   }
