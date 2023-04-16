@@ -28,9 +28,10 @@ tjsp_ler_dispositivo <- function(arquivos = NULL,
       ) |>
       rvest::html_text() |>
       stringr::str_trim() |>
-      tibble::tibble(
-        data = stringr::str_extract(., "\\d.+"),
-        dispositivo = stringr::str_extract(., "(?<=Julgado)\\X+")) |>
+        (function(.) ## Artifício para fazer o pipe nativo funcionar.
+          tibble::tibble(
+            data = stringr::str_extract(., "\\d.+"),
+            dispositivo = stringr::str_extract(., "(?<=Julgado)\\X+")))() |> |>
       dplyr::mutate(dispositivo = stringr::str_squish(dispositivo)) |>
       dplyr::select(data, dispositivo) |>
       dplyr::mutate(processo = !!processo, .before = 1) |>
