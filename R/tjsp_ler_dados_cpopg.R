@@ -15,15 +15,20 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
       full.names = TRUE
     )
   }
-  processos <- stringr::str_extract(arquivos, "\\d{20}")
 
-  pb <- progress::progress_bar$new(total = length(processos))
+  pb <- progress::progress_bar$new(total = length(arquivos))
 
-  dados <- purrr::map2_dfr(arquivos, processos, purrr::possibly(~ {
+  dados <- purrr::map_dfr(arquivos, purrr::possibly(~ {
 
     pb <- pb$tick()
 
     resposta <- .x |>  xml2::read_html()
+
+
+    processo <- resposta |>
+              xml2::xml_find_first("//span[@id='numeroProcesso']") |>
+              xml2::xml_text() |>
+              stringr::str_remove_all("\\D+")
 
     digital <- resposta |>
       xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
@@ -33,31 +38,32 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
       xml2::xml_text()
 
     codigo <- resposta |>
-      xml2::xml_find_all("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") %>%
+      xml2::xml_find_all("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
       xml2::xml_text() |>
       stringr::str_extract("(?<=processo.codigo=)\\w+")
 
     if (length(codigo) > 1) {
-      codigo <- duplicated(codigo) %>%
-        which() %>%
-        codigo[.] %>%
-        unique() %>%
+      codigo <- duplicated(codigo) |>
+        which() |>
+        (function(.)
+        codigo[.])()  |>
+        unique() |>
         stringr::str_c(collapse = "\n")
     }
 
 
-    variavel <- resposta %>%
-      xml2::xml_find_all("//div//span[@class='unj-label']") %>%
-      xml2::xml_text() %>%
+    variavel <- resposta |>
+      xml2::xml_find_all("//div//span[@class='unj-label']") |>
+      xml2::xml_text() |>
       stringr::str_squish()
 
-    valor <- resposta %>%
-      xml2::xml_find_all("//div[span[@class='unj-label']]/div") %>%
-      xml2::xml_text() %>%
+    valor <- resposta |>
+      xml2::xml_find_all("//div[span[@class='unj-label']]/div") |>
+      xml2::xml_text() |>
       stringr::str_squish()
 
     tibble::tibble(
-      processo = .y, codigo_processo = codigo, digital, situacao, variavel, valor
+      processo, codigo_processo = codigo, digital, situacao, variavel, valor
     )
   }, NULL))
 
@@ -70,12 +76,12 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
 
   if (wide == TRUE) {
 
-    dados <- dados %>%
-      dplyr::group_by_at(dplyr::vars(-valor)) %>%
-      dplyr::mutate(row_id = 1:dplyr::n()) %>%
-      dplyr::ungroup() %>%
-      tidyr::spread(key = variavel, value = valor) %>%
-      dplyr::select(-row_id) %>%
+    dados <- dados |>
+      dplyr::group_by_at(dplyr::vars(-valor)) |>
+      dplyr::mutate(row_id = 1:dplyr::n()) |>
+      dplyr::ungroup() |>
+      tidyr::spread(key = variavel, value = valor) |>
+      dplyr::select(-row_id) |>
       janitor::clean_names()
   }
 
