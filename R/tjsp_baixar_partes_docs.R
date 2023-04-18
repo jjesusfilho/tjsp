@@ -50,8 +50,13 @@ tjsp_baixar_partes_docs <- function(cd_processo,
 
   cd_processo <- stringr::str_extract(cd_processo,"\\w+")
 
+  pb <- progress::progress_bar$new(total = length(cd_processo))
+
   purrr::walk(cd_processo, purrr::possibly(~{
 
+
+  pb$tick()
+  
     url <- paste0("https://esaj.tjsp.jus.br/petpg/api/processos/", .x,"/partes?instancia=", instancia,"&cd_perfil=",cd_perfil,"&cd_usuario=",cd_usuario,"&cd_usuario_solicitante=",usuario_solicitante,"&documento_usuario=", document_usuario)
 
     arquivo <- file.path(diretorio, paste0("tjsp_cd_processo_", .x, "_doc_partes", ".json"))
