@@ -27,9 +27,17 @@ tjsp_ler_movimentacao <- function(arquivos = NULL,diretorio = ".") {
 
     pb$tick()
 
-    processo <- stringr::str_extract(.x, "\\d{20}")
 
-    texto <- xml2::read_html(.x) %>%
+
+    resposta <- xml2::read_html(.x)
+
+
+    processo <- resposta |>
+      xml2::xml_find_first("//span[@id='numeroProcesso']") |>
+      xml2::xml_text() |>
+      stringr::str_remove_all("\\D+")
+
+    texto <- resposta |>
       xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
 
 

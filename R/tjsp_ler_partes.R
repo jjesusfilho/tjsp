@@ -19,8 +19,6 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
     )
   }
 
-  processos <-
-    stringr::str_extract(arquivos, "\\d{20}")
 
   pb <- progress::progress_bar$new(total= length(arquivos))
 
@@ -29,6 +27,11 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
     lista <- purrr::map2_dfr(arquivos,processos,purrr::possibly(~{
       pb$tick()
       x <- xml2::read_html(.x)
+
+      processo <- x |>
+        xml2::xml_find_first("//span[@id='numeroProcesso']") |>
+        xml2::xml_text() |>
+        stringr::str_remove_all("\\D+")
 
       if (
       xml2::xml_find_first(x,"boolean(//table[@id='tableTodasPartes'])")
@@ -40,6 +43,7 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
         setNames(c("tipo_parte","parte")) %>%
         tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}", extra = "merge") %>%
         tibble::add_column(processo = .y, .before = 1)
+
       } else {
 
         x %>%
