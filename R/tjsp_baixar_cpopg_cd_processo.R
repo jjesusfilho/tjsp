@@ -19,7 +19,7 @@ tjsp_baixar_cpopg_cd_processo <- function(cd_processo, diretorio = "."){
     pb$tick()
     arquivo <- file.path(diretorio, paste0("cpopg_cd_processo_",.x, ".html"))
 
-    httr::GET(paste0("https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=",.x),
+    httr::GET(paste0("https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=",.x,"&gateway=true"),
               httr::write_disk(arquivo, overwrite = T))
 
   }, NULL))
