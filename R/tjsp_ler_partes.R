@@ -24,7 +24,7 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
 
 
 
-    lista <- purrr::map2_dfr(arquivos,processos,purrr::possibly(~{
+    lista <- purrr::map_dfr(arquivos,purrr::possibly(~{
       pb$tick()
       x <- xml2::read_html(.x)
 
@@ -51,7 +51,7 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
           rvest::html_table() %>%
           setNames(c("tipo_parte","parte")) %>%
           tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}", extra = "merge") %>%
-          tibble::add_column(processo = .y, .before = 1)
+          tibble::add_column(processo = processo, .before = 1)
 
       }
 
