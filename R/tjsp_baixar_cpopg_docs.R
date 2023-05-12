@@ -6,14 +6,13 @@
 #' @return pdfs
 #' @export
 #'
-tjsp_baixar_cpopg_docs <- function(df,
-                                   diretorio = "."){
+tjsp_baixar_cpopg_docs <- function(df,diretorio = "."){
 
 
 
   lista <- df |>
-    dplyr::mutate(p = stringr::str_remove_all(processo, "\\D+") %>%
-                    stringr::str_pad(width = 20, "left", "0") %>%
+    dplyr::mutate(p = stringr::str_remove_all(processo, "\\D+") |>
+                    stringr::str_pad(width = 20, "left", "0") |>
                     pontuar_cnj()) |>
     dplyr::group_split(processo)
 
@@ -32,9 +31,9 @@ tjsp_baixar_cpopg_docs <- function(df,
 
     p <- unique(.x$p)
 
-    unificado <- p %>% stringr::str_extract(".{15}")
+    unificado <- p |> stringr::str_extract(".{15}")
 
-    foro <- p %>% stringr::str_extract("\\d{4}$")
+    foro <- p |> stringr::str_extract("\\d{4}$")
 
     query1 <- list(conversationId = "", dadosConsulta.localPesquisa.cdLocal = "-1",
                    cbPesquisa = "NUMPROC", dadosConsulta.tipoNuProcesso = "UNIFICADO",
@@ -48,10 +47,10 @@ tjsp_baixar_cpopg_docs <- function(df,
     conteudo1 <- httr::content(resposta1)
 
     if (xml2::xml_find_first(conteudo1, "boolean(//div[@id='listagemDeProcessos'])")) {
-      conteudo1 <- xml2::xml_find_all(conteudo1, "//a[@class='linkProcesso']") %>%
-        xml2::xml_attr("href") %>%
-        xml2::url_absolute("https://esaj.tjsp.jus.br") %>%
-        purrr::map(~httr::RETRY("GET", .x, httr::timeout(2)) %>%
+      conteudo1 <- xml2::xml_find_all(conteudo1, "//a[@class='linkProcesso']") |>
+        xml2::xml_attr("href") |>
+        xml2::url_absolute("https://esaj.tjsp.jus.br") |>
+        purrr::map(~httr::RETRY("GET", .x, httr::timeout(2)) |>
                      httr::content())
     }  else {
       conteudo1 <- list(conteudo1)
@@ -62,16 +61,39 @@ tjsp_baixar_cpopg_docs <- function(df,
     purrr::walk(conteudo1, purrr::possibly(~{
 
 
-      url1 <- .x %>%
-        xml2::xml_find_first("//a[@id='linkPasta']") %>%
-        xml2::xml_attr("href") %>%
-        paste0("https://esaj.tjsp.jus.br",.)
 
-        r2<-  httr::GET(url1) |> 
-            httr::content("text") |> 
-            httr::GET()
-      
-      
+      if (
+        .x |>
+        xml2::xml_find_first("boolean(//a[@class='linkConsultaSG btn btn-secondary btn-space'])")
+      ) {
+
+        cd_processo <- .x |>
+          xml2::xml_find_first("//a[@class='linkConsultaSG btn btn-secondary btn-space']") |>
+          xml2::xml_attr("href") |>
+          stringr::str_extract("(?<=cdProcessoSg=)\\w+")
+
+        r1 <- cd_processo |>
+          paste0("https://esaj.tjsp.jus.br/cposg/show.do?processo.codigo=", ... = _, "&gateway=true") |>
+          httr::GET()
+
+        url1 <- paste0("https://esaj.tjsp.jus.br/cposg/verificarAcessoPastaDigital.do?cdProcesso=", cd_processo,"&conversationId=&_=1599440192646")
+
+      } else {
+
+
+        url1 <- .x |>
+          xml2::xml_find_first("//a[@id='linkPasta']") |>
+          xml2::xml_attr("href")  |>
+          xml2::url_absolute("https://esaj.tjsp.jus.br")
+
+      }
+
+      r2 <-  url1 |>
+        httr::GET() |>
+        httr::content("text") |>
+        httr::GET()
+
+
 
 
       tjsp_baixar_docs(dd$processo, dd$id_doc, dd$pagina,  dd$url_doc, diretorio)
@@ -95,7 +117,7 @@ tjsp_baixar_cpopg_docs <- function(df,
 #'
 tjsp_baixar_docs <- function(processos  = NULL,
                              id_doc = NULL,
-			     pagina = NULL,
+                             pagina = NULL,
                              urls = NULL,
                              diretorio = NULL){
 
@@ -105,7 +127,7 @@ tjsp_baixar_docs <- function(processos  = NULL,
   id <- stringr::str_c(processos,
                        "_id_doc_",id_doc,
                        "_pagina_",pagina
-                       )
+  )
 
   pb <- progress::progress_bar$new(total = length(processos))
 
