@@ -26,7 +26,7 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
 
 
       processo <- resposta |>
-        xml2::xml_find_first("//a[contains(@href,'processo.numero')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
+        xml2::xml_find_first("//a[contains(@href,'processo.numero')]/@href|//form[contains(@action,'processo.numero')]/@action") |>
         xml2::xml_text() |>
         stringr::str_extract("(?<=processo.numero=)\\d.+") |>
         stringr::str_remove_all("\\D")
