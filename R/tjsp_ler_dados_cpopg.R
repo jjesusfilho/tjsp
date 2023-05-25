@@ -25,10 +25,12 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
     resposta <- .x |>  xml2::read_html()
 
 
-    processo <- resposta |>
-              xml2::xml_find_first("//span[@id='numeroProcesso']") |>
-              xml2::xml_text() |>
-              stringr::str_remove_all("\\D+")
+      processo <- resposta |>
+        xml2::xml_find_first("//a[contains(@href,'processo.numero')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
+        xml2::xml_text() |>
+        stringr::str_extract("(?<=processo.numero=)\\d.+") |>
+        stringr::str_remove_all("\\D")
+
 
     digital <- resposta |>
       xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
@@ -38,7 +40,7 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
       xml2::xml_text()
 
     codigo <- resposta |>
-      xml2::xml_find_all("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
+      xml2::xml_find_first("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
       xml2::xml_text() |>
       stringr::str_extract("(?<=processo.codigo=)\\w+")
 

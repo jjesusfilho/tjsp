@@ -1,56 +1,28 @@
 Package: tjsp
 Version: 0.13.0
 Date: 2023-04-18
-Title: Coleta e organização de dados do Tribunal de Justiça de São Paulo
+Title: Coleta e organização de dados do Tribunal de Justiça de São
+        Paulo
 Description: Funções para baixar metadados das decisõeses judiciais, baixar as
     decisões mesmas de primeira e de segunda instância do TJSP e organizar esses
     dados.
 Authors@R: person("José", "de Jesus Filho", email = "jose@consudata.com.br", role = c("aut", "cre"))
-Maintainer: The package maintainer <jose@consudata.com.br>
+Maintainer: José de Jesus Filho <jose@consudata.com.br>
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1.0)
-ByteCompile: true 
-Imports:
-    xml2,
-    httr,
-    stringr,
-    purrr,
-    dplyr,
-    tibble,
-    progress,
-    magrittr,
-    rvest,
-    lubridate,
-    rlang (>= 0.1.2),
-    abjutils,
-    tidyr (>= 1.0.0),
-    stats,
-    pdftools,
-    listenv,
-    janitor,
-    getPass,
-    vctrs,
-    re2
+ByteCompile: true
+Imports: xml2, httr, stringr, purrr, dplyr, tibble, progress, magrittr,
+        rvest, lubridate, rlang (>= 0.1.2), abjutils, tidyr (>= 1.0.0),
+        stats, pdftools, listenv, janitor, getPass, vctrs, re2
 RoxygenNote: 7.2.3
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues
-Suggests: 
-    roxygen2,
-    knitr,
-    rmarkdown,
-    testthat (>= 2.1.0),
-    caret,
-    dbx,
-    rsample,
-    ggplot2,
-    stringdist,
-    future,
-    furrr,
-    zoo,
-    usethis,
-    jsonlite,
-    stringi,
-    qpdf
-VignetteBuilder: knitr 
+Suggests: roxygen2, knitr, rmarkdown, testthat (>= 2.1.0), caret, dbx,
+        rsample, ggplot2, stringdist, future, furrr, zoo, usethis,
+        jsonlite, stringi, qpdf
+VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
+Author: José de Jesus Filho [aut, cre]
