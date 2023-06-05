@@ -26,8 +26,13 @@ tjsp_ler_tabela_incidentes <- function(arquivos = NULL,diretorio = ".") {
     doc <- .x |>
            xml2::read_html()
     
-   processo <- stringr::str_extract(.x, "\\d{20}")
-
+  processo <- doc |>
+      xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |> 
+      xml2::xml_text() |> 
+      stringr::str_squish() |> 
+      stringr::str_remove_all("[^\\d+\\s]") |> 
+      stringr::str_trim()
+    
   data_recebimento <- doc |>
       xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Incidentes')]/../following-sibling::table[1]//td[@width=140]") |>
       xml2::xml_text(trim = T) |>
