@@ -23,21 +23,24 @@ tjsp_ler_tabela_incidentes <- function(arquivos = NULL,diretorio = ".") {
 
     pb$tick()
 
-    processo <- stringr::str_extract(.x, "\\d{20}")
+    doc <- .x |>
+           xml2::read_html()
+    
+   processo <- stringr::str_extract(.x, "\\d{20}")
 
-  data_recebimento <- xml2::read_html(.x) |>
+  data_recebimento <- doc |>
       xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Incidentes')]/../following-sibling::table[1]//td[@width=140]") |>
       xml2::xml_text(trim = T) |>
       lubridate::dmy()
 
 
-  classe <-  xml2::read_html(.x) |>
+  classe <-  doc |>
       xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Incidentes')]/../following-sibling::table[1]//a") |>
       xml2::xml_text() |>
       stringr::str_squish()
 
 
-  url <-  xml2::read_html(.x) |>
+  url <-  doc |>
     xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Incidentes')]/../following-sibling::table[1]//a") |>
     xml2::xml_attr("href") |>
     xml2::url_absolute("https://esaj.tjsp.jus.br")
