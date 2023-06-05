@@ -1,13 +1,13 @@
-#' Lê os metadados de processos de primeira instância.
+#' Extrai a tabela de incidentes
 #'
-#' @param arquivos Vetor de arquivos
-#' @param diretorio Informar apenas se não informou arquivos
-#' @param wide Padrão para TRUE. Colocar FALSE se quiser manter em formato longo.
+#' @param arquivos se não informados, informar diretório
+#' @param diretorio objeto ou diretorio  onde se encontram os htmls
 #'
-#' @return Tibble com variáveis em formato longo ou wide ou NULL se não houver dados.
+#' @return Tibble com urls dos incidentes
 #' @export
+
 #'
-tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) {
+tjsp_ler_tabela_incidentes <- function(arquivos = NULL,diretorio = ".") {
   
   if (is.null(arquivos)){
     arquivos <- list.files(
@@ -18,77 +18,47 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
   
   pb <- progress::progress_bar$new(total = length(arquivos))
   
-  dados <- purrr::map_dfr(arquivos, purrr::possibly(~ {
-    
-    pb <- pb$tick()
-    
-    resposta <- .x |>  xml2::read_html()
+  purrr::map_dfr(arquivos, purrr::possibly(~{
     
     
-    processo <- resposta |>
+    pb$tick()
+    
+    doc <- .x |>
+      xml2::read_html()
+    
+    processo <- doc |>
       xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |> 
       xml2::xml_text() |> 
       stringr::str_squish() |> 
       stringr::str_remove_all("[^\\d+\\s]") |> 
       stringr::str_trim()
     
-    
-    digital <- resposta |>
-      xml2::xml_find_first("boolean(//*[@id='linkPasta'] |//*[@id='linkConsultaSG'])")
-    
-    situacao <- resposta |>
-      xml2::xml_find_first("//span[@id='labelSituacaoProcesso']") |>
-      xml2::xml_text()
-    
-    codigo <- resposta |>
+    codigo_processo <- doc |>
       xml2::xml_find_first("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
       xml2::xml_text() |>
       stringr::str_extract("(?<=processo.codigo=)\\w+")
     
-    if (length(codigo) > 1) {
-      codigo <- duplicated(codigo) |>
-        which() |>
-        (function(.)
-          codigo[.])()  |>
-        unique() |>
-        stringr::str_c(collapse = "\n")
-    }
+    data_recebimento <- doc |>
+      xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Incidentes')]/../following-sibling::table[1]//td[@width=140]") |>
+      xml2::xml_text(trim = T) |>
+      lubridate::dmy()
     
     
-    variavel <- resposta |>
-      xml2::xml_find_all("//div//span[@class='unj-label']") |>
+    classe <-  doc |>
+      xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Incidentes')]/../following-sibling::table[1]//a") |>
       xml2::xml_text() |>
       stringr::str_squish()
     
-    valor <- resposta |>
-      xml2::xml_find_all("//div[span[@class='unj-label']]/div") |>
-      xml2::xml_text() |>
-      stringr::str_squish()
     
-    tibble::tibble(
-      processo, codigo_processo = codigo, digital, situacao, variavel, valor
-    )
-  }, NULL))
-  
-  
-  if (nrow(dados) == 0){
+    url <-  doc |>
+      xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Incidentes')]/../following-sibling::table[1]//a") |>
+      xml2::xml_attr("href") |>
+      xml2::url_absolute("https://esaj.tjsp.jus.br")
     
-    return(NULL)
+    tibble::tibble(processo, codigo_processo,data_recebimento, classe, url) |>
+      dplyr::mutate(codigo_incidente = stringr::str_extract(url, "(?<=codigo=)[^&]+"), .after = codigo_processo) |>
+      dplyr::mutate(codigo_local = stringr::str_extract(url, "(?i)(?<=cdLocal=)\\d+"), .after = codigo_incidente)
     
-  }
-  
-  if (wide == TRUE) {
     
-    dados <- dados |>
-      dplyr::group_by_at(dplyr::vars(-valor)) |>
-      dplyr::mutate(row_id = 1:dplyr::n()) |>
-      dplyr::ungroup() |>
-      tidyr::spread(key = variavel, value = valor) |>
-      dplyr::select(-row_id) |>
-      janitor::clean_names()
-  }
-  
-  
-  return(dados)
-  
+  }, otherwise = NULL))
 }
