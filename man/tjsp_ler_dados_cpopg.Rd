@@ -2,20 +2,20 @@
 % Please edit documentation in R/tjsp_ler_dados_cpopg.R
 \name{tjsp_ler_dados_cpopg}
 \alias{tjsp_ler_dados_cpopg}
-\title{Lê os metadados de processos de primeira instância.}
+\title{Extrai a tabela de incidentes}
 \usage{
 tjsp_ler_dados_cpopg(arquivos = NULL, diretorio = ".", wide = TRUE)
 }
 \arguments{
-\item{arquivos}{Vetor de arquivos}
+\item{arquivos}{se não informados, informar diretório}
 
-\item{diretorio}{Informar apenas se não informou arquivos}
+\item{diretorio}{objeto ou diretorio  onde se encontram os htmls}
 
-\item{wide}{Padrão para TRUE. Colocar FALSE se quiser manter em formato longo.}
+\item{wide}{Colocar em formato wide? Padrão TRUE}
 }
 \value{
-Tibble com variáveis em formato longo ou wide ou NULL se não houver dados.
+tibble
 }
 \description{
-Lê os metadados de processos de primeira instância.
+Extrai a tabela de incidentes
 }
