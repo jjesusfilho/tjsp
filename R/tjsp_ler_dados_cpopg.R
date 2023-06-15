@@ -38,8 +38,8 @@ tjsp_ler_dados_cpopg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
       xml2::xml_find_first("//span[@id='labelSituacaoProcesso']") |>
       xml2::xml_text()
 
-    codigo <- resposta |>
-      xml2::xml_find_first("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
+   codigo <- resposta |>
+      xml2::xml_find_first("//script[contains(text(),'processo.codigo')]") |> 
       xml2::xml_text() |>
       stringr::str_extract("(?<=processo.codigo=)\\w+")
 
