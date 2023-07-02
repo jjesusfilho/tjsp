@@ -42,7 +42,7 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
         rvest::html_table() %>%
         setNames(c("tipo_parte","parte")) %>%
         tidyr::separate(parte,c("parte","representante"),sep = "(?<=\\S)\\s{10,}", extra = "merge") %>%
-        tibble::add_column(processo = .y, .before = 1)
+        tibble::add_column(processo = processo, .before = 1)
 
       } else {
 
