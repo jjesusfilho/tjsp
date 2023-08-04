@@ -31,6 +31,14 @@ tjsp_ler_documentos <- function (arquivos = NULL, diretorio = ".", remover_assin
     suppressMessages({
       texto <- pdftools::pdf_text(.x)
     })
+
+
+    data <- texto |>
+      purrr::pluck(1) |>
+      stringr::str_squish() |>
+      stringr::str_extract("(?<=liberado nos autos em )\\S+") |>
+      lubridate::dmy()
+
     if (remover_assinatura) {
       texto <- remover_assinatura_cjpg(texto)
     }
@@ -43,6 +51,7 @@ tjsp_ler_documentos <- function (arquivos = NULL, diretorio = ".", remover_assin
       texto <- stringr::str_remove(texto, 'TRIBUNAL DE JUSTI\u00C7A DO ESTADO DE S\u00C3O PAULO\\X+?(?=\\s{100})')
     }
 
-    tibble::tibble(processo, id_doc, doc = texto)
+
+    tibble::tibble(processo, id_doc, doc = texto, data_documento = data)
   }, NULL))
 }
