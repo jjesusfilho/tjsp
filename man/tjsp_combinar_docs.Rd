@@ -4,7 +4,12 @@
 \alias{tjsp_combinar_docs}
 \title{Combina docs baixados com tjsp_baixar_docs}
 \usage{
-tjsp_combinar_docs(arquivos = NULL, dir_origem = ".", dir_destino = NULL)
+tjsp_combinar_docs(
+  arquivos = NULL,
+  dir_origem = ".",
+  dir_destino = NULL,
+  nivel = c("processo", "doc")
+)
 }
 \arguments{
 \item{arquivos}{Vetor de arquivos}
@@ -13,6 +18,8 @@ tjsp_combinar_docs(arquivos = NULL, dir_origem = ".", dir_destino = NULL)
 informar arquivos}
 
 \item{dir_destino}{Diretório destino}
+
+\item{nivel}{Juntar processo inteiro ou por documento?}
 }
 \value{
 único pdf
