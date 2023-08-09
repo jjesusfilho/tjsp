@@ -2,12 +2,9 @@
 % Please edit documentation in R/tjsp_ler_cjpg.R
 \name{tjsp_ler_cjpg}
 \alias{tjsp_ler_cjpg}
-\alias{ler_cjpg}
 \title{Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.}
 \usage{
 tjsp_ler_cjpg(arquivos = NULL, diretorio = ".")
-
-ler_cjpg(arquivos = NULL, diretorio = ".")
 }
 \arguments{
 \item{arquivos}{Se NULL, informar diretorio}
