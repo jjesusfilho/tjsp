@@ -2,18 +2,17 @@
 % Please edit documentation in R/tjsp_ler_dados_cposg.R
 \name{tjsp_ler_dados_cposg}
 \alias{tjsp_ler_dados_cposg}
-\alias{ler_dados_cposg}
 \title{Lê metadados dos processos de segunda instância}
 \usage{
-tjsp_ler_dados_cposg(arquivos = NULL, diretorio = ".")
-
-ler_dados_cposg(arquivos = NULL, diretorio = ".")
+tjsp_ler_dados_cposg(arquivos = NULL, diretorio = ".", wide = TRUE)
 }
 \arguments{
 \item{arquivos}{Vetor de arquivos. Se NULL, informar diretório.}
 
 \item{diretorio}{Diretório onde se encontram os htmls. Informar
 apenas se os arquivos não forem informados.}
+
+\item{wide}{TRUE para colocar em formato largo.}
 }
 \value{
 tabela com dados do processo
@@ -23,6 +22,6 @@ Lê metadados dos processos de segunda instância
 }
 \examples{
 \dontrun{
-dados <- ler_dados_cposg()
+dados <- tjsp_ler_dados_cposg()
 }
 }

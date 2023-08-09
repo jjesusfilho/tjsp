@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -62,10 +62,6 @@
           <p><code><a href="assuntos.html">assuntos</a></code> </p>
         </td>
         <td><p>assuntos</p></td>
-      </tr><tr><td>
-          <p><code><a href="baixar_cposg.html">baixar_cposg()</a></code> <code><a href="baixar_cposg.html">tjsp_baixar_cposg()</a></code> </p>
-        </td>
-        <td><p>Baixar processos de segunda instância do tjsp</p></td>
       </tr><tr><td>
           <p><code><a href="baixar_municipios.html">baixar_municipios()</a></code> </p>
         </td>
@@ -238,7 +234,7 @@
         </td>
         <td><p>Qualquer data</p></td>
       </tr><tr><td>
-          <p><code><a href="tjsp_baixar_cpopg.html">tjsp_baixar_cpopg()</a></code> <code><a href="tjsp_baixar_cpopg.html">baixar_cpopg()</a></code> </p>
+          <p><code><a href="tjsp_baixar_cpopg.html">tjsp_baixar_cpopg()</a></code> </p>
         </td>
         <td><p>Baixar consulta processual de primeiro grau</p></td>
       </tr><tr><td>
@@ -253,6 +249,10 @@
           <p><code><a href="tjsp_baixar_cpopg_par.html">tjsp_baixar_cpopg_par()</a></code> </p>
         </td>
         <td><p>Busca os números de processos no primeiro grau no parametro especificado</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_baixar_cposg.html">tjsp_baixar_cposg()</a></code> </p>
+        </td>
+        <td><p>Baixar processos de segunda instância do tjsp</p></td>
       </tr><tr><td>
           <p><code><a href="tjsp_baixar_docs.html">tjsp_baixar_docs()</a></code> </p>
         </td>
@@ -269,6 +269,18 @@
           <p><code><a href="tjsp_baixar_sentenca_cjpg.html">tjsp_baixar_sentenca_cjpg()</a></code> </p>
         </td>
         <td><p>Baixar julgados do banco de sentenças em pdf em pdf</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_baixar_tabela_cd_processo.html">tjsp_baixar_tabela_cd_processo()</a></code> </p>
+        </td>
+        <td><p>Baixa tabela de documentos com base no cd_processo</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_baixar_tabela_cpopg_docs.html">tjsp_baixar_tabela_cpopg_docs()</a></code> <code><a href="tjsp_baixar_tabela_cpopg_docs.html">tjsp_cpopg_baixar_tabela_docs()</a></code> </p>
+        </td>
+        <td><p>Baixa tabela de documentos dos processos do TJSP</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_baixar_tabela_cposg_docs.html">tjsp_baixar_tabela_cposg_docs()</a></code> </p>
+        </td>
+        <td><p>Baixa tabelas dos documentos do processo</p></td>
       </tr><tr><td>
           <p><code><a href="tjsp_classificar_recurso.html">tjsp_classificar_recurso()</a></code> <code><a href="tjsp_classificar_recurso.html">classificar_recurso2()</a></code> </p>
         </td>
@@ -289,14 +301,6 @@
           <p><code><a href="tjsp_corrigir_varas.html">tjsp_corrigir_varas()</a></code> </p>
         </td>
         <td><p>Corrigir nomes das varas</p></td>
-      </tr><tr><td>
-          <p><code><a href="tjsp_cpopg_baixar_tabela_docs.html">tjsp_cpopg_baixar_tabela_docs()</a></code> </p>
-        </td>
-        <td><p>Baixa tabela de documentos dos processos do TJSP</p></td>
-      </tr><tr><td>
-          <p><code><a href="tjsp_cposg_baixar_tabela_docs.html">tjsp_cposg_baixar_tabela_docs()</a></code> <code><a href="tjsp_cposg_baixar_tabela_docs.html">tjsp_baixar_tabela_docs()</a></code> </p>
-        </td>
-        <td><p>Baixa tabelas dos documentos do processo</p></td>
       </tr><tr><td>
           <p><code><a href="tjsp_ler_acordaos_cjsg.html">tjsp_ler_acordaos_cjsg()</a></code> </p>
         </td>
@@ -320,9 +324,9 @@
       </tr><tr><td>
           <p><code><a href="tjsp_ler_dados_cpopg.html">tjsp_ler_dados_cpopg()</a></code> </p>
         </td>
-        <td><p>Lê os metadados de processos de primeira instância.</p></td>
+        <td><p>Extrai a tabela de incidentes</p></td>
       </tr><tr><td>
-          <p><code><a href="tjsp_ler_dados_cposg.html">tjsp_ler_dados_cposg()</a></code> <code><a href="tjsp_ler_dados_cposg.html">ler_dados_cposg()</a></code> </p>
+          <p><code><a href="tjsp_ler_dados_cposg.html">tjsp_ler_dados_cposg()</a></code> </p>
         </td>
         <td><p>Lê metadados dos processos de segunda instância</p></td>
       </tr><tr><td>
@@ -334,15 +338,19 @@
         </td>
         <td><p>Ler dispositivo do cposg</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_ler_documentos.html">tjsp_ler_documentos()</a></code> </p>
+        </td>
+        <td><p>Lê documentos baixados combinados com tjsp_combinar_docs</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_ler_historico_classes.html">tjsp_ler_historico_classes()</a></code> </p>
         </td>
         <td><p>Extrai o histórico das classes processuais</p></td>
       </tr><tr><td>
-          <p><code><a href="tjsp_ler_movimentacao.html">tjsp_ler_movimentacao()</a></code> <code><a href="tjsp_ler_movimentacao.html">ler_movimentacao_cposg()</a></code> </p>
+          <p><code><a href="tjsp_ler_movimentacao.html">tjsp_ler_movimentacao()</a></code> </p>
         </td>
         <td><p>Extrai a movimentação processual de primeira e de segunda instância</p></td>
       </tr><tr><td>
-          <p><code><a href="tjsp_ler_partes.html">tjsp_ler_partes()</a></code> <code><a href="tjsp_ler_partes.html">ler_partes()</a></code> </p>
+          <p><code><a href="tjsp_ler_partes.html">tjsp_ler_partes()</a></code> </p>
         </td>
         <td><p>Ler Partes do cpopg ou cposg</p></td>
       </tr><tr><td>

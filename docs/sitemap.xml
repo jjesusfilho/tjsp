@@ -277,6 +277,9 @@
     <loc>/reference/tjsp_baixar_cpopg_par.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_baixar_cposg.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_baixar_docs.html</loc>
   </url>
   <url>
@@ -287,6 +290,15 @@
   </url>
   <url>
     <loc>/reference/tjsp_baixar_sentenca_cjpg.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_baixar_tabela_cd_processo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_baixar_tabela_cpopg_docs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_baixar_tabela_cposg_docs.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_baixar_tabela_docs.html</loc>
@@ -338,6 +350,9 @@
   </url>
   <url>
     <loc>/reference/tjsp_ler_dispositivo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_ler_documentos.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_ler_historico_classes.html</loc>

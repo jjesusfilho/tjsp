@@ -3,15 +3,16 @@
 #' @param arquivos Vetor de arquivos. Se NULL, informar diretório.
 #' @param diretorio Diretório onde se encontram os htmls. Informar
 #'     apenas se os arquivos não forem informados.
+#' @param wide TRUE para colocar em formato largo.
 #'
 #' @return tabela com dados do processo
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' dados <- ler_dados_cposg()
+#' dados <- tjsp_ler_dados_cposg()
 #' }
-tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
+tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) {
 
   if(is.null(arquivos)){
   arquivos <- list.files(
@@ -22,44 +23,41 @@ tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".") {
 
  pb <- progress::progress_bar$new(total = length(arquivos))
 
-  purrr::map_dfr(arquivos, purrr::possibly(~{
+  dados <- purrr::map_dfr(arquivos, purrr::possibly(~{
 
     pb$tick()
 
     processo <- stringr::str_extract(.x,"\\d{20}")
+    cd_processo <- stringr::str_extract(.x, "(?<=cd_processo_)\\w+")
 
     resposta <- xml2::read_html(.x)
 
-    digital <- resposta %>% xml2::xml_find_first("boolean(//*[@id='pbVisualizarAutos'] |//*[@id='linkConsultaSG'])")
+    digital <- resposta |> xml2::xml_find_first("boolean(//*[@id='pbVisualizarAutos'] |//*[@id='linkConsultaSG'])")
 
-    situacao <- resposta %>% xml2::xml_find_first("//span[@id='situacaoProcesso']") %>%
+    situacao <- resposta |> xml2::xml_find_first("//span[@id='situacaoProcesso']") |>
       xml2::xml_text()
 
-    nomes <- resposta %>%
-      xml2::xml_find_all("//span[@class='unj-label']") %>%
+    nomes <- resposta |>
+      xml2::xml_find_all("//span[@class='unj-label']") |>
       xml2::xml_text(trim=TRUE)
 
-
-    cdProcesso <- resposta %>%
-      xml2::xml_find_first("//*[@name='cdProcesso']") %>%
-      xml2::xml_attr("value")
-
-    valores <- resposta %>%
-      xml2::xml_find_all("//span[@class='unj-label']/following-sibling::div") %>%
+    valores <- resposta |>
+      xml2::xml_find_all("//span[@class='unj-label']/following-sibling::div") |>
       xml2::xml_text()
 
-    tibble::tibble(processo = processo, digital, situacao, cd_processo = cdProcesso, variavel = nomes,
+    tibble::tibble(processo = processo, digital, situacao, cd_processo, variavel = nomes,
                    valor = valores)
 
-  }, otherwise = NULL)) %>%
-    dplyr::group_by_at(dplyr::vars(-valor)) %>%
-    dplyr::mutate(row_id = 1:dplyr::n()) %>%
-    dplyr::ungroup() %>%
-    tidyr::spread(key = variavel, value = valor) %>%
-    dplyr::select(-row_id) %>%
-    janitor::clean_names()
-}
+  }, otherwise = NULL))
 
-#' @rdname tjsp_ler_dados_cposg
-#' @export
-ler_dados_cposg <- tjsp_ler_dados_cposg
+  if (wide){
+    dados <- dados |>
+    dplyr::group_by_at(dplyr::vars(-valor)) |>
+    dplyr::mutate(row_id = 1:dplyr::n()) |>
+    dplyr::ungroup() |>
+    tidyr::spread(key = variavel, value = valor) |>
+    dplyr::select(-row_id) |>
+    janitor::clean_names()
+  }
+    return(dados)
+}

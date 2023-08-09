@@ -32,31 +32,25 @@ tjsp_ler_movimentacao <- function(arquivos = NULL,diretorio = ".") {
     resposta <- xml2::read_html(.x)
 
 
-     processo <- resposta |>
-      xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |> 
-      xml2::xml_text() |> 
-      stringr::str_squish() |> 
-      stringr::str_remove_all("[^\\d+\\s]") |> 
-      stringr::str_trim()
-    
+    processo <- .x |>
+      stringr::str_extract("\\d{20}")
+
+    cd_processo <- .x |>
+      stringr::str_extract("(?<=cd_processo_)\\w+")
+
 
     texto <- resposta |>
       xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
 
 
-    data <- xml2::xml_find_all(texto, ".//td[@width='120']") %>%
-      xml2::xml_text(trim = TRUE) %>%
+    data <- xml2::xml_find_all(texto, ".//td[@width='120']") |>
+      xml2::xml_text(trim = TRUE) |>
       lubridate::dmy()
 
-    mov <- xml2::xml_find_all(texto, ".//td[@style='vertical-align: top; padding-bottom: 5px']") %>%
+    mov <- xml2::xml_find_all(texto, ".//td[@style='vertical-align: top; padding-bottom: 5px']") |>
       xml2::xml_text(trim = TRUE)
 
 
-    tibble::tibble(processo = processo, data = data, movimentacao = mov)
+    tibble::tibble(processo = processo, cd_processo = cd_processo, data = data, movimentacao = mov)
   }, otherwise = NULL))
 }
-
-
-#' @rdname tjsp_ler_movimentacao
-#' @export
-ler_movimentacao_cposg <- ler_movimentacao_cpopg <- tjsp_ler_movimentacao

@@ -34,58 +34,51 @@ tjsp_ler_cjpg <- function(arquivos = NULL, diretorio = ".")
 
     x <- .x |>  xml2::read_html(encoding = "UTF-8")
 
+    fundo_cinza <- x |>
+      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']")
 
-    processo <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    processo <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/a/span[@class='fonteNegrito']") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
-    cd_doc <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    cd_doc <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/a[@title='Visualizar Inteiro Teor']") |>
                    xml2::xml_attr("name")) |>
       unlist()
 
-    assunto <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    assunto <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Assunto:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
-    classe <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    classe <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Classe:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
-    comarca <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    comarca <-fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Comarca:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
-    foro <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    foro <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Foro:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
-    vara <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    vara <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Vara:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
-    magistrado <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    magistrado <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Magistrado:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
 
-    disponibilizacao <- x %>%
-      xml2::xml_find_all(xpath = "//tr[@class='fundocinza1']") |>
+    disponibilizacao <-fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Data de Disponibiliza\u00E7\u00E3o:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
@@ -105,7 +98,3 @@ tjsp_ler_cjpg <- function(arquivos = NULL, diretorio = ".")
                   .after = hora_coleta)
 }
 
-
-#' @rdname tjsp_ler_cjpg
-#' @export
-ler_cjpg <- tjsp_ler_cjpg

@@ -92,7 +92,7 @@ será solicitado a apresentar suas credenciais (CPF e senha), a fim de
 ter acesso aos processos sem o uso de captcha.
 
 O comando a seguir irá baixar todos os processos no diretório atual, mas
-você pode indicar um diretóio de sua escollha.
+você pode indicar um diretório de sua escolha.
 
 ``` r
 tjsp_baixar_cposg(tabela$processo)
@@ -116,7 +116,7 @@ partes <- tjsp_ler_partes(diretorio = ".")
 Ao final passamos para a leitura do andamento dos processos.
 
 ``` r
-andamento <- tjsp_ler_movimentacao_cposg(diretorio = ".")
+andamento <- tjsp_ler_movimentacao(diretorio = ".")
 ```
 
 Eventualmente, você não está interessada em ler todo o andamento, mas
@@ -125,7 +125,7 @@ tarde calcular o tempo entre a entrada e a decisão. Há uma função para
 isso:
 
 ``` r
-entrada <- tjsp_ler_entrada_cposg(diretorio = ".")
+entrada <- tjsp_ler_entrada(diretorio = ".")
 ```
 
 Por fim, você pode ler o dispositivo da decisão:

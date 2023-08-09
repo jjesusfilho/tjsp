@@ -66,9 +66,9 @@ tabela <- tjsp_ler_cjsg(diretorio = "feminicidio")
 O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função `autenticar()`, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.
 
 
-O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretóio de sua escollha.
+O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretório de sua escolha.
 
-```{r, eval=FALSE}
+```r
 tjsp_baixar_cposg(tabela$processo)
 ```
 
@@ -76,31 +76,31 @@ tjsp_baixar_cposg(tabela$processo)
 
 A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:
 
-```{r, eval=FALSE}
+```r
 dados <- tjsp_ler_dados_cposg(diretorio = ".")
 ```
 
 Em seguida, lemos as informações acerca das partes dos processos:
 
-```{r, eval=FALSE}
+```r
 partes <- tjsp_ler_partes(diretorio = ".")
 ```
 
 Ao final passamos para a leitura do andamento dos processos. 
 
-```{r, eval=FALSE}
-andamento <- tjsp_ler_movimentacao_cposg(diretorio = ".")
+```r
+andamento <- tjsp_ler_movimentacao(diretorio = ".")
 ```
 
 Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:
 
-```{r, eval=FALSE}
-entrada <- tjsp_ler_entrada_cposg(diretorio = ".")
+```r
+entrada <- tjsp_ler_entrada(diretorio = ".")
 ```
 
 Por fim, você pode ler o dispositivo da decisão:
 
-```{r, eval=FALSE}
+```r
 decisao <- tjsp_ler_dispositivo(diretorio = ".")
 ```
 

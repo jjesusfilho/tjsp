@@ -2,12 +2,9 @@
 % Please edit documentation in R/tjsp_baixar_cpopg.R
 \name{tjsp_baixar_cpopg}
 \alias{tjsp_baixar_cpopg}
-\alias{baixar_cpopg}
 \title{Baixar consulta processual de primeiro grau}
 \usage{
 tjsp_baixar_cpopg(processos = NULL, sono = 1, diretorio = ".")
-
-baixar_cpopg(processos = NULL, sono = 1, diretorio = ".")
 }
 \arguments{
 \item{processos}{Número do processo (cnj)}

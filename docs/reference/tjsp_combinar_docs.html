@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -53,7 +53,12 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tjsp_combinar_docs</span><span class="op">(</span>arquivos <span class="op">=</span> <span class="cn">NULL</span>, dir_origem <span class="op">=</span> <span class="st">"."</span>, dir_destino <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tjsp_combinar_docs</span><span class="op">(</span></span>
+<span>  arquivos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dir_origem <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  dir_destino <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  nivel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"processo"</span>, <span class="st">"doc"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -69,6 +74,10 @@ informar arquivos</p></dd>
 
 <dt>dir_destino</dt>
 <dd><p>Diretório destino</p></dd>
+
+
+<dt>nivel</dt>
+<dd><p>Juntar processo inteiro ou por documento?</p></dd>
 
 </dl></div>
     <div id="value">

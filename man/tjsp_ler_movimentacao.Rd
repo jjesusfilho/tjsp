@@ -2,12 +2,9 @@
 % Please edit documentation in R/tjsp_ler_movimentacao.R
 \name{tjsp_ler_movimentacao}
 \alias{tjsp_ler_movimentacao}
-\alias{ler_movimentacao_cposg}
 \title{Extrai a movimentação processual de primeira e de segunda instância}
 \usage{
 tjsp_ler_movimentacao(arquivos = NULL, diretorio = ".")
-
-ler_movimentacao_cposg(arquivos = NULL, diretorio = ".")
 }
 \arguments{
 \item{arquivos}{se não informados, informar diretório}

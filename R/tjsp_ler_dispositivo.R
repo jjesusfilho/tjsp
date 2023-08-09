@@ -18,7 +18,11 @@ tjsp_ler_dispositivo <- function(arquivos = NULL,
 
     pb$tick()
 
-     processo <- stringr::str_extract(.x, "\\d{20}")
+    processo <- .x |>
+      stringr::str_extract("\\d{20}")
+
+    cd_processo <- .x |>
+      stringr::str_extract("(?<=cd_processo_)\\w+")
 
 
       .x |>
@@ -35,6 +39,7 @@ tjsp_ler_dispositivo <- function(arquivos = NULL,
       dplyr::mutate(dispositivo = stringr::str_squish(dispositivo)) |>
       dplyr::select(data, dispositivo) |>
       tibble::add_column(processo = processo, .before = 1) |>
+      tibble::add_column(cd_processo = cd_processo, .after = 1) |>
       dplyr::mutate(data = lubridate::dmy(data))
   }, NULL))
 }

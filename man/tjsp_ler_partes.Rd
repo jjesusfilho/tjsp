@@ -2,12 +2,9 @@
 % Please edit documentation in R/tjsp_ler_partes.R
 \name{tjsp_ler_partes}
 \alias{tjsp_ler_partes}
-\alias{ler_partes}
 \title{Ler Partes do cpopg ou cposg}
 \usage{
 tjsp_ler_partes(arquivos = NULL, diretorio = ".")
-
-ler_partes(arquivos = NULL, diretorio = ".")
 }
 \arguments{
 \item{arquivos}{Vetor de arquivos}

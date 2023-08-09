@@ -5,13 +5,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coleta e organização de dados do Tribunal de Justiça de São Paulo • tjsp</title>
+<title>Coleta e organização de dados do Tribunal de Justiça de São
+        Paulo • tjsp</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Coleta e organização de dados do Tribunal de Justiça de São Paulo">
+<script src="pkgdown.js"></script><meta property="og:title" content="Coleta e organização de dados do Tribunal de Justiça de São
+        Paulo">
 <meta property="og:description" content="Funções para baixar metadados das decisõeses judiciais, baixar as
     decisões mesmas de primeira e de segunda instância do TJSP e organizar esses
     dados.">
@@ -35,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.13.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -110,9 +112,9 @@
 <h3 id="baixando-informações-detalhadas-dos-processos">Baixando informações detalhadas dos processos<a class="anchor" aria-label="anchor" href="#baixando-informa%C3%A7%C3%B5es-detalhadas-dos-processos"></a>
 </h3>
 <p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/tjsp_autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
-<p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretóio de sua escollha.</p>
+<p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretório de sua escolha.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/baixar_cposg.html">tjsp_baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tjsp_baixar_cposg.html">tjsp_baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="lendo-os-processos-de-segunda-instância">Lendo os processos de segunda instância.<a class="anchor" aria-label="anchor" href="#lendo-os-processos-de-segunda-inst%C3%A2ncia"></a>
@@ -125,10 +127,10 @@
 <code class="sourceCode R"><span><span class="va">partes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_partes.html">tjsp_ler_partes</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Ao final passamos para a leitura do andamento dos processos.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu">tjsp_ler_movimentacao_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_movimentacao.html">tjsp_ler_movimentacao</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">tjsp_ler_entrada_cposg</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">tjsp_ler_entrada</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Por fim, você pode ler o dispositivo da decisão:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_dispositivo.html">tjsp_ler_dispositivo</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
