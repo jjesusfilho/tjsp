@@ -32,12 +32,12 @@ tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
 
     resposta <- xml2::read_html(.x)
 
-      
-    processo_pg <- resposta |> 
-         xml2::xml_find_all("//div[h2/text()='Números de 1ª Instância']/following-sibling::table[2]//td[1]") |> 
-         xml2::xml_text(trim = T) |> 
+
+    processo_pg <- resposta |>
+         xml2::xml_find_all("//div[h2/text()='N\u00FAmeros de 1\u00AA Inst\u00E2ncia']/following-sibling::table[2]//td[1]") |>
+         xml2::xml_text(trim = T) |>
          stringr::str_remove_all("\\D+")
-    
+
     digital <- resposta |> xml2::xml_find_first("boolean(//*[@id='pbVisualizarAutos'] |//*[@id='linkConsultaSG'])")
 
     situacao <- resposta |> xml2::xml_find_first("//span[@id='situacaoProcesso']") |>

@@ -19,10 +19,29 @@ Imports: xml2, httr, stringr, purrr, dplyr, tibble, progress, magrittr,
 RoxygenNote: 7.2.3
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues
-Suggests: roxygen2, knitr, rmarkdown, testthat (>= 2.1.0), caret, dbx,
-        rsample, ggplot2, stringdist, future, furrr, zoo, usethis,
-        jsonlite, stringi, qpdf
+Suggests: 
+    roxygen2,
+    knitr,
+    rmarkdown,
+    testthat (>= 2.1.0),
+    caret,
+    dbx,
+    rsample,
+    ggplot2,
+    stringdist,
+    future,
+    furrr,
+    zoo,
+    usethis,
+    jsonlite,
+    stringi,
+    qpdf,
+    JSON2XML (>= 0.0.1),
+    jqr,
+    glue
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
 Author: José de Jesus Filho [aut, cre]
+Remotes: 
+    johndharrison/JSON2XML
