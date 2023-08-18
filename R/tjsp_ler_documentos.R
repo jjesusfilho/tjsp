@@ -36,7 +36,7 @@ tjsp_ler_documentos <- function (arquivos = NULL, diretorio = ".", remover_assin
     data <- texto |>
       purrr::pluck(1) |>
       stringr::str_squish() |>
-      stringr::str_extract("(?i)(?<=(liberado nos autos em |protocolado em )\\S+") |>
+      stringr::str_extract("(?i)(?<=(liberado nos autos em |protocolado em ))\\S+") |>
       lubridate::dmy()
 
     if (remover_assinatura) {
