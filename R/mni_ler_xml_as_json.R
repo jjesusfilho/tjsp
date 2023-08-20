@@ -30,6 +30,6 @@ purrr::map_dfr(arquivos, purrr::possibly(~{
    )
 
    tibble::tibble(processo, json)
-}, NA_character_))
+}, NULL))
 
 }
