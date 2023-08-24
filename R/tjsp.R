@@ -19,6 +19,6 @@ if (getRversion() >= "2.15.1") {
     "valor_da_acao", "incidente", "execucao_de_sentenca", "recebido_em",
     "classe_numero", "classe_situacao","number","n","comarca","imoveis", "lat","lng",
     "id0","dispositivo","id5","doc_name","name0","name5", "pagina", "hora_coleta",
-    "id_doc", ".datas", ".ano", "max_pag"
+    "id_doc", ".datas", ".ano", "max_pag", "cd_processo"
   ))
 }
