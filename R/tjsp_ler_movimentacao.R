@@ -32,10 +32,14 @@ tjsp_ler_movimentacao <- function(arquivos = NULL,diretorio = ".") {
     resposta <- xml2::read_html(.x)
 
 
-    processo <- .x |>
-      stringr::str_extract("\\d{20}")
+    processo <- resposta |>
+      xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |>
+      xml2::xml_text() |>
+      stringr::str_squish() |>
+      stringr::str_remove_all("[^\\d+\\s]") |>
+      stringr::str_trim()
 
-    cd_processo <- .x |>
+   cd_processo <- .x |>
       stringr::str_extract("(?<=cd_processo_)\\w+")
 
 
