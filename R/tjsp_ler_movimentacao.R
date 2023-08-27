@@ -39,9 +39,10 @@ tjsp_ler_movimentacao <- function(arquivos = NULL,diretorio = ".") {
       stringr::str_remove_all("[^\\d+\\s]") |>
       stringr::str_trim()
 
-   cd_processo <- .x |>
-      stringr::str_extract("(?<=cd_processo_)\\w+")
-
+   cd_processo <- resposta |>
+      xml2::xml_find_first("//script[contains(text(),'processo.codigo')]") |> 
+      xml2::xml_text() |>
+      stringr::str_extract("(?<=processo.codigo=)\\w+")
 
     texto <- resposta |>
       xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
