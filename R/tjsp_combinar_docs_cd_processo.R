@@ -30,7 +30,7 @@ tjsp_combinar_docs_cd_processo <- function(arquivos = NULL,
 
 
   lista <- tibble::tibble(arquivos) |>
-    dplyr::mutate(cd_processo = stringr::str_extract(arquivos,"\\w+?(?<=_id_doc)"),
+    dplyr::mutate(cd_processo = stringr::str_extract(arquivos,"\\w+?(?=_id_doc)"),
                   id_doc = stringr::str_extract(arquivos,'(?<=id_doc_)\\d+') |> as.integer(),
                   pagina_inicial = stringr::str_extract(arquivos, '(?<=inicial_)\\d+') |> as.integer()) |> # nolint
     dplyr::arrange(cd_processo,id_doc,pagina_inicial)
@@ -42,7 +42,7 @@ tjsp_combinar_docs_cd_processo <- function(arquivos = NULL,
 
     purrr::walk(lista, purrr::possibly(~{
 
-      processo <- unique(.x$cd_processo)
+      cd_processo <- unique(.x$cd_processo)
 
       qpdf::pdf_combine(.x$arquivos, file.path(dir_destino,paste0(cd_processo,".pdf")))
 
@@ -51,10 +51,10 @@ tjsp_combinar_docs_cd_processo <- function(arquivos = NULL,
 
   } else {
 
-    lista <- dplyr::group_split(lista, processo, id_doc)
+    lista <- dplyr::group_split(lista, cd_processo, id_doc)
 
     purrr::walk(lista, purrr::possibly(~{
-      processo <- unique(.x$cd_processo)
+      cd_processo <- unique(.x$cd_processo)
       id_doc <- unique(.x$id_doc)
       suppressWarnings(
         qpdf::pdf_combine(.x$arquivos, file.path(dir_destino,
