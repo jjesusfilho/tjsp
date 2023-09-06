@@ -2,11 +2,11 @@
 % Please edit documentation in R/tjsp_baixar_cjsg.R
 \name{tjsp_baixar_cjsg}
 \alias{tjsp_baixar_cjsg}
-\alias{baixar_cjsg}
 \title{Baixa consulta jurisprudencial do TJSP}
 \usage{
 tjsp_baixar_cjsg(
   livre = "",
+  ementa = "",
   aspas = FALSE,
   classe = "",
   assunto = "",
@@ -15,21 +15,8 @@ tjsp_baixar_cjsg(
   fim = "",
   inicio_pb = "",
   fim_pb = "",
-  tipo = "A",
-  n = NULL,
-  diretorio = "."
-)
-
-baixar_cjsg(
-  livre = "",
-  aspas = FALSE,
-  classe = "",
-  assunto = "",
-  orgao_julgador = "",
-  inicio = "",
-  fim = "",
-  inicio_pb = "",
-  fim_pb = "",
+  sg = "T",
+  cr = "",
   tipo = "A",
   n = NULL,
   diretorio = "."
@@ -37,6 +24,8 @@ baixar_cjsg(
 }
 \arguments{
 \item{livre}{palavra ou texto a ser buscado nas ementas e nos acórdãos}
+
+\item{ementa}{palavra ou texto a ser buscado apenas nas ementas}
 
 \item{aspas}{lógico. Colocar a expressão entre aspas?}
 
@@ -53,6 +42,10 @@ baixar_cjsg(
 \item{inicio_pb}{data inicial registro/publicação}
 
 \item{fim_pb}{data final registr/publicacao}
+
+\item{sg}{"T" para origem segundo grau}
+
+\item{cr}{"R" para origem colégio recursal}
 
 \item{tipo}{"A" Para acórdãos, "D" para decisões monocráticas}
 

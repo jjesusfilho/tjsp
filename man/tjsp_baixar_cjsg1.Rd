@@ -6,6 +6,7 @@
 \usage{
 tjsp_baixar_cjsg1(
   livre = "",
+  ementa = "",
   aspas = FALSE,
   classe = "",
   assunto = "",
@@ -14,6 +15,8 @@ tjsp_baixar_cjsg1(
   fim = "",
   inicio_pb = "",
   fim_pb = "",
+  sg = "T",
+  cr = "",
   tipo = "A",
   n = NULL,
   diretorio = "."
@@ -21,6 +24,8 @@ tjsp_baixar_cjsg1(
 }
 \arguments{
 \item{livre}{palavra ou texto a ser buscado nas ementas e nos acórdãos}
+
+\item{ementa}{palavra ou texto a ser buscado apenas nas ementas}
 
 \item{aspas}{lógico. Colocar a expressão entre aspas?}
 
@@ -37,6 +42,10 @@ tjsp_baixar_cjsg1(
 \item{inicio_pb}{data inicial registro/publicação}
 
 \item{fim_pb}{data final registr/publicacao}
+
+\item{sg}{"T" para origem segundo grau}
+
+\item{cr}{"R" para origem colégio recursal}
 
 \item{tipo}{"A" Para acórdãos, "D" para decisões monocráticas}
 

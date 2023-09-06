@@ -1,6 +1,7 @@
 #' Baixa consulta jurisprudencial do TJSP
 #'
 #' @param livre palavra ou texto a ser buscado nas ementas e nos acórdãos
+#' @param ementa palavra ou texto a ser buscado apenas nas ementas
 #' @param aspas lógico. Colocar a expressão entre aspas?
 #' @param classe Código da classe processual
 #' @param assunto Código do assunto
@@ -9,6 +10,8 @@
 #' @param fim  Data final julgamento
 #' @param inicio_pb data inicial registro/publicação
 #' @param fim_pb    data final registr/publicacao
+#' @param sg  "T" para origem segundo grau
+#' @param cr  "R" para origem colégio recursal
 #' @param tipo "A" Para acórdãos, "D" para decisões monocráticas
 #' @param n Número de páginas
 #' @param diretorio Diretório onde serão armazenadas as páginas html
@@ -24,6 +27,7 @@
 #'
 tjsp_baixar_cjsg <-
   function(livre = "",
+           ementa = "",
            aspas = FALSE,
            classe = "",
            assunto = "",
@@ -32,15 +36,11 @@ tjsp_baixar_cjsg <-
            fim = "",
            inicio_pb = "",
            fim_pb = "",
+           sg = "T",
+           cr = "",
            tipo = "A",
            n = NULL,
            diretorio = ".") {
-
-
-
-
-
-
 
   data_errada <-   verificar_datas(inicio, fim, inicio_pb, fim_pb)
 
@@ -61,6 +61,7 @@ tjsp_baixar_cjsg <-
       purrr::walk2(datas$data_inicial, datas$data_final, purrr::possibly(~{
 
         tjsp_baixar_cjsg1(livre = livre,
+                          ementa = ementa,
                           aspas = aspas,
                           classe = classe,
                           assunto = assunto,
@@ -69,6 +70,8 @@ tjsp_baixar_cjsg <-
                           fim = .y,
                           inicio_pb = inicio_pb,
                           fim_pb = fim_pb,
+                          sg = sg,
+                          cr = cr,
                           tipo = tipo,
                           n = n,
                           diretorio = diretorio
@@ -84,6 +87,7 @@ tjsp_baixar_cjsg <-
       purrr::walk2(datas$data_inicial, datas$data_final, ~{
 
         tjsp_baixar_cjsg1(livre,
+                          ementa,
                           aspas,
                           classe,
                           assunto,
@@ -92,6 +96,8 @@ tjsp_baixar_cjsg <-
                           fim = fim,
                           inicio_pb = .x,
                           fim_pb = .x,
+                          sg = sg,
+                          cr = cr,
                           tipo,
                           n,
                           diretorio
@@ -103,6 +109,7 @@ tjsp_baixar_cjsg <-
     } else {
 
       tjsp_baixar_cjsg1(livre = livre,
+                        ementa = ementa,
                         aspas  = aspas,
                         classe,
                         assunto,
@@ -111,6 +118,8 @@ tjsp_baixar_cjsg <-
                         fim = fim,
                         inicio_pb = inicio_pb,
                         fim_pb = fim_pb,
+                        sg = sg,
+                        cr = cr,
                         tipo,
                         n,
                         diretorio)
@@ -120,9 +129,6 @@ tjsp_baixar_cjsg <-
   }
 
 
-#' @rdname tjsp_baixar_cjsg
-#' @export
-baixar_cjsg <- tjsp_baixar_cjsg
 
 #' Função para criar o nome do arquivo
 #'
@@ -246,6 +252,7 @@ verificar_datas <- function(inicio, fim, inicio_pb, fim_pb){
 
 tjsp_baixar_cjsg1 <-
   function(livre = "",
+           ementa = "",
            aspas = FALSE,
            classe = "",
            assunto = "",
@@ -254,6 +261,8 @@ tjsp_baixar_cjsg1 <-
            fim = "",
            inicio_pb = "",
            fim_pb = "",
+           sg = "T",
+           cr = "",
            tipo = "A",
            n = NULL,
            diretorio = ".") {
@@ -273,7 +282,7 @@ tjsp_baixar_cjsg1 <-
         dados.buscaInteiroTeor = livre,
         dados.pesquisarComSinonimos = "S",
         dados.pesquisarComSinonimos = "S",
-        dados.buscaEmenta = "",
+        dados.buscaEmenta = ementa,
         dados.nuProcOrigem = "",
         dados.nuRegistro = "",
         agenteSelectedEntitiesList = "",
@@ -303,7 +312,8 @@ tjsp_baixar_cjsg1 <-
         dados.dtJulgamentoFim = fim,
         dados.dtRegistroInicio = inicio_pb,
         dados.dtRegistroFim = fim_pb,
-        dados.origensSelecionadas = "T",
+        dados.origensSelecionadas = sg,
+        dados.origensSelecionadas = cr,
         tipoDecisaoSelecionados = tipo,
         dados.ordenacao = "dtPublicacao"
       )
