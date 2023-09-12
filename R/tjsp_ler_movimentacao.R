@@ -32,17 +32,11 @@ tjsp_ler_movimentacao <- function(arquivos = NULL,diretorio = ".") {
     resposta <- xml2::read_html(.x)
 
 
-    processo <- resposta |>
-      xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |>
-      xml2::xml_text() |>
-      stringr::str_squish() |>
-      stringr::str_remove_all("[^\\d+\\s]") |>
-      stringr::str_trim()
+    processo <- .x |>
+             stringr::str_extract("\\d{20}")
 
-   cd_processo <- resposta |>
-      xml2::xml_find_first("//script[contains(text(),'processo.codigo')]") |> 
-      xml2::xml_text() |>
-      stringr::str_extract("(?<=processo.codigo=)\\w+")
+      cd_processo <- .x |>
+             stringr::str_extract("(?<=cd_processo_)\\w+")
 
     texto <- resposta |>
       xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
