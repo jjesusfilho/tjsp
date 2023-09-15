@@ -11,7 +11,8 @@ mni_consultar_processo(
   processo = "",
   cabecalho = TRUE,
   movimentos = FALSE,
-  documentos = FALSE,
+  incluir_documentos = FALSE,
+  documentos = NULL,
   diretorio = "."
 )
 }
@@ -30,7 +31,9 @@ TJSPMNISENHA}
 
 \item{movimentos}{TRUE para pegar movimentacao}
 
-\item{documentos}{TRUE para pegar documentos.}
+\item{incluir_documentos}{TRUE para pegar documentos.}
+
+\item{documentos}{Vetor de ids dos documentos}
 
 \item{diretorio}{Diretório}
 }

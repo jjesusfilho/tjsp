@@ -8,7 +8,8 @@
 #' @param processo Processo (número único CNJ)
 #' @param cabecalho TRUE para pegar cabeçalho
 #' @param movimentos TRUE para pegar movimentacao
-#' @param documentos TRUE para pegar documentos.
+#' @param incluir_documentos TRUE para pegar documentos.
+#' @param documentos Vetor de ids dos documentos
 #' @param diretorio Diretório
 #'
 #' @return xmls
@@ -20,7 +21,8 @@ mni_consultar_processo <- function(tribunal = "tjsp",
                                    processo = "",
                                    cabecalho = TRUE,
                                    movimentos = FALSE,
-                                   documentos = FALSE,
+                                   incluir_documentos = FALSE,
+                                   documentos = NULL,
                                    diretorio = "."){
 
   usuario_key <- toupper(paste0(tribunal,"MNIUSUARIO"))
@@ -36,7 +38,7 @@ mni_consultar_processo <- function(tribunal = "tjsp",
     }
   }
 
-x <- c(movimentos = movimentos, cabecalho = cabecalho, documentos = documentos) |>
+x <- c(movimentos = movimentos, cabecalho = cabecalho, incluir_documentos = incluir_documentos) |>
      ifelse("true","false")
 
 processo <- stringr::str_remove_all(processo,"\\D")
@@ -54,17 +56,22 @@ purrr::walk(processo, purrr::possibly(~{
 corpo <- criar_corpo(
                      cabecalho = x[["cabecalho"]],
                      movimentos = x[["movimentos"]],
-                     documentos = x[["documentos"]],
+                     incluir_documentos = x[["incluir_documentos"]],
+                     documentos = documentos,
                      processo = .x,
                      usuario = usuario,
                      senha = senha
                      )
-if (documentos) {
-arquivo <- file.path(diretorio, paste0(tribunal,"_mni_documentos_", .x,".xml"))
+if (incluir_documentos) {
+arquivo <- file.path(diretorio, paste0(tribunal,"_mni_incluir_documentos_", .x,".xml"))
 
-} else {
+} else if (movimentos){
 
   arquivo <- file.path(diretorio, paste0(tribunal,"_mni_", .x,".xml"))
+
+} else if (!is.null(documentos)){
+
+  arquivo <- file.path(diretorio, paste0(tribunal,"_mni_inteiro_teor_documentos_", .x,".xml"))
 
 }
 
@@ -75,9 +82,9 @@ httr::POST(url, body = corpo, httr::write_disk(arquivo, overwrite = T))
 }
 
 
-criar_corpo <- function(cabecalho, movimentos, documentos, processo, usuario , senha){
+criar_corpo <- function(cabecalho, movimentos, incluir_documentos,documentos, processo, usuario , senha){
 
-if (documentos){
+if (incluir_documentos){
 
 corpo <- glue::glue('<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.cnj.jus.br/servico-intercomunicacao-2.2.2/" xmlns:tip="http://www.cnj.jus.br/tipos-servico-intercomunicacao-2.2.2">
 <soapenv:Header/>
@@ -91,7 +98,7 @@ corpo <- glue::glue('<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org
 </soapenv:Body>
 </soapenv:Envelope>')
 
-} else {
+} else if (movimentos){
 
 corpo <- glue::glue('<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.cnj.jus.br/servico-intercomunicacao-2.2.2/" xmlns:tip="http://www.cnj.jus.br/tipos-servico-intercomunicacao-2.2.2">
 <soapenv:Header/>
@@ -105,6 +112,25 @@ corpo <- glue::glue('<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org
 </ser:consultarProcesso>
 </soapenv:Body>
 </soapenv:Envelope>')
+} else if (!is.null(documentos)){
+
+
+docs <- glue::glue("<tip:documento>{documentos}</tip:documento>") |>
+    paste0(collapse = "\n")
+
+corpo <- glue::glue('<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://www.cnj.jus.br/servico-intercomunicacao-2.2.2/" xmlns:tip="http://www.cnj.jus.br/tipos-servico-intercomunicacao-2.2.2">
+<soapenv:Header/>
+<soapenv:Body>
+<ser:consultarProcesso>
+<tip:idConsultante>{usuario}</tip:idConsultante>
+<tip:senhaConsultante>{senha}</tip:senhaConsultante>
+<tip:numeroProcesso>{processo}</tip:numeroProcesso>
+{docs}
+</ser:consultarProcesso>
+</soapenv:Body>
+</soapenv:Envelope>')
+
+
 }
   return(corpo)
 
