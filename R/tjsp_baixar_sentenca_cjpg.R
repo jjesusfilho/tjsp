@@ -13,14 +13,37 @@ tjsp_baixar_sentenca_cjpg <- function(cd_doc, diretorio = "."){
                               port = NULL, path = "pastadigital/getPDF.do", query = NULL,
                               params = NULL, fragment = NULL, username = NULL, password = NULL), class = "url")
 
-  pb <- progress::progress_bar$new(total = length(cd_doc))
 
   purrr::walk(cd_doc, purrr::possibly(~{
 
-    pb$tick()
 
     parametros <- stringr::str_split(.x,"-") %>% unlist()
 
+
+    conteudo <- parametros[[1]] |>
+      paste0("https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=", ... = _, "&gateway=true") |>
+      httr::GET() |>
+      httr::content()
+
+
+    if (
+      conteudo |>
+      xml2::xml_find_first("boolean(//a[@class='linkConsultaSG btn btn-secondary btn-space'])")
+    ) {
+
+      url1 <- paste0("https://esaj.tjsp.jus.br/cposg/verificarAcessoPastaDigital.do?cdProcesso=", parametros[[1]],"&conversationId=&_=1599440192646")
+
+    } else {
+
+
+      url1 <- paste0("https://esaj.tjsp.jus.br/cpopg/abrirPastaDigital.do?processo.codigo=",parametros[[1]])
+
+    }
+
+    r2 <-  url1 |>
+      httr::GET() |>
+      httr::content("text") |>
+      httr::GET()
 
     query <-
       list(
