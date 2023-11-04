@@ -1,4 +1,4 @@
-#' Ler Partes do cpopg ou cposg
+#' Ler Partes do cpopg ou cposg, quando baixados por número do processo.
 #'
 #' @param arquivos Vetor de arquivos
 #' @param diretorio Diretório se não informar arquivos
@@ -28,11 +28,6 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
       pb$tick()
 
       x <- xml2::read_html(.x)
-
-      # processo <- x |>
-      #   xml2::xml_find_first("//span[@id='numeroProcesso']") |>
-      #   xml2::xml_text() |>
-      #   stringr::str_remove_all("\\D+")
 
       processo <- .x |>
              stringr::str_extract("\\d{20}")
@@ -67,4 +62,3 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
     },NULL))
 
 }
-
