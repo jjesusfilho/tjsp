@@ -24,49 +24,60 @@
 #' andamento_cpopg <- ler_movimentacao_cpopg()
 #' }
 #'
-tjsp_ler_movimentacao <- function(arquivos = NULL,diretorio = ".") {
-
-   if (is.null(arquivos)){
-   arquivos <- list.files(
-    path = diretorio, pattern = ".html",
-    full.names = TRUE
-  )
-}
-
-  pb <- progress::progress_bar$new(total = length(arquivos))
+tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
+  if (is.null(arquivos)) {
+    arquivos <- list.files(
+      path = diretorio, 
+      pattern = ".html",
+      full.names = TRUE
+    )
+  }
 
   purrr::map_dfr(arquivos, purrr::possibly(~{
 
-
-    pb$tick()
-
-
-
     resposta <- xml2::read_html(.x)
-
-
+    
     processo <- resposta |>
       xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |>
       xml2::xml_text() |>
       stringr::str_squish() |>
       stringr::str_remove_all("[^\\d+\\s]") |>
       stringr::str_trim()
-
-   cd_processo <- resposta |>
+    
+    cd_processo <- resposta |>
       xml2::xml_find_first("//script[contains(text(),'processo.codigo')]") |> 
       xml2::xml_text() |>
       stringr::str_extract("(?<=processo.codigo=)\\w+")
-
-    texto <- resposta |>
-      xml2::xml_find_first(xpath = "//table/tbody[@id='tabelaTodasMovimentacoes']")
-
-    data <- xml2::xml_find_all(texto, ".//td[@width='120']") |>
+    
+    movs <- resposta |>
+      xml2::xml_find_first("//table/tbody[@id='tabelaTodasMovimentacoes']") |> 
+      xml2::xml_find_all("./tr")
+    
+    dt_mov <- movs |> 
+      xml2::xml_find_first("./td[@class='dataMovimentacao']") |> 
       xml2::xml_text(trim = TRUE) |>
       lubridate::dmy()
-
-    mov <- xml2::xml_find_all(texto, ".//td[@style='vertical-align: top; padding-bottom: 5px']") |>
-      xml2::xml_text(trim = TRUE)
-
-    tibble::tibble(processo = processo, cd_processo = cd_processo, data = data, movimentacao = mov)
-  }, otherwise = NULL))
+    
+    tem_anexo <- movs |>
+      xml2::xml_find_first("./td[@class='descricaoMovimentacao']/a") |> 
+      xml2::xml_attr("href") |> 
+      is.na() == FALSE
+    
+    mov <- movs |> 
+      xml2::xml_find_first("./td[@class='descricaoMovimentacao']") |>
+      xml2::xml_text(trim=TRUE)
+    
+    tibble::tibble(
+      processo, 
+      cd_processo,
+      dt_mov, 
+      mov,
+      tem_anexo
+    ) |> 
+      tidyr::separate(
+        col = mov,
+        into = c("movimento", "descricao"), 
+        sep = "\n\\s+"
+      )
+  }, otherwise = NULL), .progress = TRUE)
 }
