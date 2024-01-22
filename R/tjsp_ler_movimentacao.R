@@ -32,9 +32,9 @@ tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
       full.names = TRUE
     )
   }
-
+  
   purrr::map_dfr(arquivos, purrr::possibly(~{
-
+    
     resposta <- xml2::read_html(.x)
     
     processo <- resposta |>
@@ -58,11 +58,19 @@ tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
       xml2::xml_text(trim = TRUE) |>
       lubridate::dmy()
     
-    tem_anexo <- movs |>
+     anexo <- movs |>
       xml2::xml_find_first("./td[@class='descricaoMovimentacao']/a") |> 
-      xml2::xml_attr("href") |> 
-      is.na() == FALSE
+      xml2::xml_attr("href")
+     
+     cd_documento <- anexo |> 
+         stringr::str_extract("(?<=cdDocumento=)\\d+")
+         
     
+     recurso_acessado <- anexo |> 
+              stringr::str_extract("(?<=Acessado=).+") |> 
+       URLdecode() |> 
+       stringr::str_replace_all("\\+", " ")
+     
     mov <- movs |> 
       xml2::xml_find_first("./td[@class='descricaoMovimentacao']") |>
       xml2::xml_text(trim=TRUE)
@@ -72,7 +80,8 @@ tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
       cd_processo,
       dt_mov, 
       mov,
-      tem_anexo
+      cd_documento,
+      recurso_acessado
     ) |> 
       tidyr::separate(
         col = mov,
