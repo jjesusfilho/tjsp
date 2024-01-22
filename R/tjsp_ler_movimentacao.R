@@ -71,6 +71,9 @@ tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
        URLdecode() |> 
        stringr::str_replace_all("\\+", " ")
      
+     url <- ifelse(is.na(anexo), NA_character_, xml2::url_absolute(anexo,"https://esaj.tjsp.jus.br")) 
+           
+     
     mov <- movs |> 
       xml2::xml_find_first("./td[@class='descricaoMovimentacao']") |>
       xml2::xml_text(trim=TRUE)
@@ -81,7 +84,8 @@ tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
       dt_mov, 
       mov,
       cd_documento,
-      recurso_acessado
+      recurso_acessado,
+      url
     ) |> 
       tidyr::separate(
         col = mov,
