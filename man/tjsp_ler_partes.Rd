@@ -2,7 +2,7 @@
 % Please edit documentation in R/tjsp_ler_partes.R
 \name{tjsp_ler_partes}
 \alias{tjsp_ler_partes}
-\title{Ler Partes do cpopg ou cposg}
+\title{Ler Partes do cpopg ou cposg, quando baixados por número do processo.}
 \usage{
 tjsp_ler_partes(arquivos = NULL, diretorio = ".")
 }
@@ -15,7 +15,7 @@ tjsp_ler_partes(arquivos = NULL, diretorio = ".")
 tibble
 }
 \description{
-Ler Partes do cpopg ou cposg
+Ler Partes do cpopg ou cposg, quando baixados por número do processo.
 }
 \details{
 São criadas quatros colunas : processo,

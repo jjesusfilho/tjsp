@@ -20,12 +20,10 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
   }
 
 
-  pb <- progress::progress_bar$new(total= length(arquivos))
 
 
 
     lista <- purrr::map_dfr(arquivos,purrr::possibly(~{
-      pb$tick()
 
       x <- xml2::read_html(.x)
 
@@ -59,6 +57,6 @@ tjsp_ler_partes <- function(arquivos = NULL,diretorio = ".") {
 
       }
 
-    },NULL))
+    },NULL), .progress = TRUE)
 
 }

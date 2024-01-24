@@ -13,9 +13,27 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1.0)
 ByteCompile: true
-Imports: xml2, httr, stringr, purrr, dplyr, tibble, progress, magrittr,
-        rvest, lubridate, rlang (>= 0.1.2), abjutils, tidyr (>= 1.0.0),
-        stats, pdftools, listenv, janitor, getPass, vctrs, re2
+Imports: 
+    xml2,
+    httr,
+    stringr,
+    purrr,
+    dplyr,
+    tibble,
+    progress,
+    magrittr,
+    rvest,
+    lubridate,
+    rlang (>= 0.1.2),
+    abjutils,
+    tidyr (>= 1.0.0),
+    stats,
+    pdftools,
+    listenv,
+    janitor,
+    getPass,
+    vctrs,
+    re2
 RoxygenNote: 7.2.3
 URL: https://github.com/jjesusfilho/tjsp
 BugReports: https://github.com/jjesusfilho/tjsp/issues
@@ -38,7 +56,8 @@ Suggests:
     qpdf,
     JSON2XML (>= 0.0.1),
     jqr,
-    glue
+    glue,
+    base64enc
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
