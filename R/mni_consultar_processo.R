@@ -152,6 +152,3 @@ criar_corpo <- function(cabecalho, movimentos, incluir_documentos,documentos, pr
   return(corpo)
   
 }
-
-
-}
