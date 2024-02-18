@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -55,6 +55,7 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tjsp_baixar_cjsg</span><span class="op">(</span></span>
 <span>  livre <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  ementa <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  aspas <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  classe <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  assunto <span class="op">=</span> <span class="st">""</span>,</span>
@@ -63,21 +64,8 @@
 <span>  fim <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  inicio_pb <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  fim_pb <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  tipo <span class="op">=</span> <span class="st">"A"</span>,</span>
-<span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  diretorio <span class="op">=</span> <span class="st">"."</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">baixar_cjsg</span><span class="op">(</span></span>
-<span>  livre <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  aspas <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  classe <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  assunto <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  orgao_julgador <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  inicio <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  fim <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  inicio_pb <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  fim_pb <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  sg <span class="op">=</span> <span class="st">"T"</span>,</span>
+<span>  cr <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  tipo <span class="op">=</span> <span class="st">"A"</span>,</span>
 <span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  diretorio <span class="op">=</span> <span class="st">"."</span></span>
@@ -88,6 +76,10 @@
     <h2>Arguments</h2>
     <dl><dt>livre</dt>
 <dd><p>palavra ou texto a ser buscado nas ementas e nos acórdãos</p></dd>
+
+
+<dt>ementa</dt>
+<dd><p>palavra ou texto a ser buscado apenas nas ementas</p></dd>
 
 
 <dt>aspas</dt>
@@ -120,6 +112,14 @@
 
 <dt>fim_pb</dt>
 <dd><p>data final registr/publicacao</p></dd>
+
+
+<dt>sg</dt>
+<dd><p>"T" para origem segundo grau</p></dd>
+
+
+<dt>cr</dt>
+<dd><p>"R" para origem colégio recursal</p></dd>
 
 
 <dt>tipo</dt>

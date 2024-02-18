@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -158,6 +158,30 @@
         </td>
         <td><p>Lê municípios e respectivos fóruns baixados com baixar_municipios</p></td>
       </tr><tr><td>
+          <p><code><a href="mni_base64_doc.html">mni_base64_doc()</a></code> </p>
+        </td>
+        <td><p>Converte documentos em base 64 para pdf.</p></td>
+      </tr><tr><td>
+          <p><code><a href="mni_consultar_processo.html">mni_consultar_processo()</a></code> </p>
+        </td>
+        <td><p>Consulta dados processuais pelo Modelo de interoperabilidade (MNI)</p></td>
+      </tr><tr><td>
+          <p><code><a href="mni_ler_dados_basicos.html">mni_ler_dados_basicos()</a></code> </p>
+        </td>
+        <td><p>Lê dados básicos xml mni</p></td>
+      </tr><tr><td>
+          <p><code><a href="mni_ler_partes.html">mni_ler_partes()</a></code> </p>
+        </td>
+        <td><p>Lê informações das partes do xml baixado com mni_consultar_processo</p></td>
+      </tr><tr><td>
+          <p><code><a href="mni_ler_xml_as_json.html">mni_ler_xml_as_json()</a></code> </p>
+        </td>
+        <td><p>Lê xmls baixados com mni_consultar_processo como jsons</p></td>
+      </tr><tr><td>
+          <p><code><a href="mni_listar_documentos.html">mni_listar_documentos()</a></code> </p>
+        </td>
+        <td><p>Listar documentos com respectivos códigos</p></td>
+      </tr><tr><td>
           <p><code><a href="modelar_decisao.html">modelar_decisao()</a></code> </p>
         </td>
         <td><p>Modelar decisão</p></td>
@@ -226,7 +250,7 @@
         </td>
         <td><p>Baixa processo da consulta do cjpg</p></td>
       </tr><tr><td>
-          <p><code><a href="tjsp_baixar_cjsg.html">tjsp_baixar_cjsg()</a></code> <code><a href="tjsp_baixar_cjsg.html">baixar_cjsg()</a></code> </p>
+          <p><code><a href="tjsp_baixar_cjsg.html">tjsp_baixar_cjsg()</a></code> </p>
         </td>
         <td><p>Baixa consulta jurisprudencial do TJSP</p></td>
       </tr><tr><td>
@@ -246,6 +270,10 @@
         </td>
         <td><p>Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_baixar_cpopg_docs_cd_processo.html">tjsp_baixar_cpopg_docs_cd_processo()</a></code> </p>
+        </td>
+        <td><p>Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_baixar_cpopg_par.html">tjsp_baixar_cpopg_par()</a></code> </p>
         </td>
         <td><p>Busca os números de processos no primeiro grau no parametro especificado</p></td>
@@ -255,6 +283,10 @@
         <td><p>Baixar processos de segunda instância do tjsp</p></td>
       </tr><tr><td>
           <p><code><a href="tjsp_baixar_docs.html">tjsp_baixar_docs()</a></code> </p>
+        </td>
+        <td><p>Função interna do tjsp_baixar_cpopg_docs</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_baixar_docs_cd_processo.html">tjsp_baixar_docs_cd_processo()</a></code> </p>
         </td>
         <td><p>Função interna do tjsp_baixar_cpopg_docs</p></td>
       </tr><tr><td>
@@ -298,6 +330,10 @@
         </td>
         <td><p>Combina docs baixados com tjsp_baixar_docs</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_combinar_docs_cd_processo.html">tjsp_combinar_docs_cd_processo()</a></code> </p>
+        </td>
+        <td><p>Combina docs baixados com tjsp_baixar_docs_cd_processo</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_corrigir_varas.html">tjsp_corrigir_varas()</a></code> </p>
         </td>
         <td><p>Corrigir nomes das varas</p></td>
@@ -306,7 +342,7 @@
         </td>
         <td><p>Ler acórdãos baixados com tjsp_baixar_acordao_cjsg</p></td>
       </tr><tr><td>
-          <p><code><a href="tjsp_ler_cjpg.html">tjsp_ler_cjpg()</a></code> <code><a href="tjsp_ler_cjpg.html">ler_cjpg()</a></code> </p>
+          <p><code><a href="tjsp_ler_cjpg.html">tjsp_ler_cjpg()</a></code> </p>
         </td>
         <td><p>Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.</p></td>
       </tr><tr><td>
@@ -342,6 +378,10 @@
         </td>
         <td><p>Lê documentos baixados combinados com tjsp_combinar_docs</p></td>
       </tr><tr><td>
+          <p><code><a href="tjsp_ler_documentos_cd_processo.html">tjsp_ler_documentos_cd_processo()</a></code> </p>
+        </td>
+        <td><p>Lê documentos baixados combinados com tjsp_combinar_docs</p></td>
+      </tr><tr><td>
           <p><code><a href="tjsp_ler_historico_classes.html">tjsp_ler_historico_classes()</a></code> </p>
         </td>
         <td><p>Extrai o histórico das classes processuais</p></td>
@@ -352,7 +392,7 @@
       </tr><tr><td>
           <p><code><a href="tjsp_ler_partes.html">tjsp_ler_partes()</a></code> </p>
         </td>
-        <td><p>Ler Partes do cpopg ou cposg</p></td>
+        <td><p>Ler Partes do cpopg ou cposg, quando baixados por número do processo.</p></td>
       </tr><tr><td>
           <p><code><a href="tjsp_ler_peticoes.html">tjsp_ler_peticoes()</a></code> </p>
         </td>
@@ -367,6 +407,10 @@
         <td><p>Lê pdfs das sentenças, remove assinatura e eventualmente combina</p></td>
       </tr><tr><td>
           <p><code><a href="tjsp_ler_tabela_docs.html">tjsp_ler_tabela_docs()</a></code> </p>
+        </td>
+        <td><p>Ler tabelas baixadas com tjsp_baixar_tabela_docs</p></td>
+      </tr><tr><td>
+          <p><code><a href="tjsp_ler_tabela_docs_cd_processo.html">tjsp_ler_tabela_docs_cd_processo()</a></code> </p>
         </td>
         <td><p>Ler tabelas baixadas com tjsp_baixar_tabela_docs</p></td>
       </tr><tr><td>

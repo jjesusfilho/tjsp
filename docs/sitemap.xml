@@ -178,6 +178,24 @@
     <loc>/reference/ler_partes.html</loc>
   </url>
   <url>
+    <loc>/reference/mni_base64_doc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mni_consultar_processo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mni_ler_dados_basicos.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mni_ler_partes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mni_ler_xml_as_json.html</loc>
+  </url>
+  <url>
+    <loc>/reference/mni_listar_documentos.html</loc>
+  </url>
+  <url>
     <loc>/reference/modelar_decisao.html</loc>
   </url>
   <url>
@@ -274,6 +292,9 @@
     <loc>/reference/tjsp_baixar_cpopg_docs.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_baixar_cpopg_docs_cd_processo.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_baixar_cpopg_par.html</loc>
   </url>
   <url>
@@ -281,6 +302,9 @@
   </url>
   <url>
     <loc>/reference/tjsp_baixar_docs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_baixar_docs_cd_processo.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_baixar_inicial.html</loc>
@@ -314,6 +338,9 @@
   </url>
   <url>
     <loc>/reference/tjsp_combinar_docs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_combinar_docs_cd_processo.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_corrigir_varas.html</loc>
@@ -355,6 +382,9 @@
     <loc>/reference/tjsp_ler_documentos.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_ler_documentos_cd_processo.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_ler_historico_classes.html</loc>
   </url>
   <url>
@@ -374,6 +404,9 @@
   </url>
   <url>
     <loc>/reference/tjsp_ler_tabela_docs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_ler_tabela_docs_cd_processo.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_ler_tabela_incidentes.html</loc>
