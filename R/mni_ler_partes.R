@@ -23,12 +23,16 @@ mni_ler_partes <- function(arquivos = NULL, diretorio = "."){
       xml2::xml_find_all("//ns2:polo") |>
       xml2::xml_attr("polo")
 
+    x <- .x |>
+      xml2::read_xml()
+
     purrr::map(polos, ~{
 
       xpath <- glue::glue("//ns2:polo[@polo='{.x}']")
 
       p1 <- x |>
         xml2::xml_find_first(xpath)
+
       polo <- .x
 
       p1 |>
