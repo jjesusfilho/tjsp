@@ -58,10 +58,63 @@ tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
       stringr::str_extract("(?<=Acessado=).+") |>
       URLdecode() |>
       stringr::str_replace_all("\\+", " ")
-    
-    url <- ifelse(is.na(anexo), NA_character_, xml2::url_absolute(anexo,"https://esaj.tjsp.jus.br"))
-    
-    
+
+  url <- anexo |> 
+       purrr::map_chr(~{
+         
+ if (is.na(.x)){
+      
+      
+    url <-  NA_character_ 
+ 
+ } else if(startsWith(cd_processo, "RI")) {
+
+   
+   p <- processo |> 
+        abjutils::build_id()
+   
+   unificado <- p |> 
+     stringr::str_sub(1,15)
+   
+   foro <- stringr::str_sub(p, -4)
+   
+   parseada <-
+     structure(
+       list(
+         scheme = "https",
+         hostname = "esaj.tjsp.jus.br",
+         port = NULL,
+         path = "cposg/search.do",
+         query = list(
+           conversationId = "",
+           paginaConsulta = "0",
+           cbPesquisa = "NUMPROC",
+           numeroDigitoAnoUnificado = unificado,
+           foroNumeroUnificado = foro,
+           dePesquisaNuUnificado = p,
+           dePesquisaNuUnificado = "UNIFICADO",
+           dePesquisa = "",
+           tipoNuProcesso = "UNIFICADO"
+         ),
+         params = NULL,
+         fragment = stringr::str_remove(.x,"#"),
+         username = NULL,
+         password = NULL
+       ),
+       class = "url"
+     )
+   
+   url <- httr::build_url(parseada)
+   
+ } else {
+   
+   url <- xml2::url_absolute(.x,"https://esaj.tjsp.jus.br")
+   
+ }
+    url
+       })
+  
+  
     mov <- movs |>
       xml2::xml_find_first("./td[contains(@class,'descricaoMovimentacao')]") |>
       xml2::xml_text(trim=TRUE)
