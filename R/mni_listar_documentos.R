@@ -22,10 +22,8 @@ mni_listar_documentos <- function(arquivos = NULL, diretorio  = "."){
 
     processo <- stringr::str_extract(.x, "\\d{20}")
 
-    x <- .x |>
-      xml2::read_xml()
-
-    documentos <- x |>
+      .x |>
+      xml2::read_xml() |> 
       xml2::xml_find_all("//ns2:dadosBasicos/following-sibling::ns2:documento") |>
       purrr::map_dfr(purrr::possibly(~{
 
