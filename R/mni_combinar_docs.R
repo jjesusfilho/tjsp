@@ -1,3 +1,14 @@
+#' Combina docs baixados com a partir de mni_base64_docs
+#'
+#' @param arquivos Vetor de arquivos
+#' @param dir_origem Diretório de origem, se não
+#'     informar arquivos
+#' @param dir_destino Diretório destino
+#' @param nivel Juntar processo inteiro ou por documento?
+#'
+#' @return único pdf
+#' @export
+#'
 mni_combinar_docs <- function(arquivos = NULL,
                                dir_origem = ".",
                                dir_destino = NULL,
