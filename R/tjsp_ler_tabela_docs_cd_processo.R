@@ -64,4 +64,3 @@ tjsp_ler_tabela_docs_cd_processo <- function(arquivos = NULL, diretorio = "."){
     
   }, NULL))
 }
-
