@@ -46,7 +46,7 @@ tjsp_baixar_tabela_cd_processo <- function (cd_processo = NULL, diretorio = ".")
     
      
      
-     arquivo <- file.path(diretorio, paste0("tabela_cd_processo_pg_", .x, "cd_processo_sg_",cdProcesso,".html"))
+     arquivo <- file.path(diretorio, paste0("tabela_cd_processo_pg_", .x, "_cd_processo_sg_",cdProcesso,".html"))
                           
      
      } else{
