@@ -2,24 +2,12 @@
 % Please edit documentation in R/tjsp_baixar_cpopg_docs_cd_processo.R
 \name{tjsp_baixar_docs_cd_processo}
 \alias{tjsp_baixar_docs_cd_processo}
-\title{Função interna do tjsp_baixar_cpopg_docs}
+\title{Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs}
 \usage{
-tjsp_baixar_docs_cd_processo(
-  cd_processo = NULL,
-  id_doc = NULL,
-  pagina_inicial = NULL,
-  urls = NULL,
-  diretorio = NULL
-)
+tjsp_baixar_docs_cd_processo(df, diretorio = ".")
 }
 \arguments{
-\item{cd_processo}{Número do processo}
-
-\item{id_doc}{Id do documento}
-
-\item{pagina_inicial}{Pagina}
-
-\item{urls}{Urls dos documentos}
+\item{df}{dataframe com colunas processo, id_doc e url_doc}
 
 \item{diretorio}{Diretório}
 }
@@ -27,5 +15,5 @@ tjsp_baixar_docs_cd_processo(
 pdfs
 }
 \description{
-Função interna do tjsp_baixar_cpopg_docs
+Baixar petições e docs a partir da tabela lida com tjsp_ler_tabela_docs
 }
