@@ -14,46 +14,58 @@
 #' }
 tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) {
 
-  if(is.null(arquivos)){
-  arquivos <- list.files(
-    path = diretorio, pattern = ".html",
-    full.names = TRUE
-  )
-}
-
- pb <- progress::progress_bar$new(total = length(arquivos))
-
+  if(is.null(arquivos)) {
+    arquivos <- list.files(
+      path = diretorio, pattern = ".html",
+      full.names = TRUE
+    )
+  }
+  
+  pb <- progress::progress_bar$new(total = length(arquivos))
+  
   dados <- purrr::map_dfr(arquivos, purrr::possibly(~{
-
     pb$tick()
-
-    processo <- stringr::str_extract(.x,"\\d{20}")
+      
+    processo <- stringr::str_extract(.x, "\\d{20}")
+      
     cd_processo <- stringr::str_extract(.x, "(?<=cd_processo_)\\w+")
-
+      
     resposta <- xml2::read_html(.x)
-
-
+      
     processo_pg <- resposta |>
-         xml2::xml_find_all("//div[h2/text()='N\u00FAmeros de 1\u00AA Inst\u00E2ncia']/following-sibling::table[2]//td[1]") |>
-         xml2::xml_text(trim = T) |>
-         stringr::str_remove_all("\\D+")
-
-    digital <- resposta |> xml2::xml_find_first("boolean(//*[@id='pbVisualizarAutos'] |//*[@id='linkConsultaSG'])")
-
-    situacao <- resposta |> xml2::xml_find_first("//span[@id='situacaoProcesso']") |>
+      xml2::xml_find_all("//div[h2/text()='Números de 1ª Instância']/following-sibling::table[2]//td[1]") |>
+      xml2::xml_text(trim = TRUE) |>
+      stringr::str_remove_all("\\D+")
+      
+    if(length(processo_pg) == 0) {
+      processo_pg <- NA_character_
+    }
+      
+    digital <- resposta |>
+      xml2::xml_find_first("boolean(//*[@id='pbVisualizarAutos'] |//*[@id='linkConsultaSG'])")
+  
+    situacao <- resposta |>
+      xml2::xml_find_first("//span[@id='situacaoProcesso']") |>
       xml2::xml_text()
-
+  
     nomes <- resposta |>
       xml2::xml_find_all("//span[@class='unj-label']") |>
-      xml2::xml_text(trim=TRUE)
-
+      xml2::xml_text(trim = TRUE)
+  
     valores <- resposta |>
       xml2::xml_find_all("//span[@class='unj-label']/following-sibling::div") |>
-      xml2::xml_text()
-
-    tibble::tibble(processo = processo, cd_processo, processo_pg, digital, situacao, variavel = nomes,
-                   valor = valores)
-
+      xml2::xml_text() |>
+      stringr::str_squish()
+  
+    tibble::tibble(
+      processo = processo,
+      cd_processo,
+      processo_pg,
+      digital,
+      situacao,
+      variavel = nomes,
+      valor = valores
+    )
   }, otherwise = NULL))
 
   if (wide){
