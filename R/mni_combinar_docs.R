@@ -10,9 +10,9 @@
 #' @export
 #'
 mni_combinar_docs <- function(arquivos = NULL,
-                               dir_origem = ".",
-                               dir_destino = NULL,
-                               nivel = c("processo", "doc")){
+                              dir_origem = ".",
+                              dir_destino = NULL,
+                              nivel = c("processo", "doc")){
   
   if (is.null(dir_destino) || !dir.exists(dir_destino)){
     
@@ -31,9 +31,8 @@ mni_combinar_docs <- function(arquivos = NULL,
   
   lista <- tibble::tibble(arquivos) |>
     dplyr::mutate(processo = stringr::str_extract(arquivos,"\\d{20}"),
-                  id_documento = stringr::str_extract(arquivos,'(?<=documento_)\\d+')) |> 
-    tidyr::separate_wider_delim(id_documento, delim = stringr::regex("(?=\\d$)"),
-                                names = c("id_documento","digito")) |> 
+                  id_documento = stringr::str_extract(arquivos,'(?<=documento_)\\d+'),
+                  digito = stringr::str_extract(arquivos, "(?<=digito_)\\d+")) |> 
     dplyr::mutate(dplyr::across(id_documento:digito, as.integer)) |> 
     dplyr::arrange(processo,id_documento,digito)
   
@@ -65,7 +64,5 @@ mni_combinar_docs <- function(arquivos = NULL,
     }, NULL))
   }
   
-  
-  
-  
+
 }
