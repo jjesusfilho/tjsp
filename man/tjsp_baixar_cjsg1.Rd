@@ -7,7 +7,7 @@
 tjsp_baixar_cjsg1(
   livre = "",
   ementa = "",
-  aspas = FALSE,
+  processo = "",
   classe = "",
   assunto = "",
   orgao_julgador = "",
@@ -19,7 +19,8 @@ tjsp_baixar_cjsg1(
   cr = "",
   tipo = "A",
   n = NULL,
-  diretorio = "."
+  diretorio = ".",
+  aspas = FALSE
 )
 }
 \arguments{
@@ -27,7 +28,7 @@ tjsp_baixar_cjsg1(
 
 \item{ementa}{palavra ou texto a ser buscado apenas nas ementas}
 
-\item{aspas}{lógico. Colocar a expressão entre aspas?}
+\item{processo}{Número do processo}
 
 \item{classe}{Código da classe processual}
 
@@ -52,6 +53,8 @@ tjsp_baixar_cjsg1(
 \item{n}{Número de páginas}
 
 \item{diretorio}{Diretório onde serão armazenadas as páginas html}
+
+\item{aspas}{lógico. Colocar a expressão entre aspas?}
 }
 \value{
 htmls

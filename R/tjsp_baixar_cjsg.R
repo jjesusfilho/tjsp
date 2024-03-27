@@ -2,6 +2,7 @@
 #'
 #' @param livre palavra ou texto a ser buscado nas ementas e nos acórdãos
 #' @param ementa palavra ou texto a ser buscado apenas nas ementas
+#' @param processo Número do processo
 #' @param aspas lógico. Colocar a expressão entre aspas?
 #' @param classe Código da classe processual
 #' @param assunto Código do assunto
@@ -255,92 +256,92 @@ verificar_datas <- function(inicio, fim, inicio_pb, fim_pb){
 #'
 
 tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = "",
-          assunto = "", orgao_julgador = "", inicio = "", fim = "", 
-          inicio_pb = "", fim_pb = "", sg = "T", cr = "", tipo = "A", 
+          assunto = "", orgao_julgador = "", inicio = "", fim = "",
+          inicio_pb = "", fim_pb = "", sg = "T", cr = "", tipo = "A",
           n = NULL, diretorio = ".", aspas = FALSE) {
-  
+
   httr::set_config(httr::config(ssl_verifypeer = FALSE, accept_encoding = "latin1"))
   if (aspas == TRUE) livre <- deparse(livre)
-  
+
   link_cjsg <- "https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do"
-  
+
   body <- list(
-    dados.buscaInteiroTeor = livre, 
+    dados.buscaInteiroTeor = livre,
     dados.pesquisarComSinonimos = "S",
-    dados.pesquisarComSinonimos = "S", 
+    dados.pesquisarComSinonimos = "S",
     dados.buscaEmenta = ementa,
-    dados.nuProcOrigem = processo, 
-    dados.nuRegistro = "", 
+    dados.nuProcOrigem = processo,
+    dados.nuRegistro = "",
     agenteSelectedEntitiesList = "",
-    contadoragente = "0", 
-    contadorMaioragente = "0", 
+    contadoragente = "0",
+    contadorMaioragente = "0",
     codigoCr = "",
-    codigoTr = "", 
-    nmAgente = "", 
+    codigoTr = "",
+    nmAgente = "",
     juizProlatorSelectedEntitiesList = "",
-    contadorjuizProlator = "0", 
+    contadorjuizProlator = "0",
     contadorMaiorjuizProlator = "0",
-    codigoJuizCr = "", 
-    codigoJuizTr = "", 
-    nmJuiz = "", 
+    codigoJuizCr = "",
+    codigoJuizTr = "",
+    nmJuiz = "",
     classesTreeSelection.values = classe,
-    classesTreeSelection.text = "", 
+    classesTreeSelection.text = "",
     assuntosTreeSelection.values = assunto,
-    assuntosTreeSelection.text = "", 
+    assuntosTreeSelection.text = "",
     comarcaSelectedEntitiesList = "",
-    contadorcomarca = "0", 
-    contadorMaiorcomarca = "0", 
+    contadorcomarca = "0",
+    contadorMaiorcomarca = "0",
     cdComarca = "",
-    nmComarca = "", 
+    nmComarca = "",
     secoesTreeSelection.values = orgao_julgador,
-    secoesTreeSelection.text = "", 
+    secoesTreeSelection.text = "",
     dados.dtJulgamentoInicio = inicio,
-    dados.dtJulgamentoFim = fim, 
+    dados.dtJulgamentoFim = fim,
     dados.dtRegistroInicio = inicio_pb,
     dados.dtRegistroFim = fim_pb,
     dados.origensSelecionadas = sg,
-    dados.origensSelecionadas = cr, 
+    dados.origensSelecionadas = cr,
     tipoDecisaoSelecionados = tipo,
     dados.ordenacao = "dtPublicacao"
   )
-  
-  response <- httr::POST(link_cjsg, encode = "form", body = body, 
+
+  response <- httr::POST(link_cjsg, encode = "form", body = body,
                          httr::accept("text/html; charset=latin1;"))
   if (!is.null(n)) {
     paginas <- 1:n
     pb <- progress::progress_bar$new(total = n)
   } else {
     max_pag <- response |>
-      httr::content() |> 
-      xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") |> 
-      xml2::xml_attrs() |> 
-      purrr::pluck(1, 3) |> 
-      as.numeric() |> 
-      magrittr::divide_by(20) |> 
+      httr::content() |>
+      xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") |>
+      xml2::xml_attrs() |>
+      purrr::pluck(1, 3) |>
+      as.numeric() |>
+      magrittr::divide_by(20) |>
       ceiling()
-    
+
     paginas <- 1:max_pag
-    
+
     pb <- progress::progress_bar$new(total = max_pag)
   }
   if (tipo == "A") {
     purrr::walk(paginas, purrr::possibly(~{
       pb$tick()
-        arquivo <- tjsp:::formatar_arquivo(inicio, fim, inicio_pb, 
+        arquivo <- formatar_arquivo(inicio, fim, inicio_pb,
                                   fim_pb, pagina = .x, diretorio)
       Sys.sleep(1)
-      httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=", .x), 
-                httr::set_cookies(unlist(response$cookies)), httr::accept("text/html; charset=latin1;"), 
+      httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=", .x),
+                httr::set_cookies(unlist(response$cookies)), httr::accept("text/html; charset=latin1;"),
                 httr::write_disk(arquivo, overwrite = TRUE))
     }, NULL))
   } else {
     purrr::walk(paginas, purrr::possibly(~{
       pb$tick()
-      arquivo <- formatar_arquivo(inicio, fim, inicio_pb, 
+      arquivo <- formatar_arquivo(inicio, fim, inicio_pb,
                                   fim_pb, pagina = .x, diretorio)
       Sys.sleep(1)
-      httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=", 
-                       .x), httr::set_cookies(unlist(response$cookies)), httr::write_disk(arquivo, 
+      httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=",
+                       .x), httr::set_cookies(unlist(response$cookies)), httr::write_disk(arquivo,
                                                                                    overwrite = TRUE))
     }, NULL))
   }

@@ -7,6 +7,7 @@
 tjsp_baixar_cjsg(
   livre = "",
   ementa = "",
+  processo = "",
   aspas = FALSE,
   classe = "",
   assunto = "",
@@ -26,6 +27,8 @@ tjsp_baixar_cjsg(
 \item{livre}{palavra ou texto a ser buscado nas ementas e nos acórdãos}
 
 \item{ementa}{palavra ou texto a ser buscado apenas nas ementas}
+
+\item{processo}{Número do processo}
 
 \item{aspas}{lógico. Colocar a expressão entre aspas?}
 

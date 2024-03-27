@@ -3,8 +3,7 @@
 #' Baixa  e organiza decisões do TJSP
 #'
 #'
-#' @docType package
-#' @name tjsp
+"_PACKAGE"
 NULL
 
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
