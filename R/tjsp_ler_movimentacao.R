@@ -131,7 +131,7 @@ tjsp_ler_movimentacao <- function (arquivos = NULL, diretorio = ".") {
       tidyr::separate(
         col = mov,
         into = c("movimento", "descricao"),
-        sep = "\n\\s+"
+        sep = "\n\\s+", extra = "merge",
       )
   }, otherwise = NULL), .progress = TRUE)
 }
