@@ -38,6 +38,9 @@ tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
          xml2::xml_text(trim = T) |>
          stringr::str_remove_all("\\D+")
 
+    cd_processo_pg <- stringr::str_extract(.x,"(?<=processo_pg_)\\w+?(?=_)")
+
+
     digital <- resposta |> xml2::xml_find_first("boolean(//*[@id='pbVisualizarAutos'] |//*[@id='linkConsultaSG'])")
 
     situacao <- resposta |> xml2::xml_find_first("//span[@id='situacaoProcesso']") |>
@@ -51,7 +54,7 @@ tjsp_ler_dados_cposg <- function(arquivos = NULL, diretorio = ".", wide = TRUE) 
       xml2::xml_find_all("//span[@class='unj-label']/following-sibling::div") |>
       xml2::xml_text()
 
-    tibble::tibble(processo = processo, cd_processo, processo_pg, digital, situacao, variavel = nomes,
+    tibble::tibble(processo = processo, cd_processo, processo_pg, cd_processo_pg, digital, situacao, variavel = nomes,
                    valor = valores)
 
   }, otherwise = NULL))
