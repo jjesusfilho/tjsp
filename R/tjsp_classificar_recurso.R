@@ -23,7 +23,7 @@ tjsp_classificar_recurso <- function (x)
     stringi::stri_detect_regex(x, "(?=.*\\bderam\\b)(?=.*\\bprejudicado\\b)") ~ "duvida",
     stringi::stri_detect_regex(x, "(?=.*\\bneg[oa]\\w*\\b)(?=.*\\bprejudicado\\b)") ~ "duvida",
     stringi::stri_detect_regex(x, "(?=.*\\bacolh\\w+\\b)(?=.*\\bneg[ao]\\w*\\b)") ~ "duvida",
-    stringi::stri_detect_regex(x, "parcial\\w*\\sprovi\\w+") ~ "parcial",
+    stringi::stri_detect_regex(x, "(parcial\\w*\\sprovi\\w+|\\bprovi\\w+\\sem parte)") ~ "parcial",
     stringi::stri_detect_regex(x, "(nao\\sconhec\\w+|nao\\sse\\sconhec\\w+)") ~ "n\u00e3o conhecido",
     stringi::stri_detect_regex(x, "desconh\\w+") ~ "desconhecido",
     stringi::stri_detect_regex(x, "nao\\s+conhec\\w+") ~ "desconhecido",
