@@ -54,9 +54,13 @@ tjsp_baixar_cpopg1 <- function (processo = NULL, diretorio)
                    dadosConsulta.valorConsultaNuUnificado = processo, dadosConsulta.valorConsulta = "",
                    uuidCaptcha = "")
 
+    if (foro == '0500'){
+       query1$consultaDeRequisitorios = "true"
+      }
+     
     resposta1 <- httr::RETRY("GET", url = uri1, query = query1,
                              quiet = TRUE, httr::timeout(2))
-
+     
     conteudo1 <- httr::content(resposta1)
 
     if (xml2::xml_find_first(conteudo1, "boolean(//div[@id='listagemDeProcessos'])")) {
