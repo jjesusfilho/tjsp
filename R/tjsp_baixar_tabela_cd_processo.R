@@ -18,9 +18,14 @@ tjsp_baixar_tabela_cd_processo <- function (cd_processo = NULL, diretorio = ".")
     arquivo <- file.path(diretorio,paste0("tabela_cd_processo_",.x,".html"))
 
 
-    r1 <- .x |>
-      paste0("https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=", ... = _, "&gateway=true") |>
+     if (stringr::str_detect(.x, "^DW")){
+      url1 <- paste0(url1,"&consultaDeRequisitorios=true")
+    }
+  
+    r1 <- url1 |>
       httr::GET()
+    
+
 
 
     if (
