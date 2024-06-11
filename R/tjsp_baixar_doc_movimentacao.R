@@ -1,7 +1,7 @@
 #' Baixa documentos da movimentação a partir da url
 #'
 #' @param urls Vetor de urls
-#' @param diretorio
+#' @param diretorio Informar diretório onde armazenar o pdf
 #'
 #' @return PDF
 #' @export

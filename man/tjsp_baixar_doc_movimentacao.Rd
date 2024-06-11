@@ -9,7 +9,7 @@ tjsp_baixar_doc_movimentacao(urls, diretorio = ".")
 \arguments{
 \item{urls}{Vetor de urls}
 
-\item{diretorio}{}
+\item{diretorio}{Informar diretório onde armazenar o pdf}
 }
 \value{
 PDF

@@ -57,7 +57,7 @@ tjsp_baixar_cjsg <-
 
     if(inicio != "" && fim != ""){
 
-      datas <- agrupar_datas(inicio, fim)
+      datas <- agrupar_datas(inicio, fim,"anual")
 
 
       purrr::walk2(datas$data_inicial, datas$data_final, purrr::possibly(~{
@@ -189,31 +189,6 @@ formatar_arquivo <- function(inicio,
   return(arquivo)
 }
 
-
-
-#' Subdivide as data em intervalos de um ano
-#'
-#' @param data_inicial Data inicial dd/mm/aaaa
-#' @param data_final Data final dd/mm/aaaa
-#' @param formato Formato de retorno. Default para dd/mm/aaaa
-#'
-#' @return tibble com duas colunas com data inicial e final
-#'
-agrupar_datas <- function(data_inicial = NULL,
-                          data_final = NULL,
-                          formato = "%d/%m/%Y"){
-
-  tibble::tibble(.datas = seq(lubridate::dmy(data_inicial),
-                           lubridate::dmy(data_final),1)) |>
-    dplyr::mutate(.ano = lubridate::year(.datas)) |>
-    dplyr::group_split(.ano) |>
-    purrr::map_dfr(~dplyr::pull(.x,".datas") |>
-                     range() |>
-                     setNames(c("data_inicial","data_final"))) |>
-    dplyr::mutate_all(list(~as.Date(.,origin='1970-01-01') |>
-                             format(formato)))
-
-}
 
 
 #' Verifica se está tudo ok com as datas.

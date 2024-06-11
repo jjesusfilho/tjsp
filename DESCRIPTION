@@ -57,7 +57,8 @@ Suggests:
     JSON2XML (>= 0.0.1),
     jqr,
     glue,
-    base64enc
+    base64enc,
+    readr
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
