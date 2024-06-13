@@ -9,11 +9,11 @@
 #'      Se não informada, uda a data de hoje.
 #' @param situacao Opções: "cumprida", "pendente" ou "ambas". Padrão para "ambas".
 #' @param natureza_comunicacao Opções: "intimação", "citação" ou "ambas". Padrão para "ambas".
-#' @param versao Pode ser csv ou html. Padrão para csv.
+#' @param versao Pode ser csv ou xml. Padrão para csv.
 #' @param intervalo Padrão para trimestral, ou seja, máximo.
 #' @param diretorio Padrão ".", ou seja, o atual.
 #'
-#' @return csv
+#' @return xml
 #' @export
 #'
 tjsp_baixar_intimacoes <- function(cd_foro = "",
@@ -23,7 +23,7 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
                                    dt_fim = "",
                                    situacao = "ambas",
                                    natureza_comunicacao = "ambas",
-                                   versao = c("csv","html"),
+                                   versao = c("xml","csv"),
                                    intervalo = "trimestral",
                                    diretorio = "."){
 
@@ -38,12 +38,12 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
 
   if(dt_inicio == ""){
 
-    dt_inicio <- Sys.Date() |> format("%d/%m/%Y")
+    dt_inicio <- (Sys.Date() - 1) |> format("%d/%m/%Y")
   }
 
   if(dt_fim == ""){
 
-    dt_fim <- Sys.Date() |> format("%d/%m/%Y")
+    dt_fim <- (Sys.Date() -1) |> format("%d/%m/%Y")
   }
 
   cd_tipo_ato <- switch(natureza_comunicacao,
@@ -58,13 +58,13 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
 
                  csv =  "https://esaj.tjsp.jus.br/intimacoesweb/exportarAtosRecebidosParaCsv.do",
 
-                 html = "https://esaj.tjsp.jus.br/intimacoesweb/consultarAtosRecebidos.do"
+                 xml= "https://esaj.tjsp.jus.br/intimacoesweb/consultarAtosRecebidos.do"
 
   )
 
   e <- switch(versao,
               csv = ".csv",
-              html = ".html"
+              xml = ".xml"
   )
 
   cd_usuario <- Sys.getenv("ESAJ_CD_USUARIO")
@@ -75,16 +75,10 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
 
   purrr::walk2(datas$data_inicial, datas$data_final, ~{
 
+ di <- .x
+ df <- .y
 
-    i <- lubridate::dmy(.x) |>
-      stringr::str_replace_all("\\D","_")
-
-    f <- lubridate::dmy(.y) |>
-      stringr::str_replace_all("\\D","_")
-
-    arquivo <- file.path(diretorio,paste0("foro_", cd_foro,"_inicio_",i,"_fim_",f,e))
-
-    body <-
+    corpo <-
       list(
         conversationId = "",
         entity.cdUsuario = cd_usuario,
@@ -107,8 +101,8 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
         entity.nmVaraOrigem = "",
         entity.cdVaraOrigem = "",
         dadosConsulta.flArea = "",
-        dadosConsulta.dtInicioPeriodo = .x,
-        dadosConsulta.dtFimPeriodo = .x,
+        dadosConsulta.dtInicioPeriodo = di,
+        dadosConsulta.dtFimPeriodo = df,
         entity.nuProcessoFormat = "",
         entity.cdProcesso = "",
         dadosConsulta.formaCienciaIntimacao = "",
@@ -116,6 +110,110 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
         entity.ato.flCumprido = ato_fl_cumprido
       )
 
-    httr::POST(url1, body = body, encode = "form", httr::write_disk(arquivo, overwrite = T))
+    r1 <-  httr::POST(url1, body = corpo, encode = "form") |>
+          httr::content()
+
+
+   dividir <- `/`
+
+   paginas <- r1 |>
+              xml2::xml_find_first("//*[@id='textQtLinhasRow']/following-sibling::text()") |>
+              xml2::xml_text() |>
+              stringr::str_remove_all("\\D+") |>
+              as.integer() |>
+              dividir(20) |>
+              ceiling()
+
+   i <- lubridate::dmy(di) |>
+     stringr::str_replace_all("\\D","_")
+
+   f <- lubridate::dmy(df) |>
+     stringr::str_replace_all("\\D","_")
+
+   purrr::walk(0:paginas, ~{
+
+     p  <- .x
+
+   arquivo <- file.path(diretorio,paste0('pagina_',p,"_foro_", cd_foro,"_inicio_",i,"_fim_",f,e))
+
+   q <- structure(
+     list(
+       scheme = "https",
+       hostname = "esaj.tjsp.jus.br",
+       port = NULL,
+       path = "intimacoesweb/AjaxServlet.ajax",
+       query = list(
+         component = "gridPaginada",
+         filterPaginationID = "/intimacoesweb_gridAtosUsuario",
+         beanClass = "br.com.softplan.intimacoes.comum.AtoUsuario",
+         objectPaginationHandler = "br.com.softplan.saj.intimacoesweb.grid.ConsultaAtosRecebidosPaginationHandler",
+         ejbClass = "",
+         ejbMethod = "",
+         pageSize = "20",
+         page = .x,
+         currentPage = "0",
+         paramSize = "0",
+         orderBy = "null",
+         orderByDirection = "null",
+         column0Type = "null",
+         column0 = "cdAto",
+         column1Type = "null",
+         column1 = "cdUsuario",
+         column2Type = "null",
+         column2 = "ato.cdProcesso",
+         column3Type = "null",
+         column3 = "ato.cdForo",
+         column4Type = "null",
+         column4 = "ato.especialidade.cdEspecialidade",
+         column5Type = "null",
+         column5 = "ato.cargo.cdCargo",
+         column6Type = "null",
+         column6 = "ato.flCumprido",
+         column7Type = "null",
+         column7 = "ato.cdTipoAto",
+         column8Type = "null",
+         column8 = "intimacaoAutomatica",
+         column9Type = "null",
+         column9 = "dtLeitura",
+         column10Type = "null",
+         column10 = "ato.dtInclusao",
+         column11Type = "null",
+         column11 = "dtIntimacao",
+         column12Type = "null",
+         column12 = "nuDiasPrazo",
+         column13Type = "null",
+         column13 = "ato.nuProcessoFormat",
+         column14Type = "null",
+         column14 = "classeEAssuntoPrincipaisFormatado",
+         column15Type = "null",
+         column15 = "usuarioIntimacao.nmUsuario",
+         column16Type = "null",
+         column16 = "ato.deTipoMvProcesso",
+         column17Type = "null",
+         column17 = "ato.especialidade.nmEspecialidade",
+         column18Type = "null",
+         column18 = "ato.cargo.deCargo",
+         column19Type = "null",
+         column19 = "ato.tarjasJson",
+         columnsSize = "20",
+         objSerializado = "null"
+       ),
+       params = NULL,
+       fragment = NULL,
+       username = NULL,
+       password = NULL
+     ),
+     class = "url"
+   )
+
+
+   q$query$page <- p
+
+   parseada <- httr::build_url(q)
+
+   httr::GET(parseada, httr::write_disk(arquivo, overwrite = T))
+
+})
+
   })
 }

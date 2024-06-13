@@ -12,7 +12,7 @@ tjsp_baixar_intimacoes(
   dt_fim = "",
   situacao = "ambas",
   natureza_comunicacao = "ambas",
-  versao = c("csv", "html"),
+  versao = c("xml", "csv"),
   intervalo = "trimestral",
   diretorio = "."
 )
@@ -34,14 +34,14 @@ Se não informada, uda a data de hoje.}
 
 \item{natureza_comunicacao}{Opções: "intimação", "citação" ou "ambas". Padrão para "ambas".}
 
-\item{versao}{Pode ser csv ou html. Padrão para csv.}
+\item{versao}{Pode ser csv ou xml. Padrão para csv.}
 
 \item{intervalo}{Padrão para trimestral, ou seja, máximo.}
 
 \item{diretorio}{Padrão ".", ou seja, o atual.}
 }
 \value{
-csv
+xml
 }
 \description{
 Coleta intimações do TJSP
