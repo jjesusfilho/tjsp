@@ -12,6 +12,8 @@ tjsp_baixar_intimacoes(
   dt_fim = "",
   situacao = "ambas",
   natureza_comunicacao = "ambas",
+  versao = c("csv", "html"),
+  intervalo = "trimestral",
   diretorio = "."
 )
 }
@@ -22,13 +24,19 @@ tjsp_baixar_intimacoes(
 
 \item{cd_vara}{Código da vara.}
 
-\item{dt_inicio}{Data do início no formato "dd/mm/aaaa"}
+\item{dt_inicio}{Data do início no formato "dd/mm/aaaa".
+Se não informada, usa a data de hoje.}
 
-\item{dt_fim}{Data do fim no formato "dd/mm/aaaa"}
+\item{dt_fim}{Data do fim no formato "dd/mm/aaaa".
+Se não informada, uda a data de hoje.}
 
 \item{situacao}{Opções: "cumprida", "pendente" ou "ambas". Padrão para "ambas".}
 
 \item{natureza_comunicacao}{Opções: "intimação", "citação" ou "ambas". Padrão para "ambas".}
+
+\item{versao}{Pode ser csv ou html. Padrão para csv.}
+
+\item{intervalo}{Padrão para trimestral, ou seja, máximo.}
 
 \item{diretorio}{Padrão ".", ou seja, o atual.}
 }
