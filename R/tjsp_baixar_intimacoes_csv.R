@@ -44,7 +44,7 @@ tjsp_baixar_intimacoes_csv <- function(cd_foro = "",
   cd_usuario <- Sys.getenv("ESAJ_CD_USUARIO")
 
 
-  datas <- agrupar_datas(dt_inicio, dt_fim, corte = "trimestral")
+  datas <- agrupar_datas(dt_inicio, dt_fim, corte = intervalo)
 
   url1 <- "https://esaj.tjsp.jus.br/intimacoesweb/exportarAtosRecebidosParaCsv.do"
 
