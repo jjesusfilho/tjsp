@@ -181,6 +181,9 @@
     <loc>/reference/mni_base64_doc.html</loc>
   </url>
   <url>
+    <loc>/reference/mni_combinar_docs.html</loc>
+  </url>
+  <url>
     <loc>/reference/mni_consultar_processo.html</loc>
   </url>
   <url>
@@ -250,10 +253,16 @@
     <loc>/reference/tidyeval.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp-package.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_api_extrair.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_api_ler.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_api_quantidade.html</loc>
@@ -301,13 +310,25 @@
     <loc>/reference/tjsp_baixar_cposg.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_baixar_doc_movimentacao.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_baixar_docs.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_baixar_docs_cd_processo.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_baixar_docs_cd_processo1.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_baixar_inicial.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_baixar_intimacoes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_baixar_intimacoes_csv.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_baixar_partes_docs.html</loc>
@@ -386,6 +407,12 @@
   </url>
   <url>
     <loc>/reference/tjsp_ler_historico_classes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_ler_intimacoes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_ler_intimacoes_xml.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_ler_movimentacao.html</loc>

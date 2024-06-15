@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.5.0</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Subdivide as data em intervalos de um ano</h1>
-    <small class="dont-index">Source: <a href="https://github.com/jjesusfilho/tjsp/blob/HEAD/R/tjsp_baixar_cjsg.R" class="external-link"><code>R/tjsp_baixar_cjsg.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/jjesusfilho/tjsp/blob/HEAD/R/agrupar_datas.R" class="external-link"><code>R/agrupar_datas.R</code></a></small>
     <div class="hidden name"><code>agrupar_datas.Rd</code></div>
     </div>
 
@@ -53,7 +53,12 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">agrupar_datas</span><span class="op">(</span>data_inicial <span class="op">=</span> <span class="cn">NULL</span>, data_final <span class="op">=</span> <span class="cn">NULL</span>, formato <span class="op">=</span> <span class="st">"%d/%m/%Y"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">agrupar_datas</span><span class="op">(</span></span>
+<span>  data_inicial <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  data_final <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  corte <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"anual"</span>, <span class="st">"semestral"</span>, <span class="st">"trimestral"</span>, <span class="st">"mensal"</span><span class="op">)</span>,</span>
+<span>  formato <span class="op">=</span> <span class="st">"%d/%m/%Y"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -66,8 +71,12 @@
 <dd><p>Data final dd/mm/aaaa</p></dd>
 
 
+<dt>corte</dt>
+<dd><p>Informar se anual, semestral, trimestral ou mensal.</p></dd>
+
+
 <dt>formato</dt>
-<dd><p>Formato de retorno. Default para dd/mm/aaaa</p></dd>
+<dd><p>Formato de retorno. Default para dd/mm/aaaa.</p></dd>
 
 </dl></div>
     <div id="value">
