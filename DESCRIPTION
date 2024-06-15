@@ -42,23 +42,19 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 2.1.0),
-    caret,
-    dbx,
     rsample,
     ggplot2,
     stringdist,
     future,
     furrr,
-    zoo,
     usethis,
     jsonlite,
     stringi,
     qpdf,
-    JSON2XML (>= 0.0.1),
-    jqr,
     glue,
     base64enc,
-    readr
+    readr,
+    snakecase
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
