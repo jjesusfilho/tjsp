@@ -17,7 +17,7 @@
 #' @export
 
 tjsp_pet_dados <- function(processo,
-                                    instancia = "PG",
+                                    instancia = "pg",
                                     diretorio = "."
 ){
 
@@ -68,6 +68,6 @@ tjsp_pet_dados <- function(processo,
 
     httr::GET(url1, httr::write_disk(arquivo, overwrite = T))
 
-}, NULL))
+}, NULL), .progress =TRUE)
 
 }
