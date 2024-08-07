@@ -20,20 +20,29 @@ tjsp_ler_peticoes_diversas <- function(arquivos = NULL,diretorio = ".") {
   purrr::map_dfr(arquivos, purrr::possibly(~{
 
 
-    pb$tick()
-
-    processo <- stringr::str_extract(.x, "\\d{20}")
-
+   doc <-    xml2::read_html(.x) 
     
+   processo <- doc |>
+      xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |>
+      xml2::xml_text() |>
+      stringr::str_squish() |>
+      stringr::str_remove_all("[^\\d+\\s]") |>
+      stringr::str_trim()
 
-       xml2::read_html(.x) |>
+    cd_processo <- doc |>
+      xml2::xml_find_first("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
+      xml2::xml_text() |>
+      stringr::str_extract("(?<=processo.codigo=)\\w+")
+
+
+       doc |>
       xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Peti\u00E7\u00F5es diversas')]/../following-sibling::table[1]/tbody/tr") |>
       xml2::xml_text() |>
       stringr::str_trim() |>
       stringr::str_split("\n\\s+") |>
       purrr::map_dfr(stats::setNames, c("data","tipo")) |>
       dplyr::mutate(data = lubridate::dmy(data)) |>
-      tibble::add_column(processo  = processo, .before = 1)
+      tibble::add_column(processo  = processo, cd_processo = cd_processo,  .before = 1)
 
   }, otherwise = NULL))
 }
