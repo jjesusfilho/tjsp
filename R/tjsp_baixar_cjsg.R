@@ -282,26 +282,32 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
 
   response <- httr::POST(link_cjsg, encode = "form", body = body,
                          httr::accept("text/html; charset=latin1;"))
+
+
+
+  r1 <- httr::GET("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=1",
+                  httr::set_cookies(unlist(response$cookies)), httr::accept("text/html; charset=latin1;")
+                  )
+
+
   if (!is.null(n)) {
     paginas <- 1:n
-    pb <- progress::progress_bar$new(total = n)
+
   } else {
-    max_pag <- response |>
+    max_pag <- r1 |>
       httr::content() |>
-      xml2::xml_find_all(xpath = "//*[@id='totalResultadoAba-A']|//*[@id='totalResultadoAba-D']") |>
-      xml2::xml_attrs() |>
-      purrr::pluck(1, 3) |>
+      xml2::xml_find_all(xpath = "//td[contains(., 'Resultados')]") |>
+      xml2::xml_text(trim = T) |>
+      stringr::str_extract("\\d+$") |>
       as.numeric() |>
       magrittr::divide_by(20) |>
       ceiling()
 
     paginas <- 1:max_pag
 
-    pb <- progress::progress_bar$new(total = max_pag)
   }
   if (tipo == "A") {
     purrr::walk(paginas, purrr::possibly(~{
-      pb$tick()
         arquivo <- formatar_arquivo(inicio, fim, inicio_pb,
                                   fim_pb, pagina = .x, diretorio)
       Sys.sleep(1)
@@ -311,13 +317,12 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
     }, NULL))
   } else {
     purrr::walk(paginas, purrr::possibly(~{
-      pb$tick()
       arquivo <- formatar_arquivo(inicio, fim, inicio_pb,
                                   fim_pb, pagina = .x, diretorio)
       Sys.sleep(1)
       httr::GET(paste0("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=D&pagina=",
                        .x), httr::set_cookies(unlist(response$cookies)), httr::write_disk(arquivo,
                                                                                    overwrite = TRUE))
-    }, NULL))
+    }, NULL), .progress = TRUE)
   }
 }
