@@ -16,6 +16,7 @@ tjsp_baixar_cjsg(
   fim = "",
   inicio_pb = "",
   fim_pb = "",
+  comarca = "",
   sg = "T",
   cr = "",
   tipo = "A",
@@ -45,6 +46,8 @@ tjsp_baixar_cjsg(
 \item{inicio_pb}{data inicial registro/publicação}
 
 \item{fim_pb}{data final registr/publicacao}
+
+\item{comarca}{Vetor de códigos das comarcas}
 
 \item{sg}{"T" para origem segundo grau}
 

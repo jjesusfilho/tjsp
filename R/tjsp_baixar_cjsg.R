@@ -11,6 +11,7 @@
 #' @param fim  Data final julgamento
 #' @param inicio_pb data inicial registro/publicação
 #' @param fim_pb    data final registr/publicacao
+#' @param comarca Vetor de códigos das comarcas
 #' @param sg  "T" para origem segundo grau
 #' @param cr  "R" para origem colégio recursal
 #' @param tipo "A" Para acórdãos, "D" para decisões monocráticas
@@ -38,6 +39,7 @@ tjsp_baixar_cjsg <-
            fim = "",
            inicio_pb = "",
            fim_pb = "",
+           comarca = "",
            sg = "T",
            cr = "",
            tipo = "A",
@@ -73,6 +75,7 @@ tjsp_baixar_cjsg <-
                           fim = .y,
                           inicio_pb = inicio_pb,
                           fim_pb = fim_pb,
+                          comarca = comarca,
                           sg = sg,
                           cr = cr,
                           tipo = tipo,
@@ -123,6 +126,7 @@ tjsp_baixar_cjsg <-
                         fim = fim,
                         inicio_pb = inicio_pb,
                         fim_pb = fim_pb,
+                        comarca = comarca,
                         sg = sg,
                         cr = cr,
                         tipo,
@@ -232,7 +236,7 @@ verificar_datas <- function(inicio, fim, inicio_pb, fim_pb){
 
 tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = "",
           assunto = "", orgao_julgador = "", inicio = "", fim = "",
-          inicio_pb = "", fim_pb = "", sg = "T", cr = "", tipo = "A",
+          inicio_pb = "", fim_pb = "",comarca = "", sg = "T", cr = "", tipo = "A",
           n = NULL, diretorio = ".", aspas = FALSE) {
 
   httr::set_config(httr::config(ssl_verifypeer = FALSE, accept_encoding = "latin1"))
@@ -279,6 +283,21 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
     tipoDecisaoSelecionados = tipo,
     dados.ordenacao = "dtPublicacao"
   )
+
+  if (any(comarca != "")){
+
+    body$contadorcomarca <- length(comarca)
+    body$contadorMaiorcomarca <- length(comarca)
+
+    for(i in 1:length(comarca)){
+
+      body <- append(body, comarca[i])
+
+      names(body)[length(body)]<- glue::glue("dadosComarca[{i}].cdComarca")
+
+    }
+
+  }
 
   response <- httr::POST(link_cjsg, encode = "form", body = body,
                          httr::accept("text/html; charset=latin1;"))
