@@ -269,7 +269,7 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
     assuntosTreeSelection.text = "",
     comarcaSelectedEntitiesList = "",
     contadorcomarca = "1",
-    contadorMaiorcomarca = "0",
+    contadorMaiorcomarca = "1",
     cdComarca = comarca[1],
     nmComarca = "",
     secoesTreeSelection.values = orgao_julgador,
