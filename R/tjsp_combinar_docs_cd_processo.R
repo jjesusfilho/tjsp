@@ -5,6 +5,7 @@
 #'     informar arquivos
 #' @param dir_destino Diretório destino
 #' @param nivel Juntar processo inteiro ou por documento?
+#' @param forcar Padrão para TRUE. Documentos inválidos são excluídos.
 #'
 #' @return único pdf
 #' @export
@@ -12,7 +13,8 @@
 tjsp_combinar_docs_cd_processo <- function(arquivos = NULL,
                                dir_origem = ".",
                                dir_destino = NULL,
-                               nivel = c("processo", "doc")){
+                               nivel = c("processo", "doc"),
+                               forcar = TRUE){
 
   if (is.null(dir_destino) || !dir.exists(dir_destino)){
 
@@ -34,6 +36,13 @@ tjsp_combinar_docs_cd_processo <- function(arquivos = NULL,
                   id_doc = stringr::str_extract(arquivos,'(?<=id_doc_)\\d+') |> as.integer(),
                   pagina_inicial = stringr::str_extract(arquivos, '(?<=inicial_)\\d+') |> as.integer()) |> # nolint
     dplyr::arrange(cd_processo,id_doc,pagina_inicial)
+
+
+  if (forcar){
+
+    lista <- lista |>
+      dplyr::filter(is_pdf(arquivos))
+  }
 
   if (nivel == "processo"){
 

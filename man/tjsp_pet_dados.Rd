@@ -4,7 +4,7 @@
 \alias{tjsp_pet_dados}
 \title{Baixa informações sobre as partes}
 \usage{
-tjsp_pet_dados(processo, instancia = "PG", diretorio = ".")
+tjsp_pet_dados(processo, instancia = "pg", diretorio = ".")
 }
 \arguments{
 \item{processo}{Vetor com os códigos dos processos}

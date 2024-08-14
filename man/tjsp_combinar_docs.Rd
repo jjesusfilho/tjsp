@@ -8,7 +8,8 @@ tjsp_combinar_docs(
   arquivos = NULL,
   dir_origem = ".",
   dir_destino = NULL,
-  nivel = c("processo", "doc")
+  nivel = c("processo", "doc"),
+  forcar = TRUE
 )
 }
 \arguments{
@@ -20,9 +21,11 @@ informar arquivos}
 \item{dir_destino}{Diretório destino}
 
 \item{nivel}{Juntar processo inteiro ou por documento?}
+
+\item{forcar}{Padrão para TRUE. Documentos inválidos são excluídos}
 }
 \value{
-único pdf
+Pdf(s) combinado(s)
 }
 \description{
 Combina docs baixados com tjsp_baixar_docs
