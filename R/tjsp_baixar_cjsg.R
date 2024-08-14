@@ -11,7 +11,7 @@
 #' @param fim  Data final julgamento
 #' @param inicio_pb data inicial registro/publicação
 #' @param fim_pb    data final registr/publicacao
-#' @param comarca Vetor de códigos das comarcas
+#' @param comarca Código da comarca. Uma por vez.
 #' @param sg  "T" para origem segundo grau
 #' @param cr  "R" para origem colégio recursal
 #' @param tipo "A" Para acórdãos, "D" para decisões monocráticas
@@ -270,7 +270,7 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
     comarcaSelectedEntitiesList = "",
     contadorcomarca = "0",
     contadorMaiorcomarca = "0",
-    cdComarca = "",
+    cdComarca = comarca[1],
     nmComarca = "",
     secoesTreeSelection.values = orgao_julgador,
     secoesTreeSelection.text = "",
@@ -284,20 +284,20 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
     dados.ordenacao = "dtPublicacao"
   )
 
-  if (any(comarca != "")){
+  # if (any(comarca != "")){
+  #
+  #   body$contadorcomarca <- length(comarca)
+  #   body$contadorMaiorcomarca <- length(comarca)
+  #
+  #   for(i in 1:length(comarca)){
+  #
+  #     body <- append(body, comarca[i])
+  #
+  #     names(body)[length(body)]<- glue::glue("dadosComarca[{i}].cdComarca")
+  #
+  #   }
 
-    body$contadorcomarca <- length(comarca)
-    body$contadorMaiorcomarca <- length(comarca)
-
-    for(i in 1:length(comarca)){
-
-      body <- append(body, comarca[i])
-
-      names(body)[length(body)]<- glue::glue("dadosComarca[{i}].cdComarca")
-
-    }
-
-  }
+  #}
 
   response <- httr::POST(link_cjsg, encode = "form", body = body,
                          httr::accept("text/html; charset=latin1;"))

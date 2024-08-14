@@ -47,7 +47,7 @@ tjsp_baixar_cjsg(
 
 \item{fim_pb}{data final registr/publicacao}
 
-\item{comarca}{Vetor de códigos das comarcas}
+\item{comarca}{Código da comarca. Uma por vez.}
 
 \item{sg}{"T" para origem segundo grau}
 
