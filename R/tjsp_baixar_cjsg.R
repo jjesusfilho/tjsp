@@ -268,7 +268,7 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
     assuntosTreeSelection.values = assunto,
     assuntosTreeSelection.text = "",
     comarcaSelectedEntitiesList = "",
-    contadorcomarca = "0",
+    contadorcomarca = "1",
     contadorMaiorcomarca = "0",
     cdComarca = comarca[1],
     nmComarca = "",
