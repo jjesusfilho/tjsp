@@ -12,9 +12,9 @@
 tjsp_classificar_sentenca <- function (x)
 {
 
-x<- x %>%
+x<- x |>
     # stringr::str_sub(-2000) %>%
-      tolower() %>%
+      tolower() |>
       stringi::stri_trans_general("latin-ascii")
 
       dplyr::case_when(
