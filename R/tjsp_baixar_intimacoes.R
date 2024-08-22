@@ -27,58 +27,58 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
                                    versao = c("xml","csv"),
                                    intervalo = "trimestral",
                                    diretorio = "."){
-  
-  
+
+
   cd_foro <- as.integer(cd_foro)
-  
+
   ato_fl_cumprido <- switch(situacao,
                             ambas = "",
                             cumprida = "S",
                             pendente = "N"
   )
-  
+
   if(dt_inicio == ""){
-    
+
     dt_inicio <- (Sys.Date() - 1) |> format("%d/%m/%Y")
   }
-  
+
   if(dt_fim == ""){
-    
+
     dt_fim <- (Sys.Date() -1) |> format("%d/%m/%Y")
   }
-  
+
   cd_tipo_ato <- switch(natureza_comunicacao,
                         ambas = "-1",
                         intimacao = "0",
                         citacao = "4"
   )
-  
+
   versao <- versao[[1]]
-  
+
   url1 <- switch(versao,
-                 
+
                  csv =  "https://esaj.tjsp.jus.br/intimacoesweb/exportarAtosRecebidosParaCsv.do",
-                 
+
                  xml= "https://esaj.tjsp.jus.br/intimacoesweb/consultarAtosRecebidos.do"
-                 
+
   )
-  
+
   e <- switch(versao,
               csv = ".csv",
               xml = ".xml"
   )
-  
+
   cd_usuario <- Sys.getenv("ESAJ_CD_USUARIO")
-  
-  
+
+
   datas <- agrupar_datas(dt_inicio, dt_fim, corte = intervalo)
-  
-  
+
+
   purrr::walk2(datas$data_inicial, datas$data_final, ~{
-    
+
     di <- .x
     df <- .y
-    
+
     corpo <-
       list(
         conversationId = "",
@@ -110,13 +110,13 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
         entity.cdTipoAto = cd_tipo_ato,
         entity.ato.flCumprido = ato_fl_cumprido
       )
-    
+
     r1 <-  httr::POST(url1, body = corpo, encode = "form") |>
       httr::content()
-    
-    
+
+
     dividir <- `/`
-    
+
     paginas <- r1 |>
       xml2::xml_find_first("//*[@id='textQtLinhasRow']/following-sibling::text()") |>
       xml2::xml_text() |>
@@ -124,31 +124,31 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
       as.integer() |>
       dividir(20) |>
       ceiling()
-    
+
     i <- lubridate::dmy(di) |>
       stringr::str_replace_all("\\D","_")
-    
+
     f <- lubridate::dmy(df) |>
       stringr::str_replace_all("\\D","_")
-    
-    
+
+
     p <- paginas:1
-    
+
     purrr::walk(p, ~{
-      
-   
+
+
       if (.x == max(p)){
-        
+
         page <- 2
         current_page <- 0
       } else {
-        
+
         page <- 3
         current_page <- .x
       }
-      
-      arquivo <- file.path(diretorio,paste0('pagina_',.x,"_foro_", cd_foro,"_inicio_",i,"_fim_",f,e))
-      
+
+      arquivo <- file.path(diretorio,paste0('pagina_',.x,"_foro_", cd_foro,"_vara_",cd_vara,"_inicio_",i,"_fim_",f,e))
+
       q <- structure(
         list(
           scheme = "https",
@@ -218,13 +218,13 @@ tjsp_baixar_intimacoes <- function(cd_foro = "",
         ),
         class = "url"
       )
-      
-  
+
+
       parseada <- httr::build_url(q)
-      
+
       httr::GET(parseada, httr::write_disk(arquivo, overwrite = T))
-      
+
     })
-    
+
   })
 }
