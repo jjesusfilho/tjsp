@@ -10,13 +10,42 @@
 #'
 tjsp_intimacoes_varas <- function(codigo_foro){
 
+  cd_usuario <- Sys.getenv("ESAJ_CD_USUARIO")
 
-  url1 <- "https://esaj.tjsp.jus.br/intimacoesweb/AjaxServlet.ajax?entity.cdForo=100&tagId=varaService&cdUsuarioReferencia=251219&cdTipoAto=-1&cdInstancia=1&cdForo=100&filtroValue=entity.cdForo=100&component=inputSelect&bind_nmVara=entity.nmVara&bind_cdVara=entity.cdVara&useAction=false&SpwInputSelectRequestOrigin=InputSelectSearchGrid"
+  parseada <-   structure(
+    list(
+      scheme = "https",
+      hostname = "esaj.tjsp.jus.br",
+      port = NULL,
+      path = "intimacoesweb/AjaxServlet.ajax",
+      query = list(
+        entity.cdForo = codigo_foro,
+        tagId = "varaService",
+        cdUsuarioReferencia = cd_usuario,
+        cdTipoAto = "-1",
+        cdInstancia = "1",
+        cdForo = codigo_foro,
+        filtroValue = glue::glue("entity.cdForo={codigo_foro}"),
+        component = "inputSelect",
+        bind_nmVara = "entity.nmVara",
+        bind_cdVara = "entity.cdVara",
+        useAction = "false",
+        SpwInputSelectRequestOrigin = "InputSelectSearchGrid"
+      ),
+      params = NULL,
+      fragment = NULL,
+      username = NULL,
+      password = NULL
+    ),
+    class = "url"
+  )
+
+
+  url1 <- httr::build_url(parseada)
 
   r1 <- httr::GET(url1)
 
 
-cd_usuario <- Sys.getenv("ESAJ_CD_USUARIO")
 
 parseada <- structure(
   list(
