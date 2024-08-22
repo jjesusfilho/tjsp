@@ -1,4 +1,4 @@
-#' Subdivide as data em intervalos de um ano
+#' Subdivide as data em intervalos anuais, semestrais, trimestrais ou mensais.
 #'
 #' @param data_inicial Data inicial dd/mm/aaaa
 #' @param data_final Data final dd/mm/aaaa

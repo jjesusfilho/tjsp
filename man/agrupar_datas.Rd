@@ -2,7 +2,7 @@
 % Please edit documentation in R/agrupar_datas.R
 \name{agrupar_datas}
 \alias{agrupar_datas}
-\title{Subdivide as data em intervalos de um ano}
+\title{Subdivide as data em intervalos anuais, semestrais, trimestrais ou mensais.}
 \usage{
 agrupar_datas(
   data_inicial = NULL,
@@ -24,5 +24,5 @@ agrupar_datas(
 tibble com duas colunas com data inicial e final
 }
 \description{
-Subdivide as data em intervalos de um ano
+Subdivide as data em intervalos anuais, semestrais, trimestrais ou mensais.
 }
