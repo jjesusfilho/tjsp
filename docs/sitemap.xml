@@ -124,6 +124,12 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/is_pdf.html</loc>
+  </url>
+  <url>
+    <loc>/reference/is_pdf1.html</loc>
+  </url>
+  <url>
     <loc>/reference/lapso.html</loc>
   </url>
   <url>
@@ -373,6 +379,12 @@
     <loc>/reference/tjsp_cposg_baixar_tabela_docs.html</loc>
   </url>
   <url>
+    <loc>/reference/tjsp_intimacoes_foros.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_intimacoes_varas.html</loc>
+  </url>
+  <url>
     <loc>/reference/tjsp_ler_acordaos_cjsg.html</loc>
   </url>
   <url>
@@ -419,6 +431,9 @@
   </url>
   <url>
     <loc>/reference/tjsp_ler_partes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tjsp_ler_partes_cd_processo.html</loc>
   </url>
   <url>
     <loc>/reference/tjsp_ler_peticoes.html</loc>

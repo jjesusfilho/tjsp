@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.6.0</span>
       </span>
     </div>
 
@@ -57,7 +57,8 @@
 <span>  arquivos <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dir_origem <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  dir_destino <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  nivel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"processo"</span>, <span class="st">"doc"</span><span class="op">)</span></span>
+<span>  nivel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"processo"</span>, <span class="st">"doc"</span><span class="op">)</span>,</span>
+<span>  forcar <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -79,12 +80,16 @@ informar arquivos</p></dd>
 <dt>nivel</dt>
 <dd><p>Juntar processo inteiro ou por documento?</p></dd>
 
+
+<dt>forcar</dt>
+<dd><p>Padrão para TRUE. Documentos inválidos são excluídos</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>único pdf</p>
+<p>Pdf(s) combinado(s)</p>
     </div>
 
   </div>
