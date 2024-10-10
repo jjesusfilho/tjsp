@@ -43,12 +43,17 @@ mni_consultar_processo <- function(tribunal = "tjsp",
   
   processo <- stringr::str_remove_all(processo,"\\D")
   
-  url <-"http://esaj.tjsp.jus.br/mniws/servico-intercomunicacao-2.2.2/intercomunicacao?wsdl"
+  if (toupper(tribunal) = "STF"){
+  url <-"https://wst.stf.jus.br/servico-intercomunicacao-2.2.2/intercomunicacao?wsdl"
+  } else if (toupper(tribunal) == "TJSP"){
+    
+    url <- "http://esaj.tjsp.jus.br/mniws/servico-intercomunicacao-2.2.2/intercomunicacao?wsdl"
   
-
+    }
+  
   purrr::walk(processo, purrr::possibly(~{
     
-
+    
     ## A op\u00E7\u00E3o por documentos n\u00E3o convive com cabe\u00E7alho e movimentos.
     
     corpo <- criar_corpo(
