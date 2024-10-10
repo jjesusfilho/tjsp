@@ -43,7 +43,7 @@ mni_consultar_processo <- function(tribunal = "tjsp",
   
   processo <- stringr::str_remove_all(processo,"\\D")
   
-  if (toupper(tribunal) = "STF"){
+  if (toupper(tribunal) == "STF"){
   url <-"https://wst.stf.jus.br/servico-intercomunicacao-2.2.2/intercomunicacao?wsdl"
   } else if (toupper(tribunal) == "TJSP"){
     
