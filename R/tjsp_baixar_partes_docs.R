@@ -50,12 +50,10 @@ tjsp_baixar_partes_docs <- function(cd_processo,
 
   cd_processo <- stringr::str_extract(cd_processo,"\\w+")
 
-  pb <- progress::progress_bar$new(total = length(cd_processo))
 
   purrr::walk(cd_processo, purrr::possibly(~{
 
 
-  pb$tick()
   
     url <- paste0("https://esaj.tjsp.jus.br/petpg/api/processos/", .x,"/partes?instancia=", instancia,"&cd_perfil=",cd_perfil,"&cd_usuario=",cd_usuario,"&cd_usuario_solicitante=",usuario_solicitante,"&documento_usuario=", document_usuario)
 
@@ -63,9 +61,11 @@ tjsp_baixar_partes_docs <- function(cd_processo,
 
     httr::GET(url, httr::write_disk(arquivo, overwrite = T))
 
-  }, NULL))
+  }, NULL), .progress = TRUE)
 
 }
+
+
 
 #' Cria variáveis de embiente temporárias para o usuário esaj.
 #'

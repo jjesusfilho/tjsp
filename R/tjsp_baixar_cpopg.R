@@ -15,19 +15,13 @@ tjsp_baixar_cpopg <- function(processos = NULL, sono = 1, diretorio = "."){
     stringr::str_pad(width = 20, "left", "0") |>
     pontuar_cnj()
 
-
-  pb <- progress::progress_bar$new(total = length(processos))
-
-
   purrr::walk(processos, purrr::possibly(~{
-
-    pb$tick()
 
     tjsp_baixar_cpopg1(.x,diretorio)
 
     Sys.sleep(sono)
 
-  },NULL))
+  },NULL), .progress = TRUE)
 
 
 }
@@ -48,6 +42,7 @@ tjsp_baixar_cpopg1 <- function (processo = NULL, diretorio)
 
     foro <- processo |>  stringr::str_extract("\\d{4}$")
 
+    
      query1 <- list(conversationId = "", dadosConsulta.localPesquisa.cdLocal = "-1",
                    cbPesquisa = "NUMPROC", dadosConsulta.tipoNuProcesso = "UNIFICADO",
                    numeroDigitoAnoUnificado = unificado, foroNumeroUnificado = foro,

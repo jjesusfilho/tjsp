@@ -41,20 +41,20 @@ tjsp_autenticar <- function(login = NULL, password = NULL) {
       stringr::str_c(base, "esaj/j_spring_cas_security_check"),
       reserved = TRUE
     )
-  ) %>%
+  ) |>
     httr::GET(httr::config(ssl_verifypeer = FALSE))
 
   # Get parameters for POST
-  lt <- f_login %>%
-    httr::content("text") %>%
-    xml2::read_html() %>%
-    xml2::xml_find_first("//input[@name='lt']") %>%
+  lt <- f_login |>
+    httr::content("text") |>
+    xml2::read_html() |>
+    xml2::xml_find_first("//input[@name='lt']") |>
     xml2::xml_attr("value")
 
-  e2 <- f_login %>%
-    httr::content("text") %>%
-    xml2::read_html() %>%
-    xml2::xml_find_first("//input[@name='execution']") %>%
+  e2 <- f_login |>
+    httr::content("text") |>
+    xml2::read_html() |>
+    xml2::xml_find_first("//input[@name='execution']") |>
     xml2::xml_attr("value")
 
   # Create POST quert
@@ -77,7 +77,7 @@ tjsp_autenticar <- function(login = NULL, password = NULL) {
       stringr::str_c(base, "esaj/j_spring_cas_security_check"),
       reserved = TRUE
     )
-  ) %>%
+  ) |>
     httr::POST(body = query_post, httr::config(ssl_verifypeer = FALSE), encode = "form")
 
   # Message
@@ -93,10 +93,10 @@ tjsp_autenticar <- function(login = NULL, password = NULL) {
 }
 
 check_login <- function() {
-  "https://esaj.tjsp.jus.br/" %>%
-    stringr::str_c("sajcas/verificarLogin.js") %>%
-    httr::GET(httr::config(ssl_verifypeer = FALSE)) %>%
-    httr::content("text") %>%
+  "https://esaj.tjsp.jus.br/" |>
+    stringr::str_c("sajcas/verificarLogin.js") |>
+    httr::GET(httr::config(ssl_verifypeer = FALSE)) |>
+    httr::content("text") |>
     stringr::str_detect("true")
 }
 
