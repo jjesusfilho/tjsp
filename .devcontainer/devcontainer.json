@@ -1,0 +1,33 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+
+  "features": {
+  "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
+    // See: https://github.com/rocker-org/devcontainer-features/blob/main/src/r-apt/README.md#options
+    "vscodeRSupport": "full",
+    "installBspm": true,
+    "installRadian": true,
+    "installDevTools": false,
+    "installRMarkdown": false,
+    "installVscDebugger": false,
+    "useTesting": false
+    }
+  },
+
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": { 
+        "r.rterm.linux": "/usr/local/bin/radian",
+        "r.bracketedPaste": true,
+        "r.plot.useHttpgd": true,
+        "[r]": {
+          "editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+        }
+      }
+    }
+}
+
+}
