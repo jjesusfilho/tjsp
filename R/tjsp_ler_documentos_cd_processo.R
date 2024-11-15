@@ -18,15 +18,15 @@ tjsp_ler_documentos_cd_processo <- function (arquivos = NULL, diretorio = ".", r
                            pattern = "pdf$")
   }
 
-  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map_dfr(arquivos, purrr::possibly(~{
 
-    pb$tick()
 
     cd_processo <- stringr::str_extract(.x, "\\w+?(?=_id_doc)")
 
     id_doc <- stringr::str_extract(.x, "(?<=id_doc_)\\d+")
+
+    pagina_inicial <- stringr::str_extract(.x, "(?<=pagina_inicial_)\\d+")
 
     suppressMessages({
       texto <- pdftools::pdf_text(.x)
@@ -52,6 +52,7 @@ tjsp_ler_documentos_cd_processo <- function (arquivos = NULL, diretorio = ".", r
     }
 
 
-    tibble::tibble(cd_processo, id_doc, doc = texto, data_documento = data)
-  }, NULL))
+    tibble::tibble(cd_processo, id_doc, pagina_inicial, doc = texto, data_documento = data)
+    
+  }, NULL), .progress = TRUE)
 }
