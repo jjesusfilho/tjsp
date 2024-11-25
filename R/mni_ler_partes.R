@@ -15,7 +15,7 @@ mni_ler_partes <- function(arquivos = NULL, diretorio = "."){
   }
   
   
-  purrr::map(arquivos, ~{
+  purrr::map(arquivos, purrr::possibly(~{
     
     processo <- stringr::str_extract(.x, "\\d{20}")
     
@@ -239,7 +239,7 @@ mni_ler_partes <- function(arquivos = NULL, diretorio = "."){
       purrr::list_rbind() |>
       tibble::add_column(processo = processo, .before = 1)
     
-  }, .progress = TRUE) |>
+  }, NULL)), .progress = TRUE) |>
     purrr::list_rbind()
   
   
