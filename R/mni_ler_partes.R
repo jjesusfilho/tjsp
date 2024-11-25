@@ -239,7 +239,7 @@ mni_ler_partes <- function(arquivos = NULL, diretorio = "."){
       purrr::list_rbind() |>
       tibble::add_column(processo = processo, .before = 1)
     
-  }, NULL)), .progress = TRUE) |>
+  }, NULL), .progress = TRUE) |>
     purrr::list_rbind()
   
   
