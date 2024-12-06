@@ -46,7 +46,8 @@ tjsp_baixar_docs_cd_processo <- function(df,diretorio = "."){
       }
       
       r1 <- httr::GET(url1)
-      
+      url2 <- paste0("https://esaj.tjsp.jus.br/cpopg/abrirPastaDigital.do?processo.codigo=",cd_processo)
+
     }
     
     r2 <-  url2 |>
