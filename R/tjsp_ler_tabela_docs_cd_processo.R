@@ -51,7 +51,7 @@ tjsp_ler_tabela_docs_cd_processo <- function(arquivos = NULL, diretorio = "."){
       }) |>
         dplyr::left_join(doc_name) |>
         dplyr::select(id_doc, doc_name, pagina_inicial, pagina_final, url_doc) |>
-        dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc) |> URLencode()) |>
+        dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc) |> URLencode(repeated = TRUE)) |>
         tibble::add_column(cd_processo_pg, .before =1) |>
         tibble::add_column(cd_processo_sg, .after  = 1) |>
         dplyr::mutate(instancia = ifelse(is.na(cd_processo_sg), 1, 2), .after = 2)
