@@ -52,9 +52,7 @@ tjsp_ler_tabela_docs <- function(arquivos = NULL, diretorio = "."){
       }) |> 
         dplyr::left_join(doc_name) |> 
         dplyr::select(id_doc, doc_name, pagina_inicial, pagina_final, url_doc) |> 
-        dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc)) |> 
-        dplyr::group_by(id_doc) |> 
-        dplyr::ungroup() |> 
+        dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc) |> URLencode()) |> 
         tibble::add_column(processo, .before =1)
       
     }) 

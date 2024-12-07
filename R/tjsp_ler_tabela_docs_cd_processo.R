@@ -14,11 +14,9 @@ tjsp_ler_tabela_docs_cd_processo <- function(arquivos = NULL, diretorio = "."){
 
   }
 
-  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map_dfr(arquivos,purrr::possibly(~{
 
-    pb$tick()
 
     cd_processo_pg <- stringr::str_extract(.x,"(?<=processo_pg_)[A-Z0-9]+")
     cd_processo_sg <- stringr::str_extract(.x,"(?<=processo_sg_)\\w+")
@@ -53,14 +51,12 @@ tjsp_ler_tabela_docs_cd_processo <- function(arquivos = NULL, diretorio = "."){
       }) |>
         dplyr::left_join(doc_name) |>
         dplyr::select(id_doc, doc_name, pagina_inicial, pagina_final, url_doc) |>
-        dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc)) |>
-        dplyr::group_by(id_doc) |>
-        dplyr::ungroup() |>
+        dplyr::mutate(url_doc = paste0("https://esaj.tjsp.jus.br/pastadigital/getPDF.do?",url_doc) |> URLencode()) |>
         tibble::add_column(cd_processo_pg, .before =1) |>
         tibble::add_column(cd_processo_sg, .after  = 1) |>
         dplyr::mutate(instancia = ifelse(is.na(cd_processo_sg), 1, 2), .after = 2)
 
     })
 
-  }, NULL))
+  }, NULL), .progress = TRUE)
 }
