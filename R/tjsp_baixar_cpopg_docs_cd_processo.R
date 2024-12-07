@@ -40,14 +40,15 @@ tjsp_baixar_docs_cd_processo <- function(df,diretorio = "."){
     } else {
       
       url1 <- paste0("https://esaj.tjsp.jus.br/cpopg/show.do?processo.codigo=",cd_processo , "&gateway=true")
+
+      url2 <- paste0("https://esaj.tjsp.jus.br/cpopg/abrirPastaDigital.do?processo.codigo=",cd_processo)
       
       if (stringr::str_detect(cd_processo, "^DW")){
         url1 <- paste0(url1,"&consultaDeRequisitorios=true")
       }
       
       r1 <- httr::GET(url1)
-      url2 <- paste0("https://esaj.tjsp.jus.br/cpopg/abrirPastaDigital.do?processo.codigo=",cd_processo)
-
+      
     }
     
     r2 <-  url2 |>
@@ -55,7 +56,7 @@ tjsp_baixar_docs_cd_processo <- function(df,diretorio = "."){
       httr::content("text") |>
       httr::GET()
     
-    tjsp_baixar_docs_cd_processo1(.x$cd_processo_pg, .x$id_doc, .x$pagina_inicial,  .x$url_doc, diretorio)
+    tjsp_baixar_docs_cd_processo1(.x$cd_processo_pg, .x$id_doc, .x$pagina_inicial, .x$pagina_final, .x$url_doc, diretorio)
     
     
   },NULL))
@@ -67,7 +68,8 @@ tjsp_baixar_docs_cd_processo <- function(df,diretorio = "."){
 #' Função interna do tjsp_baixar_cpopg_docs
 #' @param cd_processo Número do processo
 #' @param id_doc Id do documento
-#' @param pagina_inicial Pagina
+#' @param pagina_inicial pagina inicial
+#' @param pagina_final pagina final
 #' @param urls Urls dos documentos
 #' @param diretorio Diretório
 #'
@@ -76,6 +78,7 @@ tjsp_baixar_docs_cd_processo <- function(df,diretorio = "."){
 tjsp_baixar_docs_cd_processo1 <- function(cd_processo  = NULL,
                                           id_doc = NULL,
                                           pagina_inicial = NULL,
+                                          pagina_final = NULL,
                                           urls = NULL,
                                           diretorio = NULL){
   
@@ -83,20 +86,19 @@ tjsp_baixar_docs_cd_processo1 <- function(cd_processo  = NULL,
   
   id <- stringr::str_c(cd_processo,
                        "_id_doc_",id_doc,
-                       "_pagina_inicial_",pagina_inicial
+                       "_pagina_inicial_",pagina_inicial,
+                       "_pagina_final_", pagina_final
   )
   
-  pb <- progress::progress_bar$new(total = length(cd_processo))
   
   
   purrr::walk2(urls,id,purrr::possibly(~{
     
-    pb$tick()
     
     arquivo <- file.path(diretorio,paste0(.y,".pdf"))
     
     httr::GET(.x,httr::write_disk(arquivo,overwrite = TRUE))
     
-  },NULL))
+  },NULL), .progress = TRUE)
   
 }

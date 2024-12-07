@@ -8,6 +8,7 @@ tjsp_baixar_docs_cd_processo1(
   cd_processo = NULL,
   id_doc = NULL,
   pagina_inicial = NULL,
+  pagina_final = NULL,
   urls = NULL,
   diretorio = NULL
 )
@@ -17,7 +18,9 @@ tjsp_baixar_docs_cd_processo1(
 
 \item{id_doc}{Id do documento}
 
-\item{pagina_inicial}{Pagina}
+\item{pagina_inicial}{pagina inicial}
+
+\item{pagina_final}{pagina final}
 
 \item{urls}{Urls dos documentos}
 
