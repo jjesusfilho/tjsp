@@ -98,7 +98,7 @@ is_pdf1 <- function(arquivo) {
   if(file.exists(arquivo)) {
     res <- suppressMessages(try(pdftools::pdf_info(arquivo),
                                 silent = TRUE))
-    if(class(res) != "try-error") return(TRUE)
+    if(!methods::is(res, "try-error")) return(TRUE)
     warning(paste(arquivo, "Parece n\u00E3o se tratar de um pdf."))
     return(FALSE)
   }

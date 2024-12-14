@@ -1,33 +1,33 @@
 #' Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.
 #'
-#' @param diretorio objeto ou diretório onde se encontram as páginas.
 #' @param arquivos Se NULL, informar diretorio
-#' @return uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro, vara,
-#'     disponibilizacao e julgado (texto da decisão).
+#' @param diretorio objeto ou diretório onde se encontram as páginas.
+#' @param tz Informe o fuso horário
+#' @return uma tibble com nove colunas: processo,pagina, hora_coleta, duplicado, classe, assunto,
+#'     magistrado,comarca, foro, vara,
+#'     disponibilizacao, julgado (texto da decisão) e cd_doc (código do documento).
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' tjsp_ler_cjpg()
 #' }
-tjsp_ler_cjpg <- function(arquivos = NULL, diretorio = ".")
+tjsp_ler_cjpg <- function(arquivos = NULL, diretorio = ".", tz = "America/Sao_Paulo")
 {
   if (is.null(arquivos)) {
     arquivos <- list.files(path = diretorio, pattern = ".html",
                            full.names = TRUE)
   }
 
-  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map_dfr(arquivos, purrr::possibly(~{
 
-    pb$tick()
 
-    pagina <- stringr::str_extract(.x, "(?<=pagina_)\\d+") %>%
+    pagina <- stringr::str_extract(.x, "(?<=pagina_)\\d+") |>
       as.integer()
 
     suppressWarnings(
-      hora_coleta <- stringr::str_extract(.x, "\\d{4}[\\d_/]+") %>%
+      hora_coleta <- stringr::str_extract(.x, "\\d{4}.{15}") |>
         lubridate::ymd_hms(tz = "America/Sao_Paulo")
 
     )
@@ -78,22 +78,24 @@ tjsp_ler_cjpg <- function(arquivos = NULL, diretorio = ".")
       unlist()
 
 
-    disponibilizacao <-fundo_cinza |>
+    disponibilizacao <- fundo_cinza |>
       purrr::map(~xml2::xml_child(.x, "/tr/td//strong[contains(.,'Data de Disponibiliza\u00E7\u00E3o:')]/following-sibling::text()") |>
                    xml2::xml_text(trim = TRUE)) |>
       unlist()
 
-    julgado <- x %>% xml2::xml_find_all("//div[@align='justify'][@style='display: none;']") %>%
-      xml2::xml_text(trim = TRUE)
+    julgado <-  fundo_cinza |>
+        purrr::map(~xml2::xml_child(.x, "/div[@align='justify'][@style='display: none;']") |>
+        xml2::xml_text(trim = TRUE)) |>
+        unlist()
 
     tibble::tibble(processo, pagina, hora_coleta, classe,
                    assunto, magistrado, comarca, foro, vara, disponibilizacao,
                    julgado, cd_doc)
 
-  }, NULL)) %>%
-    dplyr::mutate(dplyr::across(4:10, ~stringi::stri_replace_first_regex(.,".*:\\s?", ""))) %>% dplyr::mutate_if(is.character, stringr::str_squish) %>%
+  }, NULL)) |>
+    dplyr::mutate(dplyr::across(c(classe,assunto, magistrado, comarca, foro, vara, disponibilizacao), ~stringi::stri_replace_first_regex(.,".*:\\s?", ""))) |> dplyr::mutate_if(is.character, stringr::str_squish) |>
     dplyr::mutate(disponibilizacao = lubridate::dmy(disponibilizacao),
-                  processo = stringr::str_remove_all(processo, "\\D+")) %>%
+                  processo = stringr::str_remove_all(processo, "\\D+")) |>
     dplyr::mutate(duplicado = vctrs::vec_duplicate_detect(processo),
                   .after = hora_coleta)
 }

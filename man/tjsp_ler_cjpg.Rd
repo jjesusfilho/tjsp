@@ -4,16 +4,19 @@
 \alias{tjsp_ler_cjpg}
 \title{Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.}
 \usage{
-tjsp_ler_cjpg(arquivos = NULL, diretorio = ".")
+tjsp_ler_cjpg(arquivos = NULL, diretorio = ".", tz = "America/Sao_Paulo")
 }
 \arguments{
 \item{arquivos}{Se NULL, informar diretorio}
 
 \item{diretorio}{objeto ou diretório onde se encontram as páginas.}
+
+\item{tz}{Informe o fuso horário}
 }
 \value{
-uma tibble com nove colunas: processo, classe, assunto, magistrado,comarca, foro, vara,
-    disponibilizacao e julgado (texto da decisão).
+uma tibble com nove colunas: processo,pagina, hora_coleta, duplicado, classe, assunto,
+    magistrado,comarca, foro, vara,
+    disponibilizacao, julgado (texto da decisão) e cd_doc (código do documento).
 }
 \description{
 Lê decisões de primeira instância do TJSP baixadas por meio da função tjsp_baixar_cjpg.

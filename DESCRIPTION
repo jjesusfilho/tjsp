@@ -1,6 +1,6 @@
 Package: tjsp
-Version: 2.6.0.9000
-Date: 2023-08-08
+Version: 2.6.1.9000
+Date: 2024-12-14
 Title: Coleta e organização de dados do Tribunal de Justiça de São
         Paulo
 Description: Funções para baixar metadados das decisõeses judiciais, baixar as
@@ -54,7 +54,8 @@ Suggests:
     glue,
     base64enc,
     readr,
-    snakecase
+    snakecase,
+    methods
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
