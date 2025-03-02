@@ -74,14 +74,15 @@ tjsp_ler_execucao_penal_cd_processo1 <- function(arquivo){
   label <- x |> 
     xml2::xml_find_all("//td[@class='label']|//td/div[@class='label']") |> 
     xml2::xml_text() |> 
-    snakecase::to_snake_case(x, transliterations = "Latin-ASCII")
+    snakecase::to_snake_case(transliterations = "Latin-ASCII")
   
   valores <- x |> 
     xml2::xml_find_all("//td[@class='label']/following-sibling::td|//td/div[@class='label']/following-sibling::text()") |> 
     xml2::xml_text(trim = T)
   
   principal <- tibble::tibble(variavel = label, valor = valores) |> 
-    tibble::add_column(cdprocesso, .before = 1)
+    tibble::add_row(variavel = "nome", valor= nome, .before = 1) |> 
+    tibble::add_column(cdprocesso, .before = 1) 
   
   documentos <- x |> 
     xml2::xml_find_first("//div[h2[text()='Documentos']]/following-sibling::table") |> 
