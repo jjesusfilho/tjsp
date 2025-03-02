@@ -9,10 +9,7 @@
 #'     de x.
 #' @export
 #'
-#' @examples
-#' wrong_names<-c("Mogi das Cruses","Sao Paulo","CANTA GALLO")
-#' correct_names<-c("Canta Galo","Mogi das Cruzes","São Paulo")
-#' fuzzy_search(x=wrong_names,y=correct_names)
+
 
 
 fuzzy_search<-function(x=NULL,y=NULL){

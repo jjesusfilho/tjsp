@@ -13,7 +13,7 @@ if (getRversion() >= "2.15.1") {
     "size", "alternativa", "vara", "vara2", "codigo_processo",
     "digital", "v1", "assunto", "classe", "distribuicao", "juiz",
     "filter", "branco", "v2", "area", "vara", "prioritaria", "assuntos", "assunto.x",
-    "", "foro", "cod_subarea", "subarea", "data_distribuicao",
+    "", "foro", "cod_subarea", "subarea", "data_distribuicao","data_evento",
     "data_recebimento", "processo_2", "processo_principal","pagina_inicial",
     "valor_da_acao", "incidente", "execucao_de_sentenca", "recebido_em",
     "classe_numero", "classe_situacao","number","n","comarca","imoveis", "lat","lng",

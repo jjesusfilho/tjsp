@@ -22,8 +22,3 @@ Procura a palavra ou frase do segundo vetor que melhor
    se aproxima do primeiro. Particularmente útil para
    comparar nomes de municípios.
 }
-\examples{
-wrong_names<-c("Mogi das Cruses","Sao Paulo","CANTA GALLO")
-correct_names<-c("Canta Galo","Mogi das Cruzes","São Paulo")
-fuzzy_search(x=wrong_names,y=correct_names)
-}
