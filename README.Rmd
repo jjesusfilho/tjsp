@@ -63,10 +63,19 @@ tabela <- tjsp_ler_cjsg(diretorio = "feminicidio")
 
 ### Baixando informações detalhadas dos processos
 
-O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função `autenticar()`, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.
+O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. 
 
+Para baixar informações processuais o ESAJ exige autenticação em duas etapas,i.e., além de usuário e senha, você tem de ter o pacote tjsp a obter um token enviado para seu email. 
 
-O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretório de sua escolha.
+No momento, é possível obter o token do gmail e do outlook (personal e business). Para tanto, você deve seguir as instruções dos pacotes [gmailr](https://github.com/r-lib/gmailr) ou do pacote [Microsoft365R](https://github.com/Azure/Microsoft365R) para autorizar o acesso automático ao seu email e extração do token.
+
+Feito isso, basta você chamar a função `tjsp_autencticar`:
+
+```r
+tjsp_autenticar(username = "seu_cpf",password = "sua_senha", email_provider= "gmail") ## ou outlook.
+
+```
+Depois disso, basta seguir com o download dos dados.
 
 ```r
 tjsp_baixar_cposg(tabela$processo)

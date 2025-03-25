@@ -5,14 +5,28 @@
 \alias{autenticar}
 \title{Autenticar no tjsp}
 \usage{
-tjsp_autenticar(login = NULL, password = NULL)
+tjsp_autenticar(
+  login = NULL,
+  password = NULL,
+  email_provider = NA,
+  outlook = "business"
+)
 
-autenticar(login = NULL, password = NULL)
+autenticar(
+  login = NULL,
+  password = NULL,
+  email_provider = NA,
+  outlook = "business"
+)
 }
 \arguments{
 \item{login}{cpf}
 
 \item{password}{senha}
+
+\item{email_provider}{Informar se "gmail" ou "outlook"}
+
+\item{outlook}{Informar se "personal" ou "business"}
 }
 \value{
 Estabelece uma sessão, não é necessário salvar.

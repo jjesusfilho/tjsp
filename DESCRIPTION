@@ -55,7 +55,9 @@ Suggests:
     base64enc,
     readr,
     snakecase,
-    methods
+    methods,
+    gmailr,
+    Microsoft365R
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho

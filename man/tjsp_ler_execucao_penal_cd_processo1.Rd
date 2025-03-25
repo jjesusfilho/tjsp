@@ -2,7 +2,7 @@
 % Please edit documentation in R/ler_execucao_penal.R
 \name{tjsp_ler_execucao_penal_cd_processo1}
 \alias{tjsp_ler_execucao_penal_cd_processo1}
-\title{L\u00EA apenas um arquivo da execu\u00E7\u00E3o}
+\title{Lêapenas um arquivo da execução}
 \usage{
 tjsp_ler_execucao_penal_cd_processo1(arquivo)
 }
@@ -13,5 +13,5 @@ tjsp_ler_execucao_penal_cd_processo1(arquivo)
 tibble
 }
 \description{
-L\u00EA apenas um arquivo da execu\u00E7\u00E3o
+Lêapenas um arquivo da execução
 }
