@@ -4,6 +4,10 @@
 #' @param password senha
 #' @param email_provider Informar se "gmail" ou "outlook"
 #' @param outlook Informar se "personal" ou "business"
+#' @param wait_email Tempo, em segundos, para aguardar antes de conferir se
+#'    se o código chegou no email.
+#' @param tz Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo"
+#'
 #' @return Estabelece uma sessão, não é necessário salvar.
 #' @export
 #'
@@ -14,15 +18,23 @@
 tjsp_autenticar <- function(login = NULL,
                             password = NULL,
                             email_provider = NA,
-                            outlook = "business"
+                            outlook = "business",
+                            wait_email = 5,
+                            tz = ""
                             ) {
 
+
+  print("Aguarde, pode demorar até dois minutos para retornar a resposta.")
+
+    if(tz==""){
+
+    tz <-Sys.timezone()
+
+    }
 
   email_provider <- match.arg(email_provider, choices = c("gmail","outlook"))
 
   outlook <- match.arg(outlook, choices = c("personal","business"))
-
-
 
   # Check if isn't already logged in
   if (check_login()) {
@@ -47,9 +59,20 @@ tjsp_autenticar <- function(login = NULL,
   base <- "https://esaj.tjsp.jus.br/"
   httr::GET(stringr::str_c(base, "esaj/portal.do?servico=740000"), httr::config(ssl_verifypeer = FALSE))
 
-  hora <- lubridate::now(tzone = "America/Sao_Paulo") |>
+  hora_gmail <- lubridate::now(tzone = tz) |>
     as.POSIXct() |>
-    as.numeric()
+    as.integer()
+
+  hora_outlook <- format(lubridate::with_tz(lubridate::now(tzone = tz), "UTC"), "%Y-%m-%dT%H:%M:%SZ")
+
+if(email_provider=='outlook'){
+
+    hora <- hora_outlook
+
+} else{
+
+  hora <- hora_gmail
+  }
 
   f_login <- stringr::str_c(
     base, "sajcas/login?service=",
@@ -100,9 +123,9 @@ tjsp_autenticar <- function(login = NULL,
   ) |>
     httr::POST(body = query_post, httr::config(ssl_verifypeer = FALSE), encode = "form")
 
+  Sys.sleep(wait_email)
 
-
- taxa <- purrr::rate_backoff(pause_base = 10, max_times = 5)
+ taxa <- purrr::rate_delay(pause = 10, max_times = 10)
 
  get_email_token_insistente <- purrr::insistently(get_email_token1, taxa, quiet = FALSE)
 
@@ -166,6 +189,10 @@ autenticar <- tjsp_autenticar
 #'
 get_email_token1 <- function(email_provider, outlook, hora) {
 
+  filtro_gmail <- glue::glue("from:esaj@tjsp.jus.br AND subject:Valida\u00E7\u00E3o AND after:{hora}")
+
+  filtro_outlook <- glue::glue("from/emailAddress/address eq 'esaj@tjsp.jus.br' and contains(subject,'Validação') and receivedDateTime ge {hora}")
+
   if(email_provider == "outlook"){
 
     if(outlook=="business"){
@@ -176,28 +203,25 @@ get_email_token1 <- function(email_provider, outlook, hora) {
       outl <- Microsoft365R::get_personal_outlook()
     }
 
-    email <- outl$list_emails(
-      search = "from:esaj@tjsp.jus.br AND subject:Valida\u00E7\u00E3o",
-      n = 1
-    )
+    email <- outlook$list_emails(
+      filter = filtro_outlook, by='received ASC', n=1)
+
 
     token <- email[[1]]$properties$bodyPreview |>
       stringr::str_extract("\\d{6}")
 
   } else {
 
-
-  #gmailr::gm_auth()
-
-  filtro <- glue::glue("from:esaj@tjsp.jus.br AND subject:Valida\u00E7\u00E3o")
-
-  token <- gmailr::gm_threads(search= filtro) |>
+  token <- gmailr::gm_threads(search= filtro_gmail) |>
   purrr::pluck(1,"threads",1,"snippet") |>
   stringr::str_extract("\\d+")
 
 }
 
-  stopifnot(stringr::str_detect(token,"\\d+"))
+  if(rlang::is_empty(token)){
+
+    stop("Token vazio")
+  }
 
   return(token)
 
