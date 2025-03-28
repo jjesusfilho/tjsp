@@ -203,7 +203,7 @@ get_email_token1 <- function(email_provider, outlook, hora) {
       outl <- Microsoft365R::get_personal_outlook()
     }
 
-    email <- outlook$list_emails(
+    email <- outl$list_emails(
       filter = filtro_outlook, by='received ASC', n=1)
 
 
