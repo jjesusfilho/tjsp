@@ -125,7 +125,7 @@ if(email_provider=='outlook'){
 
   Sys.sleep(wait_email)
 
- taxa <- purrr::rate_delay(pause = 10, max_times = 10)
+ taxa <- purrr::rate_delay(pause = 15, max_times = 8)
 
  get_email_token_insistente <- purrr::insistently(get_email_token1, taxa, quiet = FALSE)
 
