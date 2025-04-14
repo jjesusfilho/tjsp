@@ -106,6 +106,6 @@ tjsp_ler_execucao_penal_cd_processo1 <- function(arquivo){
     xml2::url_absolute("https://esaj.tjsp.jus.br/cpopg/consultarDadosParte.do?") |>
     tibble::tibble(cdprocesso, link = _)
 
-  list(principal, documentos, historico, link)
+  list(principal = principal, documentos = documentos, historico = historico, link  = link)
 
 }
