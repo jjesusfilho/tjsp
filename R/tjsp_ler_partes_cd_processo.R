@@ -20,9 +20,6 @@ tjsp_ler_partes_cd_processo <- function(arquivos = NULL,diretorio = ".") {
   }
 
 
-
-
-
   lista <- purrr::map_dfr(arquivos,purrr::possibly(~{
 
     x <- xml2::read_html(.x)

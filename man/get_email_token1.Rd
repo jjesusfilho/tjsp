@@ -2,7 +2,7 @@
 % Please edit documentation in R/tjsp_autenticar.R
 \name{get_email_token1}
 \alias{get_email_token1}
-\title{Obtêm tokens do email}
+\title{Obt\u00EAm tokens do email}
 \usage{
 get_email_token1(email_provider, outlook, hora)
 }
@@ -12,11 +12,11 @@ get_email_token1(email_provider, outlook, hora)
 \item{outlook}{Se outlook, informar se "business" ou
 "personal"}
 
-\item{hora}{Parâmetro não usado, por ora.}
+\item{hora}{Par\u00E2metro n\u00E3o usado, por ora.}
 }
 \value{
 token
 }
 \description{
-Obtêm tokens do email
+Obt\u00EAm tokens do email
 }

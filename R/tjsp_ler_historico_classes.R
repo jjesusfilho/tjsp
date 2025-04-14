@@ -13,32 +13,43 @@ tjsp_ler_historico_classes <- function(arquivos = NULL,diretorio = ".") {
    arquivos <- list.files(
     path = diretorio, pattern = ".html",
     full.names = TRUE
-  )  
+  )
 }
 
-  pb <- progress::progress_bar$new(total = length(arquivos))
 
   purrr::map_dfr(arquivos, purrr::possibly(~{
 
 
-    pb$tick()
 
-    processo <- stringr::str_extract(.x, "\\d{20}")
+    doc <-  xml2::read_html(.x)
 
-    nomes <- xml2::read_html(.x) |>
+
+    processo <- doc |>
+      xml2::xml_find_first("//span[contains(@class,'unj-larger')]") |>
+      xml2::xml_text() |>
+      stringr::str_squish() |>
+      stringr::str_remove_all("[^\\d+\\s]") |>
+      stringr::str_trim()
+
+    cd_processo <- doc |>
+      xml2::xml_find_first("//a[contains(@href,'processo.codigo')]/@href|//form[contains(@action,'processo.codigo')]/@action") |>
+      xml2::xml_text() |>
+      stringr::str_extract("(?<=processo.codigo=)\\w+")
+
+    nomes <- doc |>
       xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Hist\u00f3rico de classes')]/../following-sibling::table//th") |>
       xml2::xml_text() |>
       janitor::make_clean_names()
 
-    xml2::read_html(.x) |>
+    doc |>
       xml2::xml_find_all(xpath = "//div/h2[contains(text(),'Hist\u00f3rico de classes')]/../following-sibling::table/tbody") |>
       xml2::xml_text() |>
       stringr::str_trim() |>
       stringr::str_split("\\s*\n\t\\s*") |>
       purrr::map_dfr(stats::setNames, nomes) |>
       dplyr::mutate(data = lubridate::dmy(data)) |>
-      tibble::add_column(processo  = processo, .before = 1)
+      tibble::add_column(processo  = processo,cd_processo,  .before = 1)
 
 
-  }, otherwise = NULL))
+  }, otherwise = NULL), .progress = TRUE)
 }

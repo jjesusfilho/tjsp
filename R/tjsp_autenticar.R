@@ -24,7 +24,7 @@ tjsp_autenticar <- function(login = NULL,
                             ) {
 
 
-  print("Aguarde, pode demorar até dois minutos para retornar a resposta.")
+  print("Aguarde, pode demorar at\u00E9 dois minutos para retornar a resposta.")
 
     if(tz==""){
 
@@ -178,12 +178,12 @@ check_login <- function() {
 autenticar <- tjsp_autenticar
 
 
-#' Obtêm tokens do email
+#' Obt\u00EAm tokens do email
 #'
 #' @param email_provider "gmail" ou "outlook"
 #' @param outlook Se outlook, informar se "business" ou
 #'    "personal"
-#' @param hora Parâmetro não usado, por ora.
+#' @param hora Par\u00E2metro n\u00E3o usado, por ora.
 #'
 #' @returns token
 #'
@@ -191,7 +191,7 @@ get_email_token1 <- function(email_provider, outlook, hora) {
 
   filtro_gmail <- glue::glue("from:esaj@tjsp.jus.br AND subject:Valida\u00E7\u00E3o AND after:{hora}")
 
-  filtro_outlook <- glue::glue("from/emailAddress/address eq 'esaj@tjsp.jus.br' and contains(subject,'Validação') and receivedDateTime ge {hora}")
+  filtro_outlook <- glue::glue("from/emailAddress/address eq 'esaj@tjsp.jus.br' and contains(subject,'Valida\u00E7\u00E3o') and receivedDateTime ge {hora}")
 
   if(email_provider == "outlook"){
 
