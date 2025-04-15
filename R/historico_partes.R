@@ -58,7 +58,7 @@ tjsp_ler_historico_parte_cd_processo <- function(arquivos  = NULL, diretorio = "
 
     tjsp_ler_historico_parte_cd_processo1(.x)
 
-  },NULL))
+  },NULL), .progress = TRUE)
 }
 
 #' Lêapenas um arquivo da execução
