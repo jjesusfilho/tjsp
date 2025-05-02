@@ -67,6 +67,15 @@ tjsp2_autenticar <- function(login = NULL, password = NULL,
   hora_outlook <- format(lubridate::with_tz(lubridate::now(tzone = tz), "UTC"), "%Y-%m-%dT%H:%M:%SZ")
 
 
+  if(email_provider=='outlook'){
+
+    hora <- hora_outlook
+
+  } else{
+
+    hora <- hora_gmail
+  }
+
   # Initial access
   base <- "https://esaj.tjsp.jus.br/"
 
