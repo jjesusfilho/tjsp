@@ -81,7 +81,12 @@ tjsp2_baixar_tabela_cd_processo <- function (cd_processo = NULL, cookies_path = 
       httr2::request() |>
       httr2::req_cookie_preserve(cookies) |>
       httr2::req_options(ssl_verifypeer = FALSE) |>
-      httr2::req_perform(path = arquivo)
+      httr2::req_perform() |>
+      httr2::resp_body_string() |>
+      httr2::request() |>
+      httr2::req_cookie_preserve(cookies) |>
+      httr2::req_options(ssl_verifypeer = FALSE) |>
+      httr2::req_perform(path =arquivo)
 
   }, NULL), .progress = TRUE)
 
