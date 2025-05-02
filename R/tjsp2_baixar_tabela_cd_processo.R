@@ -1,16 +1,24 @@
 #' Baixa tabela de documentos com base no cd_processo
 #'
 #' @param cd_processo Número do processo
+#' @param cookies_path informar o caminho para o cookie.
 #' @param diretorio Diretório onde armazenar as tabelas
 #'
 #' @return html
 #' @export
 #'
-tjsp2_baixar_tabela_cd_processo <- function (cd_processo = NULL, diretorio = ".")
+tjsp2_baixar_tabela_cd_processo <- function (cd_processo = NULL, cookies_path = NULL,diretorio = ".")
 {
 
-  cookies <- httr2::last_request()$options$cookiefile
+  if (is.null(cookies_path)){
 
+    cookies <- httr2::last_request()$options$cookiefile
+
+  } else {
+
+    cookies <- cookies_path
+
+  }
   purrr::walk(cd_processo, purrr::possibly(~{
 
     arquivo <- file.path(diretorio,paste0("tabela_cd_processo_",.x,".html"))

@@ -4,10 +4,16 @@
 \alias{tjsp2_baixar_tabela_cd_processo}
 \title{Baixa tabela de documentos com base no cd_processo}
 \usage{
-tjsp2_baixar_tabela_cd_processo(cd_processo = NULL, diretorio = ".")
+tjsp2_baixar_tabela_cd_processo(
+  cd_processo = NULL,
+  cookies_path = NULL,
+  diretorio = "."
+)
 }
 \arguments{
 \item{cd_processo}{Número do processo}
+
+\item{cookies_path}{informar o caminho para o cookie.}
 
 \item{diretorio}{Diretório onde armazenar as tabelas}
 }
