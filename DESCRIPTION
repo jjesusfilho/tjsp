@@ -57,7 +57,8 @@ Suggests:
     snakecase,
     methods,
     gmailr,
-    Microsoft365R
+    Microsoft365R,
+    httr2
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
