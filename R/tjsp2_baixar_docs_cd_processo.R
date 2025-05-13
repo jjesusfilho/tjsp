@@ -43,6 +43,7 @@ if (is.null(cookies_path)){
 
       r1 <- paste0("https://esaj.tjsp.jus.br/cposg/show.do?processo.codigo=",sg , "&gateway=true") |>
         httr2::request() |>
+        httr2::req_options(ssl_verifypeer = FALSE) |>
         httr2::req_cookie_preserve(cookies) |>
         httr2::req_perform()
 
@@ -62,6 +63,7 @@ if (is.null(cookies_path)){
 
       r1 <- url1 |>
            httr2::request() |>
+          httr2::req_options(ssl_verifypeer = FALSE) |>
            httr2::req_cookie_preserve(cookies) |>
            httr2::req_perform()
 
@@ -70,9 +72,11 @@ if (is.null(cookies_path)){
     r2 <-  url2 |>
       httr2::request() |>
       httr2::req_cookie_preserve(cookies) |>
+     httr2::req_options(ssl_verifypeer = FALSE) |>
       httr2::req_perform() |>
       httr2::resp_body_string() |>
       httr2::request() |>
+      httr2::req_options(ssl_verifypeer = FALSE) |>
       httr2::req_cookie_preserve(cookies) |>
       httr2::req_perform()
 
