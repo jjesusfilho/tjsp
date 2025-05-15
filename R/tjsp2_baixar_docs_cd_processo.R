@@ -108,6 +108,8 @@ tjsp2_baixar_docs_cd_processo1 <- function(cd_processo  = NULL,
 
 
 
+  cookies <- httr2::last_request()$options$cookiefile
+
   id <- stringr::str_c(cd_processo,
                        "_id_doc_",id_doc,
                        "_pagina_inicial_",pagina_inicial,
