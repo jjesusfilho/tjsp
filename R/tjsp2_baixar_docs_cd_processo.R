@@ -95,6 +95,8 @@ if (is.null(cookies_path)){
 #' @param pagina_inicial pagina inicial
 #' @param pagina_final pagina final
 #' @param urls Urls dos documentos
+#' @param cookies_path NULL para pegar da requisição anterior ou
+#'    informar caminho para o cookie.
 #' @param diretorio Diretório
 #'
 #' @return pdfs
@@ -104,12 +106,20 @@ tjsp2_baixar_docs_cd_processo1 <- function(cd_processo  = NULL,
                                           pagina_inicial = NULL,
                                           pagina_final = NULL,
                                           urls = NULL,
+                                          cookies_path = NULL,
                                           diretorio = NULL){
 
 
 
-  cookies <- httr2::last_request()$options$cookiefile
+  if (is.null(cookies_path)){
 
+    cookies <- httr2::last_request()$options$cookiefile
+
+  } else {
+
+    cookies <- cookies_path
+
+  }
   id <- stringr::str_c(cd_processo,
                        "_id_doc_",id_doc,
                        "_pagina_inicial_",pagina_inicial,
