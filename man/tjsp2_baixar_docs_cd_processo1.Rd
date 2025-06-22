@@ -10,6 +10,7 @@ tjsp2_baixar_docs_cd_processo1(
   pagina_inicial = NULL,
   pagina_final = NULL,
   urls = NULL,
+  cookies_path = NULL,
   diretorio = NULL
 )
 }
@@ -23,6 +24,9 @@ tjsp2_baixar_docs_cd_processo1(
 \item{pagina_final}{pagina final}
 
 \item{urls}{Urls dos documentos}
+
+\item{cookies_path}{NULL para pegar da requisição anterior ou
+informar caminho para o cookie.}
 
 \item{diretorio}{Diretório}
 }
