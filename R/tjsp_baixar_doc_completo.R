@@ -121,7 +121,7 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tenta
 
     while(r5 == "" & i <=  tentativas ){
       
-       print(paste0("Tentativa", i+1,"."))
+       print(paste0("Tentativa ", i+1,"."))
 
       Sys.sleep(5)
 
