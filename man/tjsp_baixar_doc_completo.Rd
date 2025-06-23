@@ -4,15 +4,26 @@
 \alias{tjsp_baixar_doc_completo}
 \title{Baixa documento completo com base no cd_processo}
 \usage{
-tjsp_baixar_doc_completo(cd_processo = NULL, diretorio = ".")
+tjsp_baixar_doc_completo(
+  cd_processo = NULL,
+  diretorio = ".",
+  tentativas = 10,
+  separar_documentos = TRUE
+)
 }
 \arguments{
 \item{cd_processo}{Número do processo}
 
 \item{diretorio}{Diretório onde armazenar as tabelas}
+
+\item{tentativas}{Número de tentantivas de recuperação do arquivo finalizado.
+Não é possível saber de antemão quanto tempo domora para gerar o(s) arquivo(s).
+Fixamos em 10 tentativas de 5 segundos cada.}
+
+\item{separar_documentos}{TRUE para zip, FALSE para pdf}
 }
 \value{
-pdf
+zip ou pdf a depender da escolha em separar_documentos
 }
 \description{
 Baixa documento completo com base no cd_processo

@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.6.1.9000</span>
       </span>
     </div>
 
@@ -31,14 +31,14 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/jjesusfilho/tjsp/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -53,26 +53,57 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tjsp_autenticar</span><span class="op">(</span>login <span class="op">=</span> <span class="cn">NULL</span>, password <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tjsp_autenticar</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  password <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  email_provider <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  outlook <span class="op">=</span> <span class="st">"business"</span>,</span>
+<span>  wait_email <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  tz <span class="op">=</span> <span class="st">""</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">autenticar</span><span class="op">(</span>login <span class="op">=</span> <span class="cn">NULL</span>, password <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">autenticar</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  password <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  email_provider <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  outlook <span class="op">=</span> <span class="st">"business"</span>,</span>
+<span>  wait_email <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  tz <span class="op">=</span> <span class="st">""</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>login</dt>
+
+
+<dl><dt id="arg-login">login<a class="anchor" aria-label="anchor" href="#arg-login"></a></dt>
 <dd><p>cpf</p></dd>
 
 
-<dt>password</dt>
+<dt id="arg-password">password<a class="anchor" aria-label="anchor" href="#arg-password"></a></dt>
 <dd><p>senha</p></dd>
+
+
+<dt id="arg-email-provider">email_provider<a class="anchor" aria-label="anchor" href="#arg-email-provider"></a></dt>
+<dd><p>Informar se "gmail" ou "outlook"</p></dd>
+
+
+<dt id="arg-outlook">outlook<a class="anchor" aria-label="anchor" href="#arg-outlook"></a></dt>
+<dd><p>Informar se "personal" ou "business"</p></dd>
+
+
+<dt id="arg-wait-email">wait_email<a class="anchor" aria-label="anchor" href="#arg-wait-email"></a></dt>
+<dd><p>Tempo, em segundos, para aguardar antes de conferir se
+se o código chegou no email.</p></dd>
+
+
+<dt id="arg-tz">tz<a class="anchor" aria-label="anchor" href="#arg-tz"></a></dt>
+<dd><p>Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo"</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>Estabelece uma sessão, não é necessário salvar.</p>
+    <p>Estabelece uma sessão, não é necessário salvar.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -94,15 +125,15 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

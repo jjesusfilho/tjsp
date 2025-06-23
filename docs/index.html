@@ -19,7 +19,7 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">tjsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.6.1.9000</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
 <li>
   <a href="https://github.com/jjesusfilho/tjsp/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -61,7 +61,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="contents col-md-9">
@@ -107,28 +107,33 @@
 <div class="section level3">
 <h3 id="baixando-informações-detalhadas-dos-processos">Baixando informações detalhadas dos processos<a class="anchor" aria-label="anchor" href="#baixando-informa%C3%A7%C3%B5es-detalhadas-dos-processos"></a>
 </h3>
-<p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados. Recentemente o TJSP impôs recaptcha para baixar os processos. Diante disso, para baixar processos você deve antes se autenticar como advogado. Por meio da função <code><a href="reference/tjsp_autenticar.html">autenticar()</a></code>, você será solicitado a apresentar suas credenciais (CPF e senha), a fim de ter acesso aos processos sem o uso de captcha.</p>
-<p>O comando a seguir irá baixar todos os processos no diretório atual, mas você pode indicar um diretório de sua escolha.</p>
+<p>O passo seguinte é realizar a busca e baixar os htmls dos processos individualmente considerados.</p>
+<p>Para baixar informações processuais o ESAJ exige autenticação em duas etapas,i.e., além de usuário e senha, você tem de ter o pacote tjsp a obter um token enviado para seu email.</p>
+<p>No momento, é possível obter o token do gmail e do outlook (personal e business). Para tanto, você deve seguir as instruções dos pacotes <a href="https://github.com/r-lib/gmailr" class="external-link">gmailr</a> ou do pacote <a href="https://github.com/Azure/Microsoft365R" class="external-link">Microsoft365R</a> para autorizar o acesso automático ao seu email e extração do token.</p>
+<p>Feito isso, basta você chamar a função <code>tjsp_autencticar</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tjsp_autenticar.html">tjsp_autenticar</a></span><span class="op">(</span>username <span class="op">=</span> <span class="st">"seu_cpf"</span>,password <span class="op">=</span> <span class="st">"sua_senha"</span>, email_provider<span class="op">=</span> <span class="st">"gmail"</span><span class="op">)</span> <span class="co">## ou outlook.</span></span></code></pre></div>
+<p>Depois disso, basta seguir com o download dos dados.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/tjsp_baixar_cposg.html">tjsp_baixar_cposg</a></span><span class="op">(</span><span class="va">tabela</span><span class="op">$</span><span class="va">processo</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="lendo-os-processos-de-segunda-instância">Lendo os processos de segunda instância.<a class="anchor" aria-label="anchor" href="#lendo-os-processos-de-segunda-inst%C3%A2ncia"></a>
 </h3>
 <p>A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dados</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_dados_cposg.html">tjsp_ler_dados_cposg</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Em seguida, lemos as informações acerca das partes dos processos:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">partes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_partes.html">tjsp_ler_partes</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Ao final passamos para a leitura do andamento dos processos.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">andamento</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_movimentacao.html">tjsp_ler_movimentacao</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Eventualmente, você não está interessada em ler todo o andamento, mas somente a data da entrada do processo em segunda instância para mais tarde calcular o tempo entre a entrada e a decisão. Há uma função para isso:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">entrada</span> <span class="op">&lt;-</span> <span class="fu">tjsp_ler_entrada</span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Por fim, você pode ler o dispositivo da decisão:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">decisao</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tjsp_ler_dispositivo.html">tjsp_ler_dispositivo</a></span><span class="op">(</span>diretorio <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -201,16 +206,16 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

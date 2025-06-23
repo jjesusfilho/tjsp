@@ -2,12 +2,26 @@
 #'
 #' @param cd_processo Número do processo
 #' @param diretorio Diretório onde armazenar as tabelas
+#' @param tentativas Número de tentantivas de recuperação do arquivo finalizado.
+#'        Não é possível saber de antemão quanto tempo domora para gerar o(s) arquivo(s).
+#'        Fixamos em 10 tentativas de 5 segundos cada.
+#' @param separar_documentos TRUE para zip, FALSE para pdf
 #'
-#' @return pdf
+#' @return zip ou pdf a depender da escolha em separar_documentos
 #' @export
 #'
-tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".")
+tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tentativas = 10, separar_documentos = TRUE)
 {
+
+  if(separar_documentos == TRUE){
+
+    separar_documentos <-  'true'
+
+  } else {
+
+    separar_documentos <- "false"
+  }
+
   httr::set_config(httr::config(ssl_verifypeer = FALSE))
 
   purrr::walk(cd_processo,purrr::possibly(~{
@@ -43,6 +57,7 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".")
         xml2::xml_attr("href") |>
         stringr::str_extract("(?<=Sg.)\\w+")
 
+      xx <- cdProcesso
       url2 <-  paste0("https://esaj.tjsp.jus.br/cposg/show.do?processo.codigo=",cdProcesso, "&gateway=true")
 
 
@@ -76,29 +91,52 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".")
 
         .x$data$parametros
       }) |>
+      purrr::flatten() |>
+      as.list() |>
       rlang::set_names("itensPdfSelecionados") |>
-      purrr::list_assign(cdProcesso = xx, separarDocumentos = 'false', acessoPeloPetsg = "")
+      purrr::list_assign(cdProcesso = xx, separarDocumentos = separar_documentos, acessoPeloPetsg = "")
+
 
 
     url4 <- "https://esaj.tjsp.jus.br/pastadigital/salvarDocumentoPreparado.do"
 
-    localizador  <- httr::POST(url4,
-                               body = documentos, encode = "form"
-    ) |>
+    localizador  <- httr::POST(url4, body = documentos, encode = "form") |>
       httr::content("text")
 
-    Sys.sleep(5)
 
     localizacao <- list(localizador = localizador, cdProcesso = xx)
 
+    if(separar_documentos == "true"){
+
+      arquivo <- stringr::str_replace(arquivo,"pdf$","zip")
+    }
+
     url5 <- "https://esaj.tjsp.jus.br/pastadigital/buscarDocumentoFinalizado.do"
 
-    httr::RETRY("POST", url5, body = localizacao, encode = "form", times = 5,
-                pause_base = 5,
-                pause_cap = 5,
-                pause_min = 5 ) |>
-      httr::content("text") |>
-      httr::GET( httr::write_disk(arquivo, overwrite = T))
+    r5 <- httr::POST(url5, body = localizacao, encode = "form") |>
+      httr::content("text")
+
+    i <- 0
+
+    while(r5 == "" & i <=  tentativas ){
+
+      Sys.sleep(5)
+
+      r5 <- httr::POST(url5, body = localizacao, encode = "form") |>
+        httr::content("text")
+
+      i <- i+1
+
+    }
+
+    if (stringr::str_detect(r5,"http")){
+
+      httr::GET(r5, httr::write_disk(arquivo, overwrite = T))
+
+    } else {
+
+      print("Não foi possível o arquivo. Experimente aumentar o número de tentativas.")
+    }
 
 
   },NULL), .progress = TRUE)
