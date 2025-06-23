@@ -135,7 +135,7 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tenta
 
     } else {
 
-      print("Não foi possível o arquivo. Experimente aumentar o número de tentativas.")
+      print("Não foi possível baixar o arquivo. Experimente aumentar o número de tentativas.")
     }
 
 
