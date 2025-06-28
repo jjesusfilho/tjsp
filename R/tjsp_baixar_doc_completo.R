@@ -115,15 +115,19 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tenta
 
     r5 <- httr::POST(url5, body = localizacao, encode = "form") |>
       httr::content("text")
+    
 
     i <- 0
 
     while(r5 == "" & i <=  tentativas ){
+      
+       print(paste0("Tentativa ", i+1,"."))
 
       Sys.sleep(5)
 
       r5 <- httr::POST(url5, body = localizacao, encode = "form") |>
         httr::content("text")
+
 
       i <- i+1
 
@@ -135,7 +139,7 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tenta
 
     } else {
 
-      print("Não foi possível o arquivo. Experimente aumentar o número de tentativas.")
+      print("Não foi possível baixar o arquivo. Experimente aumentar o número de tentativas.")
     }
 
 
