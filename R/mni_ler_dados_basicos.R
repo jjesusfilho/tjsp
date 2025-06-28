@@ -19,6 +19,8 @@ mni_ler_dados_basicos <- function(arquivos = NULL, diretorio = "."){
 
 
     dados_basicos <- .x |>
+      readLines() |>
+      stringr::str_subset("<soap") |>
       xml2::read_xml() |>
       xml2::xml_find_first("//ns2:dadosBasicos")
 
@@ -33,7 +35,7 @@ mni_ler_dados_basicos <- function(arquivos = NULL, diretorio = "."){
 
 
     nivel_sigilo <- dados_basicos |>
-      xml2::xml_attr("nivel_sigilo")
+      xml2::xml_attr("nivelSigilo")
 
     intervencao_mp <- dados_basicos |>
       xml2::xml_attr("intervencaoMP") |>
