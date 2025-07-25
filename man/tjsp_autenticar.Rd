@@ -11,7 +11,8 @@ tjsp_autenticar(
   email_provider = NA,
   outlook = "business",
   wait_email = 5,
-  tz = ""
+  tz = "",
+  check_login = TRUE
 )
 
 autenticar(
@@ -20,7 +21,8 @@ autenticar(
   email_provider = NA,
   outlook = "business",
   wait_email = 5,
-  tz = ""
+  tz = "",
+  check_login = TRUE
 )
 }
 \arguments{
@@ -35,7 +37,9 @@ autenticar(
 \item{wait_email}{Tempo, em segundos, para aguardar antes de conferir se
 se o código chegou no email.}
 
-\item{tz}{Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo"}
+\item{tz}{Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo",}
+
+\item{check_login}{Verificar se já está logado?}
 }
 \value{
 Estabelece uma sessão, não é necessário salvar.

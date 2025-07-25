@@ -7,6 +7,7 @@
 #' @param wait_email Tempo, em segundos, para aguardar antes de conferir se
 #'    se o código chegou no email.
 #' @param tz Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo"
+#' @param check_login Verificar se já está logado?
 #' @param cookies_path Informar caminho para armazenar cookies.
 #'
 #' @return Estabelece uma sessão, não é necessário salvar.
@@ -22,14 +23,18 @@ tjsp2_autenticar <- function(login = NULL, password = NULL,
                              outlook = "business",
                              wait_email = 5,
                              tz = "",
+                             check_login = TRUE,
                              cookies_path = tempfile()
                              ) {
 
   cookies <- cookies_path
 
   # Check if isn't already logged in
+
+  if(check_login){
   if (check_login2(cookies)) {
     return(TRUE)
+  }
   }
 
   # Prompt for information if necessary

@@ -6,7 +6,8 @@
 #' @param outlook Informar se "personal" ou "business"
 #' @param wait_email Tempo, em segundos, para aguardar antes de conferir se
 #'    se o código chegou no email.
-#' @param tz Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo"
+#' @param tz Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo",
+#' @param check_login Verificar se já está logado?
 #'
 #' @return Estabelece uma sessão, não é necessário salvar.
 #' @export
@@ -20,7 +21,8 @@ tjsp_autenticar <- function(login = NULL,
                             email_provider = NA,
                             outlook = "business",
                             wait_email = 5,
-                            tz = ""
+                            tz = "",
+                            check_login = TRUE
                             ) {
 
 
@@ -37,8 +39,10 @@ tjsp_autenticar <- function(login = NULL,
   outlook <- match.arg(outlook, choices = c("personal","business"))
 
   # Check if isn't already logged in
+  if(check_login){
   if (check_login()) {
     return(TRUE)
+  }
   }
 
   # Prompt for information if necessary

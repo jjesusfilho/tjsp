@@ -7,7 +7,7 @@
     "vscodeRSupport": "full",
     "installBspm": true,
     "installRadian": true,
-    "installDevTools": false,
+    "installDevTools": true,
     "installRMarkdown": false,
     "installVscDebugger": false,
     "useTesting": false

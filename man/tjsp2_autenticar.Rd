@@ -11,6 +11,7 @@ tjsp2_autenticar(
   outlook = "business",
   wait_email = 5,
   tz = "",
+  check_login = TRUE,
   cookies_path = tempfile()
 )
 }
@@ -27,6 +28,8 @@ tjsp2_autenticar(
 se o código chegou no email.}
 
 \item{tz}{Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo"}
+
+\item{check_login}{Verificar se já está logado?}
 
 \item{cookies_path}{Informar caminho para armazenar cookies.}
 }
