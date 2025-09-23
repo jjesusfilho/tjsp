@@ -83,6 +83,7 @@ mni_consultar_processo <- function(tribunal = "tjsp",
 
     }
 
+    httr::set_config(httr::config(ssl_verifypeer = 0L))
     httr::POST(url, body = corpo, httr::write_disk(arquivo, overwrite = T))
 
   }, NULL), .progress = TRUE)
