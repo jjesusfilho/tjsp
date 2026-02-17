@@ -191,7 +191,7 @@ autenticar <- tjsp_autenticar
 #' @param outlook Se outlook, informar se "business" ou
 #'    "personal"
 #' @param hora Par\u00E2metro n\u00E3o usado, por ora.
-#' #' @param email_from Origem do gmail. Eventualmente, em ambiente corporativo, o email pode ser redistribuído
+#' @param email_from Origem do gmail. Eventualmente, em ambiente corporativo, o email pode ser redistribuído
 #'     a partir de outro email.
 #'
 #' @returns token
