@@ -4,9 +4,9 @@
 \alias{get_email_token1}
 \title{Obt\u00EAm tokens do email}
 \usage{
-get_email_token1(email_provider, outlook, hora)
+get_email_token1(email_provider, outlook, hora, email_from)
 
-get_email_token1(email_provider, outlook, hora)
+get_email_token1(email_provider, outlook, hora, email_from)
 }
 \arguments{
 \item{email_provider}{"gmail" ou "outlook"}
@@ -14,7 +14,9 @@ get_email_token1(email_provider, outlook, hora)
 \item{outlook}{Se outlook, informar se "business" ou
 "personal"}
 
-\item{hora}{Par\u00E2metro n\u00E3o usado, por ora.}
+\item{hora}{Par\u00E2metro n\u00E3o usado, por ora.
+#' @param email_from Origem do gmail. Eventualmente, em ambiente corporativo, o email pode ser redistribuído
+    a partir de outro email.}
 }
 \value{
 token
