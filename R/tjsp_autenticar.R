@@ -138,7 +138,7 @@ if(email_provider=='outlook'){
 
  get_token <- purrr::possibly(get_email_token_insistente, otherwise = "N\u00E3o foi poss\u00EDvel gerar o token")
 
- token <- get_token(email_provider,outlook,hora)
+ token <- get_token(email_provider,outlook,hora, email_from)
 
  if(stringr::str_detect(token,"\\d", negate = T)){
 
