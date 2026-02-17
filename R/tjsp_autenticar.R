@@ -4,6 +4,8 @@
 #' @param password senha
 #' @param email_provider Informar se "gmail" ou "outlook"
 #' @param outlook Informar se "personal" ou "business"
+#' @param email_from Origem do gmail. Eventualmente, em ambiente corporativo, o email pode ser redistribuído
+#'     a partir de outro email.
 #' @param wait_email Tempo, em segundos, para aguardar antes de conferir se
 #'    se o código chegou no email.
 #' @param tz Fuso horário. Padrão para o da máquina. Recomentado: "America/Sao_Paulo",
@@ -20,6 +22,7 @@ tjsp_autenticar <- function(login = NULL,
                             password = NULL,
                             email_provider = NA,
                             outlook = "business",
+                            email_from = "esaj@tjsp.jus.br",
                             wait_email = 5,
                             tz = "",
                             check_login = TRUE
@@ -193,9 +196,9 @@ autenticar <- tjsp_autenticar
 #'
 get_email_token1 <- function(email_provider, outlook, hora) {
 
-  filtro_gmail <- glue::glue("from:esaj@tjsp.jus.br AND subject:Valida\u00E7\u00E3o AND after:{hora}")
+  filtro_gmail <- glue::glue("from:{email_from} AND subject:Valida\u00E7\u00E3o AND after:{hora}")
 
-  filtro_outlook <- glue::glue("from/emailAddress/address eq 'esaj@tjsp.jus.br' and contains(subject,'Valida\u00E7\u00E3o') and receivedDateTime ge {hora}")
+  filtro_outlook <- glue::glue("from/emailAddress/address eq '{email_from}' and contains(subject,'Valida\u00E7\u00E3o') and receivedDateTime ge {hora}")
 
   if(email_provider == "outlook"){
 

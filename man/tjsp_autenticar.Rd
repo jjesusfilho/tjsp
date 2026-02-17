@@ -10,6 +10,7 @@ tjsp_autenticar(
   password = NULL,
   email_provider = NA,
   outlook = "business",
+  email_from = "esaj@tjsp.jus.br",
   wait_email = 5,
   tz = "",
   check_login = TRUE
@@ -20,6 +21,7 @@ autenticar(
   password = NULL,
   email_provider = NA,
   outlook = "business",
+  email_from = "esaj@tjsp.jus.br",
   wait_email = 5,
   tz = "",
   check_login = TRUE
@@ -33,6 +35,9 @@ autenticar(
 \item{email_provider}{Informar se "gmail" ou "outlook"}
 
 \item{outlook}{Informar se "personal" ou "business"}
+
+\item{email_from}{Origem do gmail. Eventualmente, em ambiente corporativo, o email pode ser redistribuído
+a partir de outro email.}
 
 \item{wait_email}{Tempo, em segundos, para aguardar antes de conferir se
 se o código chegou no email.}
