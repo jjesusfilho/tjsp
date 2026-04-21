@@ -79,13 +79,20 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tenta
 
     }
 
-    documentos <-   url3 |>
+    url_pasta <- url3 |>
       httr::GET() |>
       httr::content("text") |>
+      stringr::str_extract("https://[^[:space:]<>\"]+")
+
+    docs_json <- url_pasta |>
       httr::GET() |>
       httr::content("text") |>
       stringr::str_extract("(?<=requestScope = )\\X+?(?=;)") |>
-      jsonlite::fromJSON() |>
+      jsonlite::fromJSON()
+
+    cd_documento <- docs_json$data$cdDocumento |> utils::tail(1)
+
+    documentos <- docs_json |>
       purrr::pluck("children") |>
       purrr::map(~{
 
@@ -94,17 +101,20 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tenta
       purrr::flatten() |>
       as.list() |>
       rlang::set_names("itensPdfSelecionados") |>
-      purrr::list_assign(cdProcesso = xx, separarDocumentos = separar_documentos, acessoPeloPetsg = "")
+      purrr::list_assign(cdProcesso = xx, cdDocumento = cd_documento, separarDocumentos = separar_documentos, acessoPeloPetsg = "")
 
-
+    ajax_headers <- httr::add_headers(
+      "x-requested-with" = "XMLHttpRequest",
+      "Referer" = url_pasta
+    )
 
     url4 <- "https://esaj.tjsp.jus.br/pastadigital/salvarDocumentoPreparado.do"
 
-    localizador  <- httr::POST(url4, body = documentos, encode = "form") |>
+    localizador  <- httr::POST(url4, body = documentos, encode = "form", ajax_headers) |>
       httr::content("text")
 
 
-    localizacao <- list(localizador = localizador, cdProcesso = xx)
+    localizacao <- list(localizador = localizador, cdProcesso = xx, cdDocumento = cd_documento)
 
     if(separar_documentos == "true"){
 
@@ -113,19 +123,21 @@ tjsp_baixar_doc_completo <- function (cd_processo = NULL, diretorio = ".", tenta
 
     url5 <- "https://esaj.tjsp.jus.br/pastadigital/buscarDocumentoFinalizado.do"
 
-    r5 <- httr::POST(url5, body = localizacao, encode = "form") |>
+    Sys.sleep(5)
+
+    r5 <- httr::POST(url5, body = localizacao, encode = "form", ajax_headers) |>
       httr::content("text")
-    
+
 
     i <- 0
 
     while(r5 == "" & i <=  tentativas ){
-      
+
        print(paste0("Tentativa ", i+1,"."))
 
       Sys.sleep(5)
 
-      r5 <- httr::POST(url5, body = localizacao, encode = "form") |>
+      r5 <- httr::POST(url5, body = localizacao, encode = "form", ajax_headers) |>
         httr::content("text")
 
 
