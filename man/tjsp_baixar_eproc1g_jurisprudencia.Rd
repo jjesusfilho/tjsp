@@ -7,9 +7,9 @@
 tjsp_baixar_eproc1g_jurisprudencia(
   pesquisa = "",
   campo = c("I", "E"),
+  origem = "4",
   agrupar = TRUE,
   precedente = FALSE,
-  colegio_recursal = FALSE,
   tipo_documento = character(0),
   processo = "",
   classe = character(0),
@@ -24,21 +24,25 @@ tjsp_baixar_eproc1g_jurisprudencia(
 )
 }
 \arguments{
-\item{pesquisa}{Texto livre para pesquisa}
+\item{pesquisa}{Texto livre para pesquisa.}
 
-\item{campo}{"I" para inteiro teor (padrão) ou "E" para somente ementa}
+\item{campo}{"I" para inteiro teor (padrão) ou "E" para somente ementa.}
+
+\item{origem}{Vetor com os códigos de origem: "3" = Colégio Recursal,
+"4" = Primeiro Grau (padrão), "5" = Segundo Grau.}
 
 \item{agrupar}{Lógico. Agrupar resultados? Padrão TRUE.}
 
 \item{precedente}{Lógico. Filtrar somente precedentes relevantes? Padrão FALSE.}
 
-\item{colegio_recursal}{Lógico. Incluir somente Colégio Recursal? Padrão FALSE.}
-
-\item{tipo_documento}{Vetor de caracteres com tipos de documento.}
+\item{tipo_documento}{Código do tipo de documento. Os valores dependem da origem:
+origem "3" (Colégio Recursal) e "5" (Segundo Grau): "1" = Acórdão, "2" = Decisão monocrática;
+origem "4" (Primeiro Grau): "5" = Sentença, "2" = Decisão monocrática.
+Aceita vetor para múltiplos tipos.}
 
 \item{processo}{Número do processo.}
 
-\item{classe}{Vetor de caracteres com nomes das classes processuais.}
+\item{classe}{Vetor com nomes das classes processuais (ex. "Apelação", "Agravo de Instrumento").}
 
 \item{relator}{Vetor de caracteres com nomes dos relatores.}
 

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(Rscript -e ' *)",
+      "Bash(Rscript -e \"devtools::document\\(quiet=TRUE\\); cat\\('OK\\\\n'\\)\")",
+      "Bash(curl -sk -w '\\\\nHTTP: %{http_code}\\\\nSize: %{size_download}\\\\n' 'https://eproc2g.tjsp.jus.br/eproc/externo_controlador.php?acao=jurisprudencia@jurisprudencia/download_inteiro_teor&id_jurisprudencia=611777895373406198436003464184' -o /tmp/inteiro_teor_test.html)",
+      "Read(//tmp/**)",
+      "Bash(iconv -f latin1 -t utf8 /Users/jjesusfilho/Pacotes/tjsp/data-raw/611777373026593622832733115671.html)"
+    ]
+  }
+}
