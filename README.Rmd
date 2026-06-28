@@ -75,6 +75,15 @@ Feito isso, basta você chamar a função `tjsp_autencticar`:
 tjsp_autenticar(username = "seu_cpf",password = "sua_senha", email_provider= "gmail") ## ou outlook.
 
 ```
+
+Alternativamente, se você possui certificado digital A1 (arquivo `.pfx` ou `.p12`), pode autenticar diretamente com ele, sem precisar do token por email:
+
+```r
+tjsp_autenticar(metodo = "certificado", certificado = "caminho/do/certificado.pfx")
+```
+
+A senha do certificado pode ser informada no argumento `senha_certificado`, na variável de ambiente `SENHACERTIFICADO`, ou será solicitada interativamente.
+
 Depois disso, basta seguir com o download dos dados.
 
 ```r
