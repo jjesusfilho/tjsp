@@ -115,6 +115,27 @@ A senha do certificado pode ser informada no argumento
 `senha_certificado`, na variável de ambiente `SENHACERTIFICADO`, ou será
 solicitada interativamente.
 
+Para não precisar informar o caminho do certificado em toda sessão, você
+pode instalá-lo uma única vez em um diretório padrão do sistema (via
+[rappdirs](https://github.com/r-lib/rappdirs), que funciona tanto em Mac
+quanto em Linux e Windows):
+
+``` r
+tjsp_instalar_certificado("caminho/do/certificado.pfx")
+```
+
+Essa função copia o certificado para o diretório de dados padrão da
+aplicação (por exemplo, `~/Library/Application Support/tjsp` no Mac,
+`~/.local/share/tjsp` no Linux ou `%APPDATA%\tjsp` no Windows) e
+registra esse caminho na variável de ambiente `CERTIFICADOTJSP` no seu
+`.Renviron`. A partir da próxima sessão do R, basta chamar:
+
+``` r
+tjsp_autenticar(metodo = "certificado")
+```
+
+sem precisar informar `certificado` novamente.
+
 Depois disso, basta seguir com o download dos dados.
 
 ``` r
