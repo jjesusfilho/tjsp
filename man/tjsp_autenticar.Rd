@@ -8,6 +8,9 @@
 tjsp_autenticar(
   login = NULL,
   password = NULL,
+  metodo = c("email", "certificado"),
+  certificado = NULL,
+  senha_certificado = NULL,
   email_provider = NA,
   outlook = "business",
   email_from = "esaj@tjsp.jus.br",
@@ -19,6 +22,9 @@ tjsp_autenticar(
 autenticar(
   login = NULL,
   password = NULL,
+  metodo = c("email", "certificado"),
+  certificado = NULL,
+  senha_certificado = NULL,
   email_provider = NA,
   outlook = "business",
   email_from = "esaj@tjsp.jus.br",
@@ -31,6 +37,16 @@ autenticar(
 \item{login}{cpf}
 
 \item{password}{senha}
+
+\item{metodo}{Informar se "email" (login e senha com token por email) ou
+"certificado" (certificado digital A1)}
+
+\item{certificado}{Caminho para o arquivo do certificado A1 (".pfx" ou ".p12").
+Necessário apenas quando `metodo = "certificado"`.}
+
+\item{senha_certificado}{Senha do certificado A1. Se não for informada e
+`metodo = "certificado"`, será solicitada interativamente, ou pode ser
+fornecida pela variável de ambiente "SENHACERTIFICADO".}
 
 \item{email_provider}{Informar se "gmail" ou "outlook"}
 
@@ -56,5 +72,6 @@ Autenticar no tjsp
 Você pode informar as credenciais nos argumentos ou
      criar variáveis de ambiente: "LOGINADV" e "PASSWORDADV", ou
      chamar a função e aguardar o prompt para informar
-     login e password
+     login e password. Para autenticar com certificado A1, informe
+     `metodo = "certificado"` e o caminho do arquivo em `certificado`.
 }
