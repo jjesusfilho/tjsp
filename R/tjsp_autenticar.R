@@ -5,7 +5,9 @@
 #' @param metodo Informar se "email" (login e senha com token por email) ou
 #'    "certificado" (certificado digital A1)
 #' @param certificado Caminho para o arquivo do certificado A1 (".pfx" ou ".p12").
-#'    Necessário apenas quando `metodo = "certificado"`.
+#'    Necessário apenas quando `metodo = "certificado"`. Se não for informado,
+#'    busca a variável de ambiente "CERTIFICADOTJSP", que pode ser configurada
+#'    automaticamente com [tjsp_instalar_certificado()].
 #' @param senha_certificado Senha do certificado A1. Se não for informada e
 #'    `metodo = "certificado"`, será solicitada interativamente, ou pode ser
 #'    fornecida pela variável de ambiente "SENHACERTIFICADO".
@@ -58,6 +60,12 @@ tjsp_autenticar <- function(login = NULL,
   }
 
   if (metodo == "certificado") {
+
+    if (is.null(certificado)) {
+      certificado <- Sys.getenv("CERTIFICADOTJSP")
+      if (certificado == "") certificado <- NULL
+    }
+
     return(tjsp_autenticar_certificado(certificado, senha_certificado))
   }
 

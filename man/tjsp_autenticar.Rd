@@ -42,7 +42,9 @@ autenticar(
 "certificado" (certificado digital A1)}
 
 \item{certificado}{Caminho para o arquivo do certificado A1 (".pfx" ou ".p12").
-Necessário apenas quando `metodo = "certificado"`.}
+Necessário apenas quando `metodo = "certificado"`. Se não for informado,
+busca a variável de ambiente "CERTIFICADOTJSP", que pode ser configurada
+automaticamente com [tjsp_instalar_certificado()].}
 
 \item{senha_certificado}{Senha do certificado A1. Se não for informada e
 `metodo = "certificado"`, será solicitada interativamente, ou pode ser
