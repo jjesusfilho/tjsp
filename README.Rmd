@@ -104,6 +104,37 @@ Depois disso, basta seguir com o download dos dados.
 tjsp_baixar_cposg(tabela$processo)
 ```
 
+### Consultando pela API mobile do TJSP (api.tjsp.jus.br)
+
+Além da raspagem do e-SAJ web, o pacote também consulta diretamente a API REST que o app **TJSP Mobile** consome (`https://api.tjsp.jus.br/processo`, o mesmo backend `cpopgmobile` do e-SAJ). As funções `tjsp_api_*` cobrem dois níveis de acesso:
+
+- **Busca pública**, sem login e sem captcha, por número, CPF/CNPJ de parte, nome de parte/advogado, OAB, precatório ou CDA:
+
+```r
+tjsp_api_buscar_processo("0416873-22.1998.8.26.0053")
+tjsp_api_buscar_documento("00000000000191")
+tjsp_api_buscar_nome("Fulano de Tal", tipo = "advogado")
+tjsp_api_buscar_oab("123456", "SP")
+```
+
+- **Detalhes autenticados** (partes, movimentação, pasta digital), liberados apenas nos processos em que o usuário logado está habilitado nos autos. A autenticação é mais simples que a do e-SAJ web: só CPF e senha, **sem token por email** (as mesmas variáveis `LOGINADV`/`PASSWORDADV`, ou os argumentos `cpf`/`senha`). Esta API **não aceita certificado digital A1** -- o contrato de `sajcas/login` só aceita usuário e senha.
+
+```r
+tjsp_api_autenticar(cpf = "seu_cpf", senha = "sua_senha")
+
+tjsp_api_dados_basicos("0416873-22.1998.8.26.0053")
+tjsp_api_partes("0416873-22.1998.8.26.0053")
+tjsp_api_movimentacao("0416873-22.1998.8.26.0053")
+```
+
+Para peças e volumes da pasta digital, liste ou baixe diretamente como PDF (as páginas são baixadas individualmente e juntadas com `qpdf`):
+
+```r
+tjsp_api_pasta_digital("0416873-22.1998.8.26.0053")
+tjsp_api_baixar_documento_por_titulo("0416873-22.1998.8.26.0053", "petição", "inicial.pdf")
+tjsp_api_baixar_pasta_digital("0416873-22.1998.8.26.0053", diretorio = "pasta_digital")
+```
+
 ### Lendo os processos de segunda instância.
 
 A leitura dos processos de segunda instância se dá em três etapas. Primeiramente, lemos os metadados:
