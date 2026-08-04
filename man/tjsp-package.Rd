@@ -19,4 +19,9 @@ Useful links:
 \author{
 \strong{Maintainer}: José de Jesus Filho \email{jose@consudata.com.br}
 
+Authors:
+\itemize{
+  \item José de Jesus Filho \email{jose@consudata.com.br}
+}
+
 }
