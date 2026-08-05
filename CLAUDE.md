@@ -19,3 +19,8 @@
   do indicativo, descrevendo o que a mudança faz.
 - Antes de commitar, gere/atualize a documentação roxygen2 quando funções
   exportadas tiverem sido alteradas (`roxygen2::roxygenise()`).
+
+
+## Versão
+
+Sempre que apropriado, dê um bump na versão.

@@ -19,7 +19,7 @@ Busca processo por número CNJ na API mobile do TJSP (pública, sem login)
 }
 \details{
 Consulta anônima (sem captcha) via
-   `GET https://api.tjsp.jus.br/processo/{grau}/search/numproc/{numero}`.
+   `GET https://api.tjsp.jus.br/processo/<grau>/search/numproc/<numero>`.
    Retorna dados básicos e o `cd_processo` interno do SAJ, necessário para
    [tjsp_api_dados_basicos()], [tjsp_api_partes()], [tjsp_api_movimentacao()]
    e a pasta digital.
