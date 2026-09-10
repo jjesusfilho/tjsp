@@ -1,5 +1,5 @@
 Package: tjsp
-Version: 2.6.1.9002
+Version: 2.6.1.9003
 Date: 2026-08-04
 Title: Coleta e organização de dados do Tribunal de Justiça de São
         Paulo
@@ -64,6 +64,6 @@ VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-05-22 16:08:01 UTC; jjesusfilho
 Author: José de Jesus Filho [aut, cre]
-Remotes: 
+Remotes:
     johndharrison/JSON2XML
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0

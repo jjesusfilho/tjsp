@@ -303,6 +303,11 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
                          httr::accept("text/html; charset=latin1;"))
 
 
+  # A página 1 costuma vir com captcha logo após a busca; as páginas
+  # seguintes não têm esse problema. Pedir a página 2 primeiro "libera" a
+  # sessão, e a página 1 passa a responder normalmente depois disso.
+  httr::GET("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=2",
+            httr::set_cookies(unlist(response$cookies)), httr::accept("text/html; charset=latin1;"))
 
   r1 <- httr::GET("https://esaj.tjsp.jus.br/cjsg/trocaDePagina.do?tipoDeDecisao=A&pagina=1",
                   httr::set_cookies(unlist(response$cookies)), httr::accept("text/html; charset=latin1;")
@@ -313,14 +318,32 @@ tjsp_baixar_cjsg1 <- function (livre = "", ementa = "", processo = "", classe = 
     paginas <- 1:n
 
   } else {
-    max_pag <- r1 |>
-      httr::content() |>
-      xml2::xml_find_all(xpath = "//td[contains(., 'Resultados')]") |>
-      xml2::xml_text(trim = T) |>
-      stringr::str_extract("\\d+$") |>
-      as.numeric() |>
-      magrittr::divide_by(20) |>
-      ceiling()
+    # httr::content(r1) (sem `as`/`encoding`) deixa a autodetecção do tipo
+    # de conteúdo por conta do httr; isso intermitentemente falha e
+    # devolve os bytes crus ("raw") em vez de um documento já parseado,
+    # quebrando xml_find_all() logo em seguida. Forçar a leitura como
+    # texto e parsear explicitamente com xml2::read_html() evita cair
+    # nesse caminho ambíguo. Um retry cobre picos passageiros de
+    # instabilidade do servidor.
+    ler_max_pag <- function() {
+      r1 |>
+        httr::content(as = "text", encoding = "UTF-8") |>
+        xml2::read_html() |>
+        xml2::xml_find_all(xpath = "//td[contains(., 'Resultados')]") |>
+        xml2::xml_text(trim = T) |>
+        stringr::str_extract("\\d+$") |>
+        as.numeric() |>
+        magrittr::divide_by(20) |>
+        ceiling()
+    }
+
+    max_pag <- tryCatch(
+      ler_max_pag(),
+      error = function(e) {
+        Sys.sleep(2)
+        tryCatch(ler_max_pag(), error = function(e2) 1)
+      }
+    )
 
     paginas <- 1:max_pag
 
