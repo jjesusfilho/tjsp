@@ -74,18 +74,17 @@ tjsp_autenticar <- function(login = NULL,
   outlook <- match.arg(outlook, choices = c("personal","business"))
 
   # Prompt for information if necessary
-  if (is.null(login) || is.null(password)) {
+  if (is.null(login) || is.null(password) || login == "" || password == "") {
 
     login <- Sys.getenv("LOGINADV")
     password <- Sys.getenv("PASSWORDADV")
 
-    if ( login =="" || password == "") {
-
-    login <- as.character(getPass::getPass(msg = "Enter your login: "))
-    password <- as.character(getPass::getPass(msg = "Enter your password: "))
+    if (login == "" || password == "") {
+      login <- as.character(getPass::getPass(msg = "Enter your login: "))
+      password <- as.character(getPass::getPass(msg = "Enter your password: "))
     }
 
-    }
+  }
 
   # Initial access
   base <- "https://esaj.tjsp.jus.br/"
