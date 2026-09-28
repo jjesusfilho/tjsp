@@ -7,11 +7,12 @@
 tjsp_gerar_cd_processo(processo)
 }
 \arguments{
-\item{processo}{Vetor com números dos processos}
+\item{processo}{Número do processo (número único CNJ)}
 }
 \value{
 String
 }
 \description{
-Gera cd_processo a partir de processo
+A consulta processual de primeiro grau passou a exigir login. Autentique-se
+antes com [tjsp_autenticar()] (por exemplo, `metodo = "certificado"`).
 }

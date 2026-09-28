@@ -1,7 +1,10 @@
 
 #' Gera cd_processo a partir de processo
 #'
-#' @param processo Vetor com números dos processos
+#' A consulta processual de primeiro grau passou a exigir login. Autentique-se
+#' antes com [tjsp_autenticar()] (por exemplo, `metodo = "certificado"`).
+#'
+#' @param processo Número do processo (número único CNJ)
 #'
 #' @return String
 #' @export
@@ -28,9 +31,11 @@ tjsp_gerar_cd_processo <- function(processo) {
       }
      
     resposta1 <- httr::RETRY("GET", url = uri1, query = query1,
-                             quiet = TRUE, httr::timeout(2))
-     
-    conteudo1 <- httr::content(resposta1)
+                             quiet = TRUE, httr::timeout(30))
+
+    texto1 <- httr::content(resposta1, "text")
+
+    conteudo1 <- xml2::read_html(texto1)
 
     if (xml2::xml_find_first(conteudo1, "boolean(//div[@id='listagemDeProcessos'])")) {
 
@@ -50,10 +55,20 @@ tjsp_gerar_cd_processo <- function(processo) {
 
     } else {
 
-         conteudo1 |>
-        xml2::xml_find_first("//script[contains(text(),'processo.codigo')]") |>
-        xml2::xml_text() |>
-        stringr::str_extract("(?<=processo.codigo=)\\w+")
+      ## No layout atual, o código aparece em "codigoProcesso: '...'" e em
+      ## links "cdProcesso=..."; "processo.codigo=" pode apontar para incidentes.
+      padroes <- c("(?<=codigoProcesso:\\s{0,5}')\\w+",
+                   "(?<=cdProcesso=)\\w+",
+                   "(?<=processo\\.codigo=)\\w+")
+
+      cd <- NA_character_
+
+      for (padrao in padroes) {
+        cd <- stringr::str_extract(texto1, padrao)
+        if (!is.na(cd)) break
+      }
+
+      cd
 
     }
 }
