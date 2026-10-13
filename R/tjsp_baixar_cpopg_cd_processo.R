@@ -130,3 +130,32 @@ tjsp_baixar_cpopg_cd_processo <- function(cd_processo, diretorio = "."){
 
   invisible(arquivo)
 }
+
+#' Insere as movimentações num documento html já lido
+#'
+#' Versão de `.tjsp_cpopg_incluir_movimentacoes()` para quem tem o documento
+#' em memória (`xml2`) em vez do arquivo, como `tjsp_baixar_cpopg()`.
+#'
+#' @param doc Documento html (`xml2_document`) de `show.do`.
+#' @param cd_processo Código do processo.
+#'
+#' @return `doc`, invisivelmente (modificado por referência).
+#' @noRd
+.tjsp_cpopg_incluir_movimentacoes_doc <- function(doc, cd_processo){
+
+  linhas <- .tjsp_cpopg_buscar_movimentacoes(cd_processo)
+
+  tabela <- paste0(
+    '<table><tbody id="tabelaTodasMovimentacoes">',
+    paste(linhas, collapse = "\n"),
+    "</tbody></table>"
+  ) |>
+    xml2::read_html() |>
+    xml2::xml_find_first("//table")
+
+  doc |>
+    xml2::xml_find_first("//div[@id='containerMovimentacoes']") |>
+    xml2::xml_add_child(tabela)
+
+  invisible(doc)
+}

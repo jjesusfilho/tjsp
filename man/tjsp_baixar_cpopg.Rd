@@ -19,3 +19,8 @@ html com dados processuais
 \description{
 Baixar consulta processual de primeiro grau
 }
+\details{
+Assim como em [tjsp_baixar_cpopg_cd_processo()], as movimentações
+    (carregadas sob demanda pelo e-SAJ) são sempre baixadas e gravadas no
+    html, em `tbody#tabelaTodasMovimentacoes`.
+}
