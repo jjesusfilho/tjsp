@@ -18,3 +18,12 @@ htmls
 \description{
 Baixa dados processuais com base no código do processo
 }
+\details{
+O e-SAJ carrega as movimentações sob demanda (botão "Exibir
+    movimentações", via `carregarMovimentacoesAjax.do`), então o HTML de
+    `show.do` vem sem elas. Por isso a função sempre busca todas as páginas
+    de movimentações e as grava no próprio html, em
+    `tbody#tabelaTodasMovimentacoes`, o mesmo layout que os leitores
+    (`tjsp_ler_movimentacao()`) esperam. Se a busca das movimentações
+    falhar, o arquivo é apagado para não ficar um html incompleto.
+}
