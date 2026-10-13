@@ -4,6 +4,10 @@
 #' @param sono Tempo em segundos entre requisições.
 #' @param diretorio Diretório onde serão armazenados os htmls
 #'
+#' @details Assim como em [tjsp_baixar_cpopg_cd_processo()], as movimentações
+#'     (carregadas sob demanda pelo e-SAJ) são sempre baixadas e gravadas no
+#'     html, em `tbody#tabelaTodasMovimentacoes`.
+#'
 #' @return html com dados processuais
 #' @export
 #'
@@ -100,6 +104,20 @@ tjsp_baixar_cpopg1 <- function (processo = NULL, diretorio)
     arquivo <- file.path(diretorio, paste0("cpopg_", format(Sys.Date(),
                                                             "%Y_%m_%d_"), processo,"_cd_processo_",codigo_processo,".html"))
 
-    purrr::walk2(conteudo1, arquivo, ~xml2::write_html(.x, .y))
+    ## O e-SAJ carrega as movimentações sob demanda: busca-as e as insere
+    ## no html (mesmo layout de tjsp_baixar_cpopg_cd_processo()). Se falhar,
+    ## o arquivo não é gravado, para não ficar um html incompleto.
+    purrr::pwalk(list(conteudo1, arquivo, codigo_processo), function(doc, arq, cd) {
+
+      ok <- tryCatch({
+        .tjsp_cpopg_incluir_movimentacoes_doc(doc, cd)
+        TRUE
+      }, error = function(e) {
+        message("Falha ao baixar movimenta\u00E7\u00F5es de ", cd, ": ", conditionMessage(e))
+        FALSE
+      })
+
+      if (ok) xml2::write_html(doc, arq)
+    })
 
 }
