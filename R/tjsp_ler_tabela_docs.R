@@ -40,11 +40,9 @@ tjsp_ler_tabela_docs <- function(arquivos = NULL, diretorio = "."){
         
         url_doc <-  .x$data$parametros
         
-        pagina_inicial <- .x$data$title |> 
-                          stringr::str_extract("\\d+")
-        
-        pagina_final <- .x$data$title |> 
-                        stringr::str_extract("\\d+$")
+        paginas_no <- extrair_paginas(.x$data$title)
+        pagina_inicial <- paginas_no$inicial
+        pagina_final <- paginas_no$final
         
         tibble::tibble(id_doc = .y, pagina_inicial, pagina_final, url_doc) |> 
           dplyr::mutate(id_doc = as.character(id_doc))
